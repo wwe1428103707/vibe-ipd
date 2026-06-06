@@ -146,7 +146,7 @@ No external platform is required for core gate enforcement.
 
 - IPD mode is activated automatically when the constitution contains a
   "Gate Criteria Reference" section — no configuration file needed
-- Each `/speckit-*` command performs deep content validation before proceeding,
+- Each `/vipd-speckit-*` command performs deep content validation before proceeding,
   ensuring prior TR gate criteria are satisfied
 - All artifacts (specs, plans, contracts, test reports) MUST be
   version-controlled alongside code in the repository
@@ -167,7 +167,7 @@ TR gate before the next phase begins.
 
 | Phase | SDD Commands | IPD Gate | Key Deliverables |
 |-------|-------------|----------|-----------------|
-| **Concept** | `/speckit-constitution` → `/speckit-specify` → `/speckit-clarify` | TR1 | Constitution, Feature Spec, Feasibility Prototype, OR Log |
+| **Concept** | `/vipd-speckit-constitution` → `/vipd-speckit-specify` → `/vipd-speckit-clarify` | TR1 | Constitution, Feature Spec, Feasibility Prototype, OR Log |
 | **Plan** | `/speckit.checklist` → `/speckit.plan` | TR2/TR3 | Architecture Design, Data Model, API Contracts, Research Doc |
 | **Development** | `/speckit.tasks` → `/speckit.implement` | TR4/TR4A | Working Software, Automated Tests, CI Quality Reports |
 | **Validation** | `/speckit.analyze` (cross-artifact review) | TR5 | Full Test Report, Beta Feedback, Performance Validation |

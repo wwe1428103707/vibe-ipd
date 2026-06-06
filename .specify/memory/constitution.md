@@ -1,30 +1,28 @@
 <!--
   Sync Impact Report
   ===================
-  Version change: (template) → 1.0.0
-  Bump rationale: Initial constitution — all placeholders filled for the first time.
+  Version change: 1.0.0 → 1.1.0
+  Bump rationale: MINOR — materially expanded guidance across Tooling &
+  Platform Requirements, Development Workflow command format, and new
+  Gate Criteria Reference section.
   
-  Modified principles: (none — first fill)
-    - PRINCIPLE_1 → I. Spec-First, Intent-Driven Development (SDD Core)
-    - PRINCIPLE_2 → II. Dual-Track Agile: Discovery & Delivery
-    - PRINCIPLE_3 → III. Agile-Stage-Gate Governance
-    - PRINCIPLE_4 → IV. Cross-Functional PDT with Autonomous Feature Teams
-    - PRINCIPLE_5 → V. Quality Built-In with Automated Gate Verification
+  Modified principles: (none — content unchanged)
   
   Added sections:
-    - Tooling & Platform Requirements (formerly SECTION_2)
-    - Development Workflow (Agile-Stage-Gate Process) (formerly SECTION_3)
+    - Gate Criteria Reference (TR1–TR6 Must-Meet/Should-Meet table)
   
   Removed sections: (none)
   
+  Section content updated:
+    - Tooling & Platform Requirements — reframed to document-state mode as
+      primary enforcement mechanism (reflecting 002 and 003 feature cycles)
+    - Development Workflow — command references use hyphens (actual format)
+  
   Templates requiring updates:
-    - spec-template.md ✅ — compatible; no changes needed
-    - plan-template.md ✅ — compatible; Constitution Check gate aligns with
-      Agile-Stage-Gate governance
-    - tasks-template.md ✅ — compatible; task categories cover all principle areas
+    - spec-template.md ✅ — compatible; includes TR Gate Assessment, Risk Register
+    - plan-template.md ✅ — compatible; includes Gate Readiness, WSJF Score
+    - tasks-template.md ✅ — compatible; includes Gate Completion Verification
     - commands/*.md ✅ — no command files found under templates/commands/
-    - README.md ✅ — already references SDD workflow; no principle-level conflict
-    - docs/quickstart.md ✅ — compatible; references constitution as first step
   
   Follow-up TODOs: (none — all placeholders resolved)
 -->
@@ -141,24 +139,25 @@ Agile's continuous delivery ethos.
 
 ## Tooling & Platform Requirements
 
-The Agile-Stage-Gate model requires a digital platform that serves as the
-single source of truth, unifying the macro roadmap and micro iterations.
+The Agile-Stage-Gate model is enforced primarily through **Spec Kit's native
+document-state mode** — AI agent commands perform pre-flight TR gate checks
+against the project's own documentation (constitution, spec, plan, tasks).
+No external platform is required for core gate enforcement.
 
-- The project management platform MUST support a multi-level issue hierarchy:
-  Initiative → Feature → Story → Sub-Task, mapping to the IPD requirement
-  decomposition chain
-- Advanced Roadmaps (or equivalent) MUST be configured to visualize cross-team
-  dependencies with automatic out-of-sequence conflict detection (red-line
-  alerts)
-- Automation rules MUST enforce gate transitions — preventing premature status
-  advancement until mandatory DoD criteria are satisfied
-- The CI/CD pipeline MUST integrate with the project management platform for
-  end-to-end traceability from requirement to deployment
+- IPD mode is activated automatically when the constitution contains a
+  "Gate Criteria Reference" section — no configuration file needed
+- Each `/speckit-*` command performs deep content validation before proceeding,
+  ensuring prior TR gate criteria are satisfied
 - All artifacts (specs, plans, contracts, test reports) MUST be
   version-controlled alongside code in the repository
-- A unified requirement intake pool (Original Requirement log) MUST be
-  maintained and triaged via KANO or MoSCoW prioritization before entering
-  the discovery track
+- Cross-team dependencies SHOULD be tracked via document cross-references
+  (document-state mode) or via an external project management platform if
+  available
+
+For teams that require external platform integration (e.g., Jira Cloud
+Premium), the platform SHOULD support a multi-level issue hierarchy:
+Initiative → Feature → Story → Sub-Task, and automation rules SHOULD
+enforce gate transitions consistent with the constitution's criteria.
 
 ## Development Workflow (Agile-Stage-Gate Process)
 
@@ -168,12 +167,25 @@ TR gate before the next phase begins.
 
 | Phase | SDD Commands | IPD Gate | Key Deliverables |
 |-------|-------------|----------|-----------------|
-| **Concept** | `/speckit.constitution` → `/speckit.specify` → `/speckit.clarify` | TR1 | Constitution, Feature Spec, Feasibility Prototype, OR Log |
+| **Concept** | `/speckit-constitution` → `/speckit-specify` → `/speckit-clarify` | TR1 | Constitution, Feature Spec, Feasibility Prototype, OR Log |
 | **Plan** | `/speckit.checklist` → `/speckit.plan` | TR2/TR3 | Architecture Design, Data Model, API Contracts, Research Doc |
 | **Development** | `/speckit.tasks` → `/speckit.implement` | TR4/TR4A | Working Software, Automated Tests, CI Quality Reports |
 | **Validation** | `/speckit.analyze` (cross-artifact review) | TR5 | Full Test Report, Beta Feedback, Performance Validation |
 | **Launch** | Release automation & deployment | TR6 | Release Notes, Deployment Verification, Ops Handover |
 | **Lifecycle** | PCR management & maintenance | Ongoing | Change Logs, Monitoring Dashboards, EOL Plan |
+
+## Gate Criteria Reference
+
+This section defines the Must-Meet and Should-Meet criteria for each TR gate.
+The presence of this section activates IPD mode in Spec Kit commands.
+
+| TR Gate | Phase | Must-Meet (Veto) | Should-Meet (Scorecard) |
+|---------|-------|------------------|------------------------|
+| TR1 | Concept | Spec created with user stories, feasibility assessed | Market attractiveness > 8/10 |
+| TR2/TR3 | Plan | Architecture reviewed, dependencies locked | Effort variance < 15% |
+| TR4 | Development | DoD defined, CI configured | Velocity variance < 15% |
+| TR5 | Validation | Blocker/critical bugs = 0 | Beta NPS >= 8 |
+| TR6 | Launch | Deployment verified, ops handover complete | Training pass rate = 100% |
 
 ## Governance
 
@@ -215,4 +227,4 @@ supersedes all other practices, methodologies, and conventions.
 - The constitution MUST be reviewed at least once per major release cycle for
   continued relevance.
 
-**Version**: 1.0.0 | **Ratified**: 2026-06-06 | **Last Amended**: 2026-06-06
+**Version**: 1.1.0 | **Ratified**: 2026-06-06 | **Last Amended**: 2026-06-06

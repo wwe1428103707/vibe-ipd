@@ -143,3 +143,21 @@ For teams of 3–5 where one person covers multiple IPD roles:
 Feature Teams)** by defining role mappings, autonomy boundaries, and escalation
 paths, and **Principle II (Dual-Track Agile)** by specifying the Product Trio
 discovery mechanism.*
+
+## Implementation Status
+
+Role-specific Claude Code subagent skills have been implemented:
+
+| Role | Skill File | Status |
+|------|------------|--------|
+| LPDT/RTE (PDT Manager) | `.claude/skills/vipd-agent-assign-lpdt/SKILL.md` | Active |
+| PO (Product Manager) | `.claude/skills/vipd-agent-assign-po/SKILL.md` | Active |
+| Architect (Dev Lead) | `.claude/skills/vipd-agent-assign-architect/SKILL.md` | Active |
+| QA Lead (Test Lead) | `.claude/skills/vipd-agent-assign-qa-lead/SKILL.md` | Active |
+| DevOps Lead (Ops Lead) | `.claude/skills/vipd-agent-assign-devops-lead/SKILL.md` | Active |
+| LPDT+PO (combined) | `.claude/skills/vipd-agent-assign-lpdt-po/SKILL.md` | Active |
+| DevOps+QA (combined) | `.claude/skills/vipd-agent-assign-devops-qa/SKILL.md` | Active |
+| Product Trio Workflow | `docs/ipd-transformation/product-trio-workflow.md` | Active |
+| Trio Review Template | `.specify/templates/guides/trio-review-template.md` | Active |
+
+Invoke any role via `/vipd-agent-assign-{role}` in Claude Code.

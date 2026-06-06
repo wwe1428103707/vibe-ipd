@@ -1,14 +1,14 @@
 <!--
   Sync Impact Report
   ===================
-  Version change: 1.1.0 → 1.2.0
-  Bump rationale: PATCH — command reference cleanup to reflect completed
-  vipd- prefix migration (004) and remaining IPD gate implementation (005).
+  Version change: 1.2.0 → 1.3.0
+  Bump rationale: MINOR — gate status tracking mechanism added to Tooling
+  & Platform Requirements and Compliance & Review sections.
   
   Modified sections:
-    - Development Workflow — all 5 command references use /vipd-speckit-* format
-      (fixed mixed dot-notation and hyphens from v1.1.0)
-    - Compliance & Review — /speckit.analyze → /vipd-speckit-analyze
+    - Tooling & Platform Requirements — added gate status tracking to
+      `.specify/memory/gate-status.json`
+    - Compliance & Review — added persistent gate evidence recording
   
   Follow-up TODOs: (none)
 -->
@@ -134,6 +134,8 @@ No external platform is required for core gate enforcement.
   "Gate Criteria Reference" section — no configuration file needed
 - Each `/vipd-speckit-*` command performs deep content validation before proceeding,
   ensuring prior TR gate criteria are satisfied
+- Gate status is tracked persistently in `.specify/memory/gate-status.json`,
+  recording which TR gates have passed and associated evidence
 - All artifacts (specs, plans, contracts, test reports) MUST be
   version-controlled alongside code in the repository
 - Cross-team dependencies SHOULD be tracked via document cross-references
@@ -206,6 +208,8 @@ supersedes all other practices, methodologies, and conventions.
   Phase 0 research begins and again after Phase 1 design.
 - Cross-artifact consistency MUST be verified before implementation via
   `/vipd-speckit-analyze`.
+- Gate status tracking (`.specify/memory/gate-status.json`) provides persistent
+  evidence of TR gate progression across the project lifecycle.
 - All PRs and code reviews MUST verify compliance with constitutional
   principles.
 - Any complexity that appears to violate the simplicity ethos MUST be

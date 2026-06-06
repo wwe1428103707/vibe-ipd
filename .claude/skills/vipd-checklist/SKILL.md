@@ -1,5 +1,5 @@
 ---
-name: "speckit-checklist"
+name: "vipd-checklist"
 description: "Generate a custom checklist for the current feature based on user requirements."
 argument-hint: "Domain or focus area for the checklist"
 compatibility: "Requires spec-kit project structure with .specify/ directory"

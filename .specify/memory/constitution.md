@@ -1,30 +1,16 @@
 <!--
   Sync Impact Report
   ===================
-  Version change: 1.0.0 → 1.1.0
-  Bump rationale: MINOR — materially expanded guidance across Tooling &
-  Platform Requirements, Development Workflow command format, and new
-  Gate Criteria Reference section.
+  Version change: 1.1.0 → 1.2.0
+  Bump rationale: PATCH — command reference cleanup to reflect completed
+  vipd- prefix migration (004) and remaining IPD gate implementation (005).
   
-  Modified principles: (none — content unchanged)
+  Modified sections:
+    - Development Workflow — all 5 command references use /vipd-speckit-* format
+      (fixed mixed dot-notation and hyphens from v1.1.0)
+    - Compliance & Review — /speckit.analyze → /vipd-speckit-analyze
   
-  Added sections:
-    - Gate Criteria Reference (TR1–TR6 Must-Meet/Should-Meet table)
-  
-  Removed sections: (none)
-  
-  Section content updated:
-    - Tooling & Platform Requirements — reframed to document-state mode as
-      primary enforcement mechanism (reflecting 002 and 003 feature cycles)
-    - Development Workflow — command references use hyphens (actual format)
-  
-  Templates requiring updates:
-    - spec-template.md ✅ — compatible; includes TR Gate Assessment, Risk Register
-    - plan-template.md ✅ — compatible; includes Gate Readiness, WSJF Score
-    - tasks-template.md ✅ — compatible; includes Gate Completion Verification
-    - commands/*.md ✅ — no command files found under templates/commands/
-  
-  Follow-up TODOs: (none — all placeholders resolved)
+  Follow-up TODOs: (none)
 -->
 
 # Spec Kit Constitution
@@ -168,9 +154,9 @@ TR gate before the next phase begins.
 | Phase | SDD Commands | IPD Gate | Key Deliverables |
 |-------|-------------|----------|-----------------|
 | **Concept** | `/vipd-speckit-constitution` → `/vipd-speckit-specify` → `/vipd-speckit-clarify` | TR1 | Constitution, Feature Spec, Feasibility Prototype, OR Log |
-| **Plan** | `/speckit.checklist` → `/speckit.plan` | TR2/TR3 | Architecture Design, Data Model, API Contracts, Research Doc |
-| **Development** | `/speckit.tasks` → `/speckit.implement` | TR4/TR4A | Working Software, Automated Tests, CI Quality Reports |
-| **Validation** | `/speckit.analyze` (cross-artifact review) | TR5 | Full Test Report, Beta Feedback, Performance Validation |
+| **Plan** | `/vipd-speckit-checklist` → `/vipd-speckit-plan` | TR2/TR3 | Architecture Design, Data Model, API Contracts, Research Doc |
+| **Development** | `/vipd-speckit-tasks` → `/vipd-speckit-implement` | TR4/TR4A | Working Software, Automated Tests, CI Quality Reports |
+| **Validation** | `/vipd-speckit-analyze` (cross-artifact review) | TR5 | Full Test Report, Beta Feedback, Performance Validation |
 | **Launch** | Release automation & deployment | TR6 | Release Notes, Deployment Verification, Ops Handover |
 | **Lifecycle** | PCR management & maintenance | Ongoing | Change Logs, Monitoring Dashboards, EOL Plan |
 
@@ -219,7 +205,7 @@ supersedes all other practices, methodologies, and conventions.
   plan-template.md) that verifies alignment with all five principles before
   Phase 0 research begins and again after Phase 1 design.
 - Cross-artifact consistency MUST be verified before implementation via
-  `/speckit.analyze`.
+  `/vipd-speckit-analyze`.
 - All PRs and code reviews MUST verify compliance with constitutional
   principles.
 - Any complexity that appears to violate the simplicity ethos MUST be
@@ -227,4 +213,4 @@ supersedes all other practices, methodologies, and conventions.
 - The constitution MUST be reviewed at least once per major release cycle for
   continued relevance.
 
-**Version**: 1.1.0 | **Ratified**: 2026-06-06 | **Last Amended**: 2026-06-06
+**Version**: 1.2.0 | **Ratified**: 2026-06-06 | **Last Amended**: 2026-06-06

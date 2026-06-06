@@ -71,6 +71,7 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] T009 Setup environment configuration management
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
+> **Gate Completion Verification**: All setup and foundational tasks [ ] completed / [ ] verified
 
 ---
 

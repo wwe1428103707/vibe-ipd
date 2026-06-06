@@ -54,6 +54,26 @@ You **MUST** consider the user input before proceeding (if not empty).
     ```
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
+## IPD Gate Check
+
+**TR2/TR3 — Plan & Design Gate**: Verify prior TR gates passed before planning.
+
+1. **IPD mode detection**: Check if `.specify/memory/constitution.md` exists AND
+   contains a "Gate Criteria Reference" section heading.
+   - If YES → IPD mode ACTIVE — continue gate check
+   - If NO → SDD-only mode — skip, proceed normally
+
+2. **Deep content validation (IPD mode only)**:
+   - **TR0 passed?** Check `.specify/memory/constitution.md` exists AND contains
+     "Agile-Stage-Gate Governance" heading
+   - **TR1 passed?** Check that `spec.md` exists for the current feature AND
+     contains a "TR Gate Assessment" section heading
+   - If NOT all prior gates passed → display specific unmet criteria → ask:
+     "Proceed to planning anyway? (yes/no)" If no, halt with message:
+     "Prior TR gates not passed. Complete spec first or run /speckit-analyze."
+
+3. **Post-planning**: Generate Architecture Decision Log as TR3 evidence.
+
 ## Outline
 
 1. **Setup**: Run `.specify/scripts/powershell/setup-plan.ps1 -Json` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").

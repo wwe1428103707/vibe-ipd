@@ -10,6 +10,14 @@
 
 [Extract from feature spec: primary requirement + technical approach from research]
 
+## Gate Readiness *(IPD only)*
+
+<!-- Include this section only when the project has an IPD-enhanced constitution. -->
+
+- **Constitution Check**: [PASS / FAIL]
+- **TR Gates Passed**: [TR0, TR1, ...]
+- **Next Gate**: [TR_N]
+
 ## Technical Context
 
 <!--
@@ -35,6 +43,8 @@
 **Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]
 
 **Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+
+**WSJF Priority Score**: [number — (Value + Time Criticality + Risk Reduction) / Job Size] *(IPD only)*
 
 ## Constitution Check
 

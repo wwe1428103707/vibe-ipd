@@ -54,6 +54,29 @@ You **MUST** consider the user input before proceeding (if not empty).
     ```
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
+## IPD Gate Check
+
+**TR5 — Validation Gate**: Verify prior gate evidence completeness.
+
+1. **IPD mode detection**: Check if `.specify/memory/constitution.md` exists AND
+   contains a "Gate Criteria Reference" section heading.
+   - If YES → IPD mode ACTIVE — add TR5 compliance analysis
+   - If NO → SDD-only mode — skip, proceed with standard analysis
+
+2. **Deep content validation (IPD mode only)**:
+   - **TR0 passed?** Constitution exists + Gate Criteria Reference section
+   - **TR1 passed?** Spec exists + TR Gate Assessment section
+   - **TR2/TR3 passed?** Plan exists + Gate Readiness section
+   - **TR4 passed?** Tasks exist + Gate Completion Verification checkpoints
+   - **TR4A passed?** Implementation complete + quality indicators present
+   - **TR5**: This analysis generates the TR5 validation report
+   - Include TR5 gate status in the analysis report output
+
+3. **Extended analysis scope for IPD mode**:
+   - Verify all Must-Meet criteria from constitution are addressed
+   - Check DoD (Definition of Done) completeness
+   - Generate TR5-ready validation summary
+
 ## Goal
 
 Identify inconsistencies, duplications, ambiguities, and underspecified items across the three core artifacts (`spec.md`, `plan.md`, `tasks.md`) before implementation. This command MUST run only after `/speckit-tasks` has successfully produced a complete `tasks.md`.

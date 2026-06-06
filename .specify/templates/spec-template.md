@@ -78,6 +78,17 @@
 - What happens when [boundary condition]?
 - How does system handle [error scenario]?
 
+## TR Gate Assessment *(IPD only)*
+
+<!--
+  Include this section only when the project has an IPD-enhanced constitution
+  with a Gate Criteria Reference section.
+-->
+
+- **Applicable TR Gates**: [TR1, TR2, ...]
+- **Risk Level**: [High / Medium / Low]
+- **Gate Evidence Required**: [what artifacts prove gate readiness]
+
 ## Requirements *(mandatory)*
 
 <!--
@@ -129,3 +140,13 @@
 - [Assumption about scope boundaries, e.g., "Mobile support is out of scope for v1"]
 - [Assumption about data/environment, e.g., "Existing authentication system will be reused"]
 - [Dependency on existing system/service, e.g., "Requires access to the existing user profile API"]
+
+## Risk Register *(IPD only)*
+
+<!--
+  Include this section only when the project has an IPD-enhanced constitution.
+-->
+
+| Risk | Impact | Likelihood | Mitigation |
+|------|--------|------------|------------|
+| [risk description] | [H/M/L] | [H/M/L] | [mitigation strategy] |

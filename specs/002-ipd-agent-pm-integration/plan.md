@@ -11,7 +11,7 @@ project management via AI agents and document structure.
 
 ## Summary
 
-Implement TR gate enforcement as pre-flight checks in all 7 `/speckit-*` commands,
+Implement TR gate enforcement as pre-flight checks in all 7 `/vipd-speckit-*` commands,
 update all 4 templates (constitution, spec, plan, tasks) with IPD-aware sections,
 and update the Tooling Integration Blueprint document to describe this
 agent-driven approach alongside the existing Jira-centric guidance.
@@ -19,10 +19,10 @@ agent-driven approach alongside the existing Jira-centric guidance.
 ## Technical Context
 
 **Language/Version**: Agent skill files in Markdown + YAML frontmatter (same format
-as existing `.claude/skills/speckit-*/skill.md`). Blueprint documents in GFM Markdown.
+as existing `.claude/skills/vipd-speckit-*/skill.md`). Blueprint documents in GFM Markdown.
 
 **Primary Dependencies**:
-- Existing `.claude/skills/speckit-*/skill.md` files (7 commands) — to be modified
+- Existing `.claude/skills/vipd-speckit-*/skill.md` files (7 commands) — to be modified
 - Existing `.specify/templates/*.md` files (4 templates) — to be updated
 - Existing `docs/ipd-transformation/03-tooling-integration-blueprint.md` — to be extended
 - Existing `docs/ipd-transformation/zh/03-工具集成蓝图.md` — to be updated in parallel
@@ -44,10 +44,10 @@ No automated test framework for skill files.
 - Gate enforcement uses **deep content validation** (per Q1 clarification)
 - IPD-mode detection is **constitution-based** (per Q2 clarification)
 - Chinese blueprint document MUST be updated in parallel with English version
-- No new commands — only modifications to existing 7 commands + `/speckit-analyze` enhancement
+- No new commands — only modifications to existing 7 commands + `/vipd-speckit-analyze` enhancement
 
 **Scale/Scope**: 7 skill files modified, 4 templates updated, 2 blueprint documents
-updated, 1 new `/speckit-analyze` gate compliance check feature
+updated, 1 new `/vipd-speckit-analyze` gate compliance check feature
 
 ## Constitution Check
 
@@ -86,20 +86,20 @@ specs/002-ipd-agent-pm-integration/
 ├── data-model.md        # Phase 1 output (gate criteria model)
 ├── quickstart.md        # Phase 1 output
 ├── contracts/           # Phase 1 output (gate check contracts)
-└── tasks.md             # Phase 2 output (/speckit-tasks command)
+└── tasks.md             # Phase 2 output (/vipd-speckit-tasks command)
 ```
 
 ### Files to Modify
 
 ```text
 # Agent Skill Files (modify)
-.claude/skills/speckit-constitution/skill.md    # → Add TR0 gate integration
-.claude/skills/speckit-specify/skill.md          # → Add TR1 gate pre-flight check
-.claude/skills/speckit-clarify/skill.md          # → Add TR1 gate evidence generation
-.claude/skills/speckit-plan/skill.md             # → Add TR2/TR3 gate checkpoint
-.claude/skills/speckit-tasks/skill.md            # → Add TR4 gate checkpoint
-.claude/skills/speckit-implement/skill.md        # → Add TR4/TR4A gate checkpoint
-.claude/skills/speckit-analyze/skill.md          # → Add TR5 gate compliance check
+.claude/skills/vipd-speckit-constitution/skill.md    # → Add TR0 gate integration
+.claude/skills/vipd-speckit-specify/skill.md          # → Add TR1 gate pre-flight check
+.claude/skills/vipd-speckit-clarify/skill.md          # → Add TR1 gate evidence generation
+.claude/skills/vipd-speckit-plan/skill.md             # → Add TR2/TR3 gate checkpoint
+.claude/skills/vipd-speckit-tasks/skill.md            # → Add TR4 gate checkpoint
+.claude/skills/vipd-speckit-implement/skill.md        # → Add TR4/TR4A gate checkpoint
+.claude/skills/vipd-speckit-analyze/skill.md          # → Add TR5 gate compliance check
 
 # Templates (modify)
 .specify/templates/constitution-template.md      # → Add IPD gate criteria sections

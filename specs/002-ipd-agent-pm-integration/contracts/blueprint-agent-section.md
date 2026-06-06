@@ -16,7 +16,7 @@ Insert after "CI/CD Integration" section, before "Platform Alternatives":
 In addition to Jira-based gate enforcement, the Spec Kit toolchain provides
 native gate enforcement through its AI agent command system. This
 "document-state mode" works without external tooling by having each
-`/speckit-*` command perform pre-flight TR gate checks against the project's
+`/vipd-speckit-*` command perform pre-flight TR gate checks against the project's
 own documentation.
 
 ### How It Works
@@ -30,12 +30,12 @@ own documentation.
    exist within the relevant documents (constitution, spec, plan, tasks).
 
 3. **Gate Flow Enforcement**: Commands enforce sequential gate progression:
-   - `/speckit-constitution` → TR0 (project setup)
-   - `/speckit-specify`, `/speckit-clarify` → TR1 (concept)
-   - `/speckit-checklist`, `/speckit-plan` → TR2/TR3 (plan/design)
-   - `/speckit-tasks` → TR4 (development baseline)
-   - `/speckit-implement` → TR4/TR4A (development)
-   - `/speckit-analyze` → TR5 (validation)
+   - `/vipd-speckit-constitution` → TR0 (project setup)
+   - `/vipd-speckit-specify`, `/vipd-speckit-clarify` → TR1 (concept)
+   - `/vipd-speckit-checklist`, `/vipd-speckit-plan` → TR2/TR3 (plan/design)
+   - `/vipd-speckit-tasks` → TR4 (development baseline)
+   - `/vipd-speckit-implement` → TR4/TR4A (development)
+   - `/vipd-speckit-analyze` → TR5 (validation)
 
 ### Comparison: Document-State vs Jira-Integrated
 

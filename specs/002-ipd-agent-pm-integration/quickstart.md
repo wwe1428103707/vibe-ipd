@@ -43,8 +43,8 @@ Phase 3: Blueprint documentation
 
 After implementing each phase, verify:
 
-- **Template phase**: Run `/speckit-constitution` on a test project → new IPD sections present
-- **Command phase**: Run `/speckit-plan` without constitution → gate block warning shown
+- **Template phase**: Run `/vipd-speckit-constitution` on a test project → new IPD sections present
+- **Command phase**: Run `/vipd-speckit-plan` without constitution → gate block warning shown
 - **Blueprint phase**: Documents render correctly with new agent PM section
 
 ## Cross-Reference

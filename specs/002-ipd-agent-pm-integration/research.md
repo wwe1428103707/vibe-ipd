@@ -6,7 +6,7 @@
 
 ### Skill File Structure (common pattern)
 
-All existing skill files in `.claude/skills/speckit-*/skill.md` follow this structure:
+All existing skill files in `.claude/skills/vipd-speckit-*/skill.md` follow this structure:
 
 ```yaml
 ---

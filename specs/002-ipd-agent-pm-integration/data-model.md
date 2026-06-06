@@ -19,16 +19,16 @@ Gates are sequential — TR(n+1) requires TR(n) to be passed first.
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
-| command | string | `/speckit-<name>` |
-| skill_path | string | Path to `.claude/skills/speckit-<name>/skill.md` |
+| command | string | `/vipd-speckit-<name>` |
+| skill_path | string | Path to `.claude/skills/vipd-speckit-<name>/skill.md` |
 | tr_gate | string | Associated TR gate(s) |
 | check_type | "pre-flight" / "post-execution" | When the check runs |
 | ipd_detection | boolean | Whether IPD mode check is needed |
 | deep_validation | string | What content to validate in which file |
 
 **Example**:
-- command: `/speckit-specify`
-- skill_path: `.claude/skills/speckit-specify/skill.md`
+- command: `/vipd-speckit-specify`
+- skill_path: `.claude/skills/vipd-speckit-specify/skill.md`
 - tr_gate: TR1
 - check_type: pre-flight
 - ipd_detection: true

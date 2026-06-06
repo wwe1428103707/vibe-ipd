@@ -42,7 +42,7 @@ description: "Task list for IPD Toolkit Transformation Plan document creation"
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
 - [x] T004 Review IPD fusion guide at `docs/IPD与敏捷开发深度融合的软件产品开发流程与研发管理平台搭建指南.md` to ensure full understanding of TR gate criteria, role mappings, and tooling requirements
-- [x] T005 [P] Review existing SDD skills at `.claude/skills/speckit-*/skill.md` and catalog current command behavior (for US2 before/after comparison)
+- [x] T005 [P] Review existing SDD skills at `.claude/skills/vipd-speckit-*/skill.md` and catalog current command behavior (for US2 before/after comparison)
 - [x] T006 [P] Review research findings at `specs/001-ipd-toolkit/research.md` and extract decisions into a working reference
 
 **Checkpoint**: Foundation ready — all 4 document creation tasks can now begin
@@ -78,13 +78,13 @@ description: "Task list for IPD Toolkit Transformation Plan document creation"
 ### Implementation for User Story 2
 
 - [x] T014 [US2] Create command redesign guide at `docs/ipd-transformation/02-command-template-redesign-guide.md` with Overview section defining the SDD-to-IPD integration approach
-- [x] T015 [P] [US2] Write `/speckit-constitution` redesign section: current behavior → TR0 gate integration → new behavior per `contracts/02-command-template-contract.md`
-- [x] T016 [P] [US2] Write `/speckit-specify` redesign section: current behavior → TR1 gate integration → new behavior
-- [x] T017 [P] [US2] Write `/speckit-clarify` redesign section: current behavior → TR1 gate integration → new behavior
-- [x] T018 [P] [US2] Write `/speckit-plan` redesign section: current behavior → TR2/TR3 gate integration → new behavior
-- [x] T019 [P] [US2] Write `/speckit-tasks` redesign section: current behavior → TR4 gate integration → new behavior
-- [x] T020 [P] [US2] Write `/speckit-implement` redesign section: current behavior → TR4/TR4A gate integration → new behavior
-- [x] T021 [P] [US2] Write `/speckit-analyze` redesign section: current behavior → TR5 gate integration → new behavior
+- [x] T015 [P] [US2] Write `/vipd-speckit-constitution` redesign section: current behavior → TR0 gate integration → new behavior per `contracts/02-command-template-contract.md`
+- [x] T016 [P] [US2] Write `/vipd-speckit-specify` redesign section: current behavior → TR1 gate integration → new behavior
+- [x] T017 [P] [US2] Write `/vipd-speckit-clarify` redesign section: current behavior → TR1 gate integration → new behavior
+- [x] T018 [P] [US2] Write `/vipd-speckit-plan` redesign section: current behavior → TR2/TR3 gate integration → new behavior
+- [x] T019 [P] [US2] Write `/vipd-speckit-tasks` redesign section: current behavior → TR4 gate integration → new behavior
+- [x] T020 [P] [US2] Write `/vipd-speckit-implement` redesign section: current behavior → TR4/TR4A gate integration → new behavior
+- [x] T021 [P] [US2] Write `/vipd-speckit-analyze` redesign section: current behavior → TR5 gate integration → new behavior
 - [x] T022 [P] [US2] Write template redesign sections for all 4 templates (constitution, spec, plan, tasks) with new IPD-aligned fields per FR-006
 - [x] T023 [US2] Write backward compatibility notes section and implementation sequence recommendation
 

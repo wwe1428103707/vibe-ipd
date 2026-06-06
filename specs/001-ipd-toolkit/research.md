@@ -42,19 +42,19 @@ fusion guide for authoritative context:
 
 | Command | Skill File | Current Purpose |
 |---------|-----------|-----------------|
-| `/speckit-constitution` | `.claude/skills/speckit-constitution/skill.md` | Create/update project constitution |
-| `/speckit-specify` | `.claude/skills/speckit-specify/skill.md` | Define feature specification |
-| `/speckit-clarify` | `.claude/skills/speckit-clarify/skill.md` | Reduce spec ambiguity via Q&A |
-| `/speckit-plan` | `.claude/skills/speckit-plan/skill.md` | Create technical implementation plan |
-| `/speckit-tasks` | `.claude/skills/speckit-tasks/skill.md` | Break plan into actionable tasks |
-| `/speckit-implement` | `.claude/skills/speckit-implement/skill.md` | Execute implementation tasks |
-| `/speckit-analyze` | `.claude/skills/speckit-analyze/skill.md` | Cross-artifact consistency analysis |
+| `/vipd-speckit-constitution` | `.claude/skills/vipd-speckit-constitution/skill.md` | Create/update project constitution |
+| `/vipd-speckit-specify` | `.claude/skills/vipd-speckit-specify/skill.md` | Define feature specification |
+| `/vipd-speckit-clarify` | `.claude/skills/vipd-speckit-clarify/skill.md` | Reduce spec ambiguity via Q&A |
+| `/vipd-speckit-plan` | `.claude/skills/vipd-speckit-plan/skill.md` | Create technical implementation plan |
+| `/vipd-speckit-tasks` | `.claude/skills/vipd-speckit-tasks/skill.md` | Break plan into actionable tasks |
+| `/vipd-speckit-implement` | `.claude/skills/vipd-speckit-implement/skill.md` | Execute implementation tasks |
+| `/vipd-speckit-analyze` | `.claude/skills/vipd-speckit-analyze/skill.md` | Cross-artifact consistency analysis |
 
 ### Additional Commands
 
 | Command | Skill File | Current Purpose |
 |---------|-----------|-----------------|
-| `/speckit-checklist` | `.claude/skills/speckit-checklist/skill.md` | Generate quality checklists |
+| `/vipd-speckit-checklist` | `.claude/skills/vipd-speckit-checklist/skill.md` | Generate quality checklists |
 
 ### Existing Templates (4)
 
@@ -71,14 +71,14 @@ Each command maps to a natural TR gate:
 
 | SDD Command | Natural IPD Gate | Integration Point |
 |-------------|-----------------|-------------------|
-| `/speckit-constitution` | TR0 (Project Setup) | Principles define gate criteria |
-| `/speckit-specify` | TR1 (Concept) | Spec completeness as gate input |
-| `/speckit-clarify` | TR1 (Concept) | Risk/ambiguity resolution as gate evidence |
-| `/speckit-checklist` | TR2 (Plan entry) | Quality readiness check |
-| `/speckit-plan` | TR2/TR3 (Plan/Design) | Architecture review as gate input |
-| `/speckit-tasks` | TR4 (Dev entry) | Task breakdown as execution baseline |
-| `/speckit-implement` | TR4/TR4A (Dev) | CI quality reports as gate evidence |
-| `/speckit-analyze` | TR5 (Validation) | Cross-artifact review as validation |
+| `/vipd-speckit-constitution` | TR0 (Project Setup) | Principles define gate criteria |
+| `/vipd-speckit-specify` | TR1 (Concept) | Spec completeness as gate input |
+| `/vipd-speckit-clarify` | TR1 (Concept) | Risk/ambiguity resolution as gate evidence |
+| `/vipd-speckit-checklist` | TR2 (Plan entry) | Quality readiness check |
+| `/vipd-speckit-plan` | TR2/TR3 (Plan/Design) | Architecture review as gate input |
+| `/vipd-speckit-tasks` | TR4 (Dev entry) | Task breakdown as execution baseline |
+| `/vipd-speckit-implement` | TR4/TR4A (Dev) | CI quality reports as gate evidence |
+| `/vipd-speckit-analyze` | TR5 (Validation) | Cross-artifact review as validation |
 
 ---
 

@@ -21,16 +21,16 @@ and optionally blocks execution.
 
 | TR Gate | Phase | Applicable Commands |
 |---------|-------|---------------------|
-| TR0 | Project Setup | `/speckit-constitution` |
-| TR1 | Concept | `/speckit-specify`, `/speckit-clarify` |
-| TR2/TR3 | Plan/Design | `/speckit-checklist`, `/speckit-plan` |
-| TR4 | Dev Entry | `/speckit-tasks` |
-| TR4/TR4A | Development | `/speckit-implement` |
-| TR5 | Validation | `/speckit-analyze` |
+| TR0 | Project Setup | `/vipd-speckit-constitution` |
+| TR1 | Concept | `/vipd-speckit-specify`, `/vipd-speckit-clarify` |
+| TR2/TR3 | Plan/Design | `/vipd-speckit-checklist`, `/vipd-speckit-plan` |
+| TR4 | Dev Entry | `/vipd-speckit-tasks` |
+| TR4/TR4A | Development | `/vipd-speckit-implement` |
+| TR5 | Validation | `/vipd-speckit-analyze` |
 
 ## Command Redesign
 
-### `/speckit-constitution`
+### `/vipd-speckit-constitution`
 
 **Current behavior**: Creates/updates the project constitution from user
 principles input. No gate validation.
@@ -45,7 +45,7 @@ creation, auto-register the ratification date as the TR0 gate approval date.
   existing TR gates (no retroactive principle removal without re-review)
 - **TR checkpoint**: TR0 (Project Setup)
 
-### `/speckit-specify`
+### `/vipd-speckit-specify`
 
 **Current behavior**: Creates feature specification from user description.
 No gate validation.
@@ -61,7 +61,7 @@ criteria are met.
   indicators, initial risk assessment)
 - **TR checkpoint**: TR1 (Concept)
 
-### `/speckit-clarify`
+### `/vipd-speckit-clarify`
 
 **Current behavior**: Reduces spec ambiguity via Q&A session. No gate validation.
 
@@ -74,7 +74,7 @@ ambiguities were resolved and which risks remain open.
 - Post-session: Generate TR1 risk summary as gate evidence
 - **TR checkpoint**: TR1 (Concept)
 
-### `/speckit-checklist`
+### `/vipd-speckit-checklist`
 
 **Current behavior**: Generates quality checklists for requirements validation.
 No gate validation.
@@ -87,7 +87,7 @@ output becomes the gate evidence for TR2 (architecture/plan readiness).
 - Post-generation: Checklist completeness score as TR2 entry criterion
 - **TR checkpoint**: TR2 (Architecture Readiness)
 
-### `/speckit-plan`
+### `/vipd-speckit-plan`
 
 **Current behavior**: Creates technical implementation plan from spec + user
 tech stack input. No gate validation.
@@ -102,7 +102,7 @@ as TR3 gate evidence.
 - Include Constitution Check section (already exists in plan template)
 - **TR checkpoint**: TR2 (Architecture Review) / TR3 (Design Approval)
 
-### `/speckit-tasks`
+### `/vipd-speckit-tasks`
 
 **Current behavior**: Breaks plan into actionable tasks. No gate validation.
 
@@ -115,7 +115,7 @@ development baseline tracked during TR4/TR4A.
 - Post-generation: Task count and effort estimate as TR4 baseline
 - **TR checkpoint**: TR4 (Development Baseline)
 
-### `/speckit-implement`
+### `/vipd-speckit-implement`
 
 **Current behavior**: Executes implementation tasks. No gate validation.
 
@@ -129,7 +129,7 @@ coverage, static analysis, security scan) as TR4A gate evidence.
 - Post-completion: Generate TR4A quality report for gray release readiness
 - **TR checkpoint**: TR4 (Development) / TR4A (Gray Release Readiness)
 
-### `/speckit-analyze`
+### `/vipd-speckit-analyze`
 
 **Current behavior**: Cross-artifact consistency analysis. No gate validation.
 
@@ -203,12 +203,12 @@ Recommended order for implementing these changes:
 
 1. **Constitution template first** — establishes the gate framework
 2. **Spec template** — enables TR1 gate for new features
-3. **Plan template + `/speckit-plan`** — enables TR2/TR3
-4. **Tasks template + `/speckit-tasks`** — enables TR4
-5. **`/speckit-implement`** — enables TR4/TR4A
-6. **`/speckit-analyze`** — enables TR5
-7. **`/speckit-constitution`, `/speckit-specify`, `/speckit-clarify`,
-   `/speckit-checklist`** — remaining command gate integrations
+3. **Plan template + `/vipd-speckit-plan`** — enables TR2/TR3
+4. **Tasks template + `/vipd-speckit-tasks`** — enables TR4
+5. **`/vipd-speckit-implement`** — enables TR4/TR4A
+6. **`/vipd-speckit-analyze`** — enables TR5
+7. **`/vipd-speckit-constitution`, `/vipd-speckit-specify`, `/vipd-speckit-clarify`,
+   `/vipd-speckit-checklist`** — remaining command gate integrations
 
 This sequence ensures each gate can be tested end-to-end as it's implemented.
 

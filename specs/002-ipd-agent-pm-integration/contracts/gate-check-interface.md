@@ -1,7 +1,7 @@
 # Contract: Gate Check Pre-Flight Interface
 
 **Purpose**: Define the standard gate check pattern to inject into each
-`/speckit-*` skill file before the core command execution logic.
+`/vipd-speckit-*` skill file before the core command execution logic.
 
 ## Standard Gate Check Block
 
@@ -26,7 +26,7 @@ Reference section). SDD-only projects pass through silently.
    - If PASS → proceed
    - If FAIL → display specific unmet criteria → ask: "Proceed anyway? (yes/no)"
    - If "no" → halt with message: "[TR_GATE_NAME] gate not passed. Run
-     `/speckit-analyze` for details."
+     `/vipd-speckit-analyze` for details."
 
 3. If ALL prior gates also need checking (chained validation):
    - For each prior gate in sequence [TR0 → TR_current]:

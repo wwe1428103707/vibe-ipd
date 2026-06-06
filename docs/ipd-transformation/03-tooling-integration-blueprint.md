@@ -14,7 +14,7 @@ commands and project document structure, requiring no external tooling or
 platform configuration.
 
 The Spec Kit toolchain embeds TR gate awareness directly into each
-`/speckit-*` command. When IPD mode is active (detected by the presence of a
+`/vipd-speckit-*` command. When IPD mode is active (detected by the presence of a
 "Gate Criteria Reference" section in the project constitution), commands
 automatically perform pre-flight gate checks using deep content validation
 against the project's own documents (constitution, spec, plan, tasks).
@@ -23,7 +23,7 @@ against the project's own documents (constitution, spec, plan, tasks).
 
 Spec Kit provides native gate enforcement through its AI agent command system.
 This "document-state mode" works without external tooling by having each
-`/speckit-*` command perform pre-flight TR gate checks against the project's
+`/vipd-speckit-*` command perform pre-flight TR gate checks against the project's
 own documentation.
 
 ### How It Works
@@ -37,12 +37,12 @@ own documentation.
    exist within the relevant documents (constitution, spec, plan, tasks).
 
 3. **Gate Flow Enforcement**: Commands enforce sequential gate progression:
-   - `/speckit-constitution` → TR0 (project setup)
-   - `/speckit-specify`, `/speckit-clarify` → TR1 (concept)
-   - `/speckit-checklist`, `/speckit-plan` → TR2/TR3 (plan/design)
-   - `/speckit-tasks` → TR4 (development baseline)
-   - `/speckit-implement` → TR4/TR4A (development)
-   - `/speckit-analyze` → TR5 (validation)
+   - `/vipd-speckit-constitution` → TR0 (project setup)
+   - `/vipd-speckit-specify`, `/vipd-speckit-clarify` → TR1 (concept)
+   - `/vipd-speckit-checklist`, `/vipd-speckit-plan` → TR2/TR3 (plan/design)
+   - `/vipd-speckit-tasks` → TR4 (development baseline)
+   - `/vipd-speckit-implement` → TR4/TR4A (development)
+   - `/vipd-speckit-analyze` → TR5 (validation)
 
 ### Comparison: Document-State vs External Tooling
 

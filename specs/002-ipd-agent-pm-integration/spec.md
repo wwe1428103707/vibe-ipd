@@ -20,7 +20,7 @@
 
 ### User Story 1 - Agent Skill Commands for TR Gate Enforcement (Priority: P1)
 
-As a PDT manager using Spec Kit, I need the existing `/speckit-*` commands to
+As a PDT manager using Spec Kit, I need the existing `/vipd-speckit-*` commands to
 automatically enforce IPD Technology Review (TR) gate readiness checks before
 allowing progression to the next phase, so that gate discipline is "baked in"
 rather than relying on manual process compliance.
@@ -29,20 +29,20 @@ rather than relying on manual process compliance.
 platform configuration (Jira). Agent skill integration is the Spec Kit-native way
 to enforce gates, making it immediately usable by any project without external tooling.
 
-**Independent Test**: Running `/speckit-plan` on a project without a ratified
+**Independent Test**: Running `/vipd-speckit-plan` on a project without a ratified
 constitution (TR0 not passed) produces a clear gate-block warning and refuses to
 proceed with planning.
 
 **Acceptance Scenarios**:
 
 1. **Given** a project without a ratified constitution, **When** a user runs
-   `/speckit-specify`, **Then** the command MUST warn that TR0 (project setup)
+   `/vipd-speckit-specify`, **Then** the command MUST warn that TR0 (project setup)
    has not been passed and ask for confirmation before proceeding.
 2. **Given** a project with TR1 readiness criteria unmet, **When** a user runs
-   `/speckit-plan`, **Then** the command MUST display specific unmet TR1 criteria
+   `/vipd-speckit-plan`, **Then** the command MUST display specific unmet TR1 criteria
    and offer to generate a readiness checklist.
 3. **Given** a project with all prior gates passed, **When** a user runs
-   `/speckit-implement`, **Then** the command proceeds normally without gate
+   `/vipd-speckit-implement`, **Then** the command proceeds normally without gate
    warnings.
 
 ---
@@ -58,18 +58,18 @@ the Agile-Stage-Gate governance structure.
 Spec Kit project. Without IPD-aware constitution sections, no gate enforcement
 can work — this is the foundation.
 
-**Independent Test**: Running `/speckit-constitution` on a new project produces
+**Independent Test**: Running `/vipd-speckit-constitution` on a new project produces
 a constitution that includes sections for Agile-Stage-Gate governance,
 tooling requirements, and TR gate criteria, in addition to the existing
 5 core principles.
 
 **Acceptance Scenarios**:
 
-1. **Given** a new project with no constitution, **When** `/speckit-constitution`
+1. **Given** a new project with no constitution, **When** `/vipd-speckit-constitution`
    is run with IPD principles, **Then** the resulting constitution MUST contain
    a "Gate Criteria Reference" section listing Must-Meet and Should-Meet
    definitions for each TR gate (TR1–TR6).
-2. **Given** an existing SDD-only constitution, **When** `/speckit-constitution`
+2. **Given** an existing SDD-only constitution, **When** `/vipd-speckit-constitution`
    is run again with IPD additions, **Then** the updated constitution MUST
    remain backward-compatible with existing specs, plans, and tasks.
 
@@ -84,16 +84,16 @@ automatically captures gate-relevant information.
 
 **Why this priority**: Templates are the结构性骨架，是每个新功能规格和计划的基础。一旦宪法和命令有了门径感知，模板需要跟上才能让门径信息贯穿整个工作流。
 
-**Independent Test**: Creating a new spec with `/speckit-specify` on an
+**Independent Test**: Creating a new spec with `/vipd-speckit-specify` on an
 IPD-enhanced project produces a spec that contains a "TR Gate Assessment"
 section and risk register, matching the template redesign guide's specifications.
 
 **Acceptance Scenarios**:
 
-1. **Given** an IPD-enhanced project, **When** `/speckit-specify` creates a new
+1. **Given** an IPD-enhanced project, **When** `/vipd-speckit-specify` creates a new
    feature spec, **Then** the spec template MUST include a "TR Gate Assessment"
    section identifying which TR gates apply to this feature.
-2. **Given** an IPD-enhanced project, **When** `/speckit-plan` creates a new
+2. **Given** an IPD-enhanced project, **When** `/vipd-speckit-plan` creates a new
    implementation plan, **Then** the plan template MUST include a "Gate Readiness"
    section and "WSJF Priority Score" field.
 
@@ -111,7 +111,7 @@ section and risk register, matching the template redesign guide's specifications
 ### Functional Requirements
 
 - **FR-001**: The updated Tooling Integration Blueprint MUST include a section on
-  Spec Kit agent skill integration, describing how each `/speckit-*` command
+  Spec Kit agent skill integration, describing how each `/vipd-speckit-*` command
   adds TR gate pre-flight checks and post-execution gate evidence generation.
 - **FR-002**: Each command's gate integration MUST follow the TR mapping defined
   in the Command & Template Redesign Guide (TR0 for constitution, TR1 for
@@ -133,7 +133,7 @@ section and risk register, matching the template redesign guide's specifications
 - **FR-009**: New or updated agent skill files MUST be created/modified in
   `.claude/skills/` to implement the gate pre-flight checks described in the
   Command & Template Redesign Guide.
-- **FR-010**: A new `/speckit-analyze` gate compliance check MUST be added that
+- **FR-010**: A new `/vipd-speckit-analyze` gate compliance check MUST be added that
   verifies all TR gate evidence exists for the current project phase.
 - **FR-011**: The Chinese translation of the Blueprint MUST be updated to
   reflect all changes made to the English version.
@@ -144,7 +144,7 @@ section and risk register, matching the template redesign guide's specifications
   that add TR gate pre-flight checks and post-execution evidence generation.
 - **IPD-Enhanced Templates**: Updated constitution, spec, plan, and tasks
   templates with new IPD-aligned sections.
-- **Gate Compliance Analyzer**: An enhancement to `/speckit-analyze` that
+- **Gate Compliance Analyzer**: An enhancement to `/vipd-speckit-analyze` that
   checks TR gate evidence completeness.
 - **Updated Tooling Integration Blueprint**: The existing blueprint document
   with an added section on Spec Kit agent integration.
@@ -153,11 +153,11 @@ section and risk register, matching the template redesign guide's specifications
 
 ### Measurable Outcomes
 
-- **SC-001**: A PDT manager can run any `/speckit-*` command on an IPD-enhanced
+- **SC-001**: A PDT manager can run any `/vipd-speckit-*` command on an IPD-enhanced
   project and receive appropriate gate status feedback (pass/warn/block) without
   needing external tooling.
 - **SC-002**: A project maintainer can create a new IPD-enhanced project
-  constitution using `/speckit-constitution` that includes all gate criteria
+  constitution using `/vipd-speckit-constitution` that includes all gate criteria
   sections in under 10 minutes.
 - **SC-003**: An existing SDD-only project continues to function identically
   with no gate warnings when upgraded to the latest toolkit version.

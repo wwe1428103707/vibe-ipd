@@ -14,14 +14,14 @@
 
 ## Command Redesign
 
-### /speckit-constitution
+### /vipd-speckit-constitution
 
 **Current behavior**: [summary]
 **IPD gate integration**: [e.g., Add TR gate reference section]
 **New behavior**: [summary]
 **TR checkpoint**: TR0 (Project Setup)
 
-### /speckit-specify
+### /vipd-speckit-specify
 
 **Current behavior**: [summary]
 **IPD gate integration**: [e.g., Add TR1 gate validation in spec template]

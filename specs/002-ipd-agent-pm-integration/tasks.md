@@ -21,7 +21,7 @@ description: "Task list for IPD Agent-Driven Project Management Integration"
 
 ## Path Conventions
 
-- **Skill files**: `.claude/skills/speckit-*/skill.md`
+- **Skill files**: `.claude/skills/vipd-speckit-*/skill.md`
 - **Templates**: `.specify/templates/*-template.md`
 - **Blueprint docs**: `docs/ipd-transformation/03-tooling-integration-blueprint.md` and `zh/03-工具集成蓝图.md`
 
@@ -29,7 +29,7 @@ description: "Task list for IPD Agent-Driven Project Management Integration"
 
 **Purpose**: Analyze existing files to understand injection points
 
-- [x] T001 Read and map all 7 existing skill files in `.claude/skills/speckit-*/` to identify exact IPD gate injection points per `contracts/gate-check-interface.md`
+- [x] T001 Read and map all 7 existing skill files in `.claude/skills/vipd-speckit-*/` to identify exact IPD gate injection points per `contracts/gate-check-interface.md`
 - [x] T002 [P] Read `.specify/templates/constitution-template.md` to plan IPD section insertions per `contracts/template-sections.md`
 - [x] T003 [P] Read `.specify/templates/spec-template.md` to plan TR Gate Assessment and Risk Register insertions
 - [x] T004 [P] Read `.specify/templates/plan-template.md` to plan Gate Readiness and WSJF Score insertions
@@ -54,20 +54,20 @@ description: "Task list for IPD Agent-Driven Project Management Integration"
 
 ## Phase 3: User Story 1 — Agent Skill Commands for TR Gate Enforcement (Priority: P1) 🎯 MVP
 
-**Goal**: Modify all 7 existing `/speckit-*` skill files to add TR gate pre-flight checks with deep content validation and constitution-based IPD mode detection
+**Goal**: Modify all 7 existing `/vipd-speckit-*` skill files to add TR gate pre-flight checks with deep content validation and constitution-based IPD mode detection
 
-**Independent Test**: Running `/speckit-plan` on a project without a ratified constitution produces a clear gate-block warning
+**Independent Test**: Running `/vipd-speckit-plan` on a project without a ratified constitution produces a clear gate-block warning
 
 ### Implementation for User Story 1
 
-- [x] T008 [US1] Add IPD gate pre-flight check to `.claude/skills/speckit-constitution/skill.md` — TR0 (project setup): verify constitution existence + "Gate Criteria Reference" section; on first-run success, register TR0 as passed
-- [x] T009 [US1] Add IPD gate pre-flight check to `.claude/skills/speckit-specify/skill.md` — TR1 (concept): check TR0 passed, verify constitution has "Agile-Stage-Gate Governance" heading; post-creation generate TR1 readiness summary
-- [x] T010 [P] [US1] Add IPD gate post-execution evidence to `.claude/skills/speckit-clarify/skill.md` — TR1: after clarifications resolved, generate risk assessment output as TR1 gate evidence
-- [x] T011 [US1] Add IPD gate pre-flight check to `.claude/skills/speckit-checklist/skill.md` — TR2: check TR1 passed, reframe checklist output as TR2 entry evidence
-- [x] T012 [US1] Add IPD gate pre-flight check to `.claude/skills/speckit-plan/skill.md` — TR2/TR3: check TR1 passed, post-creation generate architecture decision log as TR3 evidence
-- [x] T013 [US1] Add IPD gate pre-flight check to `.claude/skills/speckit-tasks/skill.md` — TR4: check TR2/TR3 passed, tasks become development baseline
-- [x] T014 [US1] Add IPD gate pre-flight check to `.claude/skills/speckit-implement/skill.md` — TR4/TR4A: check TR4 passed, post-completion generate quality report
-- [x] T015 [P] [US1] Enhance `.claude/skills/speckit-analyze/skill.md` with TR5 gate compliance check — verify all prior gate evidence exists, generate TR5 validation report
+- [x] T008 [US1] Add IPD gate pre-flight check to `.claude/skills/vipd-speckit-constitution/skill.md` — TR0 (project setup): verify constitution existence + "Gate Criteria Reference" section; on first-run success, register TR0 as passed
+- [x] T009 [US1] Add IPD gate pre-flight check to `.claude/skills/vipd-speckit-specify/skill.md` — TR1 (concept): check TR0 passed, verify constitution has "Agile-Stage-Gate Governance" heading; post-creation generate TR1 readiness summary
+- [x] T010 [P] [US1] Add IPD gate post-execution evidence to `.claude/skills/vipd-speckit-clarify/skill.md` — TR1: after clarifications resolved, generate risk assessment output as TR1 gate evidence
+- [x] T011 [US1] Add IPD gate pre-flight check to `.claude/skills/vipd-speckit-checklist/skill.md` — TR2: check TR1 passed, reframe checklist output as TR2 entry evidence
+- [x] T012 [US1] Add IPD gate pre-flight check to `.claude/skills/vipd-speckit-plan/skill.md` — TR2/TR3: check TR1 passed, post-creation generate architecture decision log as TR3 evidence
+- [x] T013 [US1] Add IPD gate pre-flight check to `.claude/skills/vipd-speckit-tasks/skill.md` — TR4: check TR2/TR3 passed, tasks become development baseline
+- [x] T014 [US1] Add IPD gate pre-flight check to `.claude/skills/vipd-speckit-implement/skill.md` — TR4/TR4A: check TR4 passed, post-completion generate quality report
+- [x] T015 [P] [US1] Enhance `.claude/skills/vipd-speckit-analyze/skill.md` with TR5 gate compliance check — verify all prior gate evidence exists, generate TR5 validation report
 
 **Checkpoint**: All 7 commands have IPD gate awareness. User can run any command and receive appropriate gate status feedback.
 
@@ -77,7 +77,7 @@ description: "Task list for IPD Agent-Driven Project Management Integration"
 
 **Goal**: Update the constitution template to include IPD gate criteria sections, enabling IPD mode detection
 
-**Independent Test**: Running `/speckit-constitution` on a new project produces a constitution with "Gate Criteria Reference" section
+**Independent Test**: Running `/vipd-speckit-constitution` on a new project produces a constitution with "Gate Criteria Reference" section
 
 ### Implementation for User Story 2
 
@@ -178,7 +178,7 @@ description: "Task list for IPD Agent-Driven Project Management Integration"
 2. Complete Phase 2: Foundational (create shared utilities)
 3. Complete Phase 3: US1 (modify 7 skill files)
 4. Complete Phase 4: US2 (update constitution template)
-5. **STOP and VALIDATE**: Test gate enforcement with `/speckit-plan` on test project
+5. **STOP and VALIDATE**: Test gate enforcement with `/vipd-speckit-plan` on test project
 6. Continue with US3 (templates) and Blueprint updates
 
 ### Incremental Delivery

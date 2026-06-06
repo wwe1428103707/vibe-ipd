@@ -54,6 +54,24 @@ You **MUST** consider the user input before proceeding (if not empty).
     ```
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
+
+## IPD Gate Check
+
+**TR1 — Concept Gate**: Generate risk assessment evidence after clarifications.
+
+1. **IPD mode detection**: Check if `.specify/memory/constitution.md` exists AND
+   contains a "Gate Criteria Reference" section heading.
+   - If YES → IPD mode ACTIVE — continue
+   - If NO → SDD-only mode — skip, proceed normally
+
+2. **Deep content validation (IPD mode only)**:
+   - **TR0 passed?** Constitution exists + Gate Criteria Reference section
+   - **TR1 readiness?** Spec exists with user stories
+   - If NOT → warn, but allow clarification to proceed (clarification resolves gaps)
+
+3. **Post-session**: After clarifications resolved, generate risk assessment output
+   with risk level (high/medium/low) and open risk count as TR1 gate evidence.
+
 ## Outline
 
 Goal: Detect and reduce ambiguity or missing decision points in the active feature specification and record the clarifications directly in the spec file.

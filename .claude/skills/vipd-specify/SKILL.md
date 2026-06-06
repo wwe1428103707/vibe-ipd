@@ -54,6 +54,24 @@ You **MUST** consider the user input before proceeding (if not empty).
     ```
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
+
+## IPD Gate Check
+
+**TR1 — Concept Gate**: Verify TR0 passed before creating spec.
+
+1. **IPD mode detection**: Check if `.specify/memory/constitution.md` exists AND
+   contains a "Gate Criteria Reference" section heading.
+   - If YES → IPD mode ACTIVE — continue gate check
+   - If NO → SDD-only mode — skip, proceed normally
+
+2. **Deep content validation (IPD mode only)**:
+   - **TR0 passed?** Check `.specify/memory/constitution.md` exists AND contains
+     "Agile-Stage-Gate Governance" heading
+   - If NOT → display unmet criteria: "TR0 not passed. Create constitution first."
+     Ask: "Proceed anyway? (yes/no)" If no, halt.
+
+3. **Post-creation**: Generate TR1 readiness report noting spec completeness.
+
 ## Outline
 
 The text the user typed after `/.claude/skills/vipd-specify` in the triggering message **is** the feature description. Assume you always have it available in this conversation even if `$ARGUMENTS` appears literally below. Do not ask the user to repeat it unless they provided an empty command.

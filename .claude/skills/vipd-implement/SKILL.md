@@ -54,6 +54,26 @@ You **MUST** consider the user input before proceeding (if not empty).
     ```
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
+
+## IPD Gate Check
+
+**TR4/TR4A — Development & Gray Release Gate**: Verify TR4 passed before implement.
+
+1. **IPD mode detection**: Check if `.specify/memory/constitution.md` exists AND
+   contains a "Gate Criteria Reference" section heading.
+   - If YES → IPD mode ACTIVE — continue gate check
+   - If NO → SDD-only mode — skip, proceed normally
+
+2. **Deep content validation (IPD mode only)**:
+   - **TR0 passed?** Constitution exists + Gate Criteria Reference section
+   - **TR1 passed?** Spec exists + TR Gate Assessment section
+   - **TR2/TR3 passed?** Plan exists + Gate Readiness section
+   - **TR4 passed?** Tasks exist + Gate Completion Verification checkpoints
+   - If NOT → display unmet criteria → ask: "Proceed anyway? (yes/no)" If no, halt.
+
+3. **Post-completion**: Generate TR4A quality summary (test coverage, code quality,
+   security scan status) as gray release readiness evidence.
+
 ## Outline
 
 1. Run `.specify/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").

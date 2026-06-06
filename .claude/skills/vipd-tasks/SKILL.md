@@ -54,6 +54,24 @@ You **MUST** consider the user input before proceeding (if not empty).
     ```
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
+
+## IPD Gate Check
+
+**TR4 — Development Baseline Gate**: Verify TR2/TR3 passed before task breakdown.
+
+1. **IPD mode detection**: Check if `.specify/memory/constitution.md` exists AND
+   contains a "Gate Criteria Reference" section heading.
+   - If YES → IPD mode ACTIVE — continue gate check
+   - If NO → SDD-only mode — skip, proceed normally
+
+2. **Deep content validation (IPD mode only)**:
+   - **TR0 passed?** Constitution exists + Gate Criteria Reference section
+   - **TR1 passed?** Spec exists + TR Gate Assessment section
+   - **TR2/TR3 passed?** Plan exists + Gate Readiness section
+   - If NOT → display unmet criteria → ask: "Proceed anyway? (yes/no)" If no, halt.
+
+3. **Post-generation**: Task count and effort estimate become TR4 baseline evidence.
+
 ## Outline
 
 1. **Setup**: Run `.specify/scripts/powershell/setup-tasks.ps1 -Json` from repo root and parse FEATURE_DIR, TASKS_TEMPLATE, and AVAILABLE_DOCS list. `FEATURE_DIR` and `TASKS_TEMPLATE` must be absolute paths when provided. `AVAILABLE_DOCS` is a list of document names/relative paths available under `FEATURE_DIR` (for example `research.md` or `contracts/`). For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").

@@ -75,6 +75,23 @@ You **MUST** consider the user input before proceeding (if not empty).
     ```
 - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
+## IPD Gate Check
+
+**TR2 — Architecture Gate**: Verify TR1 passed before checklist generation.
+
+1. **IPD mode detection**: Check if `.specify/memory/constitution.md` exists AND
+   contains a "Gate Criteria Reference" section heading.
+   - If YES → IPD mode ACTIVE — continue gate check
+   - If NO → SDD-only mode — skip, proceed normally
+
+2. **Deep content validation (IPD mode only)**:
+   - **TR0 passed?** Constitution exists + Gate Criteria Reference section
+   - **TR1 passed?** Current feature spec exists AND contains "TR Gate Assessment"
+   - If NOT → display unmet criteria → ask: "Proceed anyway? (yes/no)" If no, halt.
+
+3. **Gate status recording**: On TR2 pass, update `gates.TR2_TR3` in
+   `.specify/memory/gate-status.json` with checklist score evidence.
+
 ## Execution Steps
 
 1. **Setup**: Run `.specify/scripts/powershell/check-prerequisites.ps1 -Json` from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS list.

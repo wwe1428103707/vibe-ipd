@@ -72,6 +72,14 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 3. **Post-creation**: Generate TR1 readiness report noting spec completeness.
 
+   update `.specify/memory/gate-status.json`:
+   - Set `gates.TR1.status` to `"passed"`
+   - Set `gates.TR1.evidence` to `"Spec created with TR Gate Assessment"`
+   - Set `gates.TR1.date` to current date
+   - Set `last_updated` to current date
+
+4. **Gate status recording**: On TR1 pass, update `.specify/memory/gate-status.json`:
+   - Set `gates.TR1` status/passed/evidence/date.
 ## Outline
 
 The text the user typed after `/.claude/skills/vipd-specify` in the triggering message **is** the feature description. Assume you always have it available in this conversation even if `$ARGUMENTS` appears literally below. Do not ask the user to repeat it unless they provided an empty command.

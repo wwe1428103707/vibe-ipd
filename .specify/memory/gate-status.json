@@ -1,0 +1,36 @@
+{
+  "ipd_mode": true,
+  "last_updated": "2026-06-06",
+  "gates": {
+    "TR0": {
+      "status": "passed",
+      "evidence": "Constitution ratified with Gate Criteria Reference section",
+      "date": "2026-06-06"
+    },
+    "TR1": {
+      "status": "pending",
+      "evidence": null,
+      "date": null
+    },
+    "TR2_TR3": {
+      "status": "pending",
+      "evidence": null,
+      "date": null
+    },
+    "TR4": {
+      "status": "pending",
+      "evidence": null,
+      "date": null
+    },
+    "TR4A": {
+      "status": "pending",
+      "evidence": null,
+      "date": null
+    },
+    "TR5": {
+      "status": "pending",
+      "evidence": null,
+      "date": null
+    }
+  }
+}

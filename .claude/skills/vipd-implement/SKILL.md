@@ -72,8 +72,15 @@ You **MUST** consider the user input before proceeding (if not empty).
    - If NOT → display unmet criteria → ask: "Proceed anyway? (yes/no)" If no, halt.
 
 3. **Post-completion**: Generate TR4A quality summary (test coverage, code quality,
+
+   update `.specify/memory/gate-status.json`:
+   - Set `gates.TR4A.status` to `"passed"`
+   - Set `gates.TR4A.evidence` to quality summary (coverage, security status)
+   - Set `gates.TR4A.date` to current date
+   - Set `last_updated` to current date
    security scan status) as gray release readiness evidence.
 
+4. **Gate status recording**: On TR4A pass, update `gates.TR4A` in gate-status.json with quality summary evidence.
 ## Outline
 
 1. Run `.specify/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").

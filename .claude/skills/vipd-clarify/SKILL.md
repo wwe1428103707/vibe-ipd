@@ -70,8 +70,16 @@ You **MUST** consider the user input before proceeding (if not empty).
    - If NOT → warn, but allow clarification to proceed (clarification resolves gaps)
 
 3. **Post-session**: After clarifications resolved, generate risk assessment output
+
+4. **Gate status recording**: After risk assessment generated,
+   update `.specify/memory/gate-status.json`:
+   - Set `gates.TR1.status` to `"passed"`
+   - Set `gates.TR1.evidence` to risk level and open risk count
+   - Set `gates.TR1.date` to current date
+   - Set `last_updated` to current date
    with risk level (high/medium/low) and open risk count as TR1 gate evidence.
 
+4. **Gate status recording**: After risk assessment, update `gates.TR1` in gate-status.json with risk level evidence.
 ## Outline
 
 Goal: Detect and reduce ambiguity or missing decision points in the active feature specification and record the clarifications directly in the spec file.

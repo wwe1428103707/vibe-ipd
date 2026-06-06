@@ -72,6 +72,13 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 3. **Post-generation**: Task count and effort estimate become TR4 baseline evidence.
 
+   update `.specify/memory/gate-status.json`:
+   - Set `gates.TR4.status` to `"passed"`
+   - Set `gates.TR4.evidence` to `"Tasks generated with Gate Completion Verification"`
+   - Set `gates.TR4.date` to current date
+   - Set `last_updated` to current date
+
+4. **Gate status recording**: On TR4 pass, update `gates.TR4` in gate-status.json with task baseline evidence.
 ## Outline
 
 1. **Setup**: Run `.specify/scripts/powershell/setup-tasks.ps1 -Json` from repo root and parse FEATURE_DIR, TASKS_TEMPLATE, and AVAILABLE_DOCS list. `FEATURE_DIR` and `TASKS_TEMPLATE` must be absolute paths when provided. `AVAILABLE_DOCS` is a list of document names/relative paths available under `FEATURE_DIR` (for example `research.md` or `contracts/`). For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").

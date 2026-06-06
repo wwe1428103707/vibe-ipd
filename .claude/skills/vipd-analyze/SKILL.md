@@ -77,6 +77,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Check DoD (Definition of Done) completeness
    - Generate TR5-ready validation summary
 
+4. **Gate status recording**: On TR5 pass, update `gates.TR5` in gate-status.json with analysis result evidence.
 ## Goal
 
 Identify inconsistencies, duplications, ambiguities, and underspecified items across the three core artifacts (`spec.md`, `plan.md`, `tasks.md`) before implementation. This command MUST run only after `/speckit-tasks` has successfully produced a complete `tasks.md`.

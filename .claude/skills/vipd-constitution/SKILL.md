@@ -74,6 +74,8 @@ IPD governance when the project is IPD-enhanced.
    must include a Gate Criteria Reference section for IPD mode." Ask:
    "Proceed anyway? (yes/no)" If no, halt.
 
+4. **Gate status recording**: On TR0 pass, update `.specify/memory/gate-status.json`:
+   - Set `gates.TR0.status` to `"passed"` and record evidence + date.
 ## Outline
 
 You are updating the project constitution at `.specify/memory/constitution.md`. This file is a TEMPLATE containing placeholder tokens in square brackets (e.g. `[PROJECT_NAME]`, `[PRINCIPLE_1_NAME]`). Your job is to (a) collect/derive concrete values, (b) fill the template precisely, and (c) propagate any amendments across dependent artifacts.

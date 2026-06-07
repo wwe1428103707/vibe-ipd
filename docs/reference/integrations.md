@@ -1,3 +1,5 @@
+> **[English](.)** · [中文](../zh/reference/integrations.md)
+
 # Supported AI Coding Agent Integrations
 
 The Specify CLI supports a wide range of AI coding agents. When you run `specify init`, the CLI sets up the appropriate command files, context rules, and directory structures for your chosen AI coding agent — so you can start using Spec-Driven Development immediately, regardless of which tool you prefer.

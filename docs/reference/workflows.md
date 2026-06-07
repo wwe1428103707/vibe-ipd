@@ -1,3 +1,5 @@
+> **[English](.)** · [中文](../zh/reference/workflows.md)
+
 # Workflows
 
 Workflows automate multi-step Spec-Driven Development processes — chaining commands, prompts, shell steps, and human checkpoints into repeatable sequences. They support conditional logic, loops, fan-out/fan-in, and can be paused and resumed from the exact point of interruption.

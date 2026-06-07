@@ -113,12 +113,11 @@ cd my-project
 
 完整文档位于 [`docs/`](./docs/) 目录：
 
-- [快速入门指南](./docs/quickstart.md) — 开始使用 vibe-ipd
-- [安装指南](./docs/installation.md) — 安装与配置
-- [概念](./docs/concepts/) — SDD、IPD 和敏捷-阶段门禁详解
-- [IPD 转型指南](./docs/ipd-transformation/) — 从 speckit 迁移到 vibe-ipd
-- [参考](./docs/reference/) — 命令参考和 CLI 文档
-- [社区](./docs/community/) — 扩展、预设和演练
+- [快速入门指南](./docs/zh/quickstart.md) — 开始使用 vibe-ipd
+- [安装指南](./docs/zh/installation.md) — 安装与配置
+- [概念](./docs/zh/concepts/sdd.md) — SDD、IPD 和敏捷-阶段门禁详解
+- [IPD 转型指南](./docs/ipd-transformation/zh/README.md) — 从 speckit 迁移到 vibe-ipd
+- [参考](./docs/zh/reference/overview.md) — 命令参考和 CLI 文档
 
 ## 项目状态
 

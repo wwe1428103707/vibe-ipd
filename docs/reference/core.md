@@ -1,3 +1,5 @@
+> **[English](.)** · [中文](../zh/reference/core.md)
+
 # Core Commands
 
 The core `specify` commands handle project initialization, system checks, and version information.

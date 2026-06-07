@@ -1,3 +1,5 @@
+> **[English](.)** · [中文](../zh/reference/extensions.md)
+
 # Extensions
 
 Extensions add new capabilities to vibe-ipd — domain-specific commands, external tool integrations, quality gates, and more. They introduce new commands and templates that go beyond the built-in Spec-Driven Development workflow.

@@ -1,3 +1,5 @@
+> **[English](.)** · [中文](../zh/reference/presets.md)
+
 # Presets
 
 Presets customize how vibe-ipd works — overriding templates, commands, and terminology without changing any tooling. They let you enforce organizational standards, adapt the workflow to your methodology, or localize the entire experience. Multiple presets can be stacked with priority ordering.

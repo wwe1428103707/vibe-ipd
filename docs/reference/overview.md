@@ -1,3 +1,5 @@
+> **[English](.)** · [中文](../zh/reference/overview.md)
+
 # CLI Reference
 
 The Specify CLI (`specify`) manages the full lifecycle of Spec-Driven Development — from project initialization to workflow automation.

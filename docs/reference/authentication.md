@@ -1,3 +1,5 @@
+> **[English](.)** · [中文](../zh/reference/authentication.md)
+
 # Authentication
 
 Specify CLI uses **opt-in authentication** for HTTP requests to catalog

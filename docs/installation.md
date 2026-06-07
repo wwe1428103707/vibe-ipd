@@ -1,3 +1,5 @@
+> **[English](.)** · [中文](zh/installation.md)
+
 # Installation Guide
 
 ## Prerequisites

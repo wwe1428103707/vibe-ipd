@@ -1,6 +1,6 @@
 {
   "ipd_mode": true,
-  "last_updated": "2026-06-07T22:21:59+08:00",
+  "last_updated": "2026-06-07T23:01:27+08:00",
   "gates": {
     "TR0": {
       "status": "passed",
@@ -9,8 +9,8 @@
     },
     "TR1": {
       "status": "passed",
-      "evidence": "Spec created for vipd-init skill with TR Gate Assessment section",
-      "date": "2026-06-07T22:14:29+08:00",
+      "evidence": "Low risk, 0 open risks resolved after 3 clarifications",
+      "date": "2026-06-07T22:41:26+08:00",
       "history": [
         {
           "date": "2026-06-07T20:44:11+08:00",
@@ -35,13 +35,25 @@
           "date": "2026-06-07T22:14:29+08:00",
           "evidence": "Spec created for vipd-init skill with TR Gate Assessment section",
           "from": "passed"
+        },
+        {
+          "from": "passed",
+          "evidence": "Spec created with TR Gate Assessment",
+          "to": "passed",
+          "date": "2026-06-07T22:35:11+08:00"
+        },
+        {
+          "to": "passed",
+          "evidence": "Low risk, 0 open risks resolved after 3 clarifications",
+          "from": "passed",
+          "date": "2026-06-07T22:41:26+08:00"
         }
       ]
     },
     "TR2_TR3": {
       "status": "passed",
-      "evidence": "Plan created with Technical Context, Constitution Check, CBB Assessment, ADL; quickstart.md generated",
-      "date": "2026-06-07T22:17:46+08:00",
+      "evidence": "Plan creation started with user approval (gate pre-check failed due to missing plan — expected)",
+      "date": "2026-06-07T22:43:42+08:00",
       "history": [
         {
           "date": "2026-06-07T21:03:07+08:00",
@@ -66,13 +78,19 @@
           "evidence": "Plan created with Technical Context, Constitution Check, CBB Assessment, ADL; quickstart.md generated",
           "date": "2026-06-07T22:17:46+08:00",
           "to": "passed"
+        },
+        {
+          "date": "2026-06-07T22:43:42+08:00",
+          "to": "passed",
+          "from": "passed",
+          "evidence": "Plan creation started with user approval (gate pre-check failed due to missing plan — expected)"
         }
       ]
     },
     "TR4": {
       "status": "passed",
-      "evidence": "Tasks generated for vipd-init skill: 26 tasks across 6 phases, 3 user stories, with Gate Completion Verification",
-      "date": "2026-06-07T22:19:27+08:00",
+      "evidence": "Task generation started with user approval (gate pre-check failed due to missing tasks — expected)",
+      "date": "2026-06-07T22:48:28+08:00",
       "history": [
         {
           "date": "2026-06-07T21:09:39+08:00",
@@ -91,13 +109,19 @@
           "evidence": "Tasks generated for vipd-init skill: 26 tasks across 6 phases, 3 user stories, with Gate Completion Verification",
           "from": "passed",
           "to": "passed"
+        },
+        {
+          "to": "passed",
+          "date": "2026-06-07T22:48:28+08:00",
+          "from": "passed",
+          "evidence": "Task generation started with user approval (gate pre-check failed due to missing tasks — expected)"
         }
       ]
     },
     "TR4A": {
       "status": "passed",
-      "evidence": "Quality summary: 25/26 tasks completed — SKILL.md created with all sections (frontmatter, Pre-Execution, Execution Steps 1-5, Edge Cases, Troubleshooting, Related Commands). Remaining T026 is manual E2E verification.",
-      "date": "2026-06-07T22:21:59+08:00",
+      "evidence": "All core tasks complete: 10 Chinese translation files created under docs/zh/, 5 README.zh.md links updated, all code blocks/headings/toggles verified",
+      "date": "2026-06-07T23:01:27+08:00",
       "history": [
         {
           "date": "2026-06-07T20:44:38+08:00",
@@ -116,6 +140,12 @@
           "from": "passed",
           "to": "passed",
           "date": "2026-06-07T22:21:59+08:00"
+        },
+        {
+          "to": "passed",
+          "evidence": "All core tasks complete: 10 Chinese translation files created under docs/zh/, 5 README.zh.md links updated, all code blocks/headings/toggles verified",
+          "date": "2026-06-07T23:01:27+08:00",
+          "from": "passed"
         }
       ]
     },

@@ -4,7 +4,7 @@
 
 # IPD Toolkit Transformation Plan
 
-This collection provides a comprehensive blueprint for evolving the Spec Kit
+This collection provides a comprehensive blueprint for evolving the vibe-ipd
 SDD (Spec-Driven Development) toolkit into an IPD (Integrated Product
 Development) enhanced toolkit using the Agile-Stage-Gate hybrid model.
 

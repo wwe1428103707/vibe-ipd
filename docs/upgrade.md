@@ -1,6 +1,6 @@
 # Upgrade Guide
 
-> You have Spec Kit installed and want to upgrade to the latest version to get new features, bug fixes, or updated slash commands. This guide covers both upgrading the CLI tool and updating your project files.
+> You have vibe-ipd installed and want to upgrade to the latest version to get new features, bug fixes, or updated slash commands. This guide covers both upgrading the CLI tool and updating your project files.
 
 ---
 
@@ -63,7 +63,7 @@ Specify the desired release tag:
 uvx --from git+https://github.com/github/spec-kit.git@vX.Y.Z specify init --here --integration copilot
 ```
 
-`uvx` runs a temporary copy of Spec Kit for that single command. It does not update a persistent `specify` installed with `uv tool install`, `pipx`, or another tool manager. If a newer feature works through `uvx` but your local `specify` still reports an older version, upgrade the persistent CLI with the command that matches your install method.
+`uvx` runs a temporary copy of vibe-ipd for that single command. It does not update a persistent `specify` installed with `uv tool install`, `pipx`, or another tool manager. If a newer feature works through `uvx` but your local `specify` still reports an older version, upgrade the persistent CLI with the command that matches your install method.
 
 ### If you installed with `pipx`
 
@@ -89,7 +89,7 @@ specify self check
 
 ## Part 2: Updating Project Files
 
-When Spec Kit releases new features (like new slash commands or updated templates), you need to refresh your project's Spec Kit files.
+When vibe-ipd releases new features (like new slash commands or updated templates), you need to refresh your project's vibe-ipd files.
 
 ### What gets updated?
 
@@ -137,7 +137,7 @@ Template files will be merged with existing content and may overwrite existing f
 Proceed? [y/N]
 ```
 
-With `--force`, it skips the confirmation and proceeds immediately. It also **overwrites shared infrastructure files** (`.specify/scripts/` and `.specify/templates/`) with the latest versions from the installed Spec Kit release.
+With `--force`, it skips the confirmation and proceeds immediately. It also **overwrites shared infrastructure files** (`.specify/scripts/` and `.specify/templates/`) with the latest versions from the installed vibe-ipd release.
 
 Without `--force`, shared infrastructure files that already exist are skipped — the CLI will print a warning listing the skipped files so you know which ones were not updated.
 
@@ -199,8 +199,8 @@ cd .kilocode/rules/
 ls -la
 
 # Delete old versions (example filenames - yours may differ)
-rm speckit.specify-old.md
-rm speckit.plan-v1.md
+rm vipd.specify-old.md
+rm vipd.plan-v1.md
 ```
 
 Restart your IDE to refresh the command list.
@@ -252,7 +252,7 @@ cd .kilocode/rules/
 ls -la
 
 # Delete old command files
-rm speckit.old-command-name.md
+rm vipd.old-command-name.md
 
 # Restart your IDE
 ```
@@ -278,7 +278,7 @@ The `--no-git` flag skips git initialization but doesn't affect file updates.
 
 ## Using `--no-git` Flag
 
-The `--no-git` flag tells Spec Kit to **skip git repository initialization**. This is useful when:
+The `--no-git` flag tells vibe-ipd to **skip git repository initialization**. This is useful when:
 
 - You manage version control differently (Mercurial, SVN, etc.)
 - Your project is part of a larger monorepo with existing git setup
@@ -318,9 +318,9 @@ export SPECIFY_FEATURE="001-my-feature"
 $env:SPECIFY_FEATURE = "001-my-feature"
 ```
 
-This tells Spec Kit which feature directory to use when creating specs, plans, and tasks.
+This tells vibe-ipd which feature directory to use when creating specs, plans, and tasks.
 
-**Why this matters:** Without git, Spec Kit can't detect your current branch name to determine the active feature. The environment variable provides that context manually.
+**Why this matters:** Without git, vibe-ipd can't detect your current branch name to determine the active feature. The environment variable provides that context manually.
 
 ---
 
@@ -376,11 +376,11 @@ This warning appears when you run `specify init --here` (or `specify init .`) in
 
 1. **The directory has existing content** - In the example, 25 files/folders
 2. **Files will be merged** - New template files will be added alongside your existing files
-3. **Some files may be overwritten** - If you already have Spec Kit files (`.claude/`, `.specify/`, etc.), they'll be replaced with the new versions
+3. **Some files may be overwritten** - If you already have vibe-ipd files (`.claude/`, `.specify/`, etc.), they'll be replaced with the new versions
 
 **What gets overwritten:**
 
-Only Spec Kit infrastructure files:
+Only vibe-ipd infrastructure files:
 
 - Agent command files (`.claude/commands/`, `.github/prompts/`, etc.)
 - Scripts in `.specify/scripts/`
@@ -392,7 +392,7 @@ Only Spec Kit infrastructure files:
 - Your `specs/` directory (specifications, plans, tasks)
 - Your source code files
 - Your `.git/` directory and git history
-- Any other files not part of Spec Kit templates
+- Any other files not part of vibe-ipd templates
 
 **How to respond:**
 
@@ -406,15 +406,15 @@ Only Spec Kit infrastructure files:
 
 **When you see this warning:**
 
-- ✅ **Expected** when upgrading an existing Spec Kit project
-- ✅ **Expected** when adding Spec Kit to an existing codebase
+- ✅ **Expected** when upgrading an existing vibe-ipd project
+- ✅ **Expected** when adding vibe-ipd to an existing codebase
 - ⚠️ **Unexpected** if you thought you were creating a new project in an empty directory
 
 **Prevention tip:** Before upgrading, commit or back up your `.specify/memory/constitution.md` if you customized it.
 
 ### "CLI upgrade doesn't seem to work"
 
-If a command behaves like an older Spec Kit version, first ask the CLI itself:
+If a command behaves like an older vibe-ipd version, first ask the CLI itself:
 
 ```bash
 # Read-only — prints "Up to date: X.Y.Z" or "Update available: X.Y.Z → vY.Z.W"
@@ -455,11 +455,11 @@ uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
 
 The `specify` CLI tool is used for:
 
-- **Initial setup:** `specify init` to bootstrap Spec Kit in your project
+- **Initial setup:** `specify init` to bootstrap vibe-ipd in your project
 - **Upgrades:** `specify init --here --force` to update templates and commands
 - **Diagnostics:** `specify check` to verify tool installation
 
-Once you've run `specify init`, the slash commands (like `/speckit.specify`, `/speckit.plan`, etc.) are **permanently installed** in your project's agent folder (`.claude/`, `.github/prompts/`, `.pi/prompts/`, etc.). Your AI coding agent reads these command files directly—no need to run `specify` again.
+Once you've run `specify init`, the slash commands (like `/vipd.specify`, `/vipd.plan`, etc.) are **permanently installed** in your project's agent folder (`.claude/`, `.github/prompts/`, `.pi/prompts/`, etc.). Your AI coding agent reads these command files directly—no need to run `specify` again.
 
 **If your agent isn't recognizing slash commands:**
 
@@ -492,7 +492,7 @@ Once you've run `specify init`, the slash commands (like `/speckit.specify`, `/s
 
 ## Version Compatibility
 
-Spec Kit follows semantic versioning for major releases. The CLI and project files are designed to be compatible within the same major version.
+vibe-ipd follows semantic versioning for major releases. The CLI and project files are designed to be compatible within the same major version.
 
 **Best practice:** Keep both CLI and project files in sync by upgrading both together during major version changes.
 
@@ -502,7 +502,7 @@ Spec Kit follows semantic versioning for major releases. The CLI and project fil
 
 After upgrading:
 
-- **Test new slash commands:** Run `/speckit.constitution` or another command to verify everything works
+- **Test new slash commands:** Run `/vipd.constitution` or another command to verify everything works
 - **Review release notes:** Check [GitHub Releases](https://github.com/github/spec-kit/releases) for new features and breaking changes
 - **Update workflows:** If new commands were added, update your team's development workflows
 - **Check documentation:** Visit [github.io/spec-kit](https://github.github.io/spec-kit/) for updated guides

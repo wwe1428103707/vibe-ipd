@@ -11,7 +11,7 @@
 ## Installation
 
 > [!IMPORTANT]
-> The only official, maintained packages for Spec Kit come from the [github/spec-kit](https://github.com/github/spec-kit) GitHub repository. Any packages with the same name available on PyPI (e.g. `specify-cli` on pypi.org) are **not** affiliated with this project and are not maintained by the Spec Kit maintainers. For normal installs, use the GitHub-based commands shown below. For offline or air-gapped environments, locally built wheels created from this repository are also valid.
+> The only official, maintained packages for vibe-ipd come from the [github/spec-kit](https://github.com/github/spec-kit) GitHub repository. Any packages with the same name available on PyPI (e.g. `specify-cli` on pypi.org) are **not** affiliated with this project and are not maintained by the vibe-ipd maintainers. For normal installs, use the GitHub-based commands shown below. For offline or air-gapped environments, locally built wheels created from this repository are also valid.
 
 ### Persistent Installation (Recommended)
 
@@ -86,15 +86,15 @@ After installation, run the following command to confirm the correct version is 
 specify version
 ```
 
-This helps verify you are running the official Spec Kit build from GitHub, not an unrelated package with the same name.
+This helps verify you are running the official vibe-ipd build from GitHub, not an unrelated package with the same name.
 
 **Stay current:** Run `specify self check` periodically to learn whether a newer release is available — it is read-only and never modifies your installation. When you are ready to upgrade, follow the [Upgrade Guide](./upgrade.md).
 
 After initialization, you should see the following commands available in your coding agent:
 
-- `/speckit.specify` - Create specifications
-- `/speckit.plan` - Generate implementation plans  
-- `/speckit.tasks` - Break down into actionable tasks
+- `/vipd.specify` - Create specifications
+- `/vipd.plan` - Generate implementation plans  
+- `/vipd.tasks` - Break down into actionable tasks
 
 Scripts are installed into a variant subdirectory matching the chosen script type:
 

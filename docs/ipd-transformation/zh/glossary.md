@@ -38,7 +38,7 @@
 
 ## S
 
-**SDD（规格驱动开发，Spec-Driven Development）**: 一种开发方法论，将规格说明视为可执行产物，直接生成可工作的实现。是Spec Kit工具包的基础方法论。
+**SDD（规格驱动开发，Spec-Driven Development）**: 一种开发方法论，将规格说明视为可执行产物，直接生成可工作的实现。是vibe-ipd工具包的基础方法论。
 
 ## T
 

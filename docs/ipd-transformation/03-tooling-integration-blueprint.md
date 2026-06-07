@@ -9,19 +9,19 @@
 
 The Agile-Stage-Gate hybrid model requires IPD Technology Review (TR) gate
 enforcement integrated into the development workflow. This blueprint describes
-Spec Kit's native **document-state mode** — gate enforcement through AI agent
+vibe-ipd's native **document-state mode** — gate enforcement through AI agent
 commands and project document structure, requiring no external tooling or
 platform configuration.
 
-The Spec Kit toolchain embeds TR gate awareness directly into each
+The vibe-ipd toolchain embeds TR gate awareness directly into each
 `/vipd-speckit-*` command. When IPD mode is active (detected by the presence of a
 "Gate Criteria Reference" section in the project constitution), commands
 automatically perform pre-flight gate checks using deep content validation
 against the project's own documents (constitution, spec, plan, tasks).
 
-## Spec Kit Agent Integration (Document-State Mode)
+## vibe-ipd Agent Integration (Document-State Mode)
 
-Spec Kit provides native gate enforcement through its AI agent command system.
+vibe-ipd provides native gate enforcement through its AI agent command system.
 This "document-state mode" works without external tooling by having each
 `/vipd-speckit-*` command perform pre-flight TR gate checks against the project's
 own documentation.
@@ -52,7 +52,7 @@ own documentation.
 | Gate enforcement | Pre-flight command checks | Platform automation rules |
 | Evidence collection | Document content analysis | Platform issue fields |
 | Dependency tracking | Cross-reference links | Platform dependency views |
-| Setup effort | None (built into Spec Kit) | Requires platform configuration |
+| Setup effort | None (built into vibe-ipd) | Requires platform configuration |
 
 ## Platform Alternatives
 

@@ -1,6 +1,6 @@
 ﻿{
     "ipd_mode":  true,
-    "last_updated":  "2026-06-07T21:35:41+08:00",
+    "last_updated":  "2026-06-07T21:59:18+08:00",
     "gates":  {
                   "TR0":  {
                               "status":  "passed",
@@ -10,7 +10,7 @@
                   "TR1":  {
                               "status":  "passed",
                               "evidence":  "Spec created with TR Gate Assessment",
-                              "date":  "2026-06-07T20:59:09+08:00",
+                              "date":  "2026-06-07T21:49:47+08:00",
                               "history":  [
                                               {
                                                   "date":  "2026-06-07T20:44:11+08:00",
@@ -23,13 +23,19 @@
                                                   "from":  "passed",
                                                   "to":  "passed",
                                                   "evidence":  "Spec created with TR Gate Assessment"
+                                              },
+                                              {
+                                                  "date":  "2026-06-07T21:49:47+08:00",
+                                                  "from":  "passed",
+                                                  "to":  "passed",
+                                                  "evidence":  "Spec created with TR Gate Assessment"
                                               }
                                           ]
                           },
                   "TR2_TR3":  {
                                   "status":  "passed",
                                   "evidence":  "Plan created with Gate Readiness + ADL",
-                                  "date":  "2026-06-07T21:23:41+08:00",
+                                  "date":  "2026-06-07T21:55:55+08:00",
                                   "history":  [
                                                   {
                                                       "date":  "2026-06-07T21:03:07+08:00",
@@ -42,16 +48,28 @@
                                                       "from":  "passed",
                                                       "to":  "passed",
                                                       "evidence":  "Plan created with Gate Readiness + ADL"
+                                                  },
+                                                  {
+                                                      "date":  "2026-06-07T21:55:55+08:00",
+                                                      "from":  "passed",
+                                                      "to":  "passed",
+                                                      "evidence":  "Plan created with Gate Readiness + ADL"
                                                   }
                                               ]
                               },
                   "TR4":  {
                               "status":  "passed",
                               "evidence":  "Tasks generated with Gate Completion Verification",
-                              "date":  "2026-06-07T21:09:39+08:00",
+                              "date":  "2026-06-07T21:59:18+08:00",
                               "history":  [
                                               {
                                                   "date":  "2026-06-07T21:09:39+08:00",
+                                                  "from":  "passed",
+                                                  "to":  "passed",
+                                                  "evidence":  "Tasks generated with Gate Completion Verification"
+                                              },
+                                              {
+                                                  "date":  "2026-06-07T21:59:18+08:00",
                                                   "from":  "passed",
                                                   "to":  "passed",
                                                   "evidence":  "Tasks generated with Gate Completion Verification"

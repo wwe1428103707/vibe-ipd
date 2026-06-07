@@ -1,6 +1,6 @@
 # Quick Start Guide
 
-This guide will help you get started with Spec-Driven Development using Spec Kit.
+This guide will help you get started with Spec-Driven Development using vibe-ipd.
 
 > [!NOTE]
 > All automation scripts now provide both Bash (`.sh`) and PowerShell (`.ps1`) variants. The `specify` CLI auto-selects based on OS unless you pass `--script sh|ps`.
@@ -8,15 +8,15 @@ This guide will help you get started with Spec-Driven Development using Spec Kit
 ## Recommended Workflow
 
 > [!TIP]
-> **Context Awareness**: Spec Kit commands automatically detect the active feature based on your current Git branch (e.g., `001-feature-name`). To switch between different specifications, simply switch Git branches.
+> **Context Awareness**: vibe-ipd commands automatically detect the active feature based on your current Git branch (e.g., `001-feature-name`). To switch between different specifications, simply switch Git branches.
 
-After installing Spec Kit and defining your project constitution, quick experiments can use the lean feature path: `/speckit.specify` -> `/speckit.plan` -> `/speckit.tasks` -> `/speckit.implement`. For production features or any work with meaningful ambiguity, treat `/speckit.clarify`, `/speckit.checklist`, and `/speckit.analyze` as regular quality gates:
+After installing vibe-ipd and defining your project constitution, quick experiments can use the lean feature path: `/vipd.specify` -> `/vipd.plan` -> `/vipd.tasks` -> `/vipd.implement`. For production features or any work with meaningful ambiguity, treat `/vipd.clarify`, `/vipd.checklist`, and `/vipd.analyze` as regular quality gates:
 
 ```text
-/speckit.constitution -> /speckit.specify -> /speckit.clarify -> /speckit.checklist -> /speckit.plan -> /speckit.tasks -> /speckit.analyze -> /speckit.implement
+/vipd.constitution -> /vipd.specify -> /vipd.clarify -> /vipd.checklist -> /vipd.plan -> /vipd.tasks -> /vipd.analyze -> /vipd.implement
 ```
 
-Use `/speckit.clarify` to reduce requirement ambiguity before planning, `/speckit.checklist` to validate requirements quality before planning, and `/speckit.analyze` to check spec/plan/task consistency before implementation starts. You can repeat `/speckit.analyze` after implementation as an extra review, but keep the first analysis before `/speckit.implement` so gaps are caught while the plan and tasks can still be adjusted.
+Use `/vipd.clarify` to reduce requirement ambiguity before planning, `/vipd.checklist` to validate requirements quality before planning, and `/vipd.analyze` to check spec/plan/task consistency before implementation starts. You can repeat `/vipd.analyze` after implementation as an extra review, but keep the first analysis before `/vipd.implement` so gaps are caught while the plan and tasks can still be adjusted.
 
 ### Step 1: Install Specify
 
@@ -53,60 +53,60 @@ uvx --from git+https://github.com/github/spec-kit.git specify init <PROJECT_NAME
 
 ### Step 2: Define Your Constitution
 
-**In your coding agent's chat interface**, use the `/speckit.constitution` slash command to establish the core rules and principles for your project. You should provide your project's specific principles as arguments.
+**In your coding agent's chat interface**, use the `/vipd.constitution` slash command to establish the core rules and principles for your project. You should provide your project's specific principles as arguments.
 
 ```markdown
-/speckit.constitution This project follows a "Library-First" approach. All features must be implemented as standalone libraries first. We use TDD strictly. We prefer functional programming patterns.
+/vipd.constitution This project follows a "Library-First" approach. All features must be implemented as standalone libraries first. We use TDD strictly. We prefer functional programming patterns.
 ```
 
 ### Step 3: Create the Spec
 
-**In the chat**, use the `/speckit.specify` slash command to describe what you want to build. Focus on the **what** and **why**, not the tech stack.
+**In the chat**, use the `/vipd.specify` slash command to describe what you want to build. Focus on the **what** and **why**, not the tech stack.
 
 ```markdown
-/speckit.specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums are never in other nested albums. Within each album, photos are previewed in a tile-like interface.
+/vipd.specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums are never in other nested albums. Within each album, photos are previewed in a tile-like interface.
 ```
 
 ### Step 4: Refine and Validate the Spec
 
-**In the chat**, use the `/speckit.clarify` slash command to identify and resolve ambiguities in your specification. You can provide specific focus areas as arguments.
+**In the chat**, use the `/vipd.clarify` slash command to identify and resolve ambiguities in your specification. You can provide specific focus areas as arguments.
 
 ```bash
-/speckit.clarify Focus on security and performance requirements.
+/vipd.clarify Focus on security and performance requirements.
 ```
 
-Then validate the requirements with `/speckit.checklist` before creating the technical plan:
+Then validate the requirements with `/vipd.checklist` before creating the technical plan:
 
 ```bash
-/speckit.checklist
+/vipd.checklist
 ```
 
 ### Step 5: Create a Technical Implementation Plan
 
-**In the chat**, use the `/speckit.plan` slash command to provide your tech stack and architecture choices.
+**In the chat**, use the `/vipd.plan` slash command to provide your tech stack and architecture choices.
 
 ```markdown
-/speckit.plan The application uses Vite with minimal number of libraries. Use vanilla HTML, CSS, and JavaScript as much as possible. Images are not uploaded anywhere and metadata is stored in a local SQLite database.
+/vipd.plan The application uses Vite with minimal number of libraries. Use vanilla HTML, CSS, and JavaScript as much as possible. Images are not uploaded anywhere and metadata is stored in a local SQLite database.
 ```
 
 ### Step 6: Break Down, Analyze, and Implement
 
-**In the chat**, use the `/speckit.tasks` slash command to create an actionable task list.
+**In the chat**, use the `/vipd.tasks` slash command to create an actionable task list.
 
 ```markdown
-/speckit.tasks
+/vipd.tasks
 ```
 
-Validate cross-artifact consistency with `/speckit.analyze` before implementation:
+Validate cross-artifact consistency with `/vipd.analyze` before implementation:
 
 ```markdown
-/speckit.analyze
+/vipd.analyze
 ```
 
-Use the `/speckit.implement` slash command to execute the plan.
+Use the `/vipd.implement` slash command to execute the plan.
 
 ```markdown
-/speckit.implement
+/vipd.implement
 ```
 
 > [!TIP]
@@ -121,10 +121,10 @@ Here's a complete example of building a team productivity platform:
 Initialize the project's constitution to set ground rules:
 
 ```markdown
-/speckit.constitution Taskify is a "Security-First" application. All user inputs must be validated. We use a microservices architecture. Code must be fully documented.
+/vipd.constitution Taskify is a "Security-First" application. All user inputs must be validated. We use a microservices architecture. Code must be fully documented.
 ```
 
-### Step 2: Define Requirements with `/speckit.specify`
+### Step 2: Define Requirements with `/vipd.specify`
 
 ```text
 Develop Taskify, a team productivity platform. It should allow users to create projects, add team members,
@@ -138,54 +138,54 @@ first testing thing to ensure that our basic features are set up.
 
 ### Step 3: Refine the Specification
 
-Use the `/speckit.clarify` command to interactively resolve any ambiguities in your specification. You can also provide specific details you want to ensure are included.
+Use the `/vipd.clarify` command to interactively resolve any ambiguities in your specification. You can also provide specific details you want to ensure are included.
 
 ```bash
-/speckit.clarify I want to clarify the task card details. For each task in the UI for a task card, you should be able to change the current status of the task between the different columns in the Kanban work board. You should be able to leave an unlimited number of comments for a particular card. You should be able to, from that task card, assign one of the valid users.
+/vipd.clarify I want to clarify the task card details. For each task in the UI for a task card, you should be able to change the current status of the task between the different columns in the Kanban work board. You should be able to leave an unlimited number of comments for a particular card. You should be able to, from that task card, assign one of the valid users.
 ```
 
-You can continue to refine the spec with more details using `/speckit.clarify`:
+You can continue to refine the spec with more details using `/vipd.clarify`:
 
 ```bash
-/speckit.clarify When you first launch Taskify, it's going to give you a list of the five users to pick from. There will be no password required. When you click on a user, you go into the main view, which displays the list of projects. When you click on a project, you open the Kanban board for that project. You're going to see the columns. You'll be able to drag and drop cards back and forth between different columns. You will see any cards that are assigned to you, the currently logged in user, in a different color from all the other ones, so you can quickly see yours. You can edit any comments that you make, but you can't edit comments that other people made. You can delete any comments that you made, but you can't delete comments anybody else made.
+/vipd.clarify When you first launch Taskify, it's going to give you a list of the five users to pick from. There will be no password required. When you click on a user, you go into the main view, which displays the list of projects. When you click on a project, you open the Kanban board for that project. You're going to see the columns. You'll be able to drag and drop cards back and forth between different columns. You will see any cards that are assigned to you, the currently logged in user, in a different color from all the other ones, so you can quickly see yours. You can edit any comments that you make, but you can't edit comments that other people made. You can delete any comments that you made, but you can't delete comments anybody else made.
 ```
 
 ### Step 4: Validate the Spec
 
-Validate the specification checklist using the `/speckit.checklist` command:
+Validate the specification checklist using the `/vipd.checklist` command:
 
 ```bash
-/speckit.checklist
+/vipd.checklist
 ```
 
-### Step 5: Generate Technical Plan with `/speckit.plan`
+### Step 5: Generate Technical Plan with `/vipd.plan`
 
 Be specific about your tech stack and technical requirements:
 
 ```bash
-/speckit.plan We are going to generate this using .NET Aspire, using Postgres as the database. The frontend should use Blazor server with drag-and-drop task boards, real-time updates. There should be a REST API created with a projects API, tasks API, and a notifications API.
+/vipd.plan We are going to generate this using .NET Aspire, using Postgres as the database. The frontend should use Blazor server with drag-and-drop task boards, real-time updates. There should be a REST API created with a projects API, tasks API, and a notifications API.
 ```
 
 ### Step 6: Define Tasks
 
-Generate an actionable task list using the `/speckit.tasks` command:
+Generate an actionable task list using the `/vipd.tasks` command:
 
 ```bash
-/speckit.tasks
+/vipd.tasks
 ```
 
 ### Step 7: Validate and Implement
 
-Have your coding agent audit the spec, plan, and tasks with `/speckit.analyze` before implementation:
+Have your coding agent audit the spec, plan, and tasks with `/vipd.analyze` before implementation:
 
 ```bash
-/speckit.analyze
+/vipd.analyze
 ```
 
 Finally, implement the solution:
 
 ```bash
-/speckit.implement
+/vipd.implement
 ```
 
 > [!TIP]

@@ -20,7 +20,7 @@ specify init [<project_name>]
 | `--preset <id>`          | Install a preset during initialization                                   |
 | `--branch-numbering`     | Branch numbering strategy: `sequential` (default) or `timestamp`         |
 
-Creates a new Spec Kit project with the necessary directory structure, templates, scripts, and AI coding agent integration files.
+Creates a new vibe-ipd project with the necessary directory structure, templates, scripts, and AI coding agent integration files.
 
 > [!NOTE]
 > The git extension is currently enabled by default during `specify init`.
@@ -59,7 +59,7 @@ specify init my-project --integration copilot --branch-numbering timestamp
 
 | Variable          | Description                                                              |
 | ----------------- | ------------------------------------------------------------------------ |
-| `SPECIFY_FEATURE` | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-photo-albums`) to work on a specific feature when not using Git branches. Must be set in the context of the agent prior to using `/speckit.plan` or follow-up commands. |
+| `SPECIFY_FEATURE` | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-photo-albums`) to work on a specific feature when not using Git branches. Must be set in the context of the agent prior to using `/vipd.plan` or follow-up commands. |
 
 ## Check Installed Tools
 
@@ -69,7 +69,7 @@ specify check
 
 Checks that required tools are available on your system: `git` and any CLI-based AI coding agents. IDE-based agents are skipped since they don't require a CLI tool.
 
-This command stays offline. If a command behaves like an older Spec Kit version or an expected CLI feature is missing, run `specify self check` to check whether your local CLI is behind the latest release.
+This command stays offline. If a command behaves like an older vibe-ipd version or an expected CLI feature is missing, run `specify self check` to check whether your local CLI is behind the latest release.
 
 ## Version Information
 
@@ -77,7 +77,7 @@ This command stays offline. If a command behaves like an older Spec Kit version 
 specify version
 ```
 
-Displays the Spec Kit CLI version, Python version, platform, and architecture.
+Displays the vibe-ipd CLI version, Python version, platform, and architecture.
 
 To inspect local CLI capabilities without checking the network:
 

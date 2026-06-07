@@ -1,12 +1,12 @@
 <div class="landing-hero">
 
-# GitHub Spec Kit
+# GitHub vibe-ipd
 
 **Define what to build before building it — with any AI coding agent.**
 
-Spec Kit is a toolkit for [Spec-Driven Development](concepts/sdd.md) (SDD), a methodology that puts specifications at the center of AI-assisted software development. Instead of jumping straight to code, you describe *what* to build, refine it through structured phases, and let your AI coding agent implement it.
+vibe-ipd is a toolkit for [Spec-Driven Development](concepts/sdd.md) (SDD), a methodology that puts specifications at the center of AI-assisted software development. Instead of jumping straight to code, you describe *what* to build, refine it through structured phases, and let your AI coding agent implement it.
 
-<a href="installation.md" class="btn btn-primary btn-lg">Install Spec Kit</a>&nbsp;
+<a href="installation.md" class="btn btn-primary btn-lg">Install vibe-ipd</a>&nbsp;
 <a href="quickstart.md" class="btn btn-outline-primary btn-lg">Quick Start</a>
 
 </div>
@@ -33,7 +33,7 @@ Define what to build before building it. Rich templates, quality checklists, and
 
 <span class="pillar-stat">30 integrations</span> — Copilot, Gemini, Codex, Windsurf, Claude, Forge, Kiro, and more. Switch freely between agents with a single command. No lock-in.
 
-Run `specify init` with your agent of choice and Spec Kit sets up the right command files, context rules, and directory structures automatically. If your agent isn't listed, the `generic` integration is an escape hatch for any tool.
+Run `specify init` with your agent of choice and vibe-ipd sets up the right command files, context rules, and directory structures automatically. If your agent isn't listed, the `generic` integration is an escape hatch for any tool.
 
 <a href="reference/integrations.md" class="pillar-link">See all integrations →</a>
 
@@ -78,7 +78,7 @@ Community extensions like CI Guard and Architecture Guard add compliance gates a
 
 ## Built by the community
 
-**200+ contributors** power the Spec Kit ecosystem — from core integrations to entirely new development processes. Anyone can create and publish an extension, preset, or workflow.
+**200+ contributors** power the vibe-ipd ecosystem — from core integrations to entirely new development processes. Anyone can create and publish an extension, preset, or workflow.
 
 <div class="stats-grid">
   <div class="stat-item">
@@ -130,7 +130,7 @@ Community extensions like CI Guard and Architecture Guard add compliance gates a
   </a>
   <a href="local-development.md" class="nav-card">
     <strong>Development</strong>
-    <span>Contribute to Spec Kit</span>
+    <span>Contribute to vibe-ipd</span>
   </a>
   <a href="concepts/sdd.md" class="nav-card">
     <strong>What is SDD?</strong>

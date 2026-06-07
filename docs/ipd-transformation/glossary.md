@@ -62,7 +62,7 @@ improvement. Maps to the IPD LPDT role.
 
 **SDD (Spec-Driven Development)**: A development methodology where
 specifications are treated as executable artifacts that directly generate
-working implementations. The foundation of the Spec Kit toolkit.
+working implementations. The foundation of the vibe-ipd toolkit.
 
 ## T
 

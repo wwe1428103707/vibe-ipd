@@ -1,6 +1,6 @@
 # One-time Usage (uvx)
 
-If you want to try Spec Kit without installing it permanently, use `uvx` to run it directly. This downloads the tool into a temporary environment that is discarded after the command finishes.
+If you want to try vibe-ipd without installing it permanently, use `uvx` to run it directly. This downloads the tool into a temporary environment that is discarded after the command finishes.
 
 > [!NOTE]
 > The commands below require **[uv](https://docs.astral.sh/uv/)**. If you see `command not found: uvx`, [install uv first](uv.md).
@@ -23,7 +23,7 @@ uvx --from git+https://github.com/github/spec-kit.git specify init --here --inte
 
 ## When to use persistent installation instead
 
-If you plan to use Spec Kit regularly, a persistent installation is recommended:
+If you plan to use vibe-ipd regularly, a persistent installation is recommended:
 
 - Tool stays installed and available in PATH
 - No re-download on every invocation

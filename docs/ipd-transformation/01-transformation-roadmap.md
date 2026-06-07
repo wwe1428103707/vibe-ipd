@@ -7,7 +7,7 @@
 
 ## Overview & Scope
 
-This roadmap defines a phased transformation of the Spec Kit SDD (Spec-Driven
+This roadmap defines a phased transformation of the vibe-ipd SDD (Spec-Driven
 Development) toolkit into an IPD (Integrated Product Development) enhanced
 toolkit that blends the rigor of IPD stage-gate governance with the flexibility
 of Agile delivery.

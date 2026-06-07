@@ -224,7 +224,7 @@ This sequence ensures each gate can be tested end-to-end as it's implemented.
 - [Transformation Roadmap](01-transformation-roadmap.md) — Phase 2 timing
   for implementing these changes
 - [Tooling Integration Blueprint](03-tooling-integration-blueprint.md) —
-  document-state gate enforcement mode for Spec Kit agent integration
+  document-state gate enforcement mode for vibe-ipd agent integration
 
 *This guide aligns with **Principle I (Spec-First, Intent-Driven Development)**
 by specifying precise changes before implementation, and **Principle III

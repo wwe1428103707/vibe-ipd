@@ -159,7 +159,7 @@ Catalogs are resolved in this order (first match wins):
 
 ## Workflow Definition
 
-Workflows are defined in YAML files. Here is the built-in **Full SDD Cycle** workflow that ships with Spec Kit:
+Workflows are defined in YAML files. Here is the built-in **Full SDD Cycle** workflow that ships with vibe-ipd:
 
 ```yaml
 schema_version: "1.0"
@@ -191,7 +191,7 @@ inputs:
 
 steps:
   - id: specify
-    command: speckit.specify
+    command: vipd.specify
     integration: "{{ inputs.integration }}"
     input:
       args: "{{ inputs.spec }}"
@@ -203,7 +203,7 @@ steps:
     on_reject: abort
 
   - id: plan
-    command: speckit.plan
+    command: vipd.plan
     integration: "{{ inputs.integration }}"
     input:
       args: "{{ inputs.spec }}"
@@ -215,13 +215,13 @@ steps:
     on_reject: abort
 
   - id: tasks
-    command: speckit.tasks
+    command: vipd.tasks
     integration: "{{ inputs.integration }}"
     input:
       args: "{{ inputs.spec }}"
 
   - id: implement
-    command: speckit.implement
+    command: vipd.implement
     integration: "{{ inputs.integration }}"
     input:
       args: "{{ inputs.spec }}"
@@ -259,7 +259,7 @@ specify workflow run speckit -i spec="Build a kanban board with drag-and-drop ta
 
 | Type         | Purpose                                          |
 | ------------ | ------------------------------------------------ |
-| `command`    | Invoke a Spec Kit command (e.g., `speckit.plan`) |
+| `command`    | Invoke a vibe-ipd command (e.g., `vipd.plan`) |
 | `prompt`     | Send an arbitrary prompt to the AI coding agent  |
 | `shell`      | Execute a shell command and capture output       |
 | `gate`       | Pause for human approval before continuing       |
@@ -320,4 +320,4 @@ Yes. Each run gets a unique ID and its own state directory. Use `specify workflo
 
 ### Who maintains workflows?
 
-Most workflows are independently created and maintained by their respective authors. The Spec Kit maintainers do not review, audit, endorse, or support workflow code. Review a workflow's source before installing and use at your own discretion.
+Most workflows are independently created and maintained by their respective authors. The vibe-ipd maintainers do not review, audit, endorse, or support workflow code. Review a workflow's source before installing and use at your own discretion.

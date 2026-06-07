@@ -1,5 +1,7 @@
 # vibe-ipd
 
+> **[English](README.md)** · [中文](README.zh.md)
+
 **Integrated Product Development — Agile-Stage-Gate Hybrid for AI-Native Teams**
 
 vibe-ipd 是一个基于 Spec Kit (speckit) 增强的集成产品开发（IPD）框架，融合了敏捷开发与阶段门禁治理（Agile-Stage-Gate），为 AI-Native 团队提供从概念到交付的全流程工程化支持。
@@ -29,7 +31,8 @@ While speckit provides the foundational Spec-Driven Development (SDD) engine, vi
 ### 1. Initialize your project
 
 ```bash
-specify init my-project --integration claude
+# Create a new vibe-ipd project (uses uvx or pipx under the hood)
+/vipd-init my-project --integration claude
 cd my-project
 ```
 
@@ -92,6 +95,7 @@ All vibe-ipd commands follow the `/vipd-*` naming convention:
 
 | Core Command | Description |
 |--------------|-------------|
+| `/vipd-init` | **Scaffold a new vibe-ipd project** — wraps upstream `specify init` CLI behind a unified brand entry point |
 | `/vipd-constitution` | Create or update project governing principles with IPD gate criteria |
 | `/vipd-specify` | Define feature specifications with user stories and TR1 gate assessment |
 | `/vipd-clarify` | Identify and resolve underspecified areas before planning |

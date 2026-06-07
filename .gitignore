@@ -46,6 +46,9 @@ env/
 sdd-*/
 docs/dev
 
+# Claude Code local settings
+.claude/settings.local.json
+
 # Extension system
 .specify/extensions/.cache/
 .specify/extensions/.backup/

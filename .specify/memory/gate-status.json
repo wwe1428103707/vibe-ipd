@@ -1,60 +1,88 @@
-{
-  "ipd_mode": true,
-  "last_updated": "2026-06-07T20:44:48+08:00",
-  "gates": {
-    "TR0": {
-      "status": "passed",
-      "evidence": "Constitution ratified with Gate Criteria Reference section",
-      "date": "2026-06-06"
-    },
-    "TR1": {
-      "status": "passed",
-      "evidence": "test",
-      "date": "2026-06-07T20:44:11+08:00",
-      "history": [
-        {
-          "date": "2026-06-07T20:44:11+08:00",
-          "from": "passed",
-          "evidence": "test",
-          "to": "passed"
-        }
-      ]
-    },
-    "TR2_TR3": {
-      "status": "passed",
-      "evidence": "Plan created with Gate Readiness + ADL — rename map, data model, contracts, and quickstart for 29-file/298-occurrence source rename (008); gate utility data model, CLI interface contracts (006); role data model, contracts (007)",
-      "date": "2026-06-06"
-    },
-    "TR4": {
-      "status": "passed",
-      "evidence": "Tasks generated with Gate Completion Verification — 40 tasks across 5 phases for 29-file/298-occurrence source rename (008); 24 tasks across 7 phases for 3 gate utility scripts + 8 skill file refactors (006); 16 tasks across 6 phases for 7 role skill files (007)",
-      "date": "2026-06-06"
-    },
-    "TR4A": {
-      "status": "passed",
-      "evidence": "Quality summary: 71 tasks implemented across 12 phases — TR6 launch gate, depth validation, Should-Meet advisory, ordering enforcement, per-feature gate-status.json, Python _gate_utils.py, GatewayStep IPD-awareness, agent skill renaming, CBB catalog, Trio review template, WSJF rubric, LPDT concrete criteria, LPDT+PO conflict mitigation, Go/Kill/Hold/Recycle framework, constitution v1.3.0, README IPD docs",
-      "date": "2026-06-07T20:44:38+08:00",
-      "history": [
-        {
-          "date": "2026-06-07T20:44:38+08:00",
-          "to": "passed",
-          "evidence": "Quality summary: 71 tasks implemented across 12 phases — TR6 launch gate, depth validation, Should-Meet advisory, ordering enforcement, per-feature gate-status.json, Python _gate_utils.py, GatewayStep IPD-awareness, agent skill renaming, CBB catalog, Trio review template, WSJF rubric, LPDT concrete criteria, LPDT+PO conflict mitigation, Go/Kill/Hold/Recycle framework, constitution v1.3.0, README IPD docs",
-          "from": "passed"
-        }
-      ]
-    },
-    "TR5": {
-      "status": "passed",
-      "evidence": "TR5 validation complete: 25/25 FRs implemented (FR-001 through FR-025), 8/8 SCs met, 5/5 constitution principles aligned, 0 critical issues, 71/71 tasks completed across gate scripts, Python CLI, agent skills, templates, and documentation",
-      "date": "2026-06-07T20:44:48+08:00",
-      "history": [
-        {
-          "evidence": "TR5 validation complete: 25/25 FRs implemented (FR-001 through FR-025), 8/8 SCs met, 5/5 constitution principles aligned, 0 critical issues, 71/71 tasks completed across gate scripts, Python CLI, agent skills, templates, and documentation",
-          "from": "passed",
-          "date": "2026-06-07T20:44:48+08:00",
-          "to": "passed"
-        }
-      ]
-    }
-  }
+﻿{
+    "ipd_mode":  true,
+    "last_updated":  "2026-06-07T21:16:16+08:00",
+    "gates":  {
+                  "TR0":  {
+                              "status":  "passed",
+                              "evidence":  "Constitution ratified with Gate Criteria Reference section",
+                              "date":  "2026-06-06"
+                          },
+                  "TR1":  {
+                              "status":  "passed",
+                              "evidence":  "Spec created with TR Gate Assessment",
+                              "date":  "2026-06-07T20:59:09+08:00",
+                              "history":  [
+                                              {
+                                                  "date":  "2026-06-07T20:44:11+08:00",
+                                                  "from":  "passed",
+                                                  "evidence":  "test",
+                                                  "to":  "passed"
+                                              },
+                                              {
+                                                  "date":  "2026-06-07T20:59:09+08:00",
+                                                  "from":  "passed",
+                                                  "to":  "passed",
+                                                  "evidence":  "Spec created with TR Gate Assessment"
+                                              }
+                                          ]
+                          },
+                  "TR2_TR3":  {
+                                  "status":  "passed",
+                                  "evidence":  "Plan created with Gate Readiness + ADL",
+                                  "date":  "2026-06-07T21:03:07+08:00",
+                                  "history":  [
+                                                  {
+                                                      "date":  "2026-06-07T21:03:07+08:00",
+                                                      "from":  "passed",
+                                                      "to":  "passed",
+                                                      "evidence":  "Plan created with Gate Readiness + ADL"
+                                                  }
+                                              ]
+                              },
+                  "TR4":  {
+                              "status":  "passed",
+                              "evidence":  "Tasks generated with Gate Completion Verification",
+                              "date":  "2026-06-07T21:09:39+08:00",
+                              "history":  [
+                                              {
+                                                  "date":  "2026-06-07T21:09:39+08:00",
+                                                  "from":  "passed",
+                                                  "to":  "passed",
+                                                  "evidence":  "Tasks generated with Gate Completion Verification"
+                                              }
+                                          ]
+                          },
+                  "TR4A":  {
+                               "status":  "passed",
+                               "evidence":  "Quality summary: 71 tasks implemented across 12 phases 鈥?TR6 launch gate, depth validation, Should-Meet advisory, ordering enforcement, per-feature gate-status.json, Python _gate_utils.py, GatewayStep IPD-awareness, agent skill renaming, CBB catalog, Trio review template, WSJF rubric, LPDT concrete criteria, LPDT+PO conflict mitigation, Go/Kill/Hold/Recycle framework, constitution v1.3.0, README IPD docs",
+                               "date":  "2026-06-07T20:44:38+08:00",
+                               "history":  [
+                                               {
+                                                   "date":  "2026-06-07T20:44:38+08:00",
+                                                   "to":  "passed",
+                                                   "evidence":  "Quality summary: 71 tasks implemented across 12 phases 鈥?TR6 launch gate, depth validation, Should-Meet advisory, ordering enforcement, per-feature gate-status.json, Python _gate_utils.py, GatewayStep IPD-awareness, agent skill renaming, CBB catalog, Trio review template, WSJF rubric, LPDT concrete criteria, LPDT+PO conflict mitigation, Go/Kill/Hold/Recycle framework, constitution v1.3.0, README IPD docs",
+                                                   "from":  "passed"
+                                               }
+                                           ]
+                           },
+                  "TR5":  {
+                              "status":  "passed",
+                              "evidence":  "TR5 validation complete — validation report generated",
+                              "date":  "2026-06-07T21:16:16+08:00",
+                              "history":  [
+                                              {
+                                                  "evidence":  "TR5 validation complete: 25/25 FRs implemented (FR-001 through FR-025), 8/8 SCs met, 5/5 constitution principles aligned, 0 critical issues, 71/71 tasks completed across gate scripts, Python CLI, agent skills, templates, and documentation",
+                                                  "from":  "passed",
+                                                  "date":  "2026-06-07T20:44:48+08:00",
+                                                  "to":  "passed"
+                                              },
+                                              {
+                                                  "date":  "2026-06-07T21:16:16+08:00",
+                                                  "from":  "passed",
+                                                  "to":  "passed",
+                                                  "evidence":  "TR5 validation complete — validation report generated"
+                                              }
+                                          ]
+                          }
+              }
 }

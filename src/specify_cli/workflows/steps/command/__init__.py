@@ -15,8 +15,8 @@ class CommandStep(StepBase):
 
     The command files (skills, markdown, TOML) are already installed in
     the integration's directory on disk.  This step tells the CLI to
-    execute the command by name (e.g. ``/speckit.specify`` or
-    ``/speckit-specify``) rather than reading the file contents.
+    execute the command by name (e.g. ``/vipd.speckit.specify`` or
+    ``/vipd-speckit-specify``) rather than reading the file contents.
 
     .. note::
 
@@ -106,8 +106,8 @@ class CommandStep(StepBase):
         """Invoke *command* by name through the integration CLI.
 
         The integration's ``dispatch_command`` builds the native
-        slash-command invocation (e.g. ``/speckit.specify`` for
-        markdown agents, ``/speckit-specify`` for skills agents),
+        slash-command invocation (e.g. ``/vipd.speckit.specify`` for
+        markdown agents, ``/vipd-speckit-specify`` for skills agents),
         then executes the CLI non-interactively.
 
         Returns the dispatch result dict, or ``None`` if dispatch is

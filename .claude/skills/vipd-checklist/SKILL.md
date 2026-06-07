@@ -79,18 +79,15 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 **TR2 — Architecture Gate**: Verify TR1 passed before checklist generation.
 
-1. **IPD mode detection**: Check if `.specify/memory/constitution.md` exists AND
-   contains a "Gate Criteria Reference" section heading.
-   - If YES → IPD mode ACTIVE — continue gate check
-   - If NO → SDD-only mode — skip, proceed normally
+1. **IPD mode detection**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-detect-ipd-mode.ps1 -Json`
+   - If `ipd_mode: true` → IPD mode ACTIVE — continue gate check
+   - If `ipd_mode: false` → SDD-only mode — skip, proceed normally
 
-2. **Deep content validation (IPD mode only)**:
-   - **TR0 passed?** Constitution exists + Gate Criteria Reference section
-   - **TR1 passed?** Current feature spec exists AND contains "TR Gate Assessment"
-   - If NOT → display unmet criteria → ask: "Proceed anyway? (yes/no)" If no, halt.
+2. **Gate validation (IPD mode only)**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-check.ps1 -Gate TR2_TR3 -Json`
+   - If `status: passed` → proceed
+   - If `status: failed` → display unmet criteria. Ask: "Proceed anyway? (yes/no)" If no, halt.
 
-3. **Gate status recording**: On TR2 pass, update `gates.TR2_TR3` in
-   `.specify/memory/gate-status.json` with checklist score evidence.
+3. **Gate status recording**: On TR2 pass, run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-record.ps1 -Gate TR2_TR3 -Status passed -Evidence "Checklist generated with completeness score"`
 
 ## Execution Steps
 

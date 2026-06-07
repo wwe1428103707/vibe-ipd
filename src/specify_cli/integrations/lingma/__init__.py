@@ -1,6 +1,6 @@
 """Lingma IDE integration. — skills-based agent.
 
-Lingma IDE uses ``.lingma/skills/speckit-<name>/SKILL.md`` layout.
+Lingma IDE uses ``.lingma/skills/vipd-speckit-<name>/SKILL.md`` layout.
 In Specify CLI, the Lingma integration is skills-only, and ``--skills``
 defaults to ``True``.
 """

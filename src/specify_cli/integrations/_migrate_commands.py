@@ -23,9 +23,9 @@ from ._helpers import (
     _clear_init_options_for_integration,
     _cli_error_detail,
     _cli_phase_label,
-    _get_speckit_version,
+    _get_vipd_version,
     _read_integration_json,
-    _refresh_init_options_speckit_version,
+    _refresh_init_options_vipd_version,
     _remove_integration_json,
     _resolve_integration_options,
     _resolve_integration_script_type,
@@ -247,7 +247,7 @@ def integration_switch(
     # Phase 2: Install target integration
     console.print(f"Installing integration: [cyan]{target}[/cyan]")
     manifest = IntegrationManifest(
-        target_integration.key, project_root, version=_get_speckit_version()
+        target_integration.key, project_root, version=_get_vipd_version()
     )
 
     try:
@@ -428,7 +428,7 @@ def integration_upgrade(
 
     # Phase 1: Install new files (overwrites existing; old-only files remain)
     console.print(f"Upgrading integration: [cyan]{key}[/cyan]")
-    new_manifest = IntegrationManifest(key, project_root, version=_get_speckit_version())
+    new_manifest = IntegrationManifest(key, project_root, version=_get_vipd_version())
 
     try:
         integration.setup(
@@ -466,7 +466,7 @@ def integration_upgrade(
         if installed_key == key:
             _update_init_options_for_integration(project_root, integration, script_type=selected_script)
         else:
-            _refresh_init_options_speckit_version(project_root)
+            _refresh_init_options_vipd_version(project_root)
     except Exception as exc:
         # Don't teardown — setup overwrites in-place, so teardown would
         # delete files that were working before the upgrade.  Just report.

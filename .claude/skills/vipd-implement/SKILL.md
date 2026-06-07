@@ -59,28 +59,17 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 **TR4/TR4A — Development & Gray Release Gate**: Verify TR4 passed before implement.
 
-1. **IPD mode detection**: Check if `.specify/memory/constitution.md` exists AND
-   contains a "Gate Criteria Reference" section heading.
-   - If YES → IPD mode ACTIVE — continue gate check
-   - If NO → SDD-only mode — skip, proceed normally
+1. **IPD mode detection**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-detect-ipd-mode.ps1 -Json`
+   - If `ipd_mode: true` → IPD mode ACTIVE — continue gate check
+   - If `ipd_mode: false` → SDD-only mode — skip, proceed normally
 
-2. **Deep content validation (IPD mode only)**:
-   - **TR0 passed?** Constitution exists + Gate Criteria Reference section
-   - **TR1 passed?** Spec exists + TR Gate Assessment section
-   - **TR2/TR3 passed?** Plan exists + Gate Readiness section
-   - **TR4 passed?** Tasks exist + Gate Completion Verification checkpoints
-   - If NOT → display unmet criteria → ask: "Proceed anyway? (yes/no)" If no, halt.
+2. **Gate validation (IPD mode only)**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-check.ps1 -Gate TR4 -Json`
+   - If `status: passed` → proceed
+   - If `status: failed` → display unmet criteria. Ask: "Proceed anyway? (yes/no)" If no, halt.
 
-3. **Post-completion**: Generate TR4A quality summary (test coverage, code quality,
+3. **Post-completion**: Generate TR4A quality summary as gray release readiness evidence.
 
-   update `.specify/memory/gate-status.json`:
-   - Set `gates.TR4A.status` to `"passed"`
-   - Set `gates.TR4A.evidence` to quality summary (coverage, security status)
-   - Set `gates.TR4A.date` to current date
-   - Set `last_updated` to current date
-   security scan status) as gray release readiness evidence.
-
-4. **Gate status recording**: On TR4A pass, update `gates.TR4A` in gate-status.json with quality summary evidence.
+4. **Gate status recording**: On TR4A pass, run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-record.ps1 -Gate TR4A -Status passed -Evidence "{quality summary}"`
 ## Outline
 
 1. Run `.specify/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").

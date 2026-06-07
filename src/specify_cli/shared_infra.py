@@ -21,17 +21,17 @@ class SymlinkedSharedPathError(ValueError):
     """
 
 
-def load_speckit_manifest(
+def load_vipd_manifest(
     project_path: Path,
     *,
     version: str,
     console: Any | None = None,
 ) -> IntegrationManifest:
     """Load the shared infrastructure manifest, preserving existing entries."""
-    manifest_path = project_path / ".specify" / "integrations" / "speckit.manifest.json"
+    manifest_path = project_path / ".specify" / "integrations" / "vipd.speckit.manifest.json"
     if manifest_path.exists():
         try:
-            manifest = IntegrationManifest.load("speckit", project_path)
+            manifest = IntegrationManifest.load("vipd", project_path)
             manifest.version = version
             return manifest
         except (ValueError, FileNotFoundError, OSError, UnicodeDecodeError) as exc:
@@ -44,7 +44,7 @@ def load_speckit_manifest(
                     "A new shared manifest will be created; previously tracked "
                     "shared files may be treated as untracked."
                 )
-    return IntegrationManifest("speckit", project_path, version=version)
+    return IntegrationManifest("vipd", project_path, version=version)
 
 
 def shared_templates_source(
@@ -196,32 +196,32 @@ def _write_shared_bytes(
 
 
 _BASH_FORMAT_COMMAND_RE = re.compile(
-    r"\$\(\s*format_speckit_command\s+(['\"]?)([A-Za-z0-9_.-]+)\1(?:\s+[^)]*)?\)"
+    r"\$\(\s*format_vipd_command\s+(['\"]?)([A-Za-z0-9_.-]+)\1(?:\s+[^)]*)?\)"
 )
 _POWERSHELL_FORMAT_COMMAND_RE = re.compile(
     r"Format-SpecKitCommand\s+-CommandName\s+(['\"])([A-Za-z0-9_.-]+)\1(?:\s+-RepoRoot\s+[^\r\n]+)?"
 )
 
 
-def _format_speckit_command(command_name: str, separator: str) -> str:
+def _format_vipd_command(command_name: str, separator: str) -> str:
     name = command_name.strip().lstrip("/")
-    if name.startswith("speckit."):
-        name = name[len("speckit.") :]
-    elif name.startswith("speckit-"):
-        name = name[len("speckit-") :]
+    if name.startswith("vipd.speckit."):
+        name = name[len("vipd.speckit.") :]
+    elif name.startswith("vipd-speckit-"):
+        name = name[len("vipd-speckit-") :]
     name = name.replace(".", separator)
-    return f"/speckit{separator}{name}"
+    return f"/vipd{separator}{name}"
 
 
 def _resolve_dynamic_command_refs(content: str, separator: str) -> str:
     """Render script runtime command helpers for managed shared infra copies."""
 
     content = _BASH_FORMAT_COMMAND_RE.sub(
-        lambda match: _format_speckit_command(match.group(2), separator),
+        lambda match: _format_vipd_command(match.group(2), separator),
         content,
     )
     return _POWERSHELL_FORMAT_COMMAND_RE.sub(
-        lambda match: f"'{_format_speckit_command(match.group(2), separator)}'",
+        lambda match: f"'{_format_vipd_command(match.group(2), separator)}'",
         content,
     )
 
@@ -241,7 +241,7 @@ def refresh_shared_templates(
     if not templates_src.is_dir():
         return
 
-    manifest = load_speckit_manifest(project_path, version=version, console=console)
+    manifest = load_vipd_manifest(project_path, version=version, console=console)
     tracked_files = manifest.files
     modified = set(manifest.check_modified())
     skipped_files: list[str] = []
@@ -306,7 +306,7 @@ def install_shared_infra(
     """
     from .integrations.manifest import _sha256
 
-    manifest = load_speckit_manifest(project_path, version=version, console=console)
+    manifest = load_vipd_manifest(project_path, version=version, console=console)
     prior_hashes = dict(manifest.files)
 
     def _is_managed(rel: str, dst: Path) -> bool:

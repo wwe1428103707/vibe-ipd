@@ -42,7 +42,7 @@ def _substitute_core_template(
 
     Args:
         body: Preset command body (may contain {CORE_TEMPLATE} placeholder).
-        cmd_name: Full command name (e.g. "speckit.git.feature" or "speckit.specify").
+        cmd_name: Full command name (e.g. "vipd.speckit.git.feature" or "vipd.speckit.specify").
         project_root: Project root path.
         registrar: CommandRegistrar instance for parse_frontmatter.
 
@@ -56,10 +56,10 @@ def _substitute_core_template(
     if "{CORE_TEMPLATE}" not in body:
         return body, {}
 
-    # Derive the short name (strip "speckit." prefix) used by core command templates.
+    # Derive the short name (strip "vipd.speckit." prefix) used by core command templates.
     short_name = cmd_name
-    if short_name.startswith("speckit."):
-        short_name = short_name[len("speckit."):]
+    if short_name.startswith("vipd.speckit."):
+        short_name = short_name[len("vipd.speckit."):]
 
     resolver = PresetResolver(project_root)
     # Resolution order for the core template:
@@ -68,7 +68,7 @@ def _substitute_core_template(
     #    local override always wins, even for extension commands.
     # 2. resolve_extension_command_via_manifest(cmd_name) — manifest-based tier-3
     #    fallback for extension commands whose file is named differently from the
-    #    command name (e.g. speckit.selftest.extension → commands/selftest.md).
+    #    command name (e.g. vipd.speckit.selftest.extension → commands/selftest.md).
     # 3. resolve_core(short_name) — core template fallback using the unprefixed
     #    name (e.g. specify → templates/commands/specify.md).
     # resolve_core() skips installed presets (tier 2) to prevent accidental nesting
@@ -193,8 +193,8 @@ class PresetManifest:
 
         # Validate requires section
         requires = self.data["requires"]
-        if "speckit_version" not in requires:
-            raise PresetValidationError("Missing requires.speckit_version")
+        if "vipd_version" not in requires:
+            raise PresetValidationError("Missing requires.vipd_version")
 
         # Validate provides section
         provides = self.data["provides"]
@@ -249,7 +249,7 @@ class PresetManifest:
 
             # Validate template name format
             if tmpl["type"] == "command":
-                # Commands use dot notation (e.g. speckit.specify)
+                # Commands use dot notation (e.g. vipd.speckit.specify)
                 if not re.match(r'^[a-z0-9.-]+$', tmpl["name"]):
                     raise PresetValidationError(
                         f"Invalid command name '{tmpl['name']}': "
@@ -288,9 +288,9 @@ class PresetManifest:
         return self.data["preset"].get("author", "")
 
     @property
-    def requires_speckit_version(self) -> str:
+    def requires_vipd_version(self) -> str:
         """Get required spec-kit version range."""
-        return self.data["requires"]["speckit_version"]
+        return self.data["requires"]["vipd_version"]
 
     @property
     def templates(self) -> List[Dict[str, Any]]:
@@ -555,13 +555,13 @@ class PresetManager:
     def check_compatibility(
         self,
         manifest: PresetManifest,
-        speckit_version: str
+        vipd_version: str
     ) -> bool:
         """Check if preset is compatible with current spec-kit version.
 
         Args:
             manifest: Preset manifest
-            speckit_version: Current spec-kit version
+            vipd_version: Current spec-kit version
 
         Returns:
             True if compatible
@@ -569,15 +569,15 @@ class PresetManager:
         Raises:
             PresetCompatibilityError: If pack is incompatible
         """
-        required = manifest.requires_speckit_version
-        current = pkg_version.Version(speckit_version)
+        required = manifest.requires_vipd_version
+        current = pkg_version.Version(vipd_version)
 
         try:
             specifier = SpecifierSet(required)
             if current not in specifier:
                 raise PresetCompatibilityError(
                     f"Preset requires spec-kit {required}, "
-                    f"but {speckit_version} is installed.\n"
+                    f"but {vipd_version} is installed.\n"
                     f"Upgrade spec-kit with: {REINSTALL_COMMAND}"
                 )
         except InvalidSpecifier:
@@ -616,13 +616,13 @@ class PresetManager:
             return {}
 
         # Filter out extension command overrides if the extension isn't installed.
-        # Command names follow the pattern: speckit.<ext-id>.<cmd-name>
-        # Core commands (e.g. speckit.specify) have only one dot — always register.
+        # Command names follow the pattern: vipd.speckit.<ext-id>.<cmd-name>
+        # Core commands (e.g. vipd.speckit.specify) have only one dot — always register.
         extensions_dir = self.project_root / ".specify" / "extensions"
         filtered = []
         for cmd in command_templates:
             parts = cmd["name"].split(".")
-            if len(parts) >= 3 and parts[0] == "speckit":
+            if len(parts) >= 3 and parts[0] == "vipd":
                 ext_id = parts[1]
                 if not (extensions_dir / ext_id).is_dir():
                     continue
@@ -1048,8 +1048,8 @@ class PresetManager:
                     content = top_layer["path"].read_text(encoding="utf-8")
                     fm, body = registrar.parse_frontmatter(content)
                     short_name = cmd_name
-                    if short_name.startswith("speckit."):
-                        short_name = short_name[len("speckit."):]
+                    if short_name.startswith("vipd.speckit."):
+                        short_name = short_name[len("vipd.speckit."):]
                     desc = fm.get("description", "") or SKILL_DESCRIPTIONS.get(
                         short_name.replace(".", "-"),
                         f"Command: {short_name}",
@@ -1124,19 +1124,19 @@ class PresetManager:
     def _skill_names_for_command(cmd_name: str) -> tuple[str, str]:
         """Return the modern and legacy skill directory names for a command."""
         raw_short_name = cmd_name
-        if raw_short_name.startswith("speckit."):
-            raw_short_name = raw_short_name[len("speckit."):]
+        if raw_short_name.startswith("vipd.speckit."):
+            raw_short_name = raw_short_name[len("vipd.speckit."):]
 
-        modern_skill_name = f"speckit-{raw_short_name.replace('.', '-')}"
-        legacy_skill_name = f"speckit.{raw_short_name}"
+        modern_skill_name = f"vipd-speckit-{raw_short_name.replace('.', '-')}"
+        legacy_skill_name = f"vipd.speckit.{raw_short_name}"
         return modern_skill_name, legacy_skill_name
 
     @staticmethod
     def _skill_title_from_command(cmd_name: str) -> str:
         """Return a human-friendly title for a skill command name."""
         title_name = cmd_name
-        if title_name.startswith("speckit."):
-            title_name = title_name[len("speckit."):]
+        if title_name.startswith("vipd.speckit."):
+            title_name = title_name[len("vipd.speckit."):]
         return title_name.replace(".", " ").replace("-", " ").title()
 
     @staticmethod
@@ -1147,8 +1147,8 @@ class PresetManager:
 
         Looks up the agent's invoke separator and rewrites each
         ``__SPECKIT_COMMAND_<NAME>__`` placeholder into the matching
-        slash-command invocation — ``/speckit-<cmd>`` for a ``-`` separator,
-        ``/speckit.<cmd>`` for ``.`` — the same rendering the command layer
+        slash-command invocation — ``/vipd-speckit-<cmd>`` for a ``-`` separator,
+        ``/vipd.speckit.<cmd>`` for ``.`` — the same rendering the command layer
         applies via ``CommandRegistrar.register_commands()``.
         """
         separator = registrar.AGENT_CONFIGS.get(selected_ai, {}).get(
@@ -1240,7 +1240,7 @@ class PresetManager:
         filtered = []
         for cmd in command_templates:
             parts = cmd["name"].split(".")
-            if len(parts) >= 3 and parts[0] == "speckit":
+            if len(parts) >= 3 and parts[0] == "vipd":
                 ext_id = parts[1]
                 if not (extensions_dir / ext_id).is_dir():
                     continue
@@ -1288,10 +1288,10 @@ class PresetManager:
             if composed_file.exists():
                 source_file = composed_file
 
-            # Derive the short command name (e.g. "specify" from "speckit.specify")
+            # Derive the short command name (e.g. "specify" from "vipd.speckit.specify")
             raw_short_name = cmd_name
-            if raw_short_name.startswith("speckit."):
-                raw_short_name = raw_short_name[len("speckit."):]
+            if raw_short_name.startswith("vipd.speckit."):
+                raw_short_name = raw_short_name[len("vipd.speckit."):]
             short_name = raw_short_name.replace(".", "-")
             skill_name, legacy_skill_name = self._skill_names_for_command(cmd_name)
             skill_title = self._skill_title_from_command(cmd_name)
@@ -1397,12 +1397,12 @@ class PresetManager:
         extension_restore_index = self._build_extension_skill_restore_index()
 
         for skill_name in skill_names:
-            # Derive command name from skill name (speckit-specify -> specify)
+            # Derive command name from skill name (vipd-speckit-specify -> specify)
             short_name = skill_name
-            if short_name.startswith("speckit-"):
-                short_name = short_name[len("speckit-"):]
-            elif short_name.startswith("speckit."):
-                short_name = short_name[len("speckit."):]
+            if short_name.startswith("vipd-speckit-"):
+                short_name = short_name[len("vipd-speckit-"):]
+            elif short_name.startswith("vipd.speckit."):
+                short_name = short_name[len("vipd.speckit."):]
 
             skill_subdir = skills_dir / skill_name
             skill_file = skill_subdir / "SKILL.md"
@@ -1498,14 +1498,14 @@ class PresetManager:
     def install_from_directory(
         self,
         source_dir: Path,
-        speckit_version: str,
+        vipd_version: str,
         priority: int = 10,
     ) -> PresetManifest:
         """Install preset from a local directory.
 
         Args:
             source_dir: Path to preset directory
-            speckit_version: Current spec-kit version
+            vipd_version: Current spec-kit version
             priority: Resolution priority (lower = higher precedence, default 10)
 
         Returns:
@@ -1522,7 +1522,7 @@ class PresetManager:
         manifest_path = source_dir / "preset.yml"
         manifest = PresetManifest(manifest_path)
 
-        self.check_compatibility(manifest, speckit_version)
+        self.check_compatibility(manifest, vipd_version)
 
         if self.registry.is_installed(manifest.id):
             raise PresetError(
@@ -1595,7 +1595,7 @@ class PresetManager:
                 continue
             name = t["name"]
             parts = name.split(".")
-            if len(parts) >= 3 and parts[0] == "speckit":
+            if len(parts) >= 3 and parts[0] == "vipd":
                 ext_id = parts[1]
                 if not (extensions_dir / ext_id).is_dir():
                     continue
@@ -1617,14 +1617,14 @@ class PresetManager:
     def install_from_zip(
         self,
         zip_path: Path,
-        speckit_version: str,
+        vipd_version: str,
         priority: int = 10,
     ) -> PresetManifest:
         """Install preset from ZIP file.
 
         Args:
             zip_path: Path to preset ZIP file
-            speckit_version: Current spec-kit version
+            vipd_version: Current spec-kit version
             priority: Resolution priority (lower = higher precedence, default 10)
 
         Returns:
@@ -1668,7 +1668,7 @@ class PresetManager:
                     "No preset.yml found in ZIP file"
                 )
 
-            return self.install_from_directory(pack_dir, speckit_version, priority)
+            return self.install_from_directory(pack_dir, vipd_version, priority)
 
     def remove(self, pack_id: str) -> bool:
         """Remove an installed preset.
@@ -2459,13 +2459,13 @@ class PresetResolver:
     def _core_stem(template_name: str) -> Optional[str]:
         """Extract the stem for core command lookup.
 
-        Commands use dot notation (e.g. ``speckit.specify``), but core
+        Commands use dot notation (e.g. ``vipd.speckit.specify``), but core
         command files are named by stem (e.g. ``specify.md``).  Returns
-        the stem if *template_name* follows the ``speckit.<stem>`` pattern,
+        the stem if *template_name* follows the ``vipd.speckit.<stem>`` pattern,
         or ``None`` otherwise.
         """
-        if template_name.startswith("speckit."):
-            return template_name[len("speckit."):]
+        if template_name.startswith("vipd.speckit."):
+            return template_name[len("vipd.speckit."):]
         return None
 
     def resolve(
@@ -2545,7 +2545,7 @@ class PresetResolver:
             core = self.templates_dir / "commands" / f"{template_name}.md"
             if core.exists():
                 return core
-            # Fallback: speckit.<stem> → <stem>.md
+            # Fallback: vipd.speckit.<stem> → <stem>.md
             stem = self._core_stem(template_name)
             if stem:
                 core = self.templates_dir / "commands" / f"{stem}.md"
@@ -2558,7 +2558,7 @@ class PresetResolver:
 
         # Priority 5: Bundled core_pack (wheel install) or repo-root templates
         # (source-checkout / editable install).  This is the canonical home for
-        # speckit's built-in command/template files and must always be checked
+        # vipd's built-in command/template files and must always be checked
         # so that strategy:wrap presets can locate {CORE_TEMPLATE}.
         from specify_cli import _locate_core_pack  # local import to avoid cycles
         _core_pack = _locate_core_pack()
@@ -2619,7 +2619,7 @@ class PresetResolver:
         declared name to find the actual file path.  This is necessary because
         the manifest's ``provides.commands[].file`` field is authoritative and
         may differ from the command name
-        (e.g. ``speckit.selftest.extension`` → ``commands/selftest.md``).
+        (e.g. ``vipd.speckit.selftest.extension`` → ``commands/selftest.md``).
 
         Returns None if no manifest maps the given command name, so the caller
         can fall back to the name-based lookup.
@@ -2890,7 +2890,7 @@ class PresetResolver:
             if c.exists():
                 core = c
             else:
-                # Fallback: speckit.<stem> → <stem>.md
+                # Fallback: vipd.speckit.<stem> → <stem>.md
                 stem = self._core_stem(template_name)
                 if stem:
                     c = self.templates_dir / "commands" / f"{stem}.md"

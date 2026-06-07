@@ -61,7 +61,7 @@ from ._assets import (
     _locate_bundled_workflow as _locate_bundled_workflow,
     _locate_core_pack,
     _repo_root,
-    get_speckit_version as get_speckit_version,
+    get_vipd_version as get_vipd_version,
 )
 from ._utils import (
     CLAUDE_LOCAL_PATH as CLAUDE_LOCAL_PATH,
@@ -102,7 +102,7 @@ app = typer.Typer(
 
 def _version_callback(value: bool):
     if value:
-        console.print(f"specify {get_speckit_version()}")
+        console.print(f"specify {get_vipd_version()}")
         raise typer.Exit()
 
 @app.callback()
@@ -125,7 +125,7 @@ def _refresh_shared_templates(
     """Refresh default-sensitive shared templates without touching scripts."""
     _refresh_shared_templates_impl(
         project_path,
-        version=get_speckit_version(),
+        version=get_vipd_version(),
         core_pack=_locate_core_pack(),
         repo_root=_repo_root(),
         console=console,
@@ -148,7 +148,7 @@ def _install_shared_infra(
     Copies ``.specify/scripts/<variant>/`` and ``.specify/templates/`` from
     the bundled core_pack or source checkout, where ``<variant>`` is
     ``bash`` when *script_type* is ``"sh"`` and ``powershell`` when it is
-    ``"ps"``.  Tracks all installed files in ``speckit.manifest.json``.
+    ``"ps"``.  Tracks all installed files in ``vipd.manifest.json``.
 
     Shared scripts and page templates are processed to resolve
     ``__SPECKIT_COMMAND_<NAME>__`` placeholders using *invoke_separator*
@@ -177,7 +177,7 @@ def _install_shared_infra(
     return _install_shared_infra_impl(
         project_path,
         script_type,
-        version=get_speckit_version(),
+        version=get_vipd_version(),
         core_pack=_locate_core_pack(),
         repo_root=_repo_root(),
         console=console,
@@ -521,7 +521,7 @@ def version(
     """Display version and system information."""
     import platform
 
-    cli_version = get_speckit_version()
+    cli_version = get_vipd_version()
 
     if json_output and not features:
         console.print("[red]Error:[/red] --json requires --features.")
@@ -677,7 +677,7 @@ def preset_add(
         raise typer.Exit(1)
 
     manager = PresetManager(project_root)
-    speckit_version = get_speckit_version()
+    vipd_version = get_vipd_version()
 
     try:
         if dev:
@@ -687,7 +687,7 @@ def preset_add(
                 raise typer.Exit(1)
 
             console.print(f"Installing preset from [cyan]{dev_path}[/cyan]...")
-            manifest = manager.install_from_directory(dev_path, speckit_version, priority)
+            manifest = manager.install_from_directory(dev_path, vipd_version, priority)
             console.print(f"[green]✓[/green] Preset '{manifest.name}' v{manifest.version} installed (priority {priority})")
 
         elif from_url:
@@ -721,7 +721,7 @@ def preset_add(
                     console.print(f"[red]Error:[/red] Failed to download: {e}")
                     raise typer.Exit(1)
 
-                manifest = manager.install_from_zip(zip_path, speckit_version, priority)
+                manifest = manager.install_from_zip(zip_path, vipd_version, priority)
 
             console.print(f"[green]✓[/green] Preset '{manifest.name}' v{manifest.version} installed (priority {priority})")
 
@@ -730,7 +730,7 @@ def preset_add(
             bundled_path = _locate_bundled_preset(preset_id)
             if bundled_path:
                 console.print(f"Installing bundled preset [cyan]{preset_id}[/cyan]...")
-                manifest = manager.install_from_directory(bundled_path, speckit_version, priority)
+                manifest = manager.install_from_directory(bundled_path, vipd_version, priority)
                 console.print(f"[green]✓[/green] Preset '{manifest.name}' v{manifest.version} installed (priority {priority})")
             else:
                 catalog = PresetCatalog(project_root)
@@ -765,7 +765,7 @@ def preset_add(
 
                 try:
                     zip_path = catalog.download_pack(preset_id)
-                    manifest = manager.install_from_zip(zip_path, speckit_version, priority)
+                    manifest = manager.install_from_zip(zip_path, vipd_version, priority)
                     console.print(f"[green]✓[/green] Preset '{manifest.name}' v{manifest.version} installed (priority {priority})")
                 finally:
                     if 'zip_path' in locals() and zip_path.exists():
@@ -1577,7 +1577,7 @@ def extension_add(
         raise typer.Exit(1)
 
     manager = ExtensionManager(project_root)
-    speckit_version = get_speckit_version()
+    vipd_version = get_vipd_version()
 
     if force:
         console.print("[yellow]--force:[/yellow] Will overwrite if already installed")
@@ -1637,7 +1637,7 @@ def extension_add(
 
                 manifest = manager.install_from_directory(
                     source_path,
-                    speckit_version,
+                    vipd_version,
                     priority=priority,
                     link_commands=True,
                     force=force
@@ -1662,7 +1662,7 @@ def extension_add(
                     zip_path.write_bytes(zip_data)
 
                     # Install from downloaded ZIP
-                    manifest = manager.install_from_zip(zip_path, speckit_version, priority=priority, force=force)
+                    manifest = manager.install_from_zip(zip_path, vipd_version, priority=priority, force=force)
                 except urllib.error.URLError as e:
                     console.print(f"[red]Error:[/red] Failed to download from {safe_url}: {e}")
                     raise typer.Exit(1)
@@ -1676,7 +1676,7 @@ def extension_add(
                 bundled_path = _locate_bundled_extension(extension)
                 if bundled_path is not None:
                     manifest = manager.install_from_directory(
-                        bundled_path, speckit_version, priority=priority, force=force
+                        bundled_path, vipd_version, priority=priority, force=force
                     )
                 else:
                     # Install from catalog (also resolves display names to IDs)
@@ -1699,7 +1699,7 @@ def extension_add(
                         bundled_path = _locate_bundled_extension(resolved_id)
                         if bundled_path is not None:
                             manifest = manager.install_from_directory(
-                                bundled_path, speckit_version, priority=priority, force=force
+                                bundled_path, vipd_version, priority=priority, force=force
                             )
 
                     if bundled_path is None:
@@ -1736,7 +1736,7 @@ def extension_add(
 
                         try:
                             # Install from downloaded ZIP
-                            manifest = manager.install_from_zip(zip_path, speckit_version, priority=priority, force=force)
+                            manifest = manager.install_from_zip(zip_path, vipd_version, priority=priority, force=force)
                         finally:
                             # Clean up downloaded ZIP
                             if zip_path.exists():
@@ -2044,8 +2044,8 @@ def _print_extension_info(ext_info: dict, manager):
     if ext_info.get('requires'):
         console.print("[bold]Requirements:[/bold]")
         reqs = ext_info['requires']
-        if reqs.get('speckit_version'):
-            console.print(f"  • Spec Kit: {reqs['speckit_version']}")
+        if reqs.get('vipd_version'):
+            console.print(f"  • Spec Kit: {reqs['vipd_version']}")
         if reqs.get('tools'):
             for tool in reqs['tools']:
                 tool_name = tool['name']
@@ -2134,7 +2134,7 @@ def extension_update(
     project_root = _require_specify_project()
     manager = ExtensionManager(project_root)
     catalog = ExtensionCatalog(project_root)
-    speckit_version = get_speckit_version()
+    vipd_version = get_vipd_version()
 
     try:
         # Get list of extensions to update
@@ -2347,7 +2347,7 @@ def extension_update(
                     manager.remove(extension_id, keep_config=True)
 
                     # 8. Install new version
-                    _ = manager.install_from_zip(zip_path, speckit_version)
+                    _ = manager.install_from_zip(zip_path, vipd_version)
 
                     # Restore user config files from backup after successful install.
                     new_extension_dir = manager.extensions_dir / extension_id

@@ -1,6 +1,6 @@
 """Cursor IDE integration.
 
-Cursor Agent uses the ``.cursor/skills/speckit-<name>/SKILL.md`` layout.
+Cursor Agent uses the ``.cursor/skills/vipd-speckit-<name>/SKILL.md`` layout.
 Commands are deprecated; ``--skills`` defaults to ``True``.
 
 The IDE/skills flow is the primary path and works without the
@@ -68,11 +68,11 @@ class CursorAgentIntegration(SkillsIntegration):
           integrations (``claude -p``, ``codex --exec``) get by default
 
         Together these are the minimum set required to make
-        ``specify workflow run speckit --input integration=cursor-agent``
+        ``specify workflow run vipd --input integration=cursor-agent``
         behave the same way as it does for ``claude`` / ``codex``.
         Verified locally: with ``--approve-mcps --force`` the agent can
         call any configured MCP server (e.g. ``dingtalk-doc``) and write
-        files during ``/speckit-*`` skill execution; without them the run
+        files during ``/vipd-speckit-*`` skill execution; without them the run
         either drops tool calls or exits non-zero on the first approval
         prompt.
         """

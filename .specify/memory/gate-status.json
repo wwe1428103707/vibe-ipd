@@ -9,22 +9,22 @@
     },
     "TR1": {
       "status": "passed",
-      "evidence": "Spec created with TR Gate Assessment — PDT role mapping with 9 functional requirements and 4 success criteria",
+      "evidence": "Spec created with TR Gate Assessment — docstate tooling with 9 FRs, 4 SCs for gate check/record/detect utilities (006); PDT role mapping with 9 FRs, 4 SCs (007); CLI source IPD adaptation with 8 FRs, 4 SCs for 29-file rename (008)",
       "date": "2026-06-06"
     },
     "TR2_TR3": {
       "status": "passed",
-      "evidence": "Plan created with Gate Readiness + ADL — role data model, contracts, and quickstart generated",
+      "evidence": "Plan created with Gate Readiness + ADL — rename map, data model, contracts, and quickstart for 29-file/298-occurrence source rename (008); gate utility data model, CLI interface contracts (006); role data model, contracts (007)",
       "date": "2026-06-06"
     },
     "TR4": {
       "status": "passed",
-      "evidence": "Tasks generated with Gate Completion Verification — 16 tasks across 6 phases for 7 role skill files",
+      "evidence": "Tasks generated with Gate Completion Verification — 40 tasks across 5 phases for 29-file/298-occurrence source rename (008); 24 tasks across 7 phases for 3 gate utility scripts + 8 skill file refactors (006); 16 tasks across 6 phases for 7 role skill files (007)",
       "date": "2026-06-06"
     },
     "TR4A": {
       "status": "passed",
-      "evidence": "Quality summary: 7 role skill files created with correct YAML frontmatter, decision authority matrices, RACI contexts, and response framing rules; Product Trio workflow + review template documented; RACI annotation contract established",
+      "evidence": "Quality summary: 298 speckit refs renamed across 29 Python source files — 0 unexpected remaining; core API identifiers, hook names, command names, and all 19 integration modules updated (008); 3 gate utility scripts created and tested (006); 7 role skill files (007)",
       "date": "2026-06-06"
     },
     "TR5": {

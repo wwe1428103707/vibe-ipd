@@ -59,23 +59,15 @@ You **MUST** consider the user input before proceeding (if not empty).
 **TR0 — Project Setup Gate**: Verify that the project constitution setup follows
 IPD governance when the project is IPD-enhanced.
 
-1. **IPD mode detection**: Check if `.specify/memory/constitution.md` exists AND
-   contains a "Gate Criteria Reference" section heading.
-   - If YES → IPD mode is ACTIVE — proceed with gate check
-   - If NO → SDD-only mode — skip gate check, proceed normally
+1. **IPD mode detection**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-detect-ipd-mode.ps1 -Json`
+   - If `ipd_mode: true` → IPD mode ACTIVE — proceed with gate check
+   - If `ipd_mode: false` → SDD-only mode — skip, proceed normally
 
-2. **Deep content validation (IPD mode only)**:
-   - **TR0 passed?** Check that `.specify/memory/constitution.md` exists
-     (first-time creation counts as passing TR0)
-   - **On update**: Verify that proposed changes do not remove the "Gate Criteria
-     Reference" section without approval
+2. **Gate validation (IPD mode only)**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-check.ps1 -Gate TR0 -Json`
+   - If `status: passed` → TR0 passed, proceed
+   - If `status: failed` → display unmet criteria. Ask: "Proceed anyway? (yes/no)" If no, halt.
 
-3. If TR0 fails → Warn user: "TR0 (Project Setup) gate not passed. Constitution
-   must include a Gate Criteria Reference section for IPD mode." Ask:
-   "Proceed anyway? (yes/no)" If no, halt.
-
-4. **Gate status recording**: On TR0 pass, update `.specify/memory/gate-status.json`:
-   - Set `gates.TR0.status` to `"passed"` and record evidence + date.
+3. **Gate status recording**: On TR0 pass, run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-record.ps1 -Gate TR0 -Status passed -Evidence "Constitution ratified with Gate Criteria Reference section"`
 ## Outline
 
 You are updating the project constitution at `.specify/memory/constitution.md`. This file is a TEMPLATE containing placeholder tokens in square brackets (e.g. `[PROJECT_NAME]`, `[PRINCIPLE_1_NAME]`). Your job is to (a) collect/derive concrete values, (b) fill the template precisely, and (c) propagate any amendments across dependent artifacts.

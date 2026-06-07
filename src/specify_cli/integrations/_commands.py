@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import typer
 
-from .._assets import get_speckit_version  # noqa: F401 — re-exported for monkeypatching in tests
+from .._assets import get_vipd_version  # noqa: F401 — re-exported for monkeypatching in tests
 
 # Re-export helpers used by commands/init.py and tests
 from ._helpers import (  # noqa: F401

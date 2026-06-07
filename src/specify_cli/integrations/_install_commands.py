@@ -23,9 +23,9 @@ from ._helpers import (
     _clear_init_options_for_integration,
     _cli_error_detail,
     _cli_phase_label,
-    _get_speckit_version,
+    _get_vipd_version,
     _read_integration_json,
-    _refresh_init_options_speckit_version,
+    _refresh_init_options_vipd_version,
     _remove_integration_json,
     _resolve_integration_options,
     _resolve_script_type,
@@ -135,7 +135,7 @@ def integration_install(
         ensure_executable_scripts(project_root)
 
     manifest = IntegrationManifest(
-        integration.key, project_root, version=_get_speckit_version()
+        integration.key, project_root, version=_get_vipd_version()
     )
 
     try:
@@ -160,7 +160,7 @@ def integration_install(
         if new_default == integration.key:
             _update_init_options_for_integration(project_root, integration, script_type=selected_script)
         else:
-            _refresh_init_options_speckit_version(project_root)
+            _refresh_init_options_vipd_version(project_root)
 
     except Exception as exc:
         # Attempt rollback of any files written by setup

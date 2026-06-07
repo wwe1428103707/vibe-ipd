@@ -14,7 +14,7 @@ class PromptStep(StepBase):
     """Send a free-form prompt to an integration CLI.
 
     Unlike ``CommandStep`` which invokes an installed Spec Kit command
-    by name (e.g. ``/speckit.specify`` or ``/speckit-specify``),
+    by name (e.g. ``/vipd.speckit.specify`` or ``/vipd-speckit-specify``),
     ``PromptStep`` sends an arbitrary inline ``prompt:`` string
     directly to the CLI.  This is useful for ad-hoc instructions
     that don't map to a registered command.

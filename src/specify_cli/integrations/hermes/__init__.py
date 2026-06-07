@@ -31,7 +31,7 @@ class HermesIntegration(SkillsIntegration):
     Hermes discovers them globally.  A project-local marker directory
     (``.hermes/skills/`` empty) is created so extension commands (e.g.
     git) can detect Hermes as an active integration.  Uninstall removes
-    both the marker and all global ``speckit-*`` skills, matching the
+    both the marker and all global ``vipd-speckit-*`` skills, matching the
     standard integration teardown behaviour.
     """
 
@@ -84,7 +84,7 @@ class HermesIntegration(SkillsIntegration):
         """Install command templates as global Hermes skills.
 
         Writes each skill directly to
-        ``~/.hermes/skills/speckit-<name>/SKILL.md`` where Hermes
+        ``~/.hermes/skills/vipd-speckit-<name>/SKILL.md`` where Hermes
         discovers them at runtime.  No project-local SKILL.md copies are
         created — the global directory is the single source of truth.
         A project-local marker (``.hermes/skills/`` empty) is created
@@ -120,7 +120,7 @@ class HermesIntegration(SkillsIntegration):
 
             # Derive the skill name from the template stem
             command_name = src_file.stem  # e.g. "plan"
-            skill_name = f"speckit-{command_name.replace('.', '-')}"
+            skill_name = f"vipd-speckit-{command_name.replace('.', '-')}"
 
             # Parse frontmatter for description
             frontmatter: dict[str, Any] = {}
@@ -174,7 +174,7 @@ class HermesIntegration(SkillsIntegration):
 
             skill_content = self.post_process_skill_content(skill_content)
 
-            # Write directly to global ~/.hermes/skills/speckit-<name>/SKILL.md
+            # Write directly to global ~/.hermes/skills/vipd-speckit-<name>/SKILL.md
             skill_dir = global_skills_dir / skill_name
             skill_dir.mkdir(parents=True, exist_ok=True)
             skill_file = skill_dir / "SKILL.md"
@@ -206,7 +206,7 @@ class HermesIntegration(SkillsIntegration):
         Removes the managed context section from AGENTS.md, removes the
         project-local marker directory (if empty), delegates to
         ``manifest.uninstall()`` for project-local tracked files, and
-        removes all ``speckit-*`` skills under ``~/.hermes/skills/``.
+        removes all ``vipd-speckit-*`` skills under ``~/.hermes/skills/``.
 
         Global skills are always removed on teardown — this matches the
         standard integration behaviour where all files created by the
@@ -227,13 +227,13 @@ class HermesIntegration(SkillsIntegration):
             if hermes_dir.is_dir() and not any(hermes_dir.iterdir()):
                 hermes_dir.rmdir()
 
-        # Remove all global Hermes skills for speckit — these are always
+        # Remove all global Hermes skills for vipd — these are always
         # removed on uninstall regardless of the force flag, matching the
         # standard behaviour where all integration files are cleaned up.
         global_skills_dir = self._hermes_home_skills_dir()
         if global_skills_dir.is_dir():
             for skill_dir in sorted(global_skills_dir.iterdir()):
-                if skill_dir.is_dir() and skill_dir.name.startswith("speckit-"):
+                if skill_dir.is_dir() and skill_dir.name.startswith("vipd-speckit-"):
                     try:
                         rmtree(skill_dir)
                         removed.append(skill_dir)

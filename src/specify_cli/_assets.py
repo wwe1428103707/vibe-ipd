@@ -101,7 +101,7 @@ def _locate_bundled_preset(preset_id: str) -> Path | None:
     return None
 
 
-def get_speckit_version() -> str:
+def get_vipd_version() -> str:
     """Get current spec-kit version."""
     try:
         return importlib.metadata.version("specify-cli")

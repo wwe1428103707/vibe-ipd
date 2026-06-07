@@ -58,29 +58,17 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 **TR2/TR3 — Plan & Design Gate**: Verify prior TR gates passed before planning.
 
-1. **IPD mode detection**: Check if `.specify/memory/constitution.md` exists AND
-   contains a "Gate Criteria Reference" section heading.
-   - If YES → IPD mode ACTIVE — continue gate check
-   - If NO → SDD-only mode — skip, proceed normally
+1. **IPD mode detection**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-detect-ipd-mode.ps1 -Json`
+   - If `ipd_mode: true` → IPD mode ACTIVE — continue gate check
+   - If `ipd_mode: false` → SDD-only mode — skip, proceed normally
 
-2. **Deep content validation (IPD mode only)**:
-   - **TR0 passed?** Check `.specify/memory/constitution.md` exists AND contains
-     "Agile-Stage-Gate Governance" heading
-   - **TR1 passed?** Check that `spec.md` exists for the current feature AND
-     contains a "TR Gate Assessment" section heading
-   - If NOT all prior gates passed → display specific unmet criteria → ask:
-     "Proceed to planning anyway? (yes/no)" If no, halt with message:
-     "Prior TR gates not passed. Complete spec first or run /speckit-analyze."
+2. **Gate validation (IPD mode only)**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-check.ps1 -Gate TR2_TR3 -Json`
+   - If `status: passed` → proceed
+   - If `status: failed` → display unmet criteria. Ask: "Proceed to planning anyway? (yes/no)" If no, halt.
 
 3. **Post-planning**: Generate Architecture Decision Log as TR3 evidence.
 
-   update `.specify/memory/gate-status.json`:
-   - Set `gates.TR2_TR3.status` to `"passed"`
-   - Set `gates.TR2_TR3.evidence` to `"Plan created with Gate Readiness + ADL"`
-   - Set `gates.TR2_TR3.date` to current date
-   - Set `last_updated` to current date
-
-4. **Gate status recording**: On TR2/TR3 pass, update `gates.TR2_TR3` status/passed/evidence/date in gate-status.json.
+4. **Gate status recording**: On TR2/TR3 pass, run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-record.ps1 -Gate TR2_TR3 -Status passed -Evidence "Plan created with Gate Readiness + ADL"`
 ## Outline
 
 1. **Setup**: Run `.specify/scripts/powershell/setup-plan.ps1 -Json` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").

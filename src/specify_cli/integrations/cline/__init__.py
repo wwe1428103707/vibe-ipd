@@ -15,7 +15,7 @@ from ..manifest import IntegrationManifest
 _HOOK_COMMAND_NOTE = (
     "- When constructing slash commands from hook command names, "
     "replace dots (`.`) with hyphens (`-`). "
-    "For example, `speckit.git.commit` → `/speckit-git-commit`.\n"
+    "For example, `vipd.speckit.git.commit` → `/vipd-speckit-git-commit`.\n"
 )
 
 
@@ -29,23 +29,23 @@ def format_cline_command_name(cmd_name: str) -> str:
 
     Examples:
         >>> format_cline_command_name("plan")
-        'speckit-plan'
-        >>> format_cline_command_name("speckit.plan")
-        'speckit-plan'
-        >>> format_cline_command_name("speckit.git.commit")
-        'speckit-git-commit'
+        'vipd-speckit-plan'
+        >>> format_cline_command_name("vipd.speckit.plan")
+        'vipd-speckit-plan'
+        >>> format_cline_command_name("vipd.speckit.git.commit")
+        'vipd-speckit-git-commit'
 
     Args:
-        cmd_name: Command name in dot notation (speckit.foo.bar),
-                  hyphenated format (speckit-foo-bar), or plain name (foo)
+        cmd_name: Command name in dot notation (vipd.speckit.foo.bar),
+                  hyphenated format (vipd-speckit-foo-bar), or plain name (foo)
 
     Returns:
-        Hyphenated command name with 'speckit-' prefix
+        Hyphenated command name with 'vipd-speckit-' prefix
     """
     cmd_name = cmd_name.replace(".", "-")
 
-    if not cmd_name.startswith("speckit-"):
-        cmd_name = f"speckit-{cmd_name}"
+    if not cmd_name.startswith("vipd-speckit-"):
+        cmd_name = f"vipd-speckit-{cmd_name}"
 
     return cmd_name
 
@@ -75,7 +75,7 @@ class ClineIntegration(MarkdownIntegration):
     multi_install_safe = True
 
     def command_filename(self, template_name: str) -> str:
-        """Cline uses hyphenated filenames (e.g. speckit-git-commit.md)."""
+        """Cline uses hyphenated filenames (e.g. vipd-speckit-git-commit.md)."""
         return format_cline_command_name(template_name) + ".md"
 
     def process_template(self, *args, **kwargs):
@@ -117,7 +117,7 @@ class ClineIntegration(MarkdownIntegration):
     def _rewrite_handoff_references(content: str) -> str:
         """Replace dot-notation agent references in handoffs with hyphens."""
         return re.sub(
-            r"(?m)^(\s*agent:\s*)(speckit\.[A-Za-z0-9-_]+(?:\.[A-Za-z0-9-_]+)*)",
+            r"(?m)^(\s*agent:\s*)(vipd.speckit.[A-Za-z0-9-_]+(?:\.[A-Za-z0-9-_]+)*)",
             lambda m: f"{m.group(1)}{format_cline_command_name(m.group(2))}",
             content,
         )

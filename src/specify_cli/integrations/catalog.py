@@ -615,7 +615,7 @@ class IntegrationDescriptor:
           description: "Integration for My Agent"
           author: "my-org"
         requires:
-          speckit_version: ">=0.6.0"
+          vipd_version: ">=0.6.0"
           tools: [...]
         provides:
           commands: [...]
@@ -698,13 +698,13 @@ class IntegrationDescriptor:
             raise IntegrationDescriptorError(
                 "'requires' must be a mapping"
             )
-        if "speckit_version" not in requires:
+        if "vipd_version" not in requires:
             raise IntegrationDescriptorError(
-                "Missing requires.speckit_version"
+                "Missing requires.vipd_version"
             )
-        if not isinstance(requires["speckit_version"], str) or not requires["speckit_version"].strip():
+        if not isinstance(requires["vipd_version"], str) or not requires["vipd_version"].strip():
             raise IntegrationDescriptorError(
-                "requires.speckit_version must be a non-empty string"
+                "requires.vipd_version must be a non-empty string"
             )
         tools = requires.get("tools")
         if tools is not None:
@@ -794,8 +794,8 @@ class IntegrationDescriptor:
         return self.data["integration"]["description"]
 
     @property
-    def requires_speckit_version(self) -> str:
-        return self.data["requires"]["speckit_version"]
+    def requires_vipd_version(self) -> str:
+        return self.data["requires"]["vipd_version"]
 
     @property
     def commands(self) -> List[Dict[str, Any]]:

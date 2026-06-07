@@ -1,6 +1,6 @@
 """Antigravity (agy) integration — skills-based agent.
 
-Antigravity uses ``.agents/skills/speckit-<name>/SKILL.md`` layout (enforced since v1.20.5).
+Antigravity uses ``.agents/skills/vipd-speckit-<name>/SKILL.md`` layout (enforced since v1.20.5).
 """
 
 from __future__ import annotations
@@ -16,12 +16,12 @@ if TYPE_CHECKING:
 
 # Note injected into hook sections so agy maps dot-notation command
 # names (from extensions.yml) to the hyphenated skill names it uses.
-# Without this, agy emits ``/speckit.git.commit`` (which does not
-# resolve) instead of ``/speckit-git-commit``.
+# Without this, agy emits ``/vipd.speckit.git.commit`` (which does not
+# resolve) instead of ``/vipd-speckit-git-commit``.
 _HOOK_COMMAND_NOTE = (
     "- When constructing slash commands from hook command names, "
     "replace dots (`.`) with hyphens (`-`). "
-    "For example, `speckit.git.commit` → `/speckit-git-commit`.\n"
+    "For example, `vipd.speckit.git.commit` → `/vipd-speckit-git-commit`.\n"
 )
 
 

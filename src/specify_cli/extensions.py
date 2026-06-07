@@ -39,7 +39,7 @@ _FALLBACK_CORE_COMMAND_NAMES = frozenset({
     "tasks",
     "taskstoissues",
 })
-EXTENSION_COMMAND_NAME_PATTERN = re.compile(r"^speckit\.([a-z0-9-]+)\.([a-z0-9-]+)$")
+EXTENSION_COMMAND_NAME_PATTERN = re.compile(r"^vipd\.speckit\.([a-z0-9-]+)\.([a-z0-9-]+)$")
 
 REINSTALL_COMMAND = "uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git"
 
@@ -190,8 +190,8 @@ class ExtensionManifest:
 
         # Validate requires section
         requires = self.data["requires"]
-        if "speckit_version" not in requires:
-            raise ValidationError("Missing requires.speckit_version")
+        if "vipd_version" not in requires:
+            raise ValidationError("Missing requires.vipd_version")
 
         # Validate provides section
         provides = self.data["provides"]
@@ -243,7 +243,7 @@ class ExtensionManifest:
                 if corrected:
                     self.warnings.append(
                         f"Command name '{cmd['name']}' does not follow the required pattern "
-                        f"'speckit.{{extension}}.{{command}}'. Registering as '{corrected}'. "
+                        f"'vipd.speckit.{{extension}}.{{command}}'. Registering as '{corrected}'. "
                         f"The extension author should update the manifest to use this name."
                     )
                     rename_map[cmd["name"]] = corrected
@@ -251,12 +251,12 @@ class ExtensionManifest:
                 else:
                     raise ValidationError(
                         f"Invalid command name '{cmd['name']}': "
-                        "must follow pattern 'speckit.{extension}.{command}'"
+                        "must follow pattern 'vipd.speckit.{extension}.{command}'"
                     )
 
             # Validate alias types; no pattern enforcement on aliases — they are
             # intentionally free-form to preserve community extension compatibility
-            # (e.g. 'speckit.verify' short aliases used by existing extensions).
+            # (e.g. 'vipd.speckit.verify' short aliases used by existing extensions).
             aliases = cmd.get("aliases")
             if aliases is None:
                 cmd["aliases"] = []
@@ -272,7 +272,7 @@ class ExtensionManifest:
                     )
 
         # Rewrite any hook command references that pointed at a renamed command or
-        # an alias-form ref (ext.cmd → speckit.ext.cmd).  Always emit a warning when
+        # an alias-form ref (ext.cmd → vipd.speckit.ext.cmd).  Always emit a warning when
         # the reference is changed so extension authors know to update the manifest.
         for hook_name, hook_data in self.data.get("hooks", {}).items():
             if not isinstance(hook_data, dict):
@@ -284,10 +284,10 @@ class ExtensionManifest:
                 continue
             # Step 1: apply any rename from the auto-correction pass.
             after_rename = rename_map.get(command_ref, command_ref)
-            # Step 2: lift alias-form '{ext_id}.cmd' to canonical 'speckit.{ext_id}.cmd'.
+            # Step 2: lift alias-form '{ext_id}.cmd' to canonical 'vipd.speckit.{ext_id}.cmd'.
             parts = after_rename.split(".")
             if len(parts) == 2 and parts[0] == ext["id"]:
-                final_ref = f"speckit.{ext['id']}.{parts[1]}"
+                final_ref = f"vipd.speckit.{ext['id']}.{parts[1]}"
             else:
                 final_ref = after_rename
             if final_ref != command_ref:
@@ -303,8 +303,8 @@ class ExtensionManifest:
         """Try to auto-correct a non-conforming command name to the required pattern.
 
         Handles the two legacy formats used by community extensions:
-          - 'speckit.command'  → 'speckit.{ext_id}.command'
-          - '{ext_id}.command' → 'speckit.{ext_id}.command'
+          - 'vipd.speckit.command'  → 'vipd.speckit.{ext_id}.command'
+          - '{ext_id}.command' → 'vipd.speckit.{ext_id}.command'
 
         The 'X.Y' form is only corrected when X matches ext_id to ensure the
         result passes the install-time namespace check. Any other prefix is
@@ -314,8 +314,8 @@ class ExtensionManifest:
         """
         parts = name.split('.')
         if len(parts) == 2:
-            if parts[0] == 'speckit' or parts[0] == ext_id:
-                candidate = f"speckit.{ext_id}.{parts[1]}"
+            if parts[0] == 'vipd' or parts[0] == ext_id:
+                candidate = f"vipd.speckit.{ext_id}.{parts[1]}"
                 if EXTENSION_COMMAND_NAME_PATTERN.match(candidate):
                     return candidate
         return None
@@ -341,9 +341,9 @@ class ExtensionManifest:
         return self.data["extension"]["description"]
 
     @property
-    def requires_speckit_version(self) -> str:
+    def requires_vipd_version(self) -> str:
         """Get required spec-kit version range."""
-        return self.data["requires"]["speckit_version"]
+        return self.data["requires"]["vipd_version"]
 
     @property
     def commands(self) -> List[Dict[str, Any]]:
@@ -616,7 +616,7 @@ class ExtensionManager:
         """Collect command and alias names declared by a manifest.
 
         Performs install-time validation for extension-specific constraints:
-        - primary commands must use the canonical `speckit.{extension}.{command}` shape
+        - primary commands must use the canonical `vipd.speckit.{extension}.{command}` shape
         - primary commands must use this extension's namespace
         - command namespaces must not shadow core commands
         - duplicate command/alias names inside one manifest are rejected
@@ -664,7 +664,7 @@ class ExtensionManager:
                     if match is None:
                         raise ValidationError(
                             f"Invalid {kind} '{name}': "
-                            "must follow pattern 'speckit.{extension}.{command}'"
+                            "must follow pattern 'vipd.speckit.{extension}.{command}'"
                         )
 
                     namespace = match.group(1)
@@ -942,9 +942,9 @@ class ExtensionManager:
             # Derive skill name from command name using the same hyphenated
             # convention as hook rendering and preset skill registration.
             short_name_raw = cmd_name
-            if short_name_raw.startswith("speckit."):
-                short_name_raw = short_name_raw[len("speckit."):]
-            skill_name = f"speckit-{short_name_raw.replace('.', '-')}"
+            if short_name_raw.startswith("vipd.speckit."):
+                short_name_raw = short_name_raw[len("vipd.speckit."):]
+            skill_name = f"vipd-speckit-{short_name_raw.replace('.', '-')}"
 
             # Check if skill already exists before creating the directory
             skill_subdir = skills_dir / skill_name
@@ -996,8 +996,8 @@ class ExtensionManager:
 
             # Derive a human-friendly title from the command name
             short_name = cmd_name
-            if short_name.startswith("speckit."):
-                short_name = short_name[len("speckit."):]
+            if short_name.startswith("vipd.speckit."):
+                short_name = short_name[len("vipd.speckit."):]
             title_name = short_name.replace(".", " ").replace("-", " ").title()
 
             skill_content = (
@@ -1174,13 +1174,13 @@ class ExtensionManager:
     def check_compatibility(
         self,
         manifest: ExtensionManifest,
-        speckit_version: str
+        vipd_version: str
     ) -> bool:
         """Check if extension is compatible with current spec-kit version.
 
         Args:
             manifest: Extension manifest
-            speckit_version: Current spec-kit version
+            vipd_version: Current spec-kit version
 
         Returns:
             True if compatible
@@ -1188,8 +1188,8 @@ class ExtensionManager:
         Raises:
             CompatibilityError: If extension is incompatible
         """
-        required = manifest.requires_speckit_version
-        current = pkg_version.Version(speckit_version)
+        required = manifest.requires_vipd_version
+        current = pkg_version.Version(vipd_version)
 
         # Parse version specifier (e.g., ">=0.1.0,<2.0.0")
         try:
@@ -1197,7 +1197,7 @@ class ExtensionManager:
             if current not in specifier:
                 raise CompatibilityError(
                     f"Extension requires spec-kit {required}, "
-                    f"but {speckit_version} is installed.\n"
+                    f"but {vipd_version} is installed.\n"
                     f"Upgrade spec-kit with: {REINSTALL_COMMAND}"
                 )
         except InvalidSpecifier:
@@ -1208,7 +1208,7 @@ class ExtensionManager:
     def install_from_directory(
         self,
         source_dir: Path,
-        speckit_version: str,
+        vipd_version: str,
         register_commands: bool = True,
         priority: int = 10,
         link_commands: bool = False,
@@ -1218,7 +1218,7 @@ class ExtensionManager:
 
         Args:
             source_dir: Path to extension directory
-            speckit_version: Current spec-kit version
+            vipd_version: Current spec-kit version
             register_commands: If True, register commands with AI agents
             priority: Resolution priority (lower = higher precedence, default 10)
             link_commands: If True, register rendered agent artifacts as
@@ -1242,7 +1242,7 @@ class ExtensionManager:
         manifest = ExtensionManifest(manifest_path)
 
         # Check compatibility
-        self.check_compatibility(manifest, speckit_version)
+        self.check_compatibility(manifest, vipd_version)
 
         # Check if already installed
         if self.registry.is_installed(manifest.id):
@@ -1341,7 +1341,7 @@ class ExtensionManager:
     def install_from_zip(
         self,
         zip_path: Path,
-        speckit_version: str,
+        vipd_version: str,
         priority: int = 10,
         force: bool = False,
     ) -> ExtensionManifest:
@@ -1349,7 +1349,7 @@ class ExtensionManager:
 
         Args:
             zip_path: Path to extension ZIP file
-            speckit_version: Current spec-kit version
+            vipd_version: Current spec-kit version
             priority: Resolution priority (lower = higher precedence, default 10)
             force: If True and extension is already installed, remove it first
                    before proceeding with installation
@@ -1400,7 +1400,7 @@ class ExtensionManager:
 
             # Install from extracted directory
             return self.install_from_directory(
-                extension_dir, speckit_version, priority=priority, force=force
+                extension_dir, vipd_version, priority=priority, force=force
             )
 
     def remove(self, extension_id: str, keep_config: bool = False) -> bool:
@@ -2531,13 +2531,13 @@ class HookExecutor:
 
     @staticmethod
     def _skill_name_from_command(command: Any) -> str:
-        """Map a command id like speckit.plan to speckit-plan skill name."""
+        """Map a command id like vipd.speckit.plan to vipd-speckit-plan skill name."""
         if not isinstance(command, str):
             return ""
         command_id = command.strip()
-        if not command_id.startswith("speckit."):
+        if not command_id.startswith("vipd.speckit."):
             return ""
-        return f"speckit-{command_id[len('speckit.'):].replace('.', '-')}"
+        return f"vipd-speckit-{command_id[len('vipd.speckit.'):].replace('.', '-')}"
 
     def _render_hook_invocation(self, command: Any) -> str:
         """Render an agent-specific invocation string for a hook command."""

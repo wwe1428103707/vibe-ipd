@@ -1,6 +1,6 @@
 """Devin for Terminal integration — skills-based agent.
 
-Devin uses the ``.devin/skills/speckit-<name>/SKILL.md`` layout and
+Devin uses the ``.devin/skills/vipd-speckit-<name>/SKILL.md`` layout and
 reads project context from ``AGENTS.md`` at the repo root. The CLI
 binary is ``devin`` and skills are invoked via ``/<name>`` inside an
 interactive ``devin`` session.

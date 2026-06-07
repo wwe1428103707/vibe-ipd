@@ -58,26 +58,20 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 **TR5 — Validation Gate**: Verify prior gate evidence completeness.
 
-1. **IPD mode detection**: Check if `.specify/memory/constitution.md` exists AND
-   contains a "Gate Criteria Reference" section heading.
-   - If YES → IPD mode ACTIVE — add TR5 compliance analysis
-   - If NO → SDD-only mode — skip, proceed with standard analysis
+1. **IPD mode detection**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-detect-ipd-mode.ps1 -Json`
+   - If `ipd_mode: true` → IPD mode ACTIVE — add TR5 compliance analysis
+   - If `ipd_mode: false` → SDD-only mode — skip, proceed with standard analysis
 
-2. **Deep content validation (IPD mode only)**:
-   - **TR0 passed?** Constitution exists + Gate Criteria Reference section
-   - **TR1 passed?** Spec exists + TR Gate Assessment section
-   - **TR2/TR3 passed?** Plan exists + Gate Readiness section
-   - **TR4 passed?** Tasks exist + Gate Completion Verification checkpoints
-   - **TR4A passed?** Implementation complete + quality indicators present
-   - **TR5**: This analysis generates the TR5 validation report
-   - Include TR5 gate status in the analysis report output
+2. **Gate validation (IPD mode only)**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-check.ps1 -Gate TR5 -Json`
+   - If `status: passed` → proceed with extended TR5 analysis
+   - If `status: failed` → display unmet criteria. Ask: "Proceed anyway? (yes/no)" If no, halt.
 
 3. **Extended analysis scope for IPD mode**:
    - Verify all Must-Meet criteria from constitution are addressed
    - Check DoD (Definition of Done) completeness
    - Generate TR5-ready validation summary
 
-4. **Gate status recording**: On TR5 pass, update `gates.TR5` in gate-status.json with analysis result evidence.
+4. **Gate status recording**: On TR5 pass, run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-record.ps1 -Gate TR5 -Status passed -Evidence "TR5 validation complete"`
 ## Goal
 
 Identify inconsistencies, duplications, ambiguities, and underspecified items across the three core artifacts (`spec.md`, `plan.md`, `tasks.md`) before implementation. This command MUST run only after `/speckit-tasks` has successfully produced a complete `tasks.md`.

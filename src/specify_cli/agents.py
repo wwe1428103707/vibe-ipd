@@ -71,7 +71,7 @@ class CommandRegistrar:
 
     @staticmethod
     def _hyphenate_frontmatter_refs(val: Any) -> Any:
-        """Recursively find any dotted references starting with speckit. and hyphenate them."""
+        """Recursively find any dotted references starting with vipd.speckit. and hyphenate them."""
         if isinstance(val, dict):
             return {
                 k: CommandRegistrar._hyphenate_frontmatter_refs(v)
@@ -81,7 +81,7 @@ class CommandRegistrar:
             return [CommandRegistrar._hyphenate_frontmatter_refs(x) for x in val]
         elif isinstance(val, str):
             return re.sub(
-                r"\bspeckit\.[A-Za-z0-9-_]+(?:\.[A-Za-z0-9-_]+)*\b",
+                r"\bvipd.speckit.[A-Za-z0-9-_]+(?:\.[A-Za-z0-9-_]+)*\b",
                 lambda m: m.group(0).replace(".", "-"),
                 val,
             )
@@ -89,9 +89,9 @@ class CommandRegistrar:
 
     @staticmethod
     def _hyphenate_body_refs(body: str) -> str:
-        """Hyphenate dotted speckit references in command body text."""
+        """Hyphenate dotted vipd references in command body text."""
         return re.sub(
-            r"\bspeckit\.[A-Za-z0-9-_]+(?:\.[A-Za-z0-9-_]+)*\b",
+            r"\bvipd.speckit.[A-Za-z0-9-_]+(?:\.[A-Za-z0-9-_]+)*\b",
             lambda m: m.group(0).replace(".", "-"),
             body,
         )
@@ -438,11 +438,11 @@ class CommandRegistrar:
             return cmd_name
 
         short_name = cmd_name
-        if short_name.startswith("speckit."):
-            short_name = short_name[len("speckit.") :]
+        if short_name.startswith("vipd.speckit."):
+            short_name = short_name[len("vipd.speckit.") :]
         short_name = short_name.replace(".", "-")
 
-        return f"speckit-{short_name}"
+        return f"vipd-speckit-{short_name}"
 
     @staticmethod
     def _ensure_inside(candidate: Path, base: Path) -> None:
@@ -763,7 +763,7 @@ class CommandRegistrar:
 
         Args:
             project_root: Path to project root
-            cmd_name: Command name (e.g. 'speckit.my-ext.example')
+            cmd_name: Command name (e.g. 'vipd.speckit.my-ext.example')
         """
         prompts_dir = project_root / ".github" / "prompts"
         prompts_dir.mkdir(parents=True, exist_ok=True)
@@ -1055,7 +1055,7 @@ class CommandRegistrar:
                         if cmd_file.exists() or cmd_file.is_symlink():
                             cmd_file.unlink()
                             # For SKILL.md agents each command lives in its own
-                            # subdirectory (e.g. .agents/skills/speckit-ext-cmd/
+                            # subdirectory (e.g. .agents/skills/vipd-speckit-ext-cmd/
                             # SKILL.md).  Remove the parent dir when it becomes
                             # empty to avoid orphaned directories.
                             parent = cmd_file.parent

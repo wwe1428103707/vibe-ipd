@@ -59,27 +59,15 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 **TR1 — Concept Gate**: Generate risk assessment evidence after clarifications.
 
-1. **IPD mode detection**: Check if `.specify/memory/constitution.md` exists AND
-   contains a "Gate Criteria Reference" section heading.
-   - If YES → IPD mode ACTIVE — continue
-   - If NO → SDD-only mode — skip, proceed normally
+1. **IPD mode detection**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-detect-ipd-mode.ps1 -Json`
+   - If `ipd_mode: true` → IPD mode ACTIVE — continue
+   - If `ipd_mode: false` → SDD-only mode — skip, proceed normally
 
-2. **Deep content validation (IPD mode only)**:
-   - **TR0 passed?** Constitution exists + Gate Criteria Reference section
-   - **TR1 readiness?** Spec exists with user stories
-   - If NOT → warn, but allow clarification to proceed (clarification resolves gaps)
+2. **Gate validation (IPD mode only)**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-check.ps1 -Gate TR1 -Json` — warn if not passed, but allow clarification to proceed (clarification resolves gaps)
 
-3. **Post-session**: After clarifications resolved, generate risk assessment output
+3. **Post-session**: After clarifications resolved, generate risk assessment output with risk level (high/medium/low) and open risk count as TR1 gate evidence.
 
-4. **Gate status recording**: After risk assessment generated,
-   update `.specify/memory/gate-status.json`:
-   - Set `gates.TR1.status` to `"passed"`
-   - Set `gates.TR1.evidence` to risk level and open risk count
-   - Set `gates.TR1.date` to current date
-   - Set `last_updated` to current date
-   with risk level (high/medium/low) and open risk count as TR1 gate evidence.
-
-4. **Gate status recording**: After risk assessment, update `gates.TR1` in gate-status.json with risk level evidence.
+4. **Gate status recording**: After risk assessment, run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-record.ps1 -Gate TR1 -Status passed -Evidence "{risk_level} risk, {count} open risks resolved"`
 ## Outline
 
 Goal: Detect and reduce ambiguity or missing decision points in the active feature specification and record the clarifications directly in the spec file.

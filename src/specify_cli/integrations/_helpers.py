@@ -23,15 +23,15 @@ from ..integration_state import (
 )
 
 
-def _get_speckit_version() -> str:
+def _get_vipd_version() -> str:
     """Return the current Spec Kit version.
 
-    Resolved lazily through ``_commands.get_speckit_version`` so that tests
-    that monkeypatch ``specify_cli.integrations._commands.get_speckit_version``
+    Resolved lazily through ``_commands.get_vipd_version`` so that tests
+    that monkeypatch ``specify_cli.integrations._commands.get_vipd_version``
     still affect helpers called from the command handlers.
     """
     from . import _commands  # noqa: PLC0415 — intentional late import to avoid circular + enable patching
-    return _commands.get_speckit_version()
+    return _commands.get_vipd_version()
 
 
 # ---------------------------------------------------------------------------
@@ -81,7 +81,7 @@ def _write_integration_json(
     """Write ``.specify/integration.json`` with legacy-compatible state."""
     _write_integration_json_file(
         project_root,
-        version=_get_speckit_version(),
+        version=_get_vipd_version(),
         integration_key=integration_key,
         installed_integrations=installed_integrations,
         settings=integration_settings,
@@ -92,13 +92,13 @@ def _write_integration_json(
 # init-options.json helpers
 # ---------------------------------------------------------------------------
 
-def _refresh_init_options_speckit_version(project_root: Path) -> None:
+def _refresh_init_options_vipd_version(project_root: Path) -> None:
     """Refresh only the Spec Kit version recorded in init-options.json."""
     from .. import load_init_options, save_init_options
     opts = load_init_options(project_root)
     if not isinstance(opts, dict) or not opts:
         return
-    opts["speckit_version"] = _get_speckit_version()
+    opts["vipd_version"] = _get_vipd_version()
     save_init_options(project_root, opts)
 
 
@@ -297,7 +297,7 @@ def _update_init_options_for_integration(
     # Remove legacy fields if they were written by an older version.
     opts.pop("context_file", None)
     opts.pop("context_markers", None)
-    opts["speckit_version"] = _get_speckit_version()
+    opts["vipd_version"] = _get_vipd_version()
     if script_type:
         opts["script"] = script_type
     if isinstance(integration, SkillsIntegration) or getattr(integration, "_skills_mode", False):

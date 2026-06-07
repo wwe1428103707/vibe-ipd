@@ -20,7 +20,7 @@ from ..manifest import IntegrationManifest
 class RovodevIntegration(SkillsIntegration):
     """Integration for Atlassian Rovo Dev.
 
-    Uses the skills layout (``speckit-<name>/SKILL.md``) and adds
+    Uses the skills layout (``vipd-speckit-<name>/SKILL.md``) and adds
     prompt wrappers plus a ``prompts.yml`` manifest on top.
     Runtime execution dispatches through ``acli rovodev``.
     """
@@ -105,7 +105,7 @@ class RovodevIntegration(SkillsIntegration):
         """Create thin prompt wrappers for each SKILL.md.
 
         Skill name is derived from the parent directory name
-        (e.g. ``.rovodev/skills/speckit-plan/SKILL.md`` → ``speckit-plan``).
+        (e.g. ``.rovodev/skills/vipd-speckit-plan/SKILL.md`` → ``vipd-speckit-plan``).
 
         Returns (created_files, prompt_entries) where prompt_entries are
         dicts suitable for inclusion in ``prompts.yml``.

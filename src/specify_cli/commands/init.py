@@ -20,7 +20,7 @@ from .._assets import (
     _locate_bundled_extension,
     _locate_bundled_preset,
     _locate_bundled_workflow,
-    get_speckit_version,
+    get_vipd_version,
 )
 from .._console import StepTracker, console, select_with_arrows, show_banner
 from .._utils import check_tool, init_git_repo, is_git_repo
@@ -323,7 +323,7 @@ def register(app: typer.Typer) -> None:
                 from ..integrations.manifest import IntegrationManifest
                 tracker.start("integration")
                 manifest = IntegrationManifest(
-                    resolved_integration.key, project_path, version=get_speckit_version()
+                    resolved_integration.key, project_path, version=get_vipd_version()
                 )
 
                 integration_parsed_options: dict[str, Any] = {}
@@ -397,7 +397,7 @@ def register(app: typer.Typer) -> None:
                                 git_messages.append("extension already installed")
                             else:
                                 manager.install_from_directory(
-                                    bundled_path, get_speckit_version()
+                                    bundled_path, get_vipd_version()
                                 )
                                 git_default_notice = True
                                 git_messages.append("extension installed")
@@ -419,29 +419,29 @@ def register(app: typer.Typer) -> None:
                     tracker.skip("git", "--no-git flag")
 
                 try:
-                    bundled_wf = _locate_bundled_workflow("speckit")
+                    bundled_wf = _locate_bundled_workflow("vipd")
                     if bundled_wf:
                         from ..workflows.catalog import WorkflowRegistry
                         from ..workflows.engine import WorkflowDefinition
                         wf_registry = WorkflowRegistry(project_path)
-                        if wf_registry.is_installed("speckit"):
+                        if wf_registry.is_installed("vipd"):
                             tracker.complete("workflow", "already installed")
                         else:
                             import shutil as _shutil
-                            dest_wf = project_path / ".specify" / "workflows" / "speckit"
+                            dest_wf = project_path / ".specify" / "workflows" / "vipd"
                             dest_wf.mkdir(parents=True, exist_ok=True)
                             _shutil.copy2(
                                 bundled_wf / "workflow.yml",
                                 dest_wf / "workflow.yml",
                             )
                             definition = WorkflowDefinition.from_yaml(dest_wf / "workflow.yml")
-                            wf_registry.add("speckit", {
+                            wf_registry.add("vipd", {
                                 "name": definition.name,
                                 "version": definition.version,
                                 "description": definition.description,
                                 "source": "bundled",
                             })
-                            tracker.complete("workflow", "speckit installed")
+                            tracker.complete("workflow", "vipd installed")
                     else:
                         tracker.skip("workflow", "bundled workflow not found")
                 except Exception as wf_err:
@@ -454,7 +454,7 @@ def register(app: typer.Typer) -> None:
                     "branch_numbering": branch_numbering or "sequential",
                     "here": here,
                     "script": selected_script,
-                    "speckit_version": get_speckit_version(),
+                    "vipd_version": get_vipd_version(),
                 }
                 from ..integrations.base import SkillsIntegration as _SkillsPersist
                 if isinstance(resolved_integration, _SkillsPersist) or getattr(resolved_integration, "_skills_mode", False):
@@ -473,7 +473,7 @@ def register(app: typer.Typer) -> None:
                             tracker.complete("agent-context", "already installed")
                         else:
                             ac_mgr.install_from_directory(
-                                bundled_ac, get_speckit_version()
+                                bundled_ac, get_vipd_version()
                             )
                             tracker.complete("agent-context", "extension installed")
                     else:
@@ -506,15 +506,15 @@ def register(app: typer.Typer) -> None:
                     try:
                         from ..presets import PresetManager, PresetCatalog, PresetError
                         preset_manager = PresetManager(project_path)
-                        speckit_ver = get_speckit_version()
+                        vipd_ver = get_vipd_version()
 
                         local_path = Path(preset).resolve()
                         if local_path.is_dir() and (local_path / "preset.yml").exists():
-                            preset_manager.install_from_directory(local_path, speckit_ver)
+                            preset_manager.install_from_directory(local_path, vipd_ver)
                         else:
                             bundled_path = _locate_bundled_preset(preset)
                             if bundled_path:
-                                preset_manager.install_from_directory(bundled_path, speckit_ver)
+                                preset_manager.install_from_directory(bundled_path, vipd_ver)
                             else:
                                 preset_catalog = PresetCatalog(project_path)
                                 pack_info = preset_catalog.get_pack_info(preset)
@@ -534,7 +534,7 @@ def register(app: typer.Typer) -> None:
                                     zip_path = None
                                     try:
                                         zip_path = preset_catalog.download_pack(preset)
-                                        preset_manager.install_from_zip(zip_path, speckit_ver)
+                                        preset_manager.install_from_zip(zip_path, vipd_ver)
                                     except PresetError as preset_err:
                                         _print_cli_warning(
                                             "install",
@@ -646,14 +646,14 @@ def register(app: typer.Typer) -> None:
 
         def _display_cmd(name: str) -> str:
             if codex_skill_mode or agy_skill_mode or trae_skill_mode:
-                return f"$speckit-{name}"
+                return f"$vipd-speckit-{name}"
             if claude_skill_mode:
-                return f"/speckit-{name}"
+                return f"/vipd-speckit-{name}"
             if kimi_skill_mode:
-                return f"/skill:speckit-{name}"
+                return f"/skill:vipd-speckit-{name}"
             if cursor_agent_skill_mode or copilot_skill_mode or devin_skill_mode or cline_skill_mode:
-                return f"/speckit-{name}"
-            return f"/speckit.{name}"
+                return f"/vipd-speckit-{name}"
+            return f"/vipd.speckit.{name}"
 
         steps_lines.append(f"{step_num}. Start using {usage_label} with your coding agent:")
 

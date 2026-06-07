@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Audit Log Entry",
+  "description": "Schema for each entry in .specify/gates/audit.log (JSON Lines format)",
+  "type": "object",
+  "required": ["timestamp", "actor", "event_type", "feature", "gate"],
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp"
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Operator identity (git user or specified role)"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "gate_criteria_status_change",
+        "gate_criteria_config_change",
+        "gate_manual_override",
+        "gate_verdict",
+        "deferred_item_resolved"
+      ]
+    },
+    "feature": {
+      "type": "string",
+      "description": "Feature directory name"
+    },
+    "gate": {
+      "type": "string",
+      "description": "Gate identifier, e.g. TR2/TR3"
+    },
+    "criterion_id": {
+      "type": "string",
+      "description": "Affected criterion ID if applicable",
+      "pattern": "^TR\\d+(_TR\\d+)?-(MM|SM)-\\d{3}$"
+    },
+    "from_state": {
+      "type": "string",
+      "description": "Previous state (e.g. status value, old config snapshot)"
+    },
+    "to_state": {
+      "type": "string",
+      "description": "New state"
+    },
+    "rationale": {
+      "type": "string",
+      "description": "Reason for the change"
+    }
+  },
+  "additionalProperties": false
+}

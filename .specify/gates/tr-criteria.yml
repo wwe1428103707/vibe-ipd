@@ -1,0 +1,33 @@
+# Gate Criteria Definitions with Phase Ownership
+# Schema: specs/NNN-feature/contracts/tr-criteria.schema.json
+# This file defines all TR gate criteria with explicit phase ownership
+# to prevent chicken-and-egg circular dependencies between Plan and Task phases.
+
+gate_criteria:
+  # ======== TR2/TR3: Plan & Design Gate ========
+  - id: "TR2-MM-001"
+    gate: "TR2/TR3"
+    type: "Must-Meet"
+    title: "Architecture reviewed"
+    owning_phase: "Plan"
+    description: "Architecture design has been reviewed and approved by the System Architect"
+    depends_on: []
+    validation_hint: "Confirm architecture review meeting minutes or approval evidence in plan.md"
+
+  - id: "TR2-MM-002"
+    gate: "TR2/TR3"
+    type: "Must-Meet"
+    title: "Dependencies locked"
+    owning_phase: "Plan"
+    description: "All external and cross-team dependencies are identified and committed"
+    depends_on: ["TR2-MM-001"]
+    validation_hint: "Check that dependency list in plan.md has committed owners and target dates"
+
+  - id: "TR2-SM-001"
+    gate: "TR2/TR3"
+    type: "Should-Meet"
+    title: "Effort variance < 15%"
+    owning_phase: "Task"
+    description: "Effort estimates are within 15% of actuals measured after task generation"
+    depends_on: ["TR2-MM-001"]
+    validation_hint: "Compare estimated vs actual task hours after task generation is complete"

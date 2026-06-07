@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Deferred Items",
+  "description": "Schema for per-feature deferred-items.json — registry of gate criteria deferred to a future gate",
+  "type": "object",
+  "required": ["feature", "originating_gate", "created_at", "items"],
+  "properties": {
+    "feature": {
+      "type": "string",
+      "description": "Feature directory name, e.g. 015-fix-chicken-egg-tr-gate"
+    },
+    "originating_gate": {
+      "type": "string",
+      "description": "Gate where these items were deferred, e.g. TR2/TR3"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when the deferred-items file was created"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of last update"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["criterion_id", "originating_gate", "target_gate", "owner", "due_by_phase", "status", "justification", "deferred_at"],
+        "properties": {
+          "criterion_id": {
+            "type": "string",
+            "pattern": "^TR\\d+(_TR\\d+)?-(MM|SM)-\\d{3}$"
+          },
+          "originating_gate": {
+            "type": "string"
+          },
+          "target_gate": {
+            "type": "string",
+            "description": "Gate where this must be re-verified"
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1,
+            "description": "PDT role or person responsible"
+          },
+          "due_by_phase": {
+            "type": "string",
+            "description": "Phase by which this must be resolved"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["deferred", "resolved", "escalated"]
+          },
+          "justification": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Reason for deferral"
+          },
+          "resolution_evidence": {
+            "type": "string",
+            "description": "Evidence reference when resolved"
+          },
+          "deferred_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "resolved_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

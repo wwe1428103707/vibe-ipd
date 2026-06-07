@@ -11,13 +11,10 @@ param(
     [string]$Decision = '',
     [string]$DecisionMaker = '',
     [string]$DecisionRationale = '',
-    [string]$DeferredItemsPath = '',  # NEW: path to write deferred-items.json (for conditional-pass)
-    [string]$DeferredOrigin = '',     # NEW: originating gate for deferred items
     [switch]$Json
 )
 
 . "$PSScriptRoot/gate-common.ps1"
-. "$PSScriptRoot/_gate_helpers.ps1"
 
 $errors = @()
 
@@ -173,59 +170,7 @@ if ($Decision)          { $entryParams.Decision          = $Decision }
 if ($DecisionMaker)     { $entryParams.DecisionMaker     = $DecisionMaker }
 if ($DecisionRationale) { $entryParams.DecisionRationale = $DecisionRationale }
 
-# Capture previous status before writing for audit log
-$prevStatusForAudit = if ($gs.gates.$Gate) { $gs.gates.$Gate.status } else { $null }
-
 Write-GateEntry @entryParams
-
-# ============================================================
-# Audit log entry for all gate status changes (T025)
-# ============================================================
-# Determine feature name from gateFile path
-$featureName = 'unknown'
-if ($gateFile) {
-    $gateDirName = Split-Path (Split-Path $gateFile -Parent) -Leaf
-    if ($gateDirName -match '^\d{3}-|specs') {
-        $featureName = Split-Path (Split-Path $gateFile -Parent) -Leaf
-    } elseif ($gateDirName -eq 'memory') {
-        $featureName = 'shared'
-    }
-}
-Write-AuditLog -EventType "gate_verdict" -Feature $featureName -Gate $Gate `
-    -FromState $prevStatusForAudit -ToState $Status -Rationale $Evidence
-
-# ============================================================
-# Handle conditional-pass: write deferred-items.json
-# ============================================================
-if ($Status -eq 'conditional-pass' -and $DeferredItemsPath) {
-    $deferredDir = Split-Path $DeferredItemsPath -Parent
-    if (-not (Test-Path $deferredDir)) {
-        New-Item -ItemType Directory -Path $deferredDir -Force | Out-Null
-    }
-
-    $origin = if ($DeferredOrigin) { $DeferredOrigin } else { $Gate }
-    $item = @{
-        criterion_id       = ''
-        originating_gate   = $origin
-        target_gate        = 'TR4'
-        owner              = 'LPDT'
-        due_by_phase       = 'Development'
-        status             = 'deferred'
-        justification      = $Evidence
-        deferred_at        = (Get-Date -Format 'yyyy-MM-ddTHH:mm:ssK')
-    }
-
-    # Use Set-DeferredItems from _gate_helpers.ps1
-    try {
-        Set-DeferredItems -FeatureDir $deferredDir -Items @($item) -OriginatingGate $origin
-    } catch {
-        $errors += "Failed to write deferred-items.json: $_"
-    }
-
-    # Log audit entry for deferred creation
-    Write-AuditLog -EventType "gate_criteria_status_change" -Feature (Split-Path $deferredDir -Leaf) -Gate $Gate `
-        -Rationale "Deferred items created via conditional-pass verdict"
-}
 
 $gs.last_updated = (Get-Date -Format 'yyyy-MM-ddTHH:mm:ssK')
 

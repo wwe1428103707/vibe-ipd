@@ -75,10 +75,10 @@ function Test-ValidGateId {
     return ($GateId -in @('TR0', 'TR1', 'TR2_TR3', 'TR4', 'TR4A', 'TR5', 'TR6'))
 }
 
-# Validate gate status is a known value (hold and recycled added for IPD decisions)
+# Validate gate status is a known value (hold, recycled, and conditional-pass added for IPD decisions)
 function Test-ValidGateStatus {
     param([string]$Status)
-    return ($Status -in @('passed', 'pending', 'failed', 'skipped', 'hold', 'recycled'))
+    return ($Status -in @('passed', 'pending', 'failed', 'skipped', 'hold', 'recycled', 'conditional-pass'))
 }
 
 # Validate gate decision is a known IPD decision (Go/Kill/Hold/Recycle)

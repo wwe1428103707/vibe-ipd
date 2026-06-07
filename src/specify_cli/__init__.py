@@ -446,7 +446,13 @@ _init_cmd.register(app)
 
 
 @app.command()
-def check():
+def check(
+    gate_status: bool = typer.Option(
+        False,
+        "--gate-status",
+        help="Show IPD gate status for the current feature",
+    ),
+):
     """Check that all required tools are installed."""
     show_banner()
     console.print("[bold]Checking for installed tools...[/bold]\n")
@@ -490,6 +496,70 @@ def check():
         console.print("[dim]Tip: Install a coding agent for the best experience[/dim]")
 
     console.print("[dim]Tip: Run 'specify self check' to verify you have the latest CLI version[/dim]")
+
+    # --gate-status: show IPD gate status for the current feature
+    if gate_status:
+        _show_gate_status()
+
+
+def _show_gate_status() -> None:
+    """Display IPD gate status table for the current feature."""
+    from pathlib import Path
+
+    from ._gate_utils import get_gate_status
+
+    project_root = Path.cwd()
+    data = get_gate_status(project_root)
+
+    feature = data.get("feature", "(unknown)")
+    console.print()
+    console.print(f"[bold]IPD Gate Status:[/bold] {feature}")
+
+    gates = data.get("gates", {})
+    if not gates:
+        console.print("[dim]No gate status data available.[/dim]")
+        return
+
+    # Emoji indicators
+    status_icons = {
+        "passed": "[green]✅ passed[/green]",
+        "pending": "[dim]⏳ pending[/dim]",
+        "failed": "[red]❌ failed[/red]",
+        "hold": "[yellow]🔄 hold[/yellow]",
+        "recycled": "[magenta]♻️ recycled[/magenta]",
+    }
+
+    table = Table(show_header=True, box=None, padding=(0, 1))
+    table.add_column("Gate", style="bold")
+    table.add_column("Status")
+    table.add_column("Date")
+    table.add_column("Evidence")
+
+    all_passed = True
+    for gate_id in ("TR0", "TR1", "TR2_TR3", "TR4", "TR4A", "TR5", "TR6"):
+        entry = gates.get(gate_id, {})
+        status = entry.get("status", "pending")
+        date = entry.get("date", "—")
+        evidence = (entry.get("evidence") or "—")[:60]
+
+        if status != "passed":
+            all_passed = False
+
+        icon = status_icons.get(status, f"[dim]{status}[/dim]")
+        table.add_row(gate_id, icon, date or "—", evidence)
+
+    console.print(table)
+    console.print()
+
+    if all_passed:
+        console.print(
+            "[bold green]Overall: All TR gates passed (Launch Ready)[/bold green]"
+        )
+    else:
+        pending_gates = [g for g in ("TR0", "TR1", "TR2_TR3", "TR4", "TR4A", "TR5", "TR6")
+                        if gates.get(g, {}).get("status") != "passed"]
+        label = ", ".join(pending_gates)
+        console.print(f"[bold yellow]Overall: Pending gates: {label}[/bold yellow]")
 
 
 def _feature_capabilities() -> dict[str, bool]:

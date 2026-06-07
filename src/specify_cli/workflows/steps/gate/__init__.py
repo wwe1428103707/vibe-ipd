@@ -40,7 +40,19 @@ class GateStep(StepBase):
         if isinstance(message, str) and "{{" in message:
             message = evaluate_expression(message, context)
 
+        # IPD-aware mode: detect IPD mode and use Go/Kill/Hold/Recycle options
         options = config.get("options", ["approve", "reject"])
+        ipd_mode = config.get("ipd_mode", False)
+        if not ipd_mode and context.project_root:
+            try:
+                gs_path = Path(context.project_root) / ".specify" / "memory" / "constitution.md"
+                if gs_path.is_file() and "Gate Criteria Reference" in gs_path.read_text(encoding="utf-8"):
+                    ipd_mode = True
+            except OSError:
+                pass
+        if ipd_mode:
+            options = config.get("ipd_options", ["go", "kill", "hold", "recycle"])
+
         on_reject = config.get("on_reject", "abort")
 
         show_file = config.get("show_file")

@@ -1,9 +1,9 @@
 ---
-name: speckit-agent-assign-assign
-description: Scan available Claude Code agents and assign them to tasks in tasks.md
+name: vipd-agent-assign-assign
+description: Scan available Claude Code agents and assign them to tasks in tasks.md, with IPD PDT role awareness and RACI matrix compliance
 compatibility: Requires spec-kit project structure with .specify/ directory
 metadata:
-  author: github-spec-kit
+  author: ipd-toolkit
   source: agent-assign:commands/assign.md
 ---
 

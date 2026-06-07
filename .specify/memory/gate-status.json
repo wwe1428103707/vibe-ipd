@@ -1,6 +1,6 @@
 {
   "ipd_mode": true,
-  "last_updated": "2026-06-06",
+  "last_updated": "2026-06-07T20:44:48+08:00",
   "gates": {
     "TR0": {
       "status": "passed",
@@ -9,8 +9,16 @@
     },
     "TR1": {
       "status": "passed",
-      "evidence": "Spec created with TR Gate Assessment — docstate tooling with 9 FRs, 4 SCs for gate check/record/detect utilities (006); PDT role mapping with 9 FRs, 4 SCs (007); CLI source IPD adaptation with 8 FRs, 4 SCs for 29-file rename (008)",
-      "date": "2026-06-06"
+      "evidence": "test",
+      "date": "2026-06-07T20:44:11+08:00",
+      "history": [
+        {
+          "date": "2026-06-07T20:44:11+08:00",
+          "from": "passed",
+          "evidence": "test",
+          "to": "passed"
+        }
+      ]
     },
     "TR2_TR3": {
       "status": "passed",
@@ -24,13 +32,29 @@
     },
     "TR4A": {
       "status": "passed",
-      "evidence": "Quality summary: 298 speckit refs renamed across 29 Python source files — 0 unexpected remaining; core API identifiers, hook names, command names, and all 19 integration modules updated (008); 3 gate utility scripts created and tested (006); 7 role skill files (007)",
-      "date": "2026-06-06"
+      "evidence": "Quality summary: 71 tasks implemented across 12 phases — TR6 launch gate, depth validation, Should-Meet advisory, ordering enforcement, per-feature gate-status.json, Python _gate_utils.py, GatewayStep IPD-awareness, agent skill renaming, CBB catalog, Trio review template, WSJF rubric, LPDT concrete criteria, LPDT+PO conflict mitigation, Go/Kill/Hold/Recycle framework, constitution v1.3.0, README IPD docs",
+      "date": "2026-06-07T20:44:38+08:00",
+      "history": [
+        {
+          "date": "2026-06-07T20:44:38+08:00",
+          "to": "passed",
+          "evidence": "Quality summary: 71 tasks implemented across 12 phases — TR6 launch gate, depth validation, Should-Meet advisory, ordering enforcement, per-feature gate-status.json, Python _gate_utils.py, GatewayStep IPD-awareness, agent skill renaming, CBB catalog, Trio review template, WSJF rubric, LPDT concrete criteria, LPDT+PO conflict mitigation, Go/Kill/Hold/Recycle framework, constitution v1.3.0, README IPD docs",
+          "from": "passed"
+        }
+      ]
     },
     "TR5": {
       "status": "passed",
-      "evidence": "TR5 validation complete: 9/9 requirements implemented, 4/4 success criteria met, 5/5 constitution principles aligned, 0 critical/high issues, 100% coverage",
-      "date": "2026-06-06"
+      "evidence": "TR5 validation complete: 25/25 FRs implemented (FR-001 through FR-025), 8/8 SCs met, 5/5 constitution principles aligned, 0 critical issues, 71/71 tasks completed across gate scripts, Python CLI, agent skills, templates, and documentation",
+      "date": "2026-06-07T20:44:48+08:00",
+      "history": [
+        {
+          "evidence": "TR5 validation complete: 25/25 FRs implemented (FR-001 through FR-025), 8/8 SCs met, 5/5 constitution principles aligned, 0 critical issues, 71/71 tasks completed across gate scripts, Python CLI, agent skills, templates, and documentation",
+          "from": "passed",
+          "date": "2026-06-07T20:44:48+08:00",
+          "to": "passed"
+        }
+      ]
     }
   }
 }

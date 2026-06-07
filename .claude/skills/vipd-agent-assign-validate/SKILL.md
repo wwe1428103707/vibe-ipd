@@ -1,9 +1,9 @@
 ---
-name: speckit-agent-assign-validate
-description: Validate that all agent assignments are correct and agents exist
+name: vipd-agent-assign-validate
+description: Validate that all agent assignments are correct and agents exist, with IPD RACI compliance check
 compatibility: Requires spec-kit project structure with .specify/ directory
 metadata:
-  author: github-spec-kit
+  author: ipd-toolkit
   source: agent-assign:commands/validate.md
 ---
 

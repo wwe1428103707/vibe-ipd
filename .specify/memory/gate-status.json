@@ -1,6 +1,6 @@
 ﻿{
     "ipd_mode":  true,
-    "last_updated":  "2026-06-07T21:23:41+08:00",
+    "last_updated":  "2026-06-07T21:35:41+08:00",
     "gates":  {
                   "TR0":  {
                               "status":  "passed",
@@ -60,14 +60,20 @@
                           },
                   "TR4A":  {
                                "status":  "passed",
-                               "evidence":  "Quality summary: 71 tasks implemented across 12 phases 鈥?TR6 launch gate, depth validation, Should-Meet advisory, ordering enforcement, per-feature gate-status.json, Python _gate_utils.py, GatewayStep IPD-awareness, agent skill renaming, CBB catalog, Trio review template, WSJF rubric, LPDT concrete criteria, LPDT+PO conflict mitigation, Go/Kill/Hold/Recycle framework, constitution v1.3.0, README IPD docs",
-                               "date":  "2026-06-07T20:44:38+08:00",
+                               "evidence":  "Quality summary: 16/16 tasks implemented across 6 phases — hello.sh extended with --lang en/zh/ja, UTF-8 CJK greetings validated, backward compatibility confirmed, edge cases covered (--lang without value, invalid code fallback, combined flags)",
+                               "date":  "2026-06-07T21:35:41+08:00",
                                "history":  [
                                                {
                                                    "date":  "2026-06-07T20:44:38+08:00",
                                                    "to":  "passed",
                                                    "evidence":  "Quality summary: 71 tasks implemented across 12 phases 鈥?TR6 launch gate, depth validation, Should-Meet advisory, ordering enforcement, per-feature gate-status.json, Python _gate_utils.py, GatewayStep IPD-awareness, agent skill renaming, CBB catalog, Trio review template, WSJF rubric, LPDT concrete criteria, LPDT+PO conflict mitigation, Go/Kill/Hold/Recycle framework, constitution v1.3.0, README IPD docs",
                                                    "from":  "passed"
+                                               },
+                                               {
+                                                   "date":  "2026-06-07T21:35:41+08:00",
+                                                   "from":  "passed",
+                                                   "to":  "passed",
+                                                   "evidence":  "Quality summary: 16/16 tasks implemented across 6 phases — hello.sh extended with --lang en/zh/ja, UTF-8 CJK greetings validated, backward compatibility confirmed, edge cases covered (--lang without value, invalid code fallback, combined flags)"
                                                }
                                            ]
                            },

@@ -15,43 +15,43 @@ description: "Task list for Multilingual Greeting feature"
 
 ## Phase 1: Setup (Shared Infrastructure)
 
-- [ ] T001 Read current `samples/e2e-validate-hello/hello.sh` to understand existing argument parsing structure
-- [ ] T002 [P] Back up current hello.sh to `samples/e2e-validate-hello/hello.sh.bak`
+- [X] T001 Read current `samples/e2e-validate-hello/hello.sh` to understand existing argument parsing structure
+- [X] T002 [P] Back up current hello.sh to `samples/e2e-validate-hello/hello.sh.bak`
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
-- [ ] T003 [P] Verify UTF-8 terminal support by testing Chinese characters: `echo "你好"`
-- [ ] T004 Verify bash version: `bash --version`
+- [X] T003 [P] Verify UTF-8 terminal support by testing Chinese characters: `echo "你好"`
+- [X] T004 Verify bash version: `bash --version`
 
 ## Phase 3: User Story 1 — Greet in English (P1) 🎯 MVP
 
 **Goal**: Support `--lang en` (default) with proper English greeting
 
-- [ ] T005 [P] [US1] Add `--lang` argument parsing to hello.sh in `samples/e2e-validate-hello/hello.sh`
-- [ ] T006 [US1] Implement English greeting template and default-to-English fallback in `samples/e2e-validate-hello/hello.sh`
-- [ ] T007 [US1] Update `--help` output to document `--lang` option in `samples/e2e-validate-hello/hello.sh`
+- [X] T005 [P] [US1] Add `--lang` argument parsing to hello.sh in `samples/e2e-validate-hello/hello.sh`
+- [X] T006 [US1] Implement English greeting template and default-to-English fallback in `samples/e2e-validate-hello/hello.sh`
+- [X] T007 [US1] Update `--help` output to document `--lang` option in `samples/e2e-validate-hello/hello.sh`
 
 ## Phase 4: User Story 2 — Greet in Chinese (P1)
 
 **Goal**: Support `--lang zh` with Chinese greeting
 
-- [ ] T008 [P] [US2] Add Chinese greeting template in `samples/e2e-validate-hello/hello.sh`
-- [ ] T009 [US2] Implement unsupported language fallback with stderr notice in `samples/e2e-validate-hello/hello.sh`
+- [X] T008 [P] [US2] Add Chinese greeting template in `samples/e2e-validate-hello/hello.sh`
+- [X] T009 [US2] Implement unsupported language fallback with stderr notice in `samples/e2e-validate-hello/hello.sh`
 
 ## Phase 5: User Story 3 — Greet in Japanese (P2)
 
 **Goal**: Support `--lang ja` with Japanese greeting
 
-- [ ] T010 [P] [US3] Add Japanese greeting template in `samples/e2e-validate-hello/hello.sh`
-- [ ] T011 [US3] Test --lang ja with name containing special characters in `samples/e2e-validate-hello/hello.sh`
+- [X] T010 [P] [US3] Add Japanese greeting template in `samples/e2e-validate-hello/hello.sh`
+- [X] T011 [US3] Test --lang ja with name containing special characters in `samples/e2e-validate-hello/hello.sh`
 
 ## Phase 6: Polish & Cross-Cutting Concerns
 
-- [ ] T012 Run full test suite: test all 3 languages + error cases + backward compatibility
-- [ ] T012a [P] Validate `--lang` without value exits with code 1: `bash hello.sh --name Alice --lang`
-- [ ] T012b [P] Validate `--lang` combined with `--version` and `--help` does not interfere
-- [ ] T013 Update `samples/e2e-validate-hello/README.md` with --lang usage examples
-- [ ] T014 Verify all existing features (--name, --help, --version) still work
+- [X] T012 Run full test suite: test all 3 languages + error cases + backward compatibility
+- [X] T012a [P] Validate `--lang` without value exits with code 1: `bash hello.sh --name Alice --lang`
+- [X] T012b [P] Validate `--lang` combined with `--version` and `--help` does not interfere
+- [X] T013 Update `samples/e2e-validate-hello/README.md` with --lang usage examples
+- [X] T014 Verify all existing features (--name, --help, --version) still work
 
 ## Dependencies & Execution Order
 

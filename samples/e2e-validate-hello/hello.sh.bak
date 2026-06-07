@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # e2e-validate-hello — A minimal greeting CLI tool for workflow validation
-# Usage: bash hello.sh --name <NAME> [--lang en|zh|ja]
+# Usage: bash hello.sh --name <NAME>
 
 set -euo pipefail
 
@@ -14,16 +14,10 @@ A simple CLI greeting tool.
 
 Options:
   --name <NAME>  Your name to greet (required)
-  --lang <CODE>  Language code: en (English, default), zh (Chinese), ja (Japanese)
   --help         Show this help message
   --version      Show version information
 EOF
 }
-
-# --- Greeting templates ---
-greet_en() { echo "Hello, ${1}! Welcome to the IPD-Agile toolchain validation."; }
-greet_zh() { echo "你好，${1}！欢迎来到IPD-Agile工具链验证。"; }
-greet_ja() { echo "こんにちは、${1}さん！IPD-Agileツールチェーン検証へようこそ。"; }
 
 # No arguments
 if [ $# -eq 0 ]; then
@@ -33,7 +27,6 @@ if [ $# -eq 0 ]; then
 fi
 
 NAME=""
-LANG_CODE="en"
 
 while [ $# -gt 0 ]; do
     case "$1" in
@@ -43,14 +36,6 @@ while [ $# -gt 0 ]; do
                 exit 1
             fi
             NAME="$2"
-            shift 2
-            ;;
-        --lang)
-            if [ -z "${2:-}" ]; then
-                echo "Error: --lang requires a value" >&2
-                exit 1
-            fi
-            LANG_CODE="$2"
             shift 2
             ;;
         --help)
@@ -75,14 +60,5 @@ if [ -z "$NAME" ]; then
     exit 1
 fi
 
-# Dispatch greeting by language code
-case "$LANG_CODE" in
-    en) greet_en "$NAME" ;;
-    zh) greet_zh "$NAME" ;;
-    ja) greet_ja "$NAME" ;;
-    *)
-        echo "Warning: Unsupported language code '${LANG_CODE}'. Falling back to English." >&2
-        greet_en "$NAME"
-        ;;
-esac
+echo "Hello, ${NAME}! Welcome to the IPD-Agile toolchain validation."
 exit 0

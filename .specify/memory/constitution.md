@@ -208,7 +208,7 @@ supersedes all other practices, methodologies, and conventions.
   Phase 0 research begins and again after Phase 1 design.
 - Cross-artifact consistency MUST be verified before implementation via
   `/vipd-speckit-analyze`.
-- Gate status tracking (`.specify/memory/gate-status.json`) provides persistent
+- Gate status tracking (`.specify/memory/gate-status.json` or per-feature `specs/NNN-feature-name/gate-status.json`) provides persistent
   evidence of TR gate progression across the project lifecycle.
 - All PRs and code reviews MUST verify compliance with constitutional
   principles.
@@ -217,4 +217,4 @@ supersedes all other practices, methodologies, and conventions.
 - The constitution MUST be reviewed at least once per major release cycle for
   continued relevance.
 
-**Version**: 1.2.0 | **Ratified**: 2026-06-06 | **Last Amended**: 2026-06-06
+**Version**: 1.3.0 | **Ratified**: 2026-06-06 | **Last Amended**: 2026-06-07

@@ -1,0 +1,242 @@
+# Agent Assignments
+# Feature: 009-ipd-migration-gaps
+# Generated: 2026-06-07
+# Command: /vipd-agent-assign-assign
+
+agents_scanned:
+  - name: "vipd-agent-assign-architect"
+    source: "project"
+    description: "Development Lead (System Architect / Tech Lead) — evaluate technical feasibility, enforce architecture compliance, manage CBB reuse"
+  - name: "vipd-agent-assign-devops-lead"
+    source: "project"
+    description: "Operations Lead (DevOps Lead) — assess CI/CD readiness, deployment automation, operational stability"
+  - name: "vipd-agent-assign-devops-qa"
+    source: "project"
+    description: "Combined DevOps Lead + QA Lead — assess operational stability and quality metrics for small teams"
+  - name: "vipd-agent-assign-lpdt"
+    source: "project"
+    description: "PDT Manager (LPDT/Release Train Engineer) — facilitate TR gates, resolve dependencies, drive delivery commitment"
+  - name: "vipd-agent-assign-lpdt-po"
+    source: "project"
+    description: "Combined LPDT/RTE + PO — facilitate gates and assess feature value for small teams"
+  - name: "vipd-agent-assign-po"
+    source: "project"
+    description: "Product Manager (Product Owner) — prioritize backlog, validate feature value, sign off acceptance criteria"
+  - name: "vipd-agent-assign-qa-lead"
+    source: "project"
+    description: "Test Lead (QA Lead) — define test strategy, enforce Definition of Done, assess quality metrics"
+
+assignments:
+  T001:
+    agent: "vipd-agent-assign-architect"
+    reason: "PowerShell script architecture change — gate system core design"
+  T002:
+    agent: "vipd-agent-assign-architect"
+    reason: "Bash script architecture mirror — cross-platform gate design"
+  T003:
+    agent: "vipd-agent-assign-architect"
+    reason: "Gate validation logic design — TR6 check function"
+  T004:
+    agent: "vipd-agent-assign-architect"
+    reason: "Bash gate validation mirror — cross-platform consistency"
+  T005:
+    agent: "vipd-agent-assign-architect"
+    reason: "Bug fix in gate script — requires understanding gate check flow"
+  T006:
+    agent: "vipd-agent-assign-architect"
+    reason: "Core validation logic — depth validation is architectural"
+  T007:
+    agent: "vipd-agent-assign-architect"
+    reason: "Bash validation mirror — cross-platform consistency"
+  T008:
+    agent: "vipd-agent-assign-architect"
+    reason: "Gate evaluation logic — Should-Meet is architectural"
+  T009:
+    agent: "vipd-agent-assign-architect"
+    reason: "Bash evaluation mirror — cross-platform consistency"
+  T010:
+    agent: "vipd-agent-assign-architect"
+    reason: "Gate ordering validation — core gate lifecycle design"
+  T011:
+    agent: "vipd-agent-assign-architect"
+    reason: "Bash ordering mirror — cross-platform consistency"
+  T012:
+    agent: "vipd-agent-assign-architect"
+    reason: "Core gate recording logic — audit trail and decisions"
+  T013:
+    agent: "vipd-agent-assign-devops-lead"
+    reason: "New Bash deployment script — DevOps scripting"
+  T014:
+    agent: "vipd-agent-assign-architect"
+    reason: "Path resolution architecture — per-feature gate status design"
+  T015:
+    agent: "vipd-agent-assign-architect"
+    reason: "Path resolution for gate checks — architecture consistency"
+  T016:
+    agent: "vipd-agent-assign-devops-lead"
+    reason: "Data migration script — operational data migration"
+  T017:
+    agent: "vipd-agent-assign-architect"
+    reason: "Core Python module design — gate enforcement API"
+  T018:
+    agent: "vipd-agent-assign-architect"
+    reason: "Python exception hierarchy — API design"
+  T019:
+    agent: "vipd-agent-assign-architect"
+    reason: "Python decorator pattern — gate enforcement integration"
+  T020:
+    agent: "vipd-agent-assign-architect"
+    reason: "CLI integration — check command extension"
+  T021:
+    agent: "vipd-agent-assign-architect"
+    reason: "Gate flow integration — PS1 TR6 in validation order"
+  T022:
+    agent: "vipd-agent-assign-architect"
+    reason: "Bash flow mirror — cross-platform consistency"
+  T023:
+    agent: "vipd-agent-assign-qa-lead"
+    reason: "Verification task — quality assurance of depth validation"
+  T024:
+    agent: "vipd-agent-assign-qa-lead"
+    reason: "Verification task — quality assurance of ordering enforcement"
+  T025:
+    agent: "vipd-agent-assign-qa-lead"
+    reason: "Verification task — quality assurance of audit trail"
+  T026:
+    agent: "vipd-agent-assign-architect"
+    reason: "Gate validation patterns — TR1 depth regex design"
+  T027:
+    agent: "vipd-agent-assign-architect"
+    reason: "Gate validation patterns — all TR gate depth design"
+  T028:
+    agent: "vipd-agent-assign-architect"
+    reason: "Bash mirror of depth patterns — cross-platform"
+  T029:
+    agent: "vipd-agent-assign-qa-lead"
+    reason: "Verification task — Should-Meet output validation"
+  T030:
+    agent: "vipd-agent-assign-architect"
+    reason: "Python CLI integration — gate decorator on vipd-plan"
+  T031:
+    agent: "vipd-agent-assign-architect"
+    reason: "Python CLI integration — gate decorator on vipd-tasks"
+  T032:
+    agent: "vipd-agent-assign-architect"
+    reason: "Python CLI integration — gate decorator on vipd-implement"
+  T033:
+    agent: "vipd-agent-assign-architect"
+    reason: "Python CLI integration — gate decorator on vipd-analyze"
+  T034:
+    agent: "vipd-agent-assign-devops-lead"
+    reason: "Script modification — DevOps prerequisite validation"
+  T035:
+    agent: "vipd-agent-assign-devops-lead"
+    reason: "Script modification — DevOps plan setup gate check"
+  T036:
+    agent: "vipd-agent-assign-devops-lead"
+    reason: "Script modification — DevOps tasks setup gate check"
+  T037:
+    agent: "vipd-agent-assign-devops-lead"
+    reason: "Script naming fix — DevOps command references"
+  T038:
+    agent: "vipd-agent-assign-architect"
+    reason: "Python file-watcher logic — architectural decision"
+  T039:
+    agent: "vipd-agent-assign-architect"
+    reason: "Python error handling — architectural resilience"
+  T040:
+    agent: "vipd-agent-assign-architect"
+    reason: "Workflow engine extension — GatewayStep IPD integration"
+  T041:
+    agent: "vipd-agent-assign-architect"
+    reason: "Workflow design — VIPD workflow creation"
+  T042:
+    agent: "vipd-agent-assign-devops-lead"
+    reason: "Registry configuration — workflow deployment"
+  T043:
+    agent: "vipd-agent-assign-po"
+    reason: "Product template content — TR1 criteria is a product decision"
+  T044:
+    agent: "vipd-agent-assign-po"
+    reason: "Skill content — TR1 evidence is product-focused"
+  T045:
+    agent: "vipd-agent-assign-po"
+    reason: "Skill content — TR1 conditional passage is product-focused"
+  T046:
+    agent: "vipd-agent-assign-po"
+    reason: "Template creation — Trio review template is product-focused"
+  T047:
+    agent: "vipd-agent-assign-po"
+    reason: "CBB catalog template — product backlog asset"
+  T048:
+    agent: "vipd-agent-assign-po"
+    reason: "Plan template — CBB and WSJF are product decisions"
+  T049:
+    agent: "vipd-agent-assign-po"
+    reason: "PO skill content — WSJF rubric is product-focused"
+  T050:
+    agent: "vipd-agent-assign-lpdt"
+    reason: "Agent assignment RACI awareness — PDT coordination"
+  T051:
+    agent: "vipd-agent-assign-lpdt"
+    reason: "Agent execution gate check — PDT coordination"
+  T052:
+    agent: "vipd-agent-assign-lpdt"
+    reason: "Agent validation naming — PDT coordination"
+  T053:
+    agent: "vipd-agent-assign-lpdt"
+    reason: "Gate status reporting — PDT management oversight"
+  T054:
+    agent: "vipd-agent-assign-po"
+    reason: "README documentation — product-facing content"
+  T055:
+    agent: "vipd-agent-assign-po"
+    reason: "Tasks template — product quality and RACI decisions"
+  T056:
+    agent: "vipd-agent-assign-po"
+    reason: "Checklist template — product gate readiness"
+  T057:
+    agent: "vipd-agent-assign-po"
+    reason: "Plan template — CBB and Trio are product decisions"
+  T058:
+    agent: "vipd-agent-assign-devops-lead"
+    reason: "Script naming fix — DevOps command references"
+  T059:
+    agent: "vipd-agent-assign-lpdt"
+    reason: "Constitution governance update — PDT management oversight"
+  T060:
+    agent: "vipd-agent-assign-lpdt"
+    reason: "LPDT gate template — concrete Must-Meet criteria"
+  T061:
+    agent: "vipd-agent-assign-lpdt-po"
+    reason: "Combined role conflict mitigation — LPDT+PO specific concern"
+  T062:
+    agent: "vipd-agent-assign-devops-lead"
+    reason: "Skill content update — DevOps gate check"
+  T063:
+    agent: "vipd-agent-assign-po"
+    reason: "Task template — product decision on mandatory tests"
+  T064:
+    agent: "vipd-agent-assign-devops-lead"
+    reason: "Skill naming fix — DevOps configuration"
+  T065:
+    agent: "vipd-agent-assign-architect"
+    reason: "Gate decision support — architectural API design"
+  T066:
+    agent: "vipd-agent-assign-qa-lead"
+    reason: "End-to-end verification — quality assurance of all gate scripts"
+  T067:
+    agent: "vipd-agent-assign-qa-lead"
+    reason: "Quickstart validation — quality assurance of documentation"
+  T068:
+    agent: "vipd-agent-assign-qa-lead"
+    reason: "Migration verification — quality assurance of data migration"
+  T069:
+    agent: "vipd-agent-assign-qa-lead"
+    reason: "Python integration verification — quality assurance of _gate_utils.py"
+  T070:
+    agent: "vipd-agent-assign-qa-lead"
+    reason: "CLI output verification — quality assurance of gate status display"
+  T071:
+    agent: "vipd-agent-assign-qa-lead"
+    reason: "Backward compatibility — quality assurance of workflow coexistence"

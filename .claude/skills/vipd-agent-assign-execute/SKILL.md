@@ -1,9 +1,9 @@
 ---
-name: speckit-agent-assign-execute
-description: Execute tasks by spawning the assigned agent for each task
+name: vipd-agent-assign-execute
+description: Execute tasks by spawning the assigned agent for each task, with IPD TR4 gate validation
 compatibility: Requires spec-kit project structure with .specify/ directory
 metadata:
-  author: github-spec-kit
+  author: ipd-toolkit
   source: agent-assign:commands/execute.md
 ---
 

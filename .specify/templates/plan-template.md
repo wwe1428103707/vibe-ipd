@@ -52,6 +52,13 @@
 
 [Gates determined based on constitution file]
 
+## CBB Reuse Assessment *(IPD only)*
+
+- **CBB Catalog**: [link to `.specify/memory/cbb-catalog.md`]
+- **Reusable blocks identified**: [list]
+- **New components needed**: [list]
+- **Reuse justification**: [why CBB reuse was/was not possible]
+
 ## Project Structure
 
 ### Documentation (this feature)

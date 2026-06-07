@@ -76,6 +76,7 @@ When contributing to a TR gate review, structure the response:
 - Business value: {H/M/L}
 - User impact: {description}
 - WSJF score: {value}
+- WSJF Rubric (1-10): Value(outcome) + Time Criticality(urgency) + Risk Reduction(oops value) ÷ Job Size(effort). Value: 1=internal, 5=improves revenue, 10=enables new revenue. Criticality: 1=no deadline, 10=mandate. Risk: 1=no uncertainty, 10=prevents failure. Size: 1=hours, 10=quarters.
 
 ### Acceptance Criteria Status
 - [ ] All criteria defined

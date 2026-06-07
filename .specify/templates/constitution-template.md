@@ -66,7 +66,7 @@ IPD mode is activated when this section exists in the constitution.
 
 | TR Gate | Phase | Must-Meet (Veto) | Should-Meet (Scorecard) |
 |---------|-------|------------------|------------------------|
-| TR1 | Concept | Spec created, feasibility assessed | Market attractiveness > 8/10 |
+| TR1 | Concept | Spec created, feasibility assessed; Product Trio review verdict (Go/Kill/Hold/Recycle) | Market attractiveness > 8/10 |
 | TR2/TR3 | Plan | Architecture reviewed, deps locked | Effort variance < 15% |
 | TR4 | Dev Baseline | DoD defined, CI configured | Velocity variance < 15% |
 | TR5 | Validation | Blocker/critical bugs = 0 | Beta NPS >= 8 |

@@ -1,6 +1,6 @@
 ﻿{
     "ipd_mode":  true,
-    "last_updated":  "2026-06-07T21:16:16+08:00",
+    "last_updated":  "2026-06-07T21:23:41+08:00",
     "gates":  {
                   "TR0":  {
                               "status":  "passed",
@@ -29,10 +29,16 @@
                   "TR2_TR3":  {
                                   "status":  "passed",
                                   "evidence":  "Plan created with Gate Readiness + ADL",
-                                  "date":  "2026-06-07T21:03:07+08:00",
+                                  "date":  "2026-06-07T21:23:41+08:00",
                                   "history":  [
                                                   {
                                                       "date":  "2026-06-07T21:03:07+08:00",
+                                                      "from":  "passed",
+                                                      "to":  "passed",
+                                                      "evidence":  "Plan created with Gate Readiness + ADL"
+                                                  },
+                                                  {
+                                                      "date":  "2026-06-07T21:23:41+08:00",
                                                       "from":  "passed",
                                                       "to":  "passed",
                                                       "evidence":  "Plan created with Gate Readiness + ADL"

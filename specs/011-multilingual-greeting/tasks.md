@@ -48,6 +48,8 @@ description: "Task list for Multilingual Greeting feature"
 ## Phase 6: Polish & Cross-Cutting Concerns
 
 - [ ] T012 Run full test suite: test all 3 languages + error cases + backward compatibility
+- [ ] T012a [P] Validate `--lang` without value exits with code 1: `bash hello.sh --name Alice --lang`
+- [ ] T012b [P] Validate `--lang` combined with `--version` and `--help` does not interfere
 - [ ] T013 Update `samples/e2e-validate-hello/README.md` with --lang usage examples
 - [ ] T014 Verify all existing features (--name, --help, --version) still work
 

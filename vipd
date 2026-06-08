@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# vipd — Vibe IPD Toolkit CLI wrapper
+# Usage: vipd --version, vipd --help, vipd -v, vipd -h
+
+set -euo pipefail
+
+VIPD_DIR="$(cd "$(dirname "$0")/.vipd" && pwd 2>/dev/null || echo "")"
+
+show_version() {
+  local VIPD_VER="unknown"
+  local SPECKIT_VER="unknown"
+  if [ -n "$VIPD_DIR" ] && [ -f "$VIPD_DIR/version.yml" ]; then
+    VIPD_VER=$(grep '^vipd_version:' "$VIPD_DIR/version.yml" | awk '{print $2}' | tr -d '"' 2>/dev/null || echo "unknown")
+    SPECKIT_VER=$(grep '^speckit_version:' "$VIPD_DIR/version.yml" | awk '{print $2}' | tr -d '"' 2>/dev/null || echo "unknown")
+  fi
+  echo "vipd ${VIPD_VER} (speckit ${SPECKIT_VER})"
+}
+
+show_help() {
+  echo "vipd — Vibe IPD Toolkit"
+  echo ""
+  echo "Usage:"
+  echo "  vipd --version     Show version information"
+  echo "  vipd -v            Short alias for --version"
+  echo "  vipd --help        Show this help message"
+  echo "  vipd -h            Short alias for --help"
+  echo ""
+  echo "Commands (via Claude Code):"
+  echo "  /vipd-specify      Create a feature specification"
+  echo "  /vipd-clarify      Clarify specification details"
+  echo "  /vipd-plan         Create an implementation plan"
+  echo "  /vipd-tasks        Generate task list"
+  echo "  /vipd-implement    Execute tasks"
+  echo "  /vipd-analyze      Cross-artifact review"
+  echo "  /vipd-init         Initialize a new project"
+  echo "  /vipd-git-commit   Commit changes"
+  echo ""
+  echo "See README.md for full documentation."
+}
+
+case "${1:-}" in
+  --version|-v)
+    show_version
+    ;;
+  --help|-h|"")
+    show_help
+    ;;
+  *)
+    echo "vipd: unknown option '$1'"
+    echo "Usage: vipd --version or vipd --help"
+    exit 1
+    ;;
+esac

@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VIPD Version Info",
+  "description": "Schema for .vipd/version.yml — tracks vipd and speckit versions independently",
+  "type": "object",
+  "required": ["vipd_version", "speckit_version"],
+  "properties": {
+    "vipd_version": {
+      "type": "string",
+      "description": "Semantic version of vipd toolkit (MAJOR.MINOR.PATCH)",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$",
+      "examples": ["1.0.0", "1.1.0", "2.0.0-beta"]
+    },
+    "speckit_version": {
+      "type": "string",
+      "description": "Version of speckit toolkit used by this project",
+      "examples": ["0.9.3.dev0"]
+    }
+  },
+  "additionalProperties": false
+}

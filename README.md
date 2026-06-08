@@ -67,7 +67,7 @@ That's it — your feature is now built with full IPD governance, TR gate valida
 
 ## Architecture Overview
 
-![vibe-ipd Architecture Overview](./architect-view.png)
+![vibe-ipd Architecture Overview](./architect-view-en.png)
 
 ## Feature Catalog
 

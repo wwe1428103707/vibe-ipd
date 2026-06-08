@@ -1,6 +1,6 @@
 ﻿{
     "ipd_mode":  true,
-    "last_updated":  "2026-06-08T08:14:36+08:00",
+    "last_updated":  "2026-06-08T08:22:43+08:00",
     "gates":  {
                   "TR0":  {
                               "status":  "passed",
@@ -9,8 +9,8 @@
                           },
                   "TR1":  {
                               "status":  "passed",
-                              "evidence":  "Medium risk, 4 open risks resolved via clarification",
-                              "date":  "2026-06-08T07:11:09+08:00",
+                              "evidence":  "Spec created with TR Gate Assessment: VIPD Versioning \u0026 Docs Preparation",
+                              "date":  "2026-06-08T08:20:51+08:00",
                               "history":  [
                                               {
                                                   "date":  "2026-06-07T20:44:11+08:00",
@@ -59,13 +59,19 @@
                                                   "from":  "passed",
                                                   "to":  "passed",
                                                   "evidence":  "Medium risk, 4 open risks resolved via clarification"
+                                              },
+                                              {
+                                                  "date":  "2026-06-08T08:20:51+08:00",
+                                                  "from":  "passed",
+                                                  "to":  "passed",
+                                                  "evidence":  "Spec created with TR Gate Assessment: VIPD Versioning \u0026 Docs Preparation"
                                               }
                                           ]
                           },
                   "TR2_TR3":  {
                                   "status":  "passed",
-                                  "evidence":  "Plan created with Gate Readiness + ADL (4 decisions: flat YAML resources, config priority chain, directory-scan validation, new .vipd/config.yml)",
-                                  "date":  "2026-06-08T07:50:29+08:00",
+                                  "evidence":  "Plan created with Gate Readiness + ADL (4 decisions: version.yml format, bash CLI wrapper, full feature catalog README, initial 1.0.0)",
+                                  "date":  "2026-06-08T08:22:43+08:00",
                                   "history":  [
                                                   {
                                                       "date":  "2026-06-07T21:03:07+08:00",
@@ -108,6 +114,12 @@
                                                       "from":  "passed",
                                                       "to":  "passed",
                                                       "evidence":  "Plan created with Gate Readiness + ADL (4 decisions: flat YAML resources, config priority chain, directory-scan validation, new .vipd/config.yml)"
+                                                  },
+                                                  {
+                                                      "date":  "2026-06-08T08:22:43+08:00",
+                                                      "from":  "passed",
+                                                      "to":  "passed",
+                                                      "evidence":  "Plan created with Gate Readiness + ADL (4 decisions: version.yml format, bash CLI wrapper, full feature catalog README, initial 1.0.0)"
                                                   }
                                               ]
                               },

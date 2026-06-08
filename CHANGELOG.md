@@ -2,6 +2,26 @@
 
 <!-- insert new changelog below this comment -->
 
+## [1.0.0] - 2026-06-08
+
+### Added
+
+- **Complete IPD Toolkit** — Full Technology Review gate model (TR0-TR6) integrated into every SDD command, with deep content validation, Must-Meet/Should-Meet criteria, and Go/Kill/Hold/Recycle gate decisions
+- **Spec-Driven Development** — Complete spec → plan → tasks → implement → analyze workflow with IPD gate enforcement at each phase
+- **PDT Role Mapping with RACI** — Explicit mapping of LPDT → RTE, Product Manager → PO, Dev Lead → System Architect, Test Lead → QA Lead, Ops Lead → DevOps Lead
+- **Multi-Agent Orchestration** — Integration with oh-my-claudecode for 50+ specialized agent roles
+- **Product Trio Collaboration** — Built-in templates for PO + Architect + UX Designer discovery track
+- **Bilingual Support** — Chinese-first documentation with English translations, Windows-native PowerShell tooling
+- **Project Initialization** — `/vipd-init` skill for scaffolding new projects via uvx/pipx
+- **Multilingual Greeting** — `hello.sh --lang en/zh/ja` with CJK UTF-8 validation
+- **Language Option** — `--lang` flag on vipd commands, persisted in `.vipd/config.yml`
+- **IPD Migration** — 25 gap-filling features bridging speckit and full IPD compliance
+- **Gate Dependency Fix** — Resolution of chicken-and-egg circular dependencies between Plan and Task phases
+- **Version Management** — Independent version tracking for vipd, separate from speckit, with `vipd --version` display
+- **Comprehensive Documentation** — Chinese documentation translation, rebranded project docs, quickstart guides
+
+[1.0.0]: https://github.com/wwe1428103707/vibe-ipd/releases/tag/v1.0.0
+
 ## [0.9.5] - 2026-06-05
 
 ### Changed

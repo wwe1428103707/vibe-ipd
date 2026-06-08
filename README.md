@@ -89,6 +89,50 @@ That's it — your feature is now built with full IPD governance, TR gate valida
 └──────────────────────────────────────────────────┘
 ```
 
+## Feature Catalog
+
+vibe-ipd v1.0.0 implements **17 features** across the IPD workflow:
+
+| # | Feature | Status |
+|---|---------|--------|
+| 001 | IPD Toolkit — Core gate framework and constitution | ✅ |
+| 002 | IPD Agent PM Integration | ✅ |
+| 003 | Blueprint Docstate-only Mode | ✅ |
+| 004 | VIPD Command Prefix Migration | ✅ |
+| 005 | Implement IPD Gates (TR0-TR6) | ✅ |
+| 006 | Implement Docstate Tools | ✅ |
+| 007 | PDT Role Setup with RACI Matrix | ✅ |
+| 008 | CLI IPD Adaptation | ✅ |
+| 009 | IPD Migration Gaps — 25 gaps filled | ✅ |
+| 010 | E2E Workflow Validation | ✅ |
+| 011 | Multilingual Greeting (--lang en/zh/ja) | ✅ |
+| 012 | Project Cleanup & Documentation Rebrand | ✅ |
+| 013 | VIPD Init Skill (uvx/pipx scaffolding) | ✅ |
+| 014 | Chinese Documentation Translation | ✅ |
+| 015 | Fix TR Gate Chicken-Egg Dependency | ✅ |
+| 016 | VIPD Init Language Option (--lang flag) | ✅ |
+| 017 | **Version Management & Docs Preparation** | ✅ **v1.0.0** |
+
+> Run `vipd --version` to see the current version and underlying speckit version.
+
+## Versioning
+
+vipd follows **semantic versioning** (MAJOR.MINOR.PATCH), same conventions as speckit:
+
+| Bump | When |
+|------|------|
+| **MAJOR** | Breaking workflow changes, backward-incompatible format changes |
+| **MINOR** | New features implemented (new specs) |
+| **PATCH** | Bug fixes, doc updates, refactoring |
+
+The vipd version is tracked independently from the speckit version. Run `vipd --version` to see both:
+
+```
+vipd 1.0.0 (speckit 0.9.3.dev0)
+```
+
+See [VERSION_BUMP.md](./VERSION_BUMP.md) for the complete bump process and [CHANGELOG.md](./CHANGELOG.md) for release history.
+
 ## Available Commands
 
 All vibe-ipd commands follow the `/vipd-*` naming convention:
@@ -133,6 +177,8 @@ vibe-ipd is currently in **active development** as a fork of Spec Kit with enhan
 - ✅ Multi-agent orchestration via oh-my-claudecode
 - ✅ Windows-native PowerShell tooling
 - ✅ Bilingual documentation (CN/EN)
+
+**Current version**: `vipd 1.0.0` (speckit 0.9.3.dev0) — first official release! 🎉
 
 **Next milestones**: TR6 launch gate automation, release management workflows, and CI/CD integration.
 

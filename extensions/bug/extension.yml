@@ -15,14 +15,14 @@ requires:
 
 provides:
   commands:
-    - name: speckit.bug.assess
-      file: commands/speckit.bug.assess.md
+    - name: vipd.speckit.bug.assess
+      file: commands/vipd.speckit.bug.assess.md
       description: "Assess a bug report (pasted text or URL) against the codebase and produce an assessment with possible remediation"
-    - name: speckit.bug.fix
-      file: commands/speckit.bug.fix.md
+    - name: vipd.speckit.bug.fix
+      file: commands/vipd.speckit.bug.fix.md
       description: "Apply the remediation from a bug assessment and record what was changed"
-    - name: speckit.bug.test
-      file: commands/speckit.bug.test.md
+    - name: vipd.speckit.bug.test
+      file: commands/vipd.speckit.bug.test.md
       description: "Validate that a previously fixed bug is resolved and record the verification report"
 
 tags:

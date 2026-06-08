@@ -15,17 +15,17 @@ requires:
 
 provides:
   commands:
-    - name: speckit.agent-context.update
-      file: commands/speckit.agent-context.update.md
+    - name: vipd.speckit.agent-context.update
+      file: commands/vipd.speckit.agent-context.update.md
       description: "Refresh the managed Spec Kit section in the coding agent context file"
 
 hooks:
   after_specify:
-    command: speckit.agent-context.update
+    command: vipd.speckit.agent-context.update
     optional: true
     description: "Refresh agent context after specification"
   after_plan:
-    command: speckit.agent-context.update
+    command: vipd.speckit.agent-context.update
     optional: true
     description: "Refresh agent context after planning"
 

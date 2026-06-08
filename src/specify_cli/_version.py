@@ -31,6 +31,7 @@ from packaging.version import InvalidVersion, Version
 from ._console import console
 
 GITHUB_API_LATEST = "https://api.github.com/repos/wwe1428103707/vibe-ipd/releases/latest"
+SPECKIT_VERSION = "0.9.3.dev0"
 _RESOLUTION_FAILURE_OFFLINE = "offline or timeout"
 _RESOLUTION_FAILURE_RATE_LIMITED = (
     "rate limited (configure ~/.specify/auth.json with a GitHub token)"

@@ -76,6 +76,7 @@ from ._utils import (
 )
 from ._version import (
     GITHUB_API_LATEST as GITHUB_API_LATEST,
+    SPECKIT_VERSION as SPECKIT_VERSION,
     self_app as _self_app,
     self_check as self_check,
     self_upgrade as self_upgrade,
@@ -102,7 +103,8 @@ app = typer.Typer(
 
 def _version_callback(value: bool):
     if value:
-        console.print(f"specify {get_vipd_version()}")
+        vipd_ver = get_vipd_version()
+        console.print(f"vipd {vipd_ver} (speckit {SPECKIT_VERSION})")
         raise typer.Exit()
 
 @app.callback()
@@ -487,7 +489,7 @@ def check(
 
     console.print(tracker.render())
 
-    console.print("\n[bold green]Specify CLI is ready to use![/bold green]")
+    console.print("\n[bold green]vibe-ipd CLI is ready to use![/bold green]")
 
     if not git_ok:
         console.print("[dim]Tip: Install git for repository management[/dim]")
@@ -495,7 +497,7 @@ def check(
     if not any(agent_results.values()):
         console.print("[dim]Tip: Install a coding agent for the best experience[/dim]")
 
-    console.print("[dim]Tip: Run 'specify self check' to verify you have the latest CLI version[/dim]")
+    console.print("[dim]Tip: Run 'vipd self check' to verify you have the latest CLI version[/dim]")
 
     # --gate-status: show IPD gate status for the current feature
     if gate_status:
@@ -604,7 +606,7 @@ def version(
             console.print(json.dumps(payload, indent=2))
             return
 
-        console.print(f"Spec Kit CLI: {cli_version}")
+        console.print(f"vibe-ipd CLI: {cli_version} (speckit {SPECKIT_VERSION})")
         console.print()
         console.print("Features:")
         for key, enabled in capabilities.items():
@@ -618,7 +620,7 @@ def version(
     info_table.add_column("Key", style="cyan", justify="right")
     info_table.add_column("Value", style="white")
 
-    info_table.add_row("CLI Version", cli_version)
+    info_table.add_row("vibe-ipd Version", f"vipd {cli_version} (speckit {SPECKIT_VERSION})")
     info_table.add_row("", "")
     info_table.add_row("Python", platform.python_version())
     info_table.add_row("Platform", platform.system())
@@ -627,7 +629,7 @@ def version(
 
     panel = Panel(
         info_table,
-        title="[bold cyan]Specify CLI Information[/bold cyan]",
+        title="[bold cyan]vibe-ipd CLI Information[/bold cyan]",
         border_style="cyan",
         padding=(1, 2)
     )

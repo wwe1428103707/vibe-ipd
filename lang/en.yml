@@ -35,3 +35,161 @@ info:
   branding_note: "The scaffolded project includes upstream speckit skills (speckit-*). vibe-ipd provides enhanced alternatives (vipd-*)."
   keep_skills: "Keeping speckit-* skills as-is (upstream default)."
   replace_skills: "Replace with vipd-* skills if your vibe-ipd environment has them."
+
+# ── Gate / IPD Check ──────────────────────────────────────────
+gate:
+  ipd_active: "IPD mode ACTIVE — continue gate check"
+  ipd_active_continue: "IPD mode ACTIVE — continue"
+  ipd_active_analysis: "IPD mode ACTIVE — add TR{num} compliance analysis"
+  sdd_skip: "SDD-only mode — skip, proceed normally"
+  sdd_skip_analysis: "SDD-only mode — skip, proceed with standard analysis"
+  passed: "status: passed → proceed"
+  failed_ask: "status: failed → display unmet criteria. Ask: \"{question}\" If no, halt."
+  proceed_anyway: "Proceed anyway? (yes/no)"
+  failed_warn: "warn if not passed, but allow to proceed (resolves gaps)"
+  risk_assessment: "Risk assessment: {level} risk, {count} open risks resolved"
+  evidence_created: "Spec created with TR Gate Assessment"
+  evidence_constitution: "Constitution ratified with Gate Criteria Reference section"
+  evidence_plan: "Plan created with Gate Readiness + ADL"
+  evidence_tasks: "Tasks generated with Gate Completion Verification"
+  evidence_checklist: "Checklist generated with completeness score"
+  evidence_implement: "Implementation complete with quality summary"
+  evidence_analyze: "TR{num} validation complete"
+
+# ── Hook / Extension ──────────────────────────────────────────
+hook:
+  before_check: "Check for extension hooks (before {command})"
+  header_optional_pre: "**Optional Pre-Hook**"
+  header_automatic_pre: "**Automatic Pre-Hook**"
+  header_optional: "**Optional Hook**"
+  header_automatic: "**Automatic Hook**"
+  none_skip: "If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently"
+  parse_fail: "If the YAML cannot be parsed or is invalid, skip hook checking silently and continue normally"
+  filter_disabled: "Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default."
+  condition_skip: "If the hook has no `condition` field, or it is null/empty, treat the hook as executable"
+  condition_eval: "If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation"
+  command_format: "When constructing slash commands from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`."
+  executing: "Executing: `/{command}`"
+  wait_result: "Wait for the result of the hook command before proceeding to the {next}."
+  to_execute: "To execute: `/{command}`"
+  extract: "{extension}"
+  description: "Description: {description}"
+  prompt: "Prompt: {prompt}"
+
+  post:
+    header: "## Mandatory Post-Execution Hooks"
+    complete: "**You MUST complete this section before reporting completion to the user.**"
+    skip_completion: "skip to the Completion Report"
+    completion_report: "## Completion Report"
+
+# ── Common / Shared ───────────────────────────────────────────
+common:
+  yes: "yes"
+  no: "no"
+  proceed: "proceed"
+  halt: "halt"
+  stop: "stop"
+  loading: "Loading..."
+  complete: "Complete"
+  failed: "Failed"
+  passed: "Passed"
+  warning: "Warning"
+  error: "Error"
+  success: "Success"
+  skipped: "Skipped"
+  not_found: "Not found"
+  next: "Next"
+  previous: "Previous"
+
+# ── vipd-clarify ──────────────────────────────────────────────
+clarify:
+  title: "Clarify Feature Specification"
+  goal: "Detect and reduce ambiguity or missing decision points in the active feature specification and record the clarifications directly in the spec file."
+  no_ambiguities: "No critical ambiguities detected worth formal clarification."
+  recommended: "**Recommended:**"
+  suggested: "**Suggested:**"
+  option_letters: "You can reply with the option letter (e.g., \"A\"), accept the recommendation by saying \"yes\" or \"recommended\", or provide your own short answer."
+  short_answer: "Format: Short answer (<=5 words). You can accept the suggestion by saying \"yes\" or \"suggested\", or provide your own answer."
+  question_n: "## Question [{num}]: {topic}"
+  context_label: "**Context**"
+  what_we_need: "**What we need to know**"
+  suggested_answers: "**Suggested Answers**"
+  session_heading: "### Session {date}"
+  clarifications_section: "## Clarifications"
+  questions_asked: "Number of questions asked & answered"
+  spec_path: "Path to updated spec"
+  sections_touched: "Sections touched"
+  checklist_status: "Spec quality checklist status"
+  coverage_header: "Coverage Summary"
+  status_resolved: "Resolved"
+  status_deferred: "Deferred"
+  status_clear: "Clear"
+  status_outstanding: "Outstanding"
+  next_command: "Suggested next command"
+
+# ── vipd-specify ──────────────────────────────────────────────
+specify:
+  title: "Create Feature Specification"
+  no_description: "No feature description provided"
+  cannot_determine: "Cannot determine user scenarios"
+  all_pass: "All checklist items pass — proceeding to post-execution hooks."
+  validation_iteration: "Validation iteration {num}/{max}"
+  needs_clarification: "**[NEEDS CLARIFICATION:** {question}]"
+  question_n: "## Question [{num}]: {topic}"
+  feature_summary: "Feature summary"
+  next_command: "Suggested next command"
+
+# ── vipd-plan ──────────────────────────────────────────────────
+plan:
+  title: "Implementation Planning"
+  gate_name: "TR2/TR3 — Plan & Design Gate"
+  evidence: "Plan created with Gate Readiness + ADL"
+  artifacts_generated: "Design artifacts generated"
+  plan_path: "Plan path"
+
+# ── vipd-tasks ─────────────────────────────────────────────────
+tasks:
+  title: "Task Generation"
+  gate_name: "TR4 — Development Baseline Gate"
+  evidence: "Tasks generated with Gate Completion Verification"
+  task_count: "Task count"
+  effort_estimate: "Effort estimate"
+
+# ── vipd-implement ────────────────────────────────────────────
+implement:
+  title: "Implementation"
+  gate_name: "TR4/TR4A — Development & Gray Release Gate"
+  evidence: "Implementation complete with quality summary"
+  checklists_incomplete: "Some checklists are incomplete. Do you want to proceed with implementation anyway? (yes/no)"
+  all_checklists_pass: "All checklists passed"
+  progress_task: "Completed task: {id}"
+  phase_complete: "Phase {phase} complete"
+  validation_check: "Validation checkpoint passed"
+
+# ── vipd-checklist ────────────────────────────────────────────
+checklist:
+  title: "Checklist Generation"
+  gate_name: "TR2 — Architecture Gate"
+  evidence: "Checklist generated with completeness score"
+  unit_tests_header: "## Checklist Purpose"
+  unit_tests_desc: "Checklists are **UNIT TESTS FOR REQUIREMENTS WRITING** — they validate the quality, clarity, and completeness of requirements."
+  clarifying_intent: "Clarify intent"
+  checklist_saved: "Checklist saved to {path}"
+
+# ── vipd-constitution ──────────────────────────────────────────
+constitution:
+  title: "Project Constitution"
+  gate_name: "TR0 — Project Setup Gate"
+  evidence: "Constitution ratified with Gate Criteria Reference section"
+  template_missing: "Constitution template not found. Creating from scratch..."
+  saved: "Constitution saved to {path}"
+  version_bump: "Version bumped: {old} → {new}"
+
+# ── vipd-analyze ──────────────────────────────────────────────
+analyze:
+  title: "Cross-Artifact Analysis"
+  gate_name: "TR5 — Validation Gate"
+  evidence: "TR{num} validation complete"
+  inconsistencies_found: "Inconsistencies found: {count}"
+  no_inconsistencies: "No inconsistencies detected across artifacts."
+  report_header: "## Analysis Report"

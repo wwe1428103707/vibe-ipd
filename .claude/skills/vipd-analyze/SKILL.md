@@ -11,6 +11,30 @@ disable-model-invocation: false
 ---
 
 
+## Language & Localization
+
+**IMPORTANT**: Before executing, check the user's language preference:
+
+1. **Read language setting**: Check `.vipd/config.yml` for `language: <code>`.
+   - If the file doesn't exist or `language` is not set, default to `en` (English).
+   - Supported: `en` (English), `zh` (中文)
+
+2. **Localize ALL user-facing output**: All messages, prompts, questions, completion
+   reports, gate check outputs, status updates, and summaries that you present to the
+   user MUST be in the configured language. Keep technical terms (IPD, TR gates,
+   file paths, command names, code blocks) in English.
+
+3. **Key translations** (use these when language is `zh`):
+
+   | English | 中文 |
+   |---------|------|
+   | "Proceed anyway? (yes/no)" | "是否继续？(yes/no)" |
+   | "IPD mode ACTIVE" | "IPD 模式已激活" |
+   | "SDD-only mode — skip, proceed normally" | "仅 SDD 模式 — 跳过，正常进行" |
+   | "Completion Report" | "完成报告" |
+   | "Mandatory Post-Execution Hooks" | "强制执行后钩子" |
+   | "Extension Hooks" | "扩展钩子" |
+
 ## User Input
 
 ```text
@@ -33,7 +57,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 - For each executable hook, output the following based on its `optional` flag:
   - **Optional hook** (`optional: true`):
     ```
-    ## Extension Hooks
+    ## Extension Hooks (扩展钩子)
 
     **Optional Pre-Hook**: {extension}
     Command: `/{command}`
@@ -44,7 +68,7 @@ You **MUST** consider the user input before proceeding (if not empty).
     ```
   - **Mandatory hook** (`optional: false`):
     ```
-    ## Extension Hooks
+    ## Extension Hooks (扩展钩子)
 
     **Automatic Pre-Hook**: {extension}
     Executing: `/{command}`
@@ -64,7 +88,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 2. **Gate validation (IPD mode only)**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-check.ps1 -Gate TR5 -Json`
    - If `status: passed` → proceed with extended TR5 analysis
-   - If `status: failed` → display unmet criteria. Ask: "Proceed anyway? (yes/no)" If no, halt.
+   - If `status: failed` → display unmet criteria. Ask (in configured language): "Proceed anyway? (yes/no)" If no, halt.
 
 3. **Extended analysis scope for IPD mode**:
    - Verify all Must-Meet criteria from constitution are addressed
@@ -237,7 +261,7 @@ After reporting, check if `.specify/extensions.yml` exists in the project root.
 - For each executable hook, output the following based on its `optional` flag:
   - **Optional hook** (`optional: true`):
     ```
-    ## Extension Hooks
+    ## Extension Hooks (扩展钩子)
 
     **Optional Hook**: {extension}
     Command: `/{command}`
@@ -248,7 +272,7 @@ After reporting, check if `.specify/extensions.yml` exists in the project root.
     ```
   - **Mandatory hook** (`optional: false`):
     ```
-    ## Extension Hooks
+    ## Extension Hooks (扩展钩子)
 
     **Automatic Hook**: {extension}
     Executing: `/{command}`

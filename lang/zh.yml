@@ -35,3 +35,161 @@ info:
   branding_note: "脚手架项目包含上游 speckit 技能（speckit-*）。vibe-ipd 提供增强替代方案（vipd-*）。"
   keep_skills: "保持 speckit-* 技能不变（上游默认）。"
   replace_skills: "如果您的 vibe-ipd 环境中有，可替换为 vipd-* 技能。"
+
+# ── 门禁 / IPD 检查 ────────────────────────────────────────────
+gate:
+  ipd_active: "IPD 模式已激活 — 继续门禁检查"
+  ipd_active_continue: "IPD 模式已激活 — 继续"
+  ipd_active_analysis: "IPD 模式已激活 — 添加 TR{num} 合规分析"
+  sdd_skip: "仅 SDD 模式 — 跳过，正常进行"
+  sdd_skip_analysis: "仅 SDD 模式 — 跳过，执行标准分析"
+  passed: "状态：已通过 → 继续"
+  failed_ask: "状态：未通过 → 显示未达标条件。询问：\"{question}\" 如果否，则停止。"
+  proceed_anyway: "是否继续？(yes/no)"
+  failed_warn: "未通过时警告，但允许继续（门禁将在后续阶段解决）"
+  risk_assessment: "风险评估：{level} 风险，{count} 个未解决问题已关闭"
+  evidence_created: "规格已创建，附带 TR 门禁评估"
+  evidence_constitution: "章程已批准，附带门禁标准参考章节"
+  evidence_plan: "计划已创建，附带门禁就绪 + ADL"
+  evidence_tasks: "任务已生成，附带门禁完成验证"
+  evidence_checklist: "检查清单已生成，附带完整性评分"
+  evidence_implement: "实施完成，附带质量总结"
+  evidence_analyze: "TR{num} 验证完成"
+
+# ── 钩子 / 扩展 ────────────────────────────────────────────────
+hook:
+  before_check: "检查扩展钩子（在 {command} 之前）"
+  header_optional_pre: "**可选前置钩子**"
+  header_automatic_pre: "**自动前置钩子**"
+  header_optional: "**可选钩子**"
+  header_automatic: "**自动钩子**"
+  none_skip: "如果未注册钩子或 `.specify/extensions.yml` 不存在，则静默跳过"
+  parse_fail: "如果 YAML 无法解析或无效，则静默跳过钩子检查并正常继续"
+  filter_disabled: "过滤掉 `enabled` 显式为 `false` 的钩子。没有 `enabled` 字段的钩子默认视为已启用。"
+  condition_skip: "如果钩子没有 `condition` 字段，或为 null/空，则将该钩子视为可执行"
+  condition_eval: "如果钩子定义了非空的 `condition`，则跳过该钩子，将条件评估留给 HookExecutor 实现"
+  command_format: "构造斜杠命令时，将命令名中的点（`.`）替换为连字符（`-`）。例如 `speckit.git.commit` → `/speckit-git-commit`。"
+  executing: "正在执行：`/{command}`"
+  wait_result: "等待钩子命令的结果，然后再继续执行 {next}。"
+  to_execute: "要执行：`/{command}`"
+  extract: "{extension}"
+  description: "描述：{description}"
+  prompt: "提示：{prompt}"
+
+  post:
+    header: "## 强制执行后钩子"
+    complete: "**在向用户报告完成之前，您必须完成此部分。**"
+    skip_completion: "跳过至完成报告"
+    completion_report: "## 完成报告"
+
+# ── 通用 / 共享 ─────────────────────────────────────────────────
+common:
+  yes: "是"
+  no: "否"
+  proceed: "继续"
+  halt: "停止"
+  stop: "停止"
+  loading: "加载中..."
+  complete: "完成"
+  failed: "失败"
+  passed: "通过"
+  warning: "警告"
+  error: "错误"
+  success: "成功"
+  skipped: "已跳过"
+  not_found: "未找到"
+  next: "下一步"
+  previous: "上一步"
+
+# ── vipd-clarify（澄清） ────────────────────────────────────────
+clarify:
+  title: "澄清特性规范"
+  goal: "检测并减少活跃特性规范中的歧义或缺失决策点，并将澄清结果直接记录到规范文件中。"
+  no_ambiguities: "未检测到值得正式澄清的关键歧义。"
+  recommended: "**推荐：**"
+  suggested: "**建议：**"
+  option_letters: "您可以回复选项字母（例如 \"A\"），回复 \"yes\" 或 \"recommended\" 接受推荐，或提供您自己的简短答案。"
+  short_answer: "格式：简短回答（<=5 个字）。您可以回复 \"yes\" 或 \"suggested\" 接受建议，或提供您自己的答案。"
+  question_n: "## 问题 [{num}]：{topic}"
+  context_label: "**上下文**"
+  what_we_need: "**需要确认的事项**"
+  suggested_answers: "**建议答案**"
+  session_heading: "### 会话 {date}"
+  clarifications_section: "## 澄清记录"
+  questions_asked: "提问和回答的数量"
+  spec_path: "更新后的规范路径"
+  sections_touched: "涉及的章节"
+  checklist_status: "规范质量检查清单状态"
+  coverage_header: "覆盖范围摘要"
+  status_resolved: "已解决"
+  status_deferred: "已推迟"
+  status_clear: "清晰"
+  status_outstanding: "待处理"
+  next_command: "建议的下一个命令"
+
+# ── vipd-specify（规范制定） ────────────────────────────────────
+specify:
+  title: "创建特性规范"
+  no_description: "未提供特性描述"
+  cannot_determine: "无法确定用户场景"
+  all_pass: "所有检查清单项目已通过 — 正在继续执行后钩子。"
+  validation_iteration: "验证迭代 {num}/{max}"
+  needs_clarification: "**[需要澄清：**{question}]"
+  question_n: "## 问题 [{num}]：{topic}"
+  feature_summary: "特性摘要"
+  next_command: "建议的下一个命令"
+
+# ── vipd-plan（规划） ───────────────────────────────────────────
+plan:
+  title: "实施规划"
+  gate_name: "TR2/TR3 — 规划与设计门禁"
+  evidence: "计划已创建，附带门禁就绪 + ADL"
+  artifacts_generated: "已生成的设计工件"
+  plan_path: "计划路径"
+
+# ── vipd-tasks（任务生成） ──────────────────────────────────────
+tasks:
+  title: "任务生成"
+  gate_name: "TR4 — 开发基线门禁"
+  evidence: "任务已生成，附带门禁完成验证"
+  task_count: "任务数量"
+  effort_estimate: "工作量估算"
+
+# ── vipd-implement（实施） ──────────────────────────────────────
+implement:
+  title: "实施"
+  gate_name: "TR4/TR4A — 开发与灰度发布门禁"
+  evidence: "实施完成，附带质量总结"
+  checklists_incomplete: "部分检查清单未完成。是否仍然继续实施？(yes/no)"
+  all_checklists_pass: "所有检查清单已通过"
+  progress_task: "已完成任务：{id}"
+  phase_complete: "阶段 {phase} 已完成"
+  validation_check: "验证检查点已通过"
+
+# ── vipd-checklist（检查清单） ───────────────────────────────────
+checklist:
+  title: "检查清单生成"
+  gate_name: "TR2 — 架构门禁"
+  evidence: "检查清单已生成，附带完整性评分"
+  unit_tests_header: "## 检查清单目的"
+  unit_tests_desc: "检查清单是**需求编写的单元测试**——用于验证需求的质量、清晰度和完整性。"
+  clarifying_intent: "澄清意图"
+  checklist_saved: "检查清单已保存至 {path}"
+
+# ── vipd-constitution（章程） ────────────────────────────────────
+constitution:
+  title: "项目章程"
+  gate_name: "TR0 — 项目设置门禁"
+  evidence: "章程已批准，附带门禁标准参考章节"
+  template_missing: "未找到章程模板。正在从头创建..."
+  saved: "章程已保存至 {path}"
+  version_bump: "版本更新：{old} → {new}"
+
+# ── vipd-analyze（分析） ────────────────────────────────────────
+analyze:
+  title: "跨工件分析"
+  gate_name: "TR5 — 验证门禁"
+  evidence: "TR{num} 验证完成"
+  inconsistencies_found: "发现不一致：{count} 处"
+  no_inconsistencies: "跨工件未检测到不一致。"
+  report_header: "## 分析报告"

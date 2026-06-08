@@ -5,10 +5,10 @@ scripts:
   ps: scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks
 handoffs:
   - label: Reassign Agents
-    agent: speckit.agent-assign.assign
+    agent: vipd.agent-assign.assign
     prompt: Reassign agents to fix validation issues
   - label: Execute With Agents
-    agent: speckit.agent-assign.execute
+    agent: vipd.agent-assign.execute
     prompt: Execute tasks with assigned agents
     send: true
 ---
@@ -30,7 +30,7 @@ Verify that agent assignments in `agent-assignments.yml` are complete, consisten
 1. **Setup**: Run `{SCRIPT}` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
 2. **Check Assignment File Exists**: Verify `agent-assignments.yml` exists in FEATURE_DIR.
-   - If missing, **STOP** and report: "No agent-assignments.yml found. Run `/speckit.agent-assign.assign` first to generate agent assignments."
+   - If missing, **STOP** and report: "No agent-assignments.yml found. Run `/vipd.agent-assign.assign` first to generate agent assignments."
 
 3. **Load Inputs**: Read the following files from FEATURE_DIR:
    - **REQUIRED**: `agent-assignments.yml` — the agent assignment mapping
@@ -110,15 +110,15 @@ Verify that agent assignments in `agent-assignments.yml` are complete, consisten
 
    ### Recommended Actions
 
-   - Run `/speckit.agent-assign.assign` to reassign tasks with missing or conflicting agents
+   - Run `/vipd.agent-assign.assign` to reassign tasks with missing or conflicting agents
    - Or manually edit `agent-assignments.yml` to fix specific entries
    ```
 
 7. **Final Verdict**:
-   - **PASS**: All checks pass — safe to run `/speckit.agent-assign.execute`
+   - **PASS**: All checks pass — safe to run `/vipd.agent-assign.execute`
    - **FAIL**: Issues found — list actionable remediation steps
 
-   If PASS, suggest proceeding with `/speckit.agent-assign.execute`.
-   If FAIL, suggest running `/speckit.agent-assign.assign` to fix issues.
+   If PASS, suggest proceeding with `/vipd.agent-assign.execute`.
+   If FAIL, suggest running `/vipd.agent-assign.assign` to fix issues.
 
 Note: This command is strictly read-only. It does not modify `agent-assignments.yml`, `tasks.md`, or any agent files.

@@ -18,7 +18,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 1. **Setup**: Run `{SCRIPT}` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
 2. **Check Assignment File Exists**: Verify `agent-assignments.yml` exists in FEATURE_DIR.
-   - If missing, **STOP** and report: "No agent-assignments.yml found. Run `/speckit.agent-assign.assign` first, then `/speckit.agent-assign.validate` to verify."
+   - If missing, **STOP** and report: "No agent-assignments.yml found. Run `/vipd.agent-assign.assign` first, then `/vipd.agent-assign.validate` to verify."
 
 3. **Load Implementation Context**:
    - **REQUIRED**: Read `tasks.md` for the complete task list and execution plan
@@ -129,4 +129,4 @@ You **MUST** consider the user input before proceeding (if not empty).
      Agents used: backend-dev (6 tasks), frontend-dev (4 tasks), test-writer (3 tasks), default (4 tasks)
      ```
 
-Note: This command requires both `tasks.md` and `agent-assignments.yml` to exist. If tasks.md is missing, suggest running `/speckit.tasks` first. If agent-assignments.yml is missing, suggest running `/speckit.agent-assign.assign` first.
+Note: This command requires both `tasks.md` and `agent-assignments.yml` to exist. If tasks.md is missing, suggest running `/speckit.tasks` first. If agent-assignments.yml is missing, suggest running `/vipd.agent-assign.assign` first.

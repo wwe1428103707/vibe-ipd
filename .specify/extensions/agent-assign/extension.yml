@@ -17,19 +17,19 @@ requires:
 
 provides:
   commands:
-    - name: "speckit.agent-assign.assign"
+    - name: "vipd.agent-assign.assign"
       file: "commands/assign.md"
       description: "Scan available agents and assign them to tasks in tasks.md"
-    - name: "speckit.agent-assign.validate"
+    - name: "vipd.agent-assign.validate"
       file: "commands/validate.md"
       description: "Validate that all agent assignments are correct and agents exist"
-    - name: "speckit.agent-assign.execute"
+    - name: "vipd.agent-assign.execute"
       file: "commands/execute.md"
       description: "Execute tasks by spawning the assigned agent for each task"
 
 hooks:
   after_tasks:
-    command: "speckit.agent-assign.assign"
+    command: "vipd.agent-assign.assign"
     optional: true
     prompt: "Assign agents to the generated tasks?"
     description: "Automatically assign specialized agents to tasks after generation"

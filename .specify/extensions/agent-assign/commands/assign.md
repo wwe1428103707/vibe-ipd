@@ -5,11 +5,11 @@ scripts:
   ps: scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks
 handoffs:
   - label: Validate Assignments
-    agent: speckit.agent-assign.validate
+    agent: vipd.agent-assign.validate
     prompt: Validate all agent assignments
     send: true
   - label: Execute With Agents
-    agent: speckit.agent-assign.execute
+    agent: vipd.agent-assign.execute
     prompt: Execute tasks with assigned agents
 ---
 
@@ -86,7 +86,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    # Agent Assignments
    # Feature: <feature-name from plan.md or branch name>
    # Generated: <timestamp>
-   # Command: /speckit.agent-assign.assign
+   # Command: /vipd.agent-assign.assign
 
    agents_scanned:
      - name: "backend-dev"
@@ -115,6 +115,6 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Total tasks assigned
    - Breakdown by agent (count per agent)
    - Number of tasks assigned to `default`
-   - Suggest running `/speckit.agent-assign.validate` to verify assignments
+   - Suggest running `/vipd.agent-assign.validate` to verify assignments
 
 Note: This command requires tasks.md to exist. If it does not exist, suggest running `/speckit.tasks` first.

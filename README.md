@@ -67,27 +67,7 @@ That's it — your feature is now built with full IPD governance, TR gate valida
 
 ## Architecture Overview
 
-```text
-┌──────────────────────────────────────────────────┐
-│                  vibe-ipd                        │
-│  ┌─────────────┐  ┌──────────────────────────┐  │
-│  │  Spec Kit    │  │  IPD Governance Layer    │  │
-│  │  (Engine)    │  │  ├─ TR0–TR6 Gates       │  │
-│  │              │  │  ├─ PDT Role Mapping     │  │
-│  │  ├─ spec     │  │  ├─ RACI Matrix          │  │
-│  │  ├─ plan     │  │  ├─ Product Trio         │  │
-│  │  ├─ tasks    │  │  └─ ADL (Architecture    │  │
-│  │  └─ impl     │  │     Decision Log)        │  │
-│  └─────────────┘  └──────────────────────────┘  │
-│                                                   │
-│  ┌──────────────────────────────────────────┐    │
-│  │  oh-my-claudecode Multi-Agent Layer      │    │
-│  │  ├─ 50+ specialized agent roles          │    │
-│  │  ├─ Intelligent task routing & execution │    │
-│  │  └─ Workflow orchestration               │    │
-│  └──────────────────────────────────────────┘    │
-└──────────────────────────────────────────────────┘
-```
+![vibe-ipd Architecture Overview](./architect-view.png)
 
 ## Feature Catalog
 

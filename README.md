@@ -195,6 +195,10 @@ If you are looking for the upstream Spec-Driven Development toolkit without IPD 
 
 This project builds upon the excellent work of the [Spec Kit](https://github.com/github/spec-kit) team and the Spec-Driven Development methodology pioneered by [John Lam](https://github.com/jflam). Without their open-source contributions, vibe-ipd would not exist.
 
+Special thanks to the following projects and contributors:
+
+- **[Agent Assign](https://github.com/xymelon/spec-kit-agent-assign) by [xymelon](https://github.com/xymelon)** — The `/vipd-agent-assign-*` command suite (assign, validate, execute) is adapted from this specialized extension for intelligent task-to-agent assignment. It enables scanning available Claude Code agents, auto-matching them to tasks based on capabilities and file path patterns, and executing tasks with IPD TR4 gate validation — bringing production-grade multi-agent orchestration to the VIPD workflow.
+
 ## License
 
 This project is licensed under the terms of the MIT open source license. Please refer to the [LICENSE](./LICENSE) file for the full terms.

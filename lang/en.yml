@@ -1,0 +1,37 @@
+# English language resource file
+# Schema: contracts/lang-resource-schema.json
+_meta:
+  code: en
+  display_name: English
+
+init:
+  welcome: "Welcome to vipd project initialization!"
+  project_name: "Project name"
+  language_select: "Select your preferred language"
+  language_choice: "Language ({codes}):"
+  complete: "Initialization complete!"
+  next_steps: "Next steps: cd {project} && /vipd-constitution"
+  usage: "Usage: /vipd-init <PROJECT_NAME> [--integration <TYPE>] [--script ps|sh] [--lang <CODE>]"
+
+error:
+  network: "Network error: unable to reach GitHub. Please check your internet connection and try again."
+  no_tool: "No supported tool found. Install uv or pipx to continue."
+  invalid_lang: "Unsupported language '{code}'. Falling back to English."
+  missing_project: "Usage: /vipd-init <PROJECT_NAME> [--lang <CODE>]"
+  init_cancelled: "Init cancelled by user."
+  target_exists: "Target already contains .specify/. Re-initializing may overwrite existing configuration. Continue? (yes/no)"
+  scaffolding_failed: "Scaffolding failed: {details}"
+  unknown_error: "An unexpected error occurred."
+
+help:
+  lang_flag: "Set interaction language (en, zh, ja, ...)"
+  integration_flag: "AI coding agent integration type (claude, copilot, ...)"
+  script_flag: "Script type preference (ps for PowerShell, sh for Bash)"
+  project_arg: "Target directory name, or '.' for current directory"
+
+info:
+  tool_found: "Using {tool} for scaffolding."
+  project_created: "Project scaffolded successfully!"
+  branding_note: "The scaffolded project includes upstream speckit skills (speckit-*). vibe-ipd provides enhanced alternatives (vipd-*)."
+  keep_skills: "Keeping speckit-* skills as-is (upstream default)."
+  replace_skills: "Replace with vipd-* skills if your vibe-ipd environment has them."

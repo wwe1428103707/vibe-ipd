@@ -8,8 +8,8 @@
 
 | What to Upgrade | Command | When to Use |
 |----------------|---------|-------------|
-| **CLI Tool (recommended)** | `specify self upgrade` | Latest stable release, in place. Auto-detects whether you installed via `uv tool` or `pipx`. |
-| **CLI Tool — pin a version** | `specify self upgrade --tag vX.Y.Z[suffix]` | Upgrade to a specific release tag instead of the latest stable. Suffixes are limited to dev, alpha/beta/rc, and/or build metadata forms. |
+| **CLI Tool (recommended)** | `vipd self upgrade` | Latest stable release, in place. Auto-detects whether you installed via `uv tool` or `pipx`. |
+| **CLI Tool — pin a version** | `vipd self upgrade --tag vX.Y.Z[suffix]` | Upgrade to a specific release tag instead of the latest stable. Suffixes are limited to dev, alpha/beta/rc, and/or build metadata forms. |
 | **CLI Tool — manual fallback** | `uv tool install vibe-ipd --force --from git+https://github.com/wwe1428103707/vibe-ipd.git@vX.Y.Z` | When `specify self upgrade` isn't available (older installs) or when you want explicit control. |
 | **CLI Tool — manual fallback (pipx)** | `pipx install --force git+https://github.com/wwe1428103707/vibe-ipd.git@vX.Y.Z` | Same as above, for pipx installs. |
 | **Project Files** | `specify init --here --force --integration <your-agent>` | Update slash commands, templates, and scripts in your project |

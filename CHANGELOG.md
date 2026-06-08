@@ -9,9 +9,17 @@
 - **PyPI Package Rename** — Package published on PyPI as `vibe-ipd` (was `specify-cli`). Install with `uv tool install vibe-ipd`.
 - **Self-Upgrade** — `specify self upgrade` now points to `wwe1428103707/vibe-ipd` repo for version checks.
 - **Documentation** — Installation guides, upgrade docs, and extension guides updated to reflect new package name.
-- **README** — Added PyPI install step to Quickstart. Version bumped to 1.1.0.
+- **README** — Added PyPI install step to Quickstart.
 
-## [1.0.1] - 2026-06-08
+## [1.0.3] - 2026-06-08
+
+### Changed
+
+- **Drop `specify` CLI entry point** — The only installed command is now `vipd`. This avoids binary conflicts on PATH with the upstream speckit (`specify-cli`) package. Internal Typer app name remains `specify` for backward compatibility.
+- **Documentation** — Updated install commands from `specify init` to `vipd init` across all docs.
+- **Version Bump** — 1.0.2 → 1.0.3.
+
+## [1.0.2] - 2026-06-08
 
 ### Changed
 

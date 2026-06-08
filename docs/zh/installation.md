@@ -45,7 +45,7 @@ uv tool install vibe-ipd --from git+https://github.com/wwe1428103707/vibe-ipd.gi
 然后初始化项目：
 
 ```bash
-specify init <PROJECT_NAME> --integration copilot
+vipd init <PROJECT_NAME> --integration claude
 ```
 
 ### 一次性使用

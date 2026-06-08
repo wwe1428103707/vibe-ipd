@@ -1,6 +1,6 @@
 [project]
 name = "vibe-ipd"
-version = "1.0.2"
+version = "1.0.3"
 description = "vibe-ipd — Integrated Product Development Toolkit (forked from GitHub Spec Kit). Spec-Driven Development for AI-Native teams with IPD governance."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -30,7 +30,6 @@ dependencies = [
 ]
 
 [project.scripts]
-specify = "specify_cli:main"
 vipd = "specify_cli:main"
 
 [project.urls]

@@ -17,7 +17,7 @@ pipx install git+https://github.com/wwe1428103707/vibe-ipd.git
 ## Verify
 
 ```bash
-specify version
+vipd version
 ```
 
 ## Upgrade

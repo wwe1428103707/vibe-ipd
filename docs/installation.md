@@ -31,7 +31,7 @@ uv tool install vibe-ipd==1.0.0
 Then initialize a project:
 
 ```bash
-specify init <PROJECT_NAME> --integration claude
+vipd init <PROJECT_NAME> --integration claude
 ```
 
 ### From GitHub Source

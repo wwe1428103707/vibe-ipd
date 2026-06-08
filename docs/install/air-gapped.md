@@ -34,7 +34,7 @@ pip install --no-index --find-links=./dist vibe-ipd
 No network access is required — bundled assets are used by default:
 
 ```bash
-specify init my-project --integration copilot
+vipd init my-project --integration copilot
 ```
 
 > **Note:** Python 3.11+ is required.

@@ -1,7 +1,7 @@
 ---
 name: "vipd-init"
 description: "Initialize a new vibe-ipd project by scaffolding with the upstream speckit CLI (specify init)."
-argument-hint: "<PROJECT_NAME> [--integration claude|copilot] [--script ps|sh]"
+argument-hint: "<PROJECT_NAME> [--integration claude|copilot] [--script ps|sh] [--lang en|zh|ja]"
 compatibility: "Requires uvx (recommended) or pipx for upstream CLI delegation"
 metadata:
   author: "vibe-ipd"
@@ -23,14 +23,16 @@ Parse the input to extract:
 - `<PROJECT_NAME>` — target directory name, or `.` for current directory (REQUIRED)
 - `--integration <TYPE>` — AI coding agent integration type (optional, default: none)
 - `--script ps|sh` — explicit script type selection (optional)
+- `--lang <CODE>` — interaction language code (optional, default: en)
 
 **Examples**:
 - `/vipd-init my-app --integration claude` → scaffold `my-app/` with Claude integration
 - `/vipd-init . --integration claude` → scaffold in current directory with Claude integration
 - `/vipd-init my-app` → scaffold `my-app/` without integration-specific files
-- `/vipd-init my-app --integration copilot` → scaffold with Copilot integration
+- `/vipd-init my-app --lang zh` → scaffold with Chinese language output
+- `/vipd-init my-app --integration copilot --lang ja` → scaffold with Copilot + Japanese
 
-**If PROJECT_NAME is missing**: Halt with error: "Usage: /vipd-init <PROJECT_NAME> [--integration <TYPE>] [--script ps|sh]"
+**If PROJECT_NAME is missing**: Halt with error: "$(t error.missing_project)"
 
 ## Pre-Execution Checks
 
@@ -43,8 +45,8 @@ Check if the target directory already has a `.specify/` subdirectory:
 - If PROJECT_NAME is a new directory name:
   - Check if `./<PROJECT_NAME>/.specify/` exists
 - **If `.specify/` exists**: Warn the user:
-  > "⚠️  Target already contains `.specify/`. Re-initializing may overwrite existing configuration. Continue? (yes/no)"
-  Wait for user response. If "no" or empty, halt with: "Init cancelled by user."
+  > "⚠️  $(t error.target_exists)"
+  Wait for user response. If "no" or empty, halt with: "$(t error.init_cancelled)"
 
 ### 2. Detect available tooling
 
@@ -60,29 +62,48 @@ pipx --version 2>/dev/null && echo "PIPX_AVAILABLE" || echo "PIPX_NOT_FOUND"
 
 - **If uvx found**: Use `uvx` as the primary delegation method (preferred — no persistent install needed).
 - **If uvx not found but pipx found**: Use `pipx` as fallback.
-- **If neither found**: Halt with clear error message:
+- **If neither found**: Halt with clear error message using a localized error string:
+  ```bash
+  echo "❌  $(t error.no_tool)"
   ```
-  ❌  No supported tool found.
-
-  To initialize a vibe-ipd project, you need one of:
-  1. **uv** (recommended): https://docs.astral.sh/uv/
-  2. **pipx**: https://pipx.pypa.io/
-
   After installing one, re-run /vipd-init.
 
-  Manual setup alternative:
-  ┌─────────────────────────────────────────────────────┐
-  │ uvx --from git+https://github.com/github/spec-kit  │
-  │   .git specify init <PROJECT_NAME>                  │
-  │                                                     │
-  │ # OR if you already cloned spec-kit:                │
-  │ specify init <PROJECT_NAME>                         │
-  └─────────────────────────────────────────────────────┘
-  ```
+### 3. Resolve interaction language
+
+Resolve the effective language for this session:
+
+```bash
+# Source the language resolver (parses --lang from args, then checks config)
+source .vipd/resolve_language.sh --lang "$LANG_ARG"
+source .vipd/load_strings.sh
+# VIPD_LANG and t() function are now available
+```
+
+Language priority: `--lang` CLI flag > `.vipd/config.yml` > `~/.vipd/config.yml` > `en` default.
 
 ## Execution
 
-### Step 1: Build the scaffold command
+### Step 1: Resolve language and prompt user if not specified
+
+If `--lang` was provided in the arguments, it was already resolved. If not, prompt the user to select a language:
+
+```bash
+if [[ -z "$LANG_ARG" ]]; then
+  echo "$(t init.language_select)"
+  echo "  1) English (en)"
+  echo "  2) 中文 (zh)"
+  read -p "$(t init.language_choice codes=en,zh): " LANG_CHOICE
+  case $LANG_CHOICE in
+    1|en|English) LANG_ARG="en" ;;
+    2|zh|zhongwen|中文) LANG_ARG="zh" ;;
+    *) LANG_ARG="en" ;;
+  esac
+  source .vipd/resolve_language.sh --lang "$LANG_ARG"
+  source .vipd/load_strings.sh
+fi
+```
+
+### Step 2: Build the scaffold command
 
 Construct the delegation command based on detected tooling:
 
@@ -97,63 +118,51 @@ pipx install git+https://github.com/github/spec-kit.git 2>/dev/null
 specify init <PROJECT_NAME>
 ```
 
-### Step 2: Append optional flags
+### Step 3: Append optional flags
 
 If `--integration <TYPE>` was provided:
 - Append `--integration <TYPE>` to the `specify init` command
-- Example: `specify init my-app --integration claude`
 
 If `--script ps|sh` was provided:
 - Append `--script <ps|sh>` to the `specify init` command
 
-**Important**: Forward all `--integration` and `--script` values verbatim — do not validate or restrict them. This ensures forward compatibility with new integration types added by the upstream speckit project.
+If `--lang <CODE>` was provided:
+- The language is already resolved via `resolve_language.sh` — no need to pass to `specify init`
 
-### Step 3: Execute scaffolding
+**Important**: Forward all `--integration` and `--script` values verbatim — do not validate or restrict them.
+
+### Step 4: Execute scaffolding
 
 Run the constructed command.
 
-**On success**: Proceed to Step 4 (Post-Init Branding).
+**On success**: Proceed to Step 5 (Post-Init Branding).
 
-**On failure**: Present the error output to the user along with manual setup instructions:
-  ```
-  ❌  Scaffolding failed: [error details]
-
-  You can try manually:
-  uvx --from git+https://github.com/github/spec-kit.git specify init <PROJECT_NAME> --integration claude
-
-  If the issue persists, check:
-  - Network connectivity to github.com
-  - Whether uv/pipx is up to date
+**On failure**: Show localized error:
+  ```bash
+  echo "❌  $(t error.scaffolding_failed details="$ERROR_DETAILS")"
   ```
 
-### Step 4: Post-Init Branding (Optional)
+### Step 5: Post-Init Branding (Optional)
 
 After scaffolding succeeds, check what was created:
 
 1. **Inventory newly created skills**: List `.claude/skills/` in the target project.
 2. **Detect `speckit-*` skills**: If any `speckit-*` prefixed skills are found:
    ```
-   ℹ️  The scaffolded project includes upstream speckit skills (speckit-*).
+   ℹ️  $(t info.branding_note)
 
-   vibe-ipd provides enhanced alternatives (vipd-*). Options:
-   - Keep speckit-* skills as-is (upstream default)
-   - Replace with vipd-* skills if your vibe-ipd environment has them
-
-   No changes are made automatically. The existing vipd-* skills in YOUR
-   current project are NOT affected — this only reports what was created
-   in the TARGET project.
+   Options:
+   - $(t info.keep_skills)
+   - $(t info.replace_skills)
    ```
 3. **Recommend next command**:
    ```
-   ✅  Project scaffolded successfully!
+   ✅  $(t init.complete)
 
-   Next steps:
-   cd <PROJECT_NAME>
-   /vipd-constitution Establish your project's principles
-   /vipd-specify Describe your first feature
+   $(t init.next_steps project=<PROJECT_NAME>)
    ```
 
-### Step 5: Completion Reporting
+### Step 6: Completion Reporting
 
 Report completion to the user with:
 
@@ -163,19 +172,15 @@ Report completion to the user with:
    Target:     <PROJECT_NAME>
    Integration: <TYPE> (or 'none')
    Tool used:  uvx (or pipx)
-
-   What was created:
-   - .specify/        — Core toolkit structure
-   - .claude/skills/  — AI agent integration skills (speckit-*)
-   - specs/           — Feature specifications directory
+   Language:   $VIPD_LANG
 
    Quickstart:
    cd <PROJECT_NAME>
-   /vipd-constitution Create project principles
-   /vipd-specify Define your first feature
+   /vipd-constitution $(t help.integration_flag)
+   /vipd-specify $(t help.project_arg)
 
    Troubleshooting:
-   /vipd-init --help  — Show this usage info
+   /vipd-init --help  — Show usage info
 ```
 
 ## Edge Cases
@@ -194,17 +199,18 @@ The pre-check detects this and asks for confirmation. If user confirms, re-initi
 
 ### Network timeout during scaffolding
 
-If the `uvx` or `pipx` command fails with a network-related error, display:
-```
-❌  Network error: unable to reach GitHub.
-
-Please check your internet connection and try again.
-Manual fallback: git clone https://github.com/github/spec-kit.git
+If the `uvx` or `pipx` command fails with a network-related error, display a localized message:
+```bash
+echo "❌  $(t error.network)"
 ```
 
 ### `--integration` not provided
 
 Scaffold without `--integration` flag. Inform user that integration-specific skill files were not created, and they can re-run with `--integration claude` if desired.
+
+### Unsupported language code
+
+If `--lang xyz` is provided where `xyz` is not a supported language code, the resolver falls back to English and displays a warning. The `t()` function always has English fallback for missing keys, so no message will be empty.
 
 ## Troubleshooting
 

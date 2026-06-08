@@ -1,0 +1,37 @@
+# Chinese language resource file
+# Schema: contracts/lang-resource-schema.json
+_meta:
+  code: zh
+  display_name: 中文
+
+init:
+  welcome: "欢迎使用 vipd 项目初始化！"
+  project_name: "项目名称"
+  language_select: "请选择您偏好的语言"
+  language_choice: "语言（{codes}）："
+  complete: "初始化完成！"
+  next_steps: "后续步骤：cd {project} && /vipd-constitution"
+  usage: "用法：/vipd-init <项目名称> [--integration <类型>] [--script ps|sh] [--lang <代码>]"
+
+error:
+  network: "网络错误：无法连接到 GitHub。请检查网络连接后重试。"
+  no_tool: "未找到支持的工具。请安装 uv 或 pipx 后重试。"
+  invalid_lang: "不支持的语言 '{code}'，将回退到英文。"
+  missing_project: "用法：/vipd-init <项目名称> [--lang <代码>]"
+  init_cancelled: "初始化已取消。"
+  target_exists: "目标目录已包含 .specify/。重新初始化可能会覆盖现有配置。是否继续？(yes/no)"
+  scaffolding_failed: "脚手架创建失败：{details}"
+  unknown_error: "发生未知错误。"
+
+help:
+  lang_flag: "设置交互语言（en, zh, ja, ...）"
+  integration_flag: "AI 编码助手集成类型（claude, copilot, ...）"
+  script_flag: "脚本类型偏好（ps 表示 PowerShell，sh 表示 Bash）"
+  project_arg: "目标目录名称，或 '.' 表示当前目录"
+
+info:
+  tool_found: "正在使用 {tool} 进行脚手架创建。"
+  project_created: "项目脚手架创建成功！"
+  branding_note: "脚手架项目包含上游 speckit 技能（speckit-*）。vibe-ipd 提供增强替代方案（vipd-*）。"
+  keep_skills: "保持 speckit-* 技能不变（上游默认）。"
+  replace_skills: "如果您的 vibe-ipd 环境中有，可替换为 vipd-* 技能。"

@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Language Resource File",
+  "description": "Schema for lang/<code>.yml — language string resource files",
+  "type": "object",
+  "required": ["_meta"],
+  "properties": {
+    "_meta": {
+      "type": "object",
+      "required": ["code", "display_name"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Language code matching the filename stem",
+          "minLength": 2,
+          "maxLength": 10
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Human-readable language name in its own language",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": {
+    "type": "object",
+    "description": "Message section (e.g., init, error, help)",
+    "additionalProperties": {
+      "type": "string",
+      "description": "Message string — may contain {placeholder} for variable substitution"
+    }
+  }
+}

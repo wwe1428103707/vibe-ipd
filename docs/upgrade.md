@@ -10,8 +10,8 @@
 |----------------|---------|-------------|
 | **CLI Tool (recommended)** | `specify self upgrade` | Latest stable release, in place. Auto-detects whether you installed via `uv tool` or `pipx`. |
 | **CLI Tool — pin a version** | `specify self upgrade --tag vX.Y.Z[suffix]` | Upgrade to a specific release tag instead of the latest stable. Suffixes are limited to dev, alpha/beta/rc, and/or build metadata forms. |
-| **CLI Tool — manual fallback** | `uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git@vX.Y.Z` | When `specify self upgrade` isn't available (older installs) or when you want explicit control. |
-| **CLI Tool — manual fallback (pipx)** | `pipx install --force git+https://github.com/github/spec-kit.git@vX.Y.Z` | Same as above, for pipx installs. |
+| **CLI Tool — manual fallback** | `uv tool install vibe-ipd --force --from git+https://github.com/wwe1428103707/vibe-ipd.git@vX.Y.Z` | When `specify self upgrade` isn't available (older installs) or when you want explicit control. |
+| **CLI Tool — manual fallback (pipx)** | `pipx install --force git+https://github.com/wwe1428103707/vibe-ipd.git@vX.Y.Z` | Same as above, for pipx installs. |
 | **Project Files** | `specify init --here --force --integration <your-agent>` | Update slash commands, templates, and scripts in your project |
 | **Both** | Run CLI upgrade, then project update | Recommended for major version updates |
 
@@ -39,7 +39,7 @@ specify self upgrade
 specify self upgrade --tag vX.Y.Z[suffix]
 ```
 
-Bare `specify self upgrade` executes immediately, matching the no-prompt behavior of commands like `pip install -U` and `npm update`. The CLI classifies your runtime into one of: `uv tool`, `pipx`, `uvx (ephemeral)`, source checkout, or unsupported. Only `uv tool` and `pipx` are upgraded automatically; for `uv tool` installs, it runs `uv tool install specify-cli --force --from <git ref>` under the hood so pinned release tags work. The other paths print path-specific guidance and exit 0 without touching anything.
+Bare `specify self upgrade` executes immediately, matching the no-prompt behavior of commands like `pip install -U` and `npm update`. The CLI classifies your runtime into one of: `uv tool`, `pipx`, `uvx (ephemeral)`, source checkout, or unsupported. Only `uv tool` and `pipx` are upgraded automatically; for `uv tool` installs, it runs `uv tool install vibe-ipd --force --from <git ref>` under the hood so pinned release tags work. The other paths print path-specific guidance and exit 0 without touching anything.
 
 Pinned tags must start with `vMAJOR.MINOR.PATCH`. Optional suffixes are limited to dev, alpha/beta/rc, and/or build metadata forms such as `v1.0.0-rc1`, `v0.8.0.dev0`, `v0.8.0+build.42`, or the combination `v1.0.0-rc1+build.42`; branch names, hash refs, `latest`, and bare versions without `v` are rejected.
 
@@ -49,10 +49,10 @@ If your installed CLI is older than the release that introduced `specify self up
 
 ### If you installed with `uv tool install`
 
-Upgrade to a specific release (check [Releases](https://github.com/github/spec-kit/releases) for the latest tag):
+Upgrade to a specific release (check [Releases](https://github.com/wwe1428103707/vibe-ipd/releases) for the latest tag):
 
 ```bash
-uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git@vX.Y.Z
+uv tool install vibe-ipd --force --from git+https://github.com/wwe1428103707/vibe-ipd.git@vX.Y.Z
 ```
 
 ### If you use one-shot `uvx` commands
@@ -432,7 +432,7 @@ If `self check` shows the wrong version, verify the installation:
 # Check installed tools
 uv tool list
 
-# Should show specify-cli
+# Should show vibe-ipd
 
 # Verify path
 which specify
@@ -443,8 +443,8 @@ which specify
 If not found, reinstall:
 
 ```bash
-uv tool uninstall specify-cli
-uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+uv tool uninstall vibe-ipd
+uv tool install vibe-ipd --from git+https://github.com/wwe1428103707/vibe-ipd.git
 ```
 
 ### "Do I need to run specify every time I open my project?"

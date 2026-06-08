@@ -12,18 +12,34 @@
 
 ## 安装
 
-> [!IMPORTANT]
-> vibe-ipd 唯一官方维护的包来自 [github/spec-kit](https://github.com/github/spec-kit) GitHub 仓库。在 PyPI 上出现的同名包（如 pypi.org 上的 `specify-cli`）**并非**本项目 affiliated，也不由 vibe-ipd 维护者管理。正常安装请使用下方基于 GitHub 的命令。对于离线或气隙环境，从本仓库构建的本地 wheel 包同样有效。
+### 从 PyPI 安装（推荐）
 
-### 持久安装（推荐）
-
-一次安装，随处使用。将 `vX.Y.Z` 替换为 [Releases](https://github.com/github/spec-kit/releases) 中的标签：
-
-> [!NOTE]
-> 以下命令需要 **[uv](https://docs.astral.sh/uv/)**。如果显示 `command not found: uv`，请先[安装 uv](./install/uv.md)。
+直接从 PyPI 安装 `vibe-ipd` 包：
 
 ```bash
-uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@vX.Y.Z
+uv tool install vibe-ipd
+```
+
+> **前提条件**：[uv](https://docs.astral.sh/uv/) — 如果显示 `command not found: uv`，请先[安装 uv](./install/uv.md)。
+
+或指定版本安装：
+
+```bash
+uv tool install vibe-ipd==1.0.0
+```
+
+然后初始化项目：
+
+```bash
+specify init <PROJECT_NAME> --integration claude
+```
+
+### 从 GitHub 源码安装
+
+将 `vX.Y.Z` 替换为 [Releases](https://github.com/wwe1428103707/vibe-ipd/releases) 中的标签：
+
+```bash
+uv tool install vibe-ipd --from git+https://github.com/wwe1428103707/vibe-ipd.git@vX.Y.Z
 ```
 
 然后初始化项目：

@@ -8,25 +8,25 @@ If your environment blocks access to PyPI or GitHub, you can create a portable w
 
 ```bash
 # Clone the repository
-git clone https://github.com/github/spec-kit.git
-cd spec-kit
+git clone https://github.com/wwe1428103707/vibe-ipd.git
+cd vibe-ipd
 
 # Build the wheel
 pip install build
 python -m build --wheel --outdir dist/
 
 # Download the wheel and all its runtime dependencies
-pip download -d dist/ dist/specify_cli-*.whl
+pip download -d dist/ dist/vibe_ipd-*.whl
 ```
 
 ## Step 2: Transfer the `dist/` directory
 
-Copy the entire `dist/` directory (which contains the `specify-cli` wheel and all dependency wheels) to the target machine via USB, network share, or other approved transfer method.
+Copy the entire `dist/` directory (which contains the `vibe-ipd` wheel and all dependency wheels) to the target machine via USB, network share, or other approved transfer method.
 
 ## Step 3: Install on the air-gapped machine
 
 ```bash
-pip install --no-index --find-links=./dist specify-cli
+pip install --no-index --find-links=./dist vibe-ipd
 ```
 
 ## Step 4: Initialize a project

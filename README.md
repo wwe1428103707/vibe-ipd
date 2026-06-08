@@ -28,6 +28,18 @@ While speckit provides the foundational Spec-Driven Development (SDD) engine, vi
 
 ## Quickstart
 
+### 0. Install vibe-ipd
+
+```bash
+# Install from PyPI (recommended)
+uv tool install vibe-ipd
+
+# Or from source via GitHub
+# uv tool install vibe-ipd --from git+https://github.com/wwe1428103707/vibe-ipd.git
+```
+
+> **Prerequisites**: [uv](https://docs.astral.sh/uv/) (or [pipx](https://pipx.pypa.io/)), [Python 3.11+](https://www.python.org/downloads/), and an AI coding agent like [Claude Code](https://www.anthropic.com/claude-code).
+
 ### 1. Initialize your project
 
 ```bash
@@ -71,7 +83,7 @@ That's it — your feature is now built with full IPD governance, TR gate valida
 
 ## Feature Catalog
 
-vibe-ipd v1.0.0 implements **17 features** across the IPD workflow:
+vibe-ipd v1.0.1 implements **17 features** across the IPD workflow:
 
 | # | Feature | Status |
 |---|---------|--------|
@@ -158,7 +170,7 @@ vibe-ipd is currently in **active development** as a fork of Spec Kit with enhan
 - ✅ Windows-native PowerShell tooling
 - ✅ Bilingual documentation (CN/EN)
 
-**Current version**: `vipd 1.0.0` (speckit 0.9.3.dev0) — first official release! 🎉
+**Current version**: `vipd 1.0.1` (speckit 0.9.3.dev0) — first official release! 🎉
 
 **Next milestones**: TR6 launch gate automation, release management workflows, and CI/CD integration.
 

@@ -30,7 +30,7 @@ from packaging.version import InvalidVersion, Version
 
 from ._console import console
 
-GITHUB_API_LATEST = "https://api.github.com/repos/github/spec-kit/releases/latest"
+GITHUB_API_LATEST = "https://api.github.com/repos/wwe1428103707/vibe-ipd/releases/latest"
 _RESOLUTION_FAILURE_OFFLINE = "offline or timeout"
 _RESOLUTION_FAILURE_RATE_LIMITED = (
     "rate limited (configure ~/.specify/auth.json with a GitHub token)"
@@ -51,7 +51,7 @@ _VERIFY_TIMEOUT_SECS = 10
 
 
 def _get_installed_version() -> str:
-    """Return the installed specify-cli distribution version or 'unknown'.
+    """Return the installed vibe-ipd distribution version or 'unknown'.
 
     Uses importlib.metadata so the value reflects what was actually installed
     by pip/uv/pipx — not a value read from pyproject.toml. This is
@@ -67,7 +67,7 @@ def _get_installed_version() -> str:
         metadata_errors.append(invalid_metadata_error)
 
     try:
-        return importlib.metadata.version("specify-cli")
+        return importlib.metadata.version("vibe-ipd")
     except tuple(metadata_errors):
         return "unknown"
 
@@ -171,12 +171,12 @@ def _render_argv(argv: list[str]) -> str:
 
 _INSTALLER_PATH_PREFIXES: dict[str, list[str]] = {
     "uv-tool": [
-        "~/.local/share/uv/tools/specify-cli/",
-        "%LOCALAPPDATA%\\uv\\tools\\specify-cli\\",
+        "~/.local/share/uv/tools/vibe-ipd/",
+        "%LOCALAPPDATA%\\uv\\tools\\vibe-ipd\\",
     ],
     "pipx": [
-        "~/.local/pipx/venvs/specify-cli/",
-        "%LOCALAPPDATA%\\pipx\\venvs\\specify-cli\\",
+        "~/.local/pipx/venvs/vibe-ipd/",
+        "%LOCALAPPDATA%\\pipx\\venvs\\vibe-ipd\\",
     ],
     "uvx-ephemeral": [
         "~/.cache/uv/archive-v0/",
@@ -392,7 +392,7 @@ def _resolved_argv0_path(argv0: str | None = None) -> Path:
 
 def _looks_like_specify_entrypoint(path: Path) -> bool:
     """Return whether a path looks like the `specify` CLI entrypoint."""
-    return path.name.lower() in {"specify", "specify.exe", "specify-cli", "specify-cli.exe"}
+    return path.name.lower() in {"specify", "specify.exe", "vibe-ipd", "vibe-ipd.exe"}
 
 
 def _tier3_registry_lookup_allowed(argv0_path: Path) -> bool:
@@ -401,13 +401,13 @@ def _tier3_registry_lookup_allowed(argv0_path: Path) -> bool:
 
 
 def _uv_tool_list_contains_specify_cli(stdout: str) -> bool:
-    """Return whether `uv tool list` output includes an exact `specify-cli` entry."""
+    """Return whether `uv tool list` output includes an exact `vibe-ipd` entry."""
     for raw_line in stdout.splitlines():
         line = raw_line.strip()
         if not line:
             continue
         first_token = line.split(None, 1)[0]
-        if first_token == "specify-cli":
+        if first_token == "vibe-ipd":
             return True
     return False
 
@@ -430,7 +430,7 @@ def _editable_direct_url_path() -> Path | None:
         metadata_errors.append(invalid_metadata_error)
 
     try:
-        dist = _md.distribution("specify-cli")
+        dist = _md.distribution("vibe-ipd")
     except tuple(metadata_errors):
         return None
 
@@ -558,7 +558,7 @@ def _detect_install_method(
                 if result.returncode == 0:
                     payload = json.loads(result.stdout or "")
                     venvs = payload.get("venvs") if isinstance(payload, dict) else None
-                    if isinstance(venvs, dict) and "specify-cli" in venvs:
+                    if isinstance(venvs, dict) and "vibe-ipd" in venvs:
                         pipx_match = True
             except (subprocess.TimeoutExpired, OSError, ValueError):
                 pass
@@ -593,7 +593,7 @@ def _detect_install_method(
     return method
 
 
-_GITHUB_SOURCE_URL = "git+https://github.com/github/spec-kit.git"
+_GITHUB_SOURCE_URL = "git+https://github.com/wwe1428103707/vibe-ipd.git"
 _MANUAL_TAG_PLACEHOLDER = "vX.Y.Z"
 
 
@@ -631,7 +631,7 @@ def _assemble_installer_argv(
             uv_bin,
             "tool",
             "install",
-            "specify-cli",
+            "vibe-ipd",
             "--force",
             "--from",
             source_spec,
@@ -840,7 +840,7 @@ def _run_installer(plan: _UpgradePlan) -> _InstallerResult:
 
 
 _VERIFY_VERSION_LINE_RE = re.compile(
-    r"^\s*(?:specify|specify-cli)\b(?P<rest>.*)$",
+    r"^\s*(?:specify|vibe-ipd)\b(?P<rest>.*)$",
     flags=re.IGNORECASE,
 )
 
@@ -914,7 +914,7 @@ def _source_checkout_path() -> Path | None:
         metadata_errors.append(invalid_metadata_error)
 
     try:
-        dist = _md.distribution("specify-cli")
+        dist = _md.distribution("vibe-ipd")
     except tuple(metadata_errors):
         return None
     files = dist.files or []
@@ -965,7 +965,7 @@ def _emit_guidance(method: _InstallMethod, target_tag: str | None) -> None:
             soft_wrap=True,
         )
         console.print(
-            f"  uv tool install specify-cli --force --from "
+            f"  uv tool install vibe-ipd --force --from "
             f"{_manual_source_spec(target_tag)}",
             soft_wrap=True,
         )
@@ -985,22 +985,22 @@ def _rollback_hint(plan: _UpgradePlan) -> str:
     if plan.pre_upgrade_snapshot == "unknown":
         return (
             "Could not determine the previous version; "
-            "reinstall manually from: https://github.com/github/spec-kit/releases"
+            "reinstall manually from: https://github.com/wwe1428103707/vibe-ipd/releases"
         )
     rollback_tag = _stable_release_tag_for_version(plan.pre_upgrade_snapshot)
     if rollback_tag is None:
         return (
             "Previous version was not an exact stable release tag; "
-            "reinstall manually from: https://github.com/github/spec-kit/releases"
+            "reinstall manually from: https://github.com/wwe1428103707/vibe-ipd/releases"
         )
     if plan.method == _InstallMethod.PIPX:
         return (
             f"To pin back to the previous version: pipx install --force "
-            f"git+https://github.com/github/spec-kit.git@{rollback_tag}"
+            f"{_GITHUB_SOURCE_URL}@{rollback_tag}"
         )
     return (
-        f"To pin back to the previous version: uv tool install specify-cli --force "
-        f"--from git+https://github.com/github/spec-kit.git@{rollback_tag}"
+        f"To pin back to the previous version: uv tool install vibe-ipd --force "
+        f"--from {_GITHUB_SOURCE_URL}@{rollback_tag}"
     )
 
 
@@ -1141,7 +1141,7 @@ self_app = typer.Typer(
 
 @self_app.command("check")
 def self_check() -> None:
-    """Check whether a newer specify-cli release is available. Read-only.
+    """Check whether a newer vibe-ipd release is available. Read-only.
 
     This command only checks for updates; it does not modify your installation.
     Use `specify self upgrade` to actually perform the upgrade once you've seen
@@ -1174,7 +1174,7 @@ def self_check() -> None:
         console.print("[yellow]Could not validate latest release tag from GitHub.[/yellow]")
         console.print("\nManual fallback:")
         console.print(
-            f"  uv tool install specify-cli --force --from {_manual_source_spec(manual_tag)}"
+            f"  uv tool install vibe-ipd --force --from {_manual_source_spec(manual_tag)}"
         )
         console.print(f"  pipx install --force {_manual_source_spec(manual_tag)}")
         return
@@ -1186,7 +1186,7 @@ def self_check() -> None:
         console.print(f"Latest release: {latest_display}")
         console.print("\nManual fallback:")
         console.print(
-            f"  uv tool install specify-cli --force --from {_manual_source_spec(manual_tag)}"
+            f"  uv tool install vibe-ipd --force --from {_manual_source_spec(manual_tag)}"
         )
         console.print(f"  pipx install --force {_manual_source_spec(manual_tag)}")
         console.print("\nIf this install can still be detected:")
@@ -1200,7 +1200,7 @@ def self_check() -> None:
         console.print("  specify self upgrade")
         console.print("\nManual fallback:")
         console.print(
-            f"  uv tool install specify-cli --force --from {_manual_source_spec(manual_tag)}"
+            f"  uv tool install vibe-ipd --force --from {_manual_source_spec(manual_tag)}"
         )
         console.print(f"  pipx install --force {_manual_source_spec(manual_tag)}")
         return
@@ -1227,7 +1227,7 @@ def self_upgrade(
         "latest stable release is resolved via GitHub Releases.",
     ),
 ) -> None:
-    """Upgrade specify-cli to the latest release (or a pinned --tag).
+    """Upgrade vibe-ipd to the latest release (or a pinned --tag).
 
     Bare invocation executes immediately with no confirmation prompt, matching
     pip install -U / uv tool upgrade / npm update conventions. Use --dry-run
@@ -1367,7 +1367,7 @@ def self_upgrade(
     )
     argv_str = _render_argv(plan.installer_argv) if plan.installer_argv else ""
     console.print(
-        f"{verb} specify-cli {plan.current_version} → {plan.target_tag} "
+        f"{verb} vibe-ipd {plan.current_version} → {plan.target_tag} "
         f"via {_method_label(plan.method)}: {argv_str}",
         soft_wrap=True,
     )
@@ -1424,6 +1424,6 @@ def self_upgrade(
     pre_upgrade_display = _canonicalize_version_text(plan.pre_upgrade_snapshot)
     verified_display = _canonicalize_version_text(verified)
     console.print(
-        f"Upgraded specify-cli: {pre_upgrade_display} → {verified_display}",
+        f"Upgraded vibe-ipd: {pre_upgrade_display} → {verified_display}",
         soft_wrap=True,
     )

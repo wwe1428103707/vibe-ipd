@@ -66,7 +66,9 @@ jobs:
           ## Install
 
           \`\`\`bash
-          uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@${VERSION}
+          uv tool install vibe-ipd
+          # or from source:
+          # uv tool install vibe-ipd --from git+https://github.com/wwe1428103707/vibe-ipd.git@${VERSION}
           specify init my-project
           \`\`\`
 
@@ -82,7 +84,27 @@ jobs:
           VERSION="${{ steps.version.outputs.tag }}"
           VERSION_NO_V=${VERSION#v}
           gh release create "$VERSION" \
-            --title "Spec Kit - $VERSION_NO_V" \
+            --title "vibe-ipd $VERSION_NO_V" \
             --notes-file release_notes.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  pypi-publish:
+    needs: [release]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build wheel and sdist
+        run: |
+          pip install build
+          python -m build
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}

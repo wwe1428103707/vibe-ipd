@@ -818,7 +818,7 @@ specify extension add --dev /path/to/extension
 1. Upgrade spec-kit:
 
    ```bash
-   uv tool upgrade specify-cli
+   uv tool upgrade vibe-ipd
    ```
 
 2. Install older version of extension:

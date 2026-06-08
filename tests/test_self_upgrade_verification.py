@@ -90,7 +90,7 @@ class TestVerificationMismatch:
             result = runner.invoke(app, ["self", "upgrade", "--tag", "v1.0.0-rc1"])
 
         assert result.exit_code == 0
-        assert "Upgraded specify-cli: 0.9.0 → 1.0.0rc1" in strip_ansi(result.output)
+        assert "Upgraded vibe-ipd: 0.9.0 → 1.0.0rc1" in strip_ansi(result.output)
 
     def test_verify_accepts_specify_cli_binary_name_in_version_output(
         self,
@@ -105,12 +105,12 @@ class TestVerificationMismatch:
             mock_urlopen.return_value = mock_urlopen_response({"tag_name": "v0.7.6"})
             mock_run.side_effect = [
                 _completed_process(0),
-                _completed_process(0, stdout="specify-cli version 0.7.6\n"),
+                _completed_process(0, stdout="vibe-ipd version 0.7.6\n"),
             ]
             result = runner.invoke(app, ["self", "upgrade"])
 
         assert result.exit_code == 0
-        assert "Upgraded specify-cli: 0.7.5 → 0.7.6" in strip_ansi(result.output)
+        assert "Upgraded vibe-ipd: 0.7.5 → 0.7.6" in strip_ansi(result.output)
 
     def test_verify_accepts_capitalized_binary_name_in_version_output(
         self,
@@ -130,7 +130,7 @@ class TestVerificationMismatch:
             result = runner.invoke(app, ["self", "upgrade"])
 
         assert result.exit_code == 0
-        assert "Upgraded specify-cli: 0.7.5 → 0.7.6" in strip_ansi(result.output)
+        assert "Upgraded vibe-ipd: 0.7.5 → 0.7.6" in strip_ansi(result.output)
 
     def test_verify_rejects_output_without_parseable_version(
         self,
@@ -166,7 +166,7 @@ class TestVerificationMismatch:
             method=_InstallMethod.UV_TOOL,
             current_version="0.7.5",
             target_tag="v0.7.6",
-            installer_argv=["/usr/bin/uv", "tool", "install", "specify-cli"],
+            installer_argv=["/usr/bin/uv", "tool", "install", "vibe-ipd"],
             preview_summary="",
             pre_upgrade_snapshot="0.7.5",
         )
@@ -194,7 +194,7 @@ class TestVerificationMismatch:
             method=_InstallMethod.UV_TOOL,
             current_version="0.7.5",
             target_tag="v0.7.6",
-            installer_argv=["/usr/bin/uv", "tool", "install", "specify-cli"],
+            installer_argv=["/usr/bin/uv", "tool", "install", "vibe-ipd"],
             preview_summary="",
             pre_upgrade_snapshot="0.7.5",
         )
@@ -224,7 +224,7 @@ class TestVerificationMismatch:
             method=_InstallMethod.UV_TOOL,
             current_version="0.7.5",
             target_tag="v0.7.6",
-            installer_argv=["/usr/bin/uv", "tool", "install", "specify-cli"],
+            installer_argv=["/usr/bin/uv", "tool", "install", "vibe-ipd"],
             preview_summary="",
             pre_upgrade_snapshot="0.7.5",
         )
@@ -247,29 +247,29 @@ class TestVerificationMismatch:
         clean_environ,
         tmp_path,
     ):
-        fake_specify_cli = tmp_path / "specify-cli"
-        fake_specify_cli.write_text("#!/bin/sh\n")
-        fake_specify_cli.chmod(0o755)
+        fake_vibe_ipd = tmp_path / "vibe-ipd"
+        fake_vibe_ipd.write_text("#!/bin/sh\n")
+        fake_vibe_ipd.chmod(0o755)
 
         plan = _UpgradePlan(
             method=_InstallMethod.UV_TOOL,
             current_version="0.7.5",
             target_tag="v0.7.6",
-            installer_argv=["/usr/bin/uv", "tool", "install", "specify-cli"],
+            installer_argv=["/usr/bin/uv", "tool", "install", "vibe-ipd"],
             preview_summary="",
             pre_upgrade_snapshot="0.7.5",
         )
 
         with patch("specify_cli._version.shutil.which", return_value=None), patch(
             "specify_cli._version.subprocess.run"
-        ) as mock_run, patch("specify_cli._version.sys.argv", [str(fake_specify_cli)]), patch(
+        ) as mock_run, patch("specify_cli._version.sys.argv", [str(fake_vibe_ipd)]), patch(
             "specify_cli._version.os.access", return_value=True
         ):
             mock_run.return_value = _completed_process(0, stdout="specify 0.7.6\n")
             verified = _verify_upgrade(plan)
 
         assert verified == "0.7.6"
-        assert mock_run.call_args.args[0][0] == str(fake_specify_cli)
+        assert mock_run.call_args.args[0][0] == str(fake_vibe_ipd)
 
 
 class TestResolutionFailures:
@@ -494,8 +494,8 @@ class TestUnknownCurrent:
 
         assert result.exit_code == 0
         out = strip_ansi(result.output)
-        assert "Upgrading specify-cli unknown → v0.7.6 via uv tool:" in out
-        assert "Upgraded specify-cli: unknown → 0.7.6" in out
+        assert "Upgrading vibe-ipd unknown → v0.7.6 via uv tool:" in out
+        assert "Upgraded vibe-ipd: unknown → 0.7.6" in out
 
     def test_unknown_current_rollback_hint_degrades(
         self,
@@ -514,7 +514,7 @@ class TestUnknownCurrent:
         assert result.exit_code == 2
         out = strip_ansi(result.output)
         assert "Could not determine the previous version" in out
-        assert "https://github.com/github/spec-kit/releases" in out
+        assert "https://github.com/wwe1428103707/vibe-ipd/releases" in out
 
 
 class TestTokenScrubbing:
@@ -636,7 +636,7 @@ class TestTokenScrubbing:
         # subprocess needs is lost by stripping them.
         monkeypatch.setenv("GH_HOST", "github.example.com")
         monkeypatch.setenv("GH_CONFIG_DIR", "/home/u/.config/gh")
-        monkeypatch.setenv("GITHUB_REPOSITORY", "github/spec-kit")
+        monkeypatch.setenv("GITHUB_REPOSITORY", "wwe1428103707/vibe-ipd")
         monkeypatch.setenv("GITHUB_WORKSPACE", "/home/runner/work")
         monkeypatch.setenv("GITHUB_USER", "octocat")
 

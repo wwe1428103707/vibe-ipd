@@ -2,11 +2,24 @@
 
 <!-- insert new changelog below this comment -->
 
+## [1.1.0] - 2026-06-08
+
+### Changed
+
+- **PyPI Package Rename** — Package published on PyPI as `vibe-ipd` (was `specify-cli`). Install with `uv tool install vibe-ipd`.
+- **Self-Upgrade** — `specify self upgrade` now points to `wwe1428103707/vibe-ipd` repo for version checks.
+- **Documentation** — Installation guides, upgrade docs, and extension guides updated to reflect new package name.
+- **README** — Added PyPI install step to Quickstart. Version bumped to 1.1.0.
+
+## [1.0.1] - 2026-06-08
+
+### Changed
+
+- **PyPI Description** — Added `readme = "README.md"` to `pyproject.toml` so PyPI displays the full project README with install instructions, feature catalog, and architecture overview.
+- **PyPI Metadata** — Added classifiers, keywords, license, and project URLs (Homepage, Source, Changelog) to `pyproject.toml` for a richer PyPI package page.
+- **Version Bump** — 1.0.0 → 1.0.1 to publish updated metadata.
+
 ## [1.0.0] - 2026-06-08
-
-### Added
-
-- **Complete IPD Toolkit** — Full Technology Review gate model (TR0-TR6) integrated into every SDD command, with deep content validation, Must-Meet/Should-Meet criteria, and Go/Kill/Hold/Recycle gate decisions
 - **Spec-Driven Development** — Complete spec → plan → tasks → implement → analyze workflow with IPD gate enforcement at each phase
 - **PDT Role Mapping with RACI** — Explicit mapping of LPDT → RTE, Product Manager → PO, Dev Lead → System Architect, Test Lead → QA Lead, Ops Lead → DevOps Lead
 - **Multi-Agent Orchestration** — Integration with oh-my-claudecode for 50+ specialized agent roles

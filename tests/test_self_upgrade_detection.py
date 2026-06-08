@@ -30,7 +30,7 @@ class TestDetectionUvTool:
         method, signals = _detect_install_method(include_signals=True)
         assert method == _InstallMethod.UV_TOOL
         assert signals.matched_tier == 1
-        assert "uv/tools/specify-cli" in signals.matched_prefix.replace("\\", "/")
+        assert "uv/tools/vibe-ipd" in signals.matched_prefix.replace("\\", "/")
 
     def test_detection_is_deterministic(self, uv_tool_argv0):
         a = _detect_install_method()
@@ -51,11 +51,11 @@ class TestDetectionUvTool:
     def test_bare_argv0_is_resolved_via_path_lookup(self, monkeypatch, tmp_path):
         if os.name == "nt":
             monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
-            fake_dir = tmp_path / "uv" / "tools" / "specify-cli" / "bin"
+            fake_dir = tmp_path / "uv" / "tools" / "vibe-ipd" / "bin"
         else:
             monkeypatch.setenv("HOME", str(tmp_path))
             fake_dir = (
-                tmp_path / ".local" / "share" / "uv" / "tools" / "specify-cli" / "bin"
+                tmp_path / ".local" / "share" / "uv" / "tools" / "vibe-ipd" / "bin"
             )
         fake_dir.mkdir(parents=True)
         fake_specify = fake_dir / "specify"
@@ -70,7 +70,7 @@ class TestDetectionUvTool:
 
     def test_prefix_match_does_not_accept_sibling_directory(self, monkeypatch, tmp_path):
         monkeypatch.setenv("HOME", str(tmp_path))
-        fake_dir = tmp_path / ".local" / "share" / "uv" / "tools" / "specify-cli2" / "bin"
+        fake_dir = tmp_path / ".local" / "share" / "uv" / "tools" / "vibe-ipd2" / "bin"
         fake_dir.mkdir(parents=True)
         fake_specify = fake_dir / "specify"
         fake_specify.write_text("#!/usr/bin/env python\n")
@@ -96,7 +96,7 @@ class TestDetectionUvTool:
                 return subprocess.CompletedProcess(
                     args=argv,
                     returncode=0,
-                    stdout="specify-cli v0.7.6\nother-tool v1.2.3\n",
+                    stdout="vibe-ipd v0.7.6\nother-tool v1.2.3\n",
                     stderr="",
                 )
             return subprocess.CompletedProcess(
@@ -121,7 +121,7 @@ class TestDetectionUvTool:
             return subprocess.CompletedProcess(
                 args=argv,
                 returncode=0,
-                stdout="specify-cli v0.7.6\n",
+                stdout="vibe-ipd v0.7.6\n",
                 stderr="",
             )
 
@@ -150,7 +150,7 @@ class TestDetectionUvTool:
                 return subprocess.CompletedProcess(
                     args=argv,
                     returncode=0,
-                    stdout="specify-cli v0.7.6\n",
+                    stdout="vibe-ipd v0.7.6\n",
                     stderr="",
                 )
             return subprocess.CompletedProcess(
@@ -171,11 +171,11 @@ class TestDetectionUvTool:
     ):
         if os.name == "nt":
             monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
-            fake_dir = tmp_path / "uv" / "tools" / "specify-cli" / "bin"
+            fake_dir = tmp_path / "uv" / "tools" / "vibe-ipd" / "bin"
         else:
             monkeypatch.setenv("HOME", str(tmp_path))
             fake_dir = (
-                tmp_path / ".local" / "share" / "uv" / "tools" / "specify-cli" / "bin"
+                tmp_path / ".local" / "share" / "uv" / "tools" / "vibe-ipd" / "bin"
             )
         fake_dir.mkdir(parents=True)
         fake_specify = fake_dir / "specify"
@@ -202,7 +202,7 @@ class TestDetectionUvTool:
                 return subprocess.CompletedProcess(
                     args=argv,
                     returncode=0,
-                    stdout="my-specify-cli-helper v0.1.0\n",
+                    stdout="my-vibe-ipd-helper v0.1.0\n",
                     stderr="",
                 )
             return subprocess.CompletedProcess(
@@ -227,7 +227,7 @@ class TestDetectionUvTool:
                 return subprocess.CompletedProcess(
                     args=argv,
                     returncode=0,
-                    stdout="specify-cli v0.7.6\n",
+                    stdout="vibe-ipd v0.7.6\n",
                     stderr="",
                 )
             return subprocess.CompletedProcess(
@@ -264,7 +264,7 @@ class TestDetectionUvTool:
                 return subprocess.CompletedProcess(
                     args=argv,
                     returncode=0,
-                    stdout="specify-cli v0.7.6\n",
+                    stdout="vibe-ipd v0.7.6\n",
                     stderr="",
                 )
             return subprocess.CompletedProcess(
@@ -284,7 +284,7 @@ class TestPrefixExpansion:
     """Path-prefix expansion edge cases."""
 
     def test_literal_dollar_without_variable_name_is_preserved(self, tmp_path):
-        prefix_path = tmp_path / "specify-$-cache" / "tools" / "specify-cli"
+        prefix_path = tmp_path / "vibe-ipd-$-cache" / "tools" / "vibe-ipd"
         prefix = str(prefix_path)
 
         expanded = specify_cli._version._expand_prefix(prefix)
@@ -292,10 +292,10 @@ class TestPrefixExpansion:
         assert expanded == prefix_path.resolve()
 
     def test_unresolved_posix_variable_is_rejected(self):
-        assert specify_cli._version._expand_prefix("$SPECIFY_MISSING/specify-cli/") is None
+        assert specify_cli._version._expand_prefix("$VIBE_IPD_MISSING/vibe-ipd/") is None
 
     def test_absolute_prefix_resolve_oserror_is_rejected(self, tmp_path):
-        prefix = str(tmp_path / "specify-cli")
+        prefix = str(tmp_path / "vibe-ipd")
 
         with patch("pathlib.Path.resolve", side_effect=OSError("bad path")):
             assert specify_cli._version._expand_prefix(prefix) is None
@@ -332,16 +332,16 @@ class TestArgvAssemblyUvTool:
             "uv",
             "tool",
             "install",
-            "specify-cli",
+            "vibe-ipd",
             "--force",
             "--from",
-            "git+https://github.com/github/spec-kit.git@v0.7.6",
+            "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.6",
         ]
 
     def test_dev_suffix_tag_embedded_literally(self):
         with patch("specify_cli._version.shutil.which", return_value="uv"):
             argv = _assemble_installer_argv(_InstallMethod.UV_TOOL, "v0.8.0.dev0")
-        assert "git+https://github.com/github/spec-kit.git@v0.8.0.dev0" in argv
+        assert "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.8.0.dev0" in argv
         assert (
             "upgrade" not in argv
         )  # never `uv tool upgrade` — does not accept --tag pinning
@@ -369,8 +369,8 @@ class TestBareUpgradeUvTool:
 
         assert result.exit_code == 0
         out = strip_ansi(result.output)
-        assert "Upgrading specify-cli 0.7.5 → v0.7.6 via uv tool:" in out
-        assert "Upgraded specify-cli: 0.7.5 → 0.7.6" in out
+        assert "Upgrading vibe-ipd 0.7.5 → v0.7.6 via uv tool:" in out
+        assert "Upgraded vibe-ipd: 0.7.5 → 0.7.6" in out
         assert mock_run.call_count == 2
         for call in mock_run.call_args_list:
             assert call.kwargs.get("shell", False) is False
@@ -463,7 +463,7 @@ class TestAlreadyLatestUvTool:
         assert result.exit_code == 0
         out = strip_ansi(result.output)
         assert "Already on latest release" not in out
-        assert "Upgrading specify-cli release-main → v0.7.6 via uv tool:" in out
+        assert "Upgrading vibe-ipd release-main → v0.7.6 via uv tool:" in out
         assert mock_run.call_count == 2
 
     def test_unparseable_resolved_target_fails_before_literal_noop(
@@ -502,8 +502,8 @@ class TestAlreadyLatestUvTool:
         out = strip_ansi(result.output)
         assert "Already on latest release" not in out
         # A pinned older tag is a downgrade and must be labelled as such.
-        assert "Downgrading specify-cli 0.7.6 → v0.7.5 via uv tool:" in out
-        assert "Upgrading specify-cli" not in out
+        assert "Downgrading vibe-ipd 0.7.6 → v0.7.5 via uv tool:" in out
+        assert "Upgrading vibe-ipd" not in out
         assert mock_run.call_count == 2
 
     def test_pinned_rc_tag_uses_canonical_version_equality_for_noop(
@@ -624,7 +624,7 @@ class TestDetectionPipx:
                 return subprocess.CompletedProcess(
                     args=argv,
                     returncode=0,
-                    stdout='{"venvs":{"specify-cli":{}}}',
+                    stdout='{"venvs":{"vibe-ipd":{}}}',
                     stderr="",
                 )
             return subprocess.CompletedProcess(
@@ -651,7 +651,7 @@ class TestDetectionPipx:
                 return subprocess.CompletedProcess(
                     args=argv,
                     returncode=0,
-                    stdout='{"venvs":{"specify-cli":{}}}',
+                    stdout='{"venvs":{"vibe-ipd":{}}}',
                     stderr="",
                 )
             return subprocess.CompletedProcess(
@@ -676,7 +676,7 @@ class TestDetectionPipx:
                 return subprocess.CompletedProcess(
                     args=argv,
                     returncode=0,
-                    stdout="not json but mentions specify-cli",
+                    stdout="not json but mentions vibe-ipd",
                     stderr="",
                 )
             return subprocess.CompletedProcess(
@@ -708,14 +708,14 @@ class TestDetectionPipx:
                 return subprocess.CompletedProcess(
                     args=argv,
                     returncode=0,
-                    stdout="specify-cli v0.7.6\n",
+                    stdout="vibe-ipd v0.7.6\n",
                     stderr="",
                 )
             if argv[:3] == ["pipx", "list", "--json"]:
                 return subprocess.CompletedProcess(
                     args=argv,
                     returncode=0,
-                    stdout='{"venvs":{"specify-cli":{}}}',
+                    stdout='{"venvs":{"vibe-ipd":{}}}',
                     stderr="",
                 )
             return subprocess.CompletedProcess(
@@ -825,7 +825,7 @@ class TestArgvAssemblyPipx:
             "pipx",
             "install",
             "--force",
-            "git+https://github.com/github/spec-kit.git@v0.7.6",
+            "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.6",
         ]
         assert "upgrade" not in argv  # pipx upgrade does not accept arbitrary refs
         assert "--spec" not in argv  # pipx 1.5+ dropped the --spec flag
@@ -854,7 +854,7 @@ class TestBareUpgradePipx:
         assert result.exit_code == 0
         out = strip_ansi(result.output)
         assert "via pipx:" in out
-        assert "Upgraded specify-cli: 0.7.5 → 0.7.6" in out
+        assert "Upgraded vibe-ipd: 0.7.5 → 0.7.6" in out
 
 
 class TestDetectionShortCircuit:

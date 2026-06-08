@@ -12,15 +12,15 @@
 # ]
 # ///
 """
-Specify CLI - Setup tool for Specify projects
+vibe-ipd CLI - Integrated Product Development toolkit
 
 Usage:
-    uvx specify-cli.py init <project-name>
-    uvx specify-cli.py init .
-    uvx specify-cli.py init --here
+    uvx vibe-ipd init <project-name>
+    uvx vibe-ipd init .
+    uvx vibe-ipd init --here
 
 Or install globally:
-    uv tool install --from specify-cli.py specify-cli
+    uv tool install vibe-ipd
     specify init <project-name>
     specify init .
     specify init --here

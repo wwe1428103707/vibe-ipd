@@ -107,13 +107,13 @@ def uv_tool_argv0(monkeypatch, tmp_path):
     """Point sys.argv[0] at a simulated `uv tool` install path under tmp HOME."""
     if os.name == "nt":
         return _fake_self_upgrade_argv0(
-            monkeypatch, tmp_path, "LOCALAPPDATA", ("uv", "tools", "specify-cli", "bin")
+            monkeypatch, tmp_path, "LOCALAPPDATA", ("uv", "tools", "vibe-ipd", "bin")
         )
     return _fake_self_upgrade_argv0(
         monkeypatch,
         tmp_path,
         "HOME",
-        (".local", "share", "uv", "tools", "specify-cli", "bin"),
+        (".local", "share", "uv", "tools", "vibe-ipd", "bin"),
     )
 
 
@@ -122,10 +122,10 @@ def pipx_argv0(monkeypatch, tmp_path):
     """Point sys.argv[0] at a simulated pipx install path under tmp HOME."""
     if os.name == "nt":
         return _fake_self_upgrade_argv0(
-            monkeypatch, tmp_path, "LOCALAPPDATA", ("pipx", "venvs", "specify-cli", "bin")
+            monkeypatch, tmp_path, "LOCALAPPDATA", ("pipx", "venvs", "vibe-ipd", "bin")
         )
     return _fake_self_upgrade_argv0(
-        monkeypatch, tmp_path, "HOME", (".local", "pipx", "venvs", "specify-cli", "bin")
+        monkeypatch, tmp_path, "HOME", (".local", "pipx", "venvs", "vibe-ipd", "bin")
     )
 
 

@@ -86,7 +86,7 @@ def register(app: typer.Typer) -> None:
         """
         Initialize a new Specify project.
 
-        Project files are scaffolded from assets bundled inside the specify-cli
+        Project files are scaffolded from assets bundled inside the vibe-ipd
         package, so initialization does not need network access and templates
         match the installed CLI version.
 

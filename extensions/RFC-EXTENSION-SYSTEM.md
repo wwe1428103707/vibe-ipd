@@ -1339,7 +1339,7 @@ def check_compatibility(extension_manifest: dict) -> bool:
         raise IncompatibleVersionError(
             f"Extension requires spec-kit {required_speckit}, "
             f"but {current_speckit} is installed. "
-            f"Upgrade spec-kit with: uv tool install specify-cli --force"
+            f"Upgrade spec-kit with: uv tool install vibe-ipd --force"
         )
 
     # 2. Check required tools

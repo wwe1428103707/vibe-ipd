@@ -12,24 +12,34 @@
 
 ## Installation
 
-> [!IMPORTANT]
-> The only official, maintained packages for vibe-ipd come from the [github/spec-kit](https://github.com/github/spec-kit) GitHub repository. Any packages with the same name available on PyPI (e.g. `specify-cli` on pypi.org) are **not** affiliated with this project and are not maintained by the vibe-ipd maintainers. For normal installs, use the GitHub-based commands shown below. For offline or air-gapped environments, locally built wheels created from this repository are also valid.
+### From PyPI (Recommended)
 
-### Persistent Installation (Recommended)
-
-Install once and use everywhere. Replace `vX.Y.Z` with a tag from [Releases](https://github.com/github/spec-kit/releases):
-
-> [!NOTE]
-> The command below requires **[uv](https://docs.astral.sh/uv/)**. If you see `command not found: uv`, [install uv first](./install/uv.md).
+Install the `vibe-ipd` package directly from PyPI:
 
 ```bash
-uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@vX.Y.Z
+uv tool install vibe-ipd
+```
+
+> **Prerequisite**: [uv](https://docs.astral.sh/uv/) — if you see `command not found: uv`, [install uv first](./install/uv.md).
+
+Alternatively, install a specific version:
+
+```bash
+uv tool install vibe-ipd==1.0.0
 ```
 
 Then initialize a project:
 
 ```bash
-specify init <PROJECT_NAME> --integration copilot
+specify init <PROJECT_NAME> --integration claude
+```
+
+### From GitHub Source
+
+Replace `vX.Y.Z` with a tag from [Releases](https://github.com/wwe1428103707/vibe-ipd/releases):
+
+```bash
+uv tool install vibe-ipd --from git+https://github.com/wwe1428103707/vibe-ipd.git@vX.Y.Z
 ```
 
 ### One-time Usage

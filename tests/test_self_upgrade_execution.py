@@ -32,7 +32,7 @@ class TestInstallerMissing:
         assert result.exit_code == 3
         out = strip_ansi(result.output)
         assert "Installer uv not found on PATH; reinstall it and retry." in out
-        assert "Upgrading specify-cli" not in out
+        assert "Upgrading vibe-ipd" not in out
 
     def test_pipx_missing_exits_3(self, pipx_argv0, clean_environ):
         which_results = {}
@@ -63,10 +63,10 @@ class TestInstallerMissing:
                 str(fake_uv),
                 "tool",
                 "install",
-                "specify-cli",
+                "vibe-ipd",
                 "--force",
                 "--from",
-                "git+https://github.com/github/spec-kit.git@v0.7.6",
+                "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.6",
             ],
         ):
             mock_urlopen.return_value = mock_urlopen_response({"tag_name": "v0.7.6"})
@@ -94,10 +94,10 @@ class TestInstallerMissing:
                 "./uv",
                 "tool",
                 "install",
-                "specify-cli",
+                "vibe-ipd",
                 "--force",
                 "--from",
-                "git+https://github.com/github/spec-kit.git@v0.7.6",
+                "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.6",
             ],
         ):
             mock_urlopen.return_value = mock_urlopen_response({"tag_name": "v0.7.6"})
@@ -120,10 +120,10 @@ class TestInstallerMissing:
                 "./uv",
                 "tool",
                 "install",
-                "specify-cli",
+                "vibe-ipd",
                 "--force",
                 "--from",
-                "git+https://github.com/github/spec-kit.git@v0.7.6",
+                "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.6",
             ],
         ):
             mock_urlopen.return_value = mock_urlopen_response({"tag_name": "v0.7.6"})
@@ -180,10 +180,10 @@ class TestInstallerMissing:
                 str(fake_uv),
                 "tool",
                 "install",
-                "specify-cli",
+                "vibe-ipd",
                 "--force",
                 "--from",
-                "git+https://github.com/github/spec-kit.git@v0.7.6",
+                "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.6",
             ],
         ):
             mock_urlopen.return_value = mock_urlopen_response({"tag_name": "v0.7.6"})
@@ -212,10 +212,10 @@ class TestInstallerMissing:
                 "./uv",
                 "tool",
                 "install",
-                "specify-cli",
+                "vibe-ipd",
                 "--force",
                 "--from",
-                "git+https://github.com/github/spec-kit.git@v0.7.6",
+                "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.6",
             ],
         ):
             mock_urlopen.return_value = mock_urlopen_response({"tag_name": "v0.7.6"})
@@ -259,10 +259,10 @@ class TestInstallerMissing:
                 str(fake_uv),
                 "tool",
                 "install",
-                "specify-cli",
+                "vibe-ipd",
                 "--force",
                 "--from",
-                "git+https://github.com/github/spec-kit.git@v0.7.6",
+                "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.6",
             ],
         ):
             mock_urlopen.return_value = mock_urlopen_response({"tag_name": "v0.7.6"})
@@ -289,10 +289,10 @@ class TestInstallerMissing:
                 str(fake_uv),
                 "tool",
                 "install",
-                "specify-cli",
+                "vibe-ipd",
                 "--force",
                 "--from",
-                "git+https://github.com/github/spec-kit.git@v0.7.6",
+                "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.6",
             ],
         ), patch(
             "specify_cli._version.subprocess.run",
@@ -316,10 +316,10 @@ class TestInstallerMissing:
                 "uv",
                 "tool",
                 "install",
-                "specify-cli",
+                "vibe-ipd",
                 "--force",
                 "--from",
-                "git+https://github.com/github/spec-kit.git@v0.7.6",
+                "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.6",
             ],
         ), patch(
             "specify_cli._version.subprocess.run",
@@ -349,10 +349,10 @@ class TestInstallerMissing:
                 str(fake_uv),
                 "tool",
                 "install",
-                "specify-cli",
+                "vibe-ipd",
                 "--force",
                 "--from",
-                "git+https://github.com/github/spec-kit.git@v0.7.6",
+                "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.6",
             ],
         ), patch("specify_cli._version.subprocess.run", side_effect=invalid_error):
             mock_urlopen.return_value = mock_urlopen_response({"tag_name": "v0.7.6"})
@@ -378,10 +378,10 @@ class TestInstallerMissing:
                 str(fake_uv),
                 "tool",
                 "install",
-                "specify-cli",
+                "vibe-ipd",
                 "--force",
                 "--from",
-                "git+https://github.com/github/spec-kit.git@v0.7.6",
+                "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.6",
             ],
         ), patch("specify_cli._version.subprocess.run", side_effect=transient_error):
             mock_urlopen.return_value = mock_urlopen_response({"tag_name": "v0.7.6"})
@@ -410,11 +410,11 @@ class TestInstallerFailed:
         out = strip_ansi(result.output)
         assert "Upgrade failed. Installer exit code: 2." in out
         assert "Try again or run the command manually:" in out
-        assert "git+https://github.com/github/spec-kit.git@v0.7.6" in out
+        assert "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.6" in out
         assert (
             "To pin back to the previous version: "
-            "uv tool install specify-cli --force --from "
-            "git+https://github.com/github/spec-kit.git@v0.7.5"
+            "uv tool install vibe-ipd --force --from "
+            "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.5"
         ) in out
         # No verification attempted after a failed installer run.
         assert mock_run.call_count == 1
@@ -500,7 +500,7 @@ class TestInstallerFailed:
         out = strip_ansi(result.output)
         assert (
             "To pin back to the previous version: pipx install --force "
-            "git+https://github.com/github/spec-kit.git@v0.7.5"
+            "git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.5"
         ) in out
 
     def test_rollback_hint_accepts_normalizable_stable_snapshot(
@@ -518,8 +518,8 @@ class TestInstallerFailed:
         assert result.exit_code == 2
         out = strip_ansi(result.output)
         assert (
-            "To pin back to the previous version: uv tool install specify-cli --force "
-            "--from git+https://github.com/github/spec-kit.git@v0.7.5"
+            "To pin back to the previous version: uv tool install vibe-ipd --force "
+            "--from git+https://github.com/wwe1428103707/vibe-ipd.git@v0.7.5"
         ) in out
         assert "Previous version was not an exact stable release tag" not in out
 
@@ -538,5 +538,5 @@ class TestInstallerFailed:
         assert result.exit_code == 2
         out = strip_ansi(result.output)
         assert "Previous version was not an exact stable release tag" in out
-        assert "https://github.com/github/spec-kit/releases" in out
-        assert "git+https://github.com/github/spec-kit.git@v1.0.0rc1" not in out
+        assert "https://github.com/wwe1428103707/vibe-ipd/releases" in out
+        assert "git+https://github.com/wwe1428103707/vibe-ipd.git@v1.0.0rc1" not in out

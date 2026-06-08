@@ -41,7 +41,7 @@ _FALLBACK_CORE_COMMAND_NAMES = frozenset({
 })
 EXTENSION_COMMAND_NAME_PATTERN = re.compile(r"^vipd\.speckit\.([a-z0-9-]+)\.([a-z0-9-]+)$")
 
-REINSTALL_COMMAND = "uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git"
+REINSTALL_COMMAND = "uv tool install vibe-ipd --force --from git+https://github.com/wwe1428103707/vibe-ipd.git"
 
 
 def _load_core_command_names() -> frozenset[str]:

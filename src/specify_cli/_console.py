@@ -29,7 +29,7 @@ BANNER = """
 ╚══════╝╚═╝     ╚══════╝ ╚═════╝╚═╝╚═╝        ╚═╝
 """
 
-TAGLINE = "GitHub Spec Kit - Spec-Driven Development Toolkit"
+TAGLINE = "vibe-ipd - Integrated Product Development Toolkit (forked from GitHub Spec Kit)"
 
 console = Console(highlight=False)
 

@@ -24,7 +24,7 @@ preset:
 
 # Requirements for this preset
 requires:
-  # CUSTOMIZE: Minimum spec-kit version required
+  vipd_version: ">=1.0.0"
   speckit_version: ">=0.1.0"
 
 # Templates provided by this preset

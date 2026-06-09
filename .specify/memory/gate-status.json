@@ -1,6 +1,6 @@
 {
   "ipd_mode": true,
-  "last_updated": "2026-06-09T09:30:46+08:00",
+  "last_updated": "2026-06-09T09:54:16+08:00",
   "gates": {
     "TR0": {
       "status": "passed",
@@ -9,8 +9,8 @@
     },
     "TR1": {
       "status": "passed",
-      "evidence": "medium risk, 5 open risks resolved; all 5 clarifications integrated into spec",
-      "date": "2026-06-09T08:27:51+08:00",
+      "evidence": "low risk, 4 open risks resolved via clarification: command name, JSONL format, auto-fix strategy, security category",
+      "date": "2026-06-09T09:47:39+08:00",
       "history": [
         {
           "date": "2026-06-07T20:44:11+08:00",
@@ -77,13 +77,25 @@
           "evidence": "medium risk, 5 open risks resolved; all 5 clarifications integrated into spec",
           "date": "2026-06-09T08:27:51+08:00",
           "to": "passed"
+        },
+        {
+          "evidence": "Spec created with TR Gate Assessment section, 3 user scenarios, 10 FRs, 5 SCs, all checklist items passing",
+          "from": "passed",
+          "date": "2026-06-09T09:42:55+08:00",
+          "to": "passed"
+        },
+        {
+          "from": "passed",
+          "date": "2026-06-09T09:47:39+08:00",
+          "to": "passed",
+          "evidence": "low risk, 4 open risks resolved via clarification: command name, JSONL format, auto-fix strategy, security category"
         }
       ]
     },
     "TR2_TR3": {
       "status": "passed",
       "evidence": "Plan created with Gate Readiness + ADL; research.md, data-model.md, contracts/, quickstart.md generated; Constitution Check PASS",
-      "date": "2026-06-09T09:07:37+08:00",
+      "date": "2026-06-09T09:51:20+08:00",
       "history": [
         {
           "date": "2026-06-07T21:03:07+08:00",
@@ -138,13 +150,19 @@
           "evidence": "Plan created with Gate Readiness + ADL; research.md, data-model.md, contracts/, quickstart.md generated; Constitution Check PASS",
           "from": "passed",
           "date": "2026-06-09T09:07:37+08:00"
+        },
+        {
+          "to": "passed",
+          "date": "2026-06-09T09:51:20+08:00",
+          "from": "passed",
+          "evidence": "Plan created with Gate Readiness + ADL; research.md, data-model.md, contracts/, quickstart.md generated; Constitution Check PASS"
         }
       ]
     },
     "TR4": {
       "status": "passed",
-      "evidence": "Tasks generated with Gate Completion Verification: 27 tasks across 8 phases, 5 user stories with independent test criteria",
-      "date": "2026-06-09T09:18:29+08:00",
+      "evidence": "Tasks generated: 18 tasks across 6 phases, 3 user stories with independent test criteria",
+      "date": "2026-06-09T09:54:16+08:00",
       "history": [
         {
           "date": "2026-06-07T21:09:39+08:00",
@@ -187,6 +205,12 @@
           "from": "passed",
           "to": "passed",
           "date": "2026-06-09T09:18:29+08:00"
+        },
+        {
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Tasks generated: 18 tasks across 6 phases, 3 user stories with independent test criteria",
+          "date": "2026-06-09T09:54:16+08:00"
         }
       ]
     },

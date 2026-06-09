@@ -89,7 +89,7 @@ IPD governance when the project is IPD-enhanced.
 
 2. **Gate validation (IPD mode only)**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-check.ps1 -Gate TR0 -Json`
    - If `status: passed` → TR0 passed, proceed
-   - If `status: failed` → display unmet criteria. Ask (in configured language): "Proceed anyway? (yes/no)" If no, halt.
+   - If `status: failed` → **自动修复**：分析失败原因，尝试修复，最多重试 3 次。修复后重新运行 gate check。3 次后仍失败则记录降级原因并继续。
 
 3. **Gate status recording**: On TR0 pass, run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-record.ps1 -Gate TR0 -Status passed -Evidence "Constitution ratified with Gate Criteria Reference section"`
 ## Outline

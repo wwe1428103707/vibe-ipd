@@ -88,7 +88,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 2. **Gate validation (IPD mode only)**: Run `EXECUTE_COMMAND: .specify/scripts/powershell/gate-check.ps1 -Gate TR2_TR3 -Json`
    - If `status: passed` → proceed
-   - If `status: failed` → display unmet criteria. Ask (in configured language): "Proceed to planning anyway? (yes/no)" If no, halt.
+   - If `status: failed` → **自动修复**：分析失败原因（如 plan.md 缺失），尝试修复，最多重试 3 次。每次修复后重新运行 gate check。3 次后仍失败则记录降级原因并继续。
 
 3. **Post-planning**: Generate Architecture Decision Log as TR3 evidence.
 

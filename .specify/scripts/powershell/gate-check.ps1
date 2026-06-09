@@ -138,6 +138,48 @@ function Test-DepthValidation {
         }
     }
 
+    # Enrich results with fix_hint (FR-001) and category (FR-010) — Feature 019
+    $fixHintMap = @{
+        "User Story Present" = @{action="ensure_content"; hint="Add ### User Story section with Given/When/Then"}
+        "Given/When/Then Format" = @{action="ensure_content"; hint="Add acceptance scenarios using Given/When/Then"}
+        "TR Gate Assessment" = @{action="ensure_content"; hint="Add TR Gate Assessment section"}
+        "Feasibility/Risk Assessment" = @{action="ensure_content"; hint="Add Feasibility or Risk Register section"}
+        "Gate Readiness" = @{action="ensure_content"; hint="Add Gate Readiness section"}
+        "Architecture/Data/API Contract" = @{action="ensure_content"; hint="Add Architecture Decision or Data Model"}
+        "Constitution/WSJF Check" = @{action="ensure_content"; hint="Add Constitution Check or WSJF"}
+        "Task IDs Present" = @{action="ensure_content"; hint="Add sequential T001/T002 task IDs"}
+        "Gate Completion Verification" = @{action="ensure_content"; hint="Add Gate Completion Verification checkpoint"}
+        "Phase Definition" = @{action="ensure_content"; hint="Add Phase numbering"}
+        "Definition of Done" = @{action="ensure_content"; hint="Add DoD section"}
+        "Completed Tasks Present" = @{action="mark_tasks"; hint="Mark tasks with [x]"}
+        "Task Completion Ratio" = @{action="mark_tasks"; hint="Complete remaining tasks"}
+        "Quality Documentation" = @{action="ensure_content"; hint="Add Quality Summary section"}
+        "All Prior Gates Passed" = @{action="run_gates"; hint="Pass prior TR gates"}
+        "Cross-artifact Consistency" = @{action="ensure_content"; hint="Add consistency review"}
+        "Test/Validation Evidence" = @{action="ensure_content"; hint="Add Test Report evidence"}
+        "Deployment Verification" = @{action="ensure_content"; hint="Add Deployment Verification"}
+        "Ops Handover" = @{action="ensure_content"; hint="Add Ops Handover section"}
+    }
+    $categoryMap = @{
+        "User Story Present" = "documentation"; "Given/When/Then Format" = "documentation"
+        "TR Gate Assessment" = "process"; "Feasibility/Risk Assessment" = "process"
+        "Gate Readiness" = "documentation"; "Architecture/Data/API Contract" = "documentation"
+        "Constitution/WSJF Check" = "process"; "Task IDs Present" = "documentation"
+        "Gate Completion Verification" = "process"; "Phase Definition" = "documentation"
+        "Definition of Done" = "process"; "Completed Tasks Present" = "code"
+        "Task Completion Ratio" = "code"; "Quality Documentation" = "documentation"
+        "All Prior Gates Passed" = "process"; "Cross-artifact Consistency" = "process"
+        "Test/Validation Evidence" = "process"; "Deployment Verification" = "process"
+        "Ops Handover" = "process"
+    }
+    $results = $results | ForEach-Object {
+        $criterion = $_.criterion
+        $obj = @{ criterion=$criterion; pattern=$_.pattern; matched=$_.matched; artifact_path=$_.artifact_path }
+        if ($categoryMap.ContainsKey($criterion)) { $obj.category = $categoryMap[$criterion] }
+        if (-not $_.matched -and $fixHintMap.ContainsKey($criterion)) { $obj.fix_hint = $fixHintMap[$criterion] }
+        [PSCustomObject]$obj
+    }
+
     return $results
 }
 

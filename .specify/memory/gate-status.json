@@ -1,6 +1,6 @@
 {
   "ipd_mode": true,
-  "last_updated": "2026-06-09T09:07:37+08:00",
+  "last_updated": "2026-06-09T09:30:46+08:00",
   "gates": {
     "TR0": {
       "status": "passed",
@@ -143,8 +143,8 @@
     },
     "TR4": {
       "status": "passed",
-      "evidence": "Tasks generated with Gate Completion Verification: 28 tasks across 7 phases, 4 user stories",
-      "date": "2026-06-08T08:06:25+08:00",
+      "evidence": "Tasks generated with Gate Completion Verification: 27 tasks across 8 phases, 5 user stories with independent test criteria",
+      "date": "2026-06-09T09:18:29+08:00",
       "history": [
         {
           "date": "2026-06-07T21:09:39+08:00",
@@ -181,13 +181,19 @@
           "from": "passed",
           "to": "passed",
           "evidence": "Tasks generated with Gate Completion Verification: 28 tasks across 7 phases, 4 user stories"
+        },
+        {
+          "evidence": "Tasks generated with Gate Completion Verification: 27 tasks across 8 phases, 5 user stories with independent test criteria",
+          "from": "passed",
+          "to": "passed",
+          "date": "2026-06-09T09:18:29+08:00"
         }
       ]
     },
     "TR4A": {
       "status": "passed",
-      "evidence": "Quality summary: 28/28 tasks completed across 7 phases — lang/en.yml, lang/zh.yml, .vipd/resolve_language.sh (priority chain), .vipd/load_strings.sh (t() lookup with English fallback), SKILL.md extended with --lang + language-aware output + selection prompt, config write/read, CLI override, terminal encoding check, E2E validation passed. New capabilities: vipd init --lang zh runs entirely in Chinese, language persists to .vipd/config.yml, --lang flag overrides per-command.",
-      "date": "2026-06-08T08:14:36+08:00",
+      "evidence": "27 tasks completed across 8 phases: 3 skill files modified, 3 utility scripts created, 2 template files created, 1 new skill created. Claude Code mode: init→tasks→implement full pipeline operational with Workflow parallel execution and graceful degradation.",
+      "date": "2026-06-09T09:30:46+08:00",
       "history": [
         {
           "date": "2026-06-07T20:44:38+08:00",
@@ -224,6 +230,12 @@
           "from": "passed",
           "to": "passed",
           "evidence": "Quality summary: 28/28 tasks completed across 7 phases — lang/en.yml, lang/zh.yml, .vipd/resolve_language.sh (priority chain), .vipd/load_strings.sh (t() lookup with English fallback), SKILL.md extended with --lang + language-aware output + selection prompt, config write/read, CLI override, terminal encoding check, E2E validation passed. New capabilities: vipd init --lang zh runs entirely in Chinese, language persists to .vipd/config.yml, --lang flag overrides per-command."
+        },
+        {
+          "evidence": "27 tasks completed across 8 phases: 3 skill files modified, 3 utility scripts created, 2 template files created, 1 new skill created. Claude Code mode: init→tasks→implement full pipeline operational with Workflow parallel execution and graceful degradation.",
+          "date": "2026-06-09T09:30:46+08:00",
+          "to": "passed",
+          "from": "passed"
         }
       ]
     },

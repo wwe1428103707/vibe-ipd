@@ -127,7 +127,7 @@
 - **FR-006**: 在 Claude Code 模式下，`vipd-implement` 必须先读取 `.vipd/config.yml` 中的模式标记，再尝试调用 Workflow 工具确认运行时能力，两者均验证通过后才执行 Workflow 脚本
 - **FR-007**: 当 Workflow 脚本不存在时，`vipd-implement` 必须优雅降级到传统顺序执行模式
 - **FR-008**: Workflow 脚本中每个标记为 `[P]` 的并行任务必须通过独立的 `agent()` 调用执行
-- **FR-009**: 每个 User Story 的独立测试验证必须在对应的并行 `agent()` 块完成后自动执行
+- **FR-009**: 每个 User Story 的独立测试验证必须在对应的并行 `agent()` 块完成后自动执行。验证方式为对照 spec.md 中该 User Story 的验收场景（Given/When/Then）逐条确认，无需编写自动化测试代码。
 - **FR-010**: Workflow 执行完成后必须提供汇总报告，包含每个 Agent 的执行结果和状态
 - **FR-011**: 系统必须提供专用配置命令（如 `vipd config set mode claude-code`）支持从传统模式升级到 Claude Code 模式，无需重新运行初始化
 
@@ -145,7 +145,7 @@
 - **SC-001**: 在 Claude Code 模式下，vipd-tasks 任务生成时间不超过 30 秒（包括 tasks.md 和 Workflow 脚本的生成）
 - **SC-002**: 在 Claude Code 模式下，vipd-implement 的并行执行比传统顺序执行快至少 40%（对于 3+ 个独立 User Story 的项目）
 - **SC-003**: 降级机制 100% 可靠 — 当 Workflow 脚本不存在时，vipd-implement 始终能退回到传统模式而不报错
-- **SC-004**: Workflow 执行中断后恢复时，已完成的任务结果 100% 保留，不会重复执行
+- **SC-004**: Workflow 执行中断后恢复时，已完成的任务结果 100% 保留，不会重复执行。利用 Claude Code Workflow 运行时的原生恢复能力（同 session 内已完成 agent 返回缓存结果），无需额外实现恢复机制。
 - **SC-005**: 用户无需学习 Workflow API 即可使用 — Workflow 脚本的生成和调用完全自动化，用户零干预
 
 ## 假设

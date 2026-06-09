@@ -62,5 +62,16 @@ mode: claude-code  # ← 此行表示 Claude Code 模式已激活
 
 - 需要 Claude Code CLI 环境（Workflow 工具可用）
 - 非 Claude Code 环境自动降级到传统模式
-- 并行 Agent 数上限自适应（最多 5 个）
+- 并行 Agent 数自适应（`min(5, 用户故事数)`），运行时上限 16
 - 暂停后执行结果保留，不重复执行已完成任务
+- 通过 `vipd config set mode claude-code` 可在运行中切换模式，无需重新初始化
+
+## 相关文件
+
+| 文件 | 用途 |
+|------|------|
+| `.vipd/config.yml` | 存储 `mode: claude-code\|standard` |
+| `.claude/workflows/execute-tasks.wf.js` | 自动生成的 Workflow 执行脚本 |
+| `.claude/templates/workflow-template.js` | Workflow 脚本模板 |
+| `.vipd/mode.sh` / `.vipd/mode.ps1` | 模式读写工具脚本 |
+| `.claude/templates/probe-template.js` | 环境探测模板 |

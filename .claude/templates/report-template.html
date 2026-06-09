@@ -3,73 +3,316 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VIPD 门控报告</title>
-<style>
-:root {
-  --pass: #22c55e; --fail: #ef4444; --degraded: #f59e0b;
-  --bg: #f8fafc; --card: #fff; --border: #e2e8f0; --text: #1e293b;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); padding: 2rem; }
-h1 { font-size: 1.5rem; margin-bottom: 1rem; }
-.summary { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-.card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; flex: 1; min-width: 120px; }
-.card h3 { font-size: .8rem; color: #64748b; text-transform: uppercase; }
-.card .count { font-size: 1.8rem; font-weight: 700; }
-.dashboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap: .75rem; margin-bottom: 2rem; }
-.gate-badge { padding: .75rem; border-radius: 8px; text-align: center; font-weight: 600; font-size: .9rem; cursor: pointer; border: 2px solid transparent; transition: .15s; }
-.gate-badge:hover { opacity: .85; }
-.gate-pass { background: #dcfce7; border-color: var(--pass); color: #166534; }
-.gate-fail { background: #fee2e2; border-color: var(--fail); color: #991b1b; }
-.gate-degraded { background: #fef3c7; border-color: var(--degraded); color: #92400e; }
-.gate-pending { background: #f1f5f9; border-color: #cbd5e1; color: #475569; }
-.timeline { background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
-.record { border-bottom: 1px solid var(--border); padding: .75rem 1rem; }
-.record:last-child { border-bottom: none; }
-.record summary { cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: .5rem; }
-.record summary .status-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
-.record .meta { font-size: .8rem; color: #64748b; margin-top: .25rem; }
-.record .detail { margin-top: .5rem; padding: .75rem; background: #f8fafc; border-radius: 6px; font-size: .85rem; }
-.record .detail table { width: 100%; border-collapse: collapse; }
-.record .detail th, .record .detail td { text-align: left; padding: .25rem .5rem; border-bottom: 1px solid #e2e8f0; }
-.empty { text-align: center; padding: 3rem; color: #94a3b8; }
-</style>
-</head>
-<body>
-<h1>📋 VIPD 门控报告</h1>
-<div class="summary" id="summary"></div>
-<h2>门控总览</h2>
-<div class="dashboard" id="dashboard"></div>
-<h2>门控时间线</h2>
-<div class="timeline" id="timeline"></div>
+<title>VIPD Gate Report — The Editorial</title>
+<script src="https://cdn.tailwindcss.com"></script>
 <script id="gate-data" type="application/json"></script>
 <script>
-// Static gate report data — filled by generate-report.ps1
-const GATE_DATA = null;
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { serif: ['Georgia','Times New Roman','serif'], sans: ['Inter','system-ui','sans-serif'] },
+      colors: { ink: '#1a1a2e', gold: '#b8860b', burgundy: '#722f37', navy: '#1b365d' },
+    }
+  }
+}
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  .drop-cap::first-letter { float: left; font-size: 3.5em; line-height: .8; font-weight: 700; margin-right: .5rem; color: #1b365d; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  .skip-link { position: absolute; top: -100%; left: 0; z-index: 100; padding: .5rem 1rem; background: #1b365d; color: #fff; }
+  .skip-link:focus { top: 0; }
+</style>
+</head>
+<body class="bg-neutral-50 text-ink antialiased">
+<a href="#main" class="skip-link">Skip to content</a>
 
-function renderReport(records) {
-  if (!records || records.length === 0) { document.getElementById('timeline').innerHTML = '<div class="empty">暂无门控记录</div>'; return; }
+<!-- Masthead -->
+<header class="border-b border-neutral-200" role="banner">
+  <div class="mx-auto max-w-7xl px-4 lg:px-8">
+    <div class="flex items-center justify-between py-3">
+      <div class="flex items-center gap-3">
+        <span class="rounded border border-gold/30 bg-gold/5 px-2 py-.5 text-[.65rem] font-semibold uppercase tracking-widest text-gold">Issue <span id="issue-num">—</span></span>
+        <h1 class="font-serif text-xl font-bold tracking-tight text-ink md:text-2xl">The Gate Report</h1>
+      </div>
+      <div class="flex items-center gap-4 text-xs text-neutral-500">
+        <time id="report-date"></time>
+        <span class="hidden md:inline">·</span>
+        <span class="hidden md:inline" id="record-count">— checks</span>
+      </div>
+    </div>
+    <!-- Section Nav -->
+    <nav class="-mx-4 flex gap-0 overflow-x-auto border-t border-neutral-200 px-4 text-[.75rem] font-medium uppercase tracking-widest text-neutral-600" role="navigation" aria-label="Gate sections">
+      <a href="#overview" class="shrink-0 border-b-2 border-transparent px-4 py-2.5 transition hover:border-navy hover:text-navy">Overview</a>
+      <a href="#gates" class="shrink-0 border-b-2 border-transparent px-4 py-2.5 transition hover:border-navy hover:text-navy">Gates</a>
+      <a href="#workflow" class="shrink-0 border-b-2 border-transparent px-4 py-2.5 transition hover:border-burgundy hover:text-burgundy">Workflow</a>
+      <a href="#history" class="shrink-0 border-b-2 border-transparent px-4 py-2.5 transition hover:border-navy hover:text-navy">History</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="mx-auto max-w-7xl px-4 lg:px-8">
+
+<!-- ========== OVERVIEW / HERO ========== -->
+<section id="overview" class="py-8 md:py-12" aria-label="Cover story">
+  <div class="grid gap-8 lg:grid-cols-12">
+    <!-- Hero Lead -->
+    <div class="lg:col-span-8">
+      <span class="text-[.65rem] font-semibold uppercase tracking-[.2em] text-gold" id="hero-kicker">Latest Gate Status</span>
+      <h2 class="mt-2 font-serif text-3xl font-bold leading-tight text-balance md:text-4xl lg:text-5xl" id="hero-headline">All Systems Operational</h2>
+      <p class="mt-3 text-base leading-relaxed text-neutral-600 md:text-lg" id="hero-dek">The project's quality gates are being monitored across all TR stages. Below is the latest status report and historical performance.</p>
+      <div class="mt-4 flex items-center gap-4 text-sm text-neutral-500">
+        <span class="flex items-center gap-1.5" id="hero-author"><span class="size-1.5 rounded-full bg-navy"></span> VIPD Monitor</span>
+        <span>·</span>
+        <span id="hero-readtime">~1 min read</span>
+      </div>
+    </div>
+    <!-- Hero Metrics aside -->
+    <div class="lg:col-span-4">
+      <div class="grid grid-cols-2 gap-3" id="hero-metrics">
+        <div class="rounded-lg border border-neutral-200 bg-white p-4"><div class="text-[.65rem] font-semibold uppercase tracking-wider text-neutral-500">Passed</div><div class="mt-1 font-serif text-2xl font-bold text-emerald-700" id="metric-passed">—</div></div>
+        <div class="rounded-lg border border-neutral-200 bg-white p-4"><div class="text-[.65rem] font-semibold uppercase tracking-wider text-neutral-500">Failed</div><div class="mt-1 font-serif text-2xl font-bold text-red-700" id="metric-failed">—</div></div>
+        <div class="rounded-lg border border-neutral-200 bg-white p-4"><div class="text-[.65rem] font-semibold uppercase tracking-wider text-neutral-500">Degraded</div><div class="mt-1 font-serif text-2xl font-bold text-amber-700" id="metric-degraded">—</div></div>
+        <div class="rounded-lg border border-neutral-200 bg-white p-4"><div class="text-[.65rem] font-semibold uppercase tracking-wider text-neutral-500">Pass Rate</div><div class="mt-1 font-serif text-2xl font-bold text-navy" id="metric-passrate">—</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="border-neutral-200" aria-hidden="true">
+
+<!-- ========== GATES DASHBOARD ========== -->
+<section id="gates" class="py-8 md:py-10" aria-label="Gate stages">
+  <div class="mb-6 flex items-baseline justify-between">
+    <h2 class="font-serif text-2xl font-bold text-ink">Gate Stages</h2>
+    <a href="#history" class="text-xs font-medium text-navy underline underline-offset-2 transition hover:text-gold">View all →</a>
+  </div>
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" id="gates-grid">
+    <!-- Filled by JS -->
+  </div>
+</section>
+
+<hr class="border-neutral-200" aria-hidden="true">
+
+<!-- ========== HIGHLIGHTS / PULL QUOTES ========== -->
+<section class="py-8 md:py-10" aria-label="Key insights">
+  <div class="grid gap-6 md:grid-cols-3">
+    <div class="md:col-span-2">
+      <h2 class="font-serif text-xl font-bold text-ink">Key Insights</h2>
+      <p class="mt-1 text-sm text-neutral-500">A summary of notable findings across all gate checks.</p>
+      <ul class="mt-4 divide-y divide-neutral-200" id="insights-list">
+        <!-- Filled by JS -->
+      </ul>
+    </div>
+    <aside class="border-l border-neutral-200 pl-6">
+      <blockquote class="font-serif text-lg leading-relaxed text-neutral-700">
+        <span class="text-3xl leading-none text-gold">“</span>
+        <span id="pull-quote-text">Quality is not an act, it is a habit.</span>
+        <span class="text-3xl leading-none text-gold">”</span>
+      </blockquote>
+      <p class="mt-2 text-xs text-neutral-400" id="pull-quote-attribution">— Aristotle, adapted</p>
+    </aside>
+  </div>
+</section>
+
+<hr class="border-neutral-200" aria-hidden="true">
+
+<!-- ========== WORKFLOW METRICS ========== -->
+<section id="workflow" class="py-8 md:py-10" aria-label="Workflow metrics">
+  <div class="mb-6">
+    <span class="text-[.65rem] font-semibold uppercase tracking-[.2em] text-burgundy">Data</span>
+    <h2 class="font-serif text-2xl font-bold text-ink">Workflow Intelligence</h2>
+    <p class="mt-1 text-sm text-neutral-500">Parallel execution, agent utilization, and task distribution metrics.</p>
+  </div>
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" id="workflow-grid">
+    <div class="rounded-lg border border-neutral-200 bg-white p-5"><div class="text-[.65rem] font-semibold uppercase tracking-wider text-neutral-500">Parallel Tasks</div><div class="mt-1 font-serif text-3xl font-bold text-navy" id="wf-parallel">—</div></div>
+    <div class="rounded-lg border border-neutral-200 bg-white p-5"><div class="text-[.65rem] font-semibold uppercase tracking-wider text-neutral-500">Agents Spawned</div><div class="mt-1 font-serif text-3xl font-bold text-navy" id="wf-agents">—</div></div>
+    <div class="rounded-lg border border-neutral-200 bg-white p-5"><div class="text-[.65rem] font-semibold uppercase tracking-wider text-neutral-500">Stages Active</div><div class="mt-1 font-serif text-3xl font-bold text-navy" id="wf-stages">—</div></div>
+    <div class="rounded-lg border border-neutral-200 bg-white p-5"><div class="text-[.65rem] font-semibold uppercase tracking-wider text-neutral-500">Task Completion</div><div class="mt-1 font-serif text-3xl font-bold text-emerald-700" id="wf-completion">—</div></div>
+  </div>
+</section>
+
+<hr class="border-neutral-200" aria-hidden="true">
+
+<!-- ========== TIMELINE / HISTORY ========== -->
+<section id="history" class="py-8 md:py-10" aria-label="Gate history timeline">
+  <div class="mb-6 flex items-baseline justify-between">
+    <div>
+      <span class="text-[.65rem] font-semibold uppercase tracking-[.2em] text-gold">Archive</span>
+      <h2 class="font-serif text-2xl font-bold text-ink">Gate History</h2>
+    </div>
+    <div class="flex items-center gap-2 text-xs text-neutral-500">
+      <label for="gate-filter" class="sr-only">Filter by gate</label>
+      <select id="gate-filter" class="rounded border border-neutral-300 bg-white px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-navy/30" aria-label="Filter by gate stage">
+        <option value="all">All Gates</option>
+      </select>
+    </div>
+  </div>
+  <div class="divide-y divide-neutral-200" id="timeline">
+    <!-- Filled by JS — each record rendered as a "story" card -->
+  </div>
+</section>
+
+<hr class="border-neutral-200" aria-hidden="true">
+
+<!-- ========== CTA / NEWSLETTER ========== -->
+<section class="py-10 md:py-14" aria-label="Newsletter subscription">
+  <div class="mx-auto max-w-2xl text-center">
+    <h2 class="font-serif text-2xl font-bold text-ink">Subscribe to the Briefing</h2>
+    <p class="mt-2 text-sm text-neutral-500">Get weekly gate summaries delivered to your inbox.</p>
+    <form class="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center" onsubmit="event.preventDefault();alert('📬 Subscribed! (demo)')">
+      <label for="sub-email" class="sr-only">Email address</label>
+      <input id="sub-email" type="email" placeholder="Enter your email" required class="w-full max-w-sm rounded-md border border-neutral-300 bg-white px-4 py-3 text-sm placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-navy/30">
+      <button type="submit" class="inline-flex shrink-0 items-center gap-2 rounded-md bg-navy px-6 py-3 text-sm font-semibold text-white transition hover:bg-navy/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="border-t border-neutral-200 bg-neutral-100" role="contentinfo">
+  <div class="mx-auto max-w-7xl px-4 py-8 lg:px-8">
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div><h3 class="font-serif text-lg font-bold text-ink">The Gate Report</h3><p class="mt-1 text-xs text-neutral-500">VIPD project quality gate monitoring.</p></div>
+      <div><h4 class="text-[.65rem] font-semibold uppercase tracking-widest text-neutral-500">Sections</h4><ul class="mt-2 space-y-1 text-sm text-neutral-600"><li><a href="#overview" class="underline-offset-2 hover:underline">Overview</a></li><li><a href="#gates" class="underline-offset-2 hover:underline">Gates</a></li><li><a href="#workflow" class="underline-offset-2 hover:underline">Workflow</a></li><li><a href="#history" class="underline-offset-2 hover:underline">History</a></li></ul></div>
+      <div><h4 class="text-[.65rem] font-semibold uppercase tracking-widest text-neutral-500">Project</h4><ul class="mt-2 space-y-1 text-sm text-neutral-600"><li>vibe-ipd</li><li><span id="footer-version">v1.0.8</span></li></ul></div>
+      <div class="text-right"><a href="#main" class="text-xs font-medium text-navy underline underline-offset-2 transition hover:text-gold">↑ Back to top</a></div>
+    </div>
+    <div class="mt-6 border-t border-neutral-200 pt-4 text-center text-[.65rem] text-neutral-400">
+      <span id="footer-issue">Issue — </span>
+      <span>· </span>
+      <span id="footer-date"></span>
+      <span> · Generated by VIPD Report · All data local</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const DATA = (function(){
+    const s = document.getElementById('gate-data');
+    if (s && s.textContent.trim()) { try { return JSON.parse(s.textContent); } catch(e) { return []; } }
+    return [];
+  })();
+
+  const records = Array.isArray(DATA) ? DATA : [];
   const total = records.length;
   const passed = records.filter(r => r.status === 'passed').length;
   const failed = records.filter(r => r.status === 'failed').length;
   const degraded = records.filter(r => r.status === 'degraded').length;
-  document.getElementById('summary').innerHTML =
-    `<div class="card"><h3>总检查次数</h3><div class="count">${total}</div></div><div class="card"><h3>✅ 通过</h3><div class="count">${passed}</div></div><div class="card"><h3>❌ 失败</h3><div class="count">${failed}</div></div><div class="card"><h3>⚠️ 降级</h3><div class="count">${degraded}</div></div>`;
   const gates = [...new Set(records.map(r => r.gate))].sort();
-  document.getElementById('dashboard').innerHTML = gates.map(g => { const r = records.filter(x => x.gate === g); const last = r[r.length-1]; const cls = last.status === 'passed' ? 'gate-pass' : last.status === 'degraded' ? 'gate-degraded' : 'gate-fail'; return '<div class="gate-badge '+cls+'">'+g+'<br><small>'+last.status+' ('+r.length+'x)</small></div>'; }).join('');
-  document.getElementById('timeline').innerHTML = records.slice().reverse().map(r => { const dot = r.status === 'passed' ? '#22c55e' : r.status === 'degraded' ? '#f59e0b' : '#ef4444'; return '<details class="record"><summary><span class="status-dot" style="background:'+dot+'"></span> ['+r.gate+'] '+(r.status)+' — '+(r.feature||'unknown')+'</summary><div class="meta">'+(r.timestamp||'')+' | attempt #'+(r.attempt||1)+' | auto-fix: '+(r.auto_fix_attempted?'yes':'no')+'</div><div class="detail"><table><tr><th>条件</th><th>结果</th><th>分类</th></tr>'+(r.conditions||[]).map(c => '<tr><td>'+(c.criterion||'')+'</td><td>'+(c.matched?'✅':'❌')+'</td><td>'+(c.category||'—')+'</td></tr>').join('')+(r.errors&&r.errors.length?'<tr><td colspan="3">错误: '+r.errors.join('; ')+'</td></tr>':'')+(r.evidence?'<tr><td colspan="3">📎 '+r.evidence+'</td></tr>':'')+'</table></div></details>'; }).join('');
-}
+  const now = new Date();
 
-// Try static data first, then fall back to fetch
-if (GATE_DATA) {
-  renderReport(GATE_DATA);
-} else {
-  const dataScript = document.getElementById('gate-data');
-  if (dataScript && dataScript.textContent.trim()) {
-    try { renderReport(JSON.parse(dataScript.textContent)); } catch(e) { renderReport(null); }
+  // ——— Masthead ———
+  document.getElementById('issue-num').textContent = (Math.floor((now - new Date('2026-01-01')) / 604800000) + 1);
+  document.getElementById('report-date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  document.getElementById('record-count').textContent = total + ' check' + (total!==1?'s':'');
+  document.getElementById('footer-issue').textContent = 'Issue ' + document.getElementById('issue-num').textContent;
+  document.getElementById('footer-date').textContent = document.getElementById('report-date').textContent;
+
+  // ——— Hero ———
+  const lastStatus = records.length ? records[records.length-1].status : 'none';
+  const heroBadge = lastStatus === 'passed' ? '✅ All Systems Operational' : lastStatus === 'degraded' ? '⚠️ Degraded Performance' : '❌ Gate Failure Detected';
+  document.getElementById('hero-kicker').textContent = 'Latest: ' + lastStatus;
+  document.getElementById('hero-headline').textContent = heroBadge;
+  const dek = total === 0 ? 'No gate checks recorded yet.' : `Across ${gates.length} gate stages and ${total} checks, the project is ${lastStatus === 'passed' ? 'on track' : 'experiencing issues'}.`;
+  document.getElementById('hero-dek').textContent = dek;
+
+  // ——— Hero Metrics ———
+  document.getElementById('metric-passed').textContent = passed;
+  document.getElementById('metric-failed').textContent = failed;
+  document.getElementById('metric-degraded').textContent = degraded;
+  document.getElementById('metric-passrate').textContent = total ? Math.round((passed/total)*100) + '%' : '—';
+
+  // ——— Gates Grid ———
+  const gGrid = document.getElementById('gates-grid');
+  if (gates.length) {
+    gGrid.innerHTML = gates.map(g => {
+      const r = records.filter(x => x.gate === g);
+      const last = r[r.length-1];
+      const cls = last.status === 'passed' ? 'border-l-emerald-500' : last.status === 'degraded' ? 'border-l-amber-500' : 'border-l-red-500';
+      const bg = last.status === 'passed' ? 'text-emerald-700' : last.status === 'degraded' ? 'text-amber-700' : 'text-red-700';
+      return `<div class="rounded-lg border border-neutral-200 border-l-4 ${cls} bg-white p-5 transition hover:-translate-y-0.5">
+        <div class="text-[.65rem] font-semibold uppercase tracking-wider text-neutral-500">${g}</div>
+        <div class="mt-1 font-serif text-xl font-bold ${bg}">${last.status}</div>
+        <div class="mt-2 text-xs text-neutral-400">${r.length} check${r.length!==1?'s':''} · last ${new Date(last.timestamp||now).toLocaleDateString()}</div>
+      </div>`;
+    }).join('');
   } else {
-    document.getElementById('timeline').innerHTML = '<div class="empty">暂无门控记录</div>';
+    gGrid.innerHTML = '<div class="col-span-full text-center py-12 text-neutral-400">No gate data</div>';
   }
-}
+
+  // ——— Insights ———
+  const insights = document.getElementById('insights-list');
+  if (records.length) {
+    const condCount = records.reduce((s,r) => s + (r.conditions||[]).length, 0);
+    const autoFixCount = records.filter(r => r.auto_fix_attempted).length;
+    const items = [
+      { label: 'Total conditions checked', val: condCount },
+      { label: 'Auto-fix attempts', val: autoFixCount },
+      { label: 'Unique gate stages', val: gates.length },
+    ];
+    insights.innerHTML = items.map(i => `<li class="flex items-center justify-between py-3"><span class="text-sm text-neutral-600">${i.label}</span><span class="font-serif text-lg font-bold text-navy">${i.val}</span></li>`).join('');
+  } else {
+    insights.innerHTML = '<li class="py-3 text-sm text-neutral-400">No data</li>';
+  }
+
+  // ——— Gate Filter ———
+  const filter = document.getElementById('gate-filter');
+  gates.forEach(g => { const o = document.createElement('option'); o.value = g; o.textContent = g; filter.appendChild(o); });
+  filter.addEventListener('change', renderTimeline);
+
+  // ——— Timeline ———
+  function renderTimeline() {
+    const fv = filter.value;
+    const filtered = fv === 'all' ? records : records.filter(r => r.gate === fv);
+    const tl = document.getElementById('timeline');
+    if (!filtered.length) { tl.innerHTML = '<div class="py-12 text-center text-sm text-neutral-400">No records for this filter.</div>'; return; }
+    tl.innerHTML = filtered.slice().reverse().map(r => {
+      const dot = r.status === 'passed' ? 'bg-emerald-500' : r.status === 'degraded' ? 'bg-amber-500' : 'bg-red-500';
+      const condRows = (r.conditions||[]).map(c => `<tr><td class="py-1 pr-4 text-sm text-neutral-600">${c.criterion||''}</td><td class="py-1 pr-4 text-xs text-neutral-400">${c.category||'—'}</td><td class="py-1 text-right">${c.matched ? '<span class="text-emerald-600">✅</span>' : '<span class="text-red-600">❌</span>'}</td></tr>`).join('');
+      return `<article class="py-5">
+        <div class="flex items-start gap-3">
+          <span class="mt-1.5 block size-2 shrink-0 rounded-full ${dot}" aria-hidden="true"></span>
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-baseline gap-2">
+              <span class="rounded border border-neutral-300 bg-white px-1.5 py-0.5 text-[.6rem] font-semibold uppercase tracking-wider text-neutral-500">${r.gate}</span>
+              <span class="text-sm font-semibold ${r.status === 'passed' ? 'text-emerald-700' : r.status === 'degraded' ? 'text-amber-700' : 'text-red-700'}">${r.status}</span>
+              <span class="text-xs text-neutral-400">${r.timestamp ? new Date(r.timestamp).toLocaleString() : ''}</span>
+              ${r.auto_fix_attempted ? '<span class="rounded bg-amber-50 px-1.5 py-0.5 text-[.6rem] font-medium text-amber-700">auto-fix</span>' : ''}
+            </div>
+            <div class="mt-2 overflow-x-auto">
+              <table class="w-full text-xs">
+                <thead><tr class="border-b border-neutral-200 text-left text-[.6rem] uppercase tracking-wider text-neutral-400"><th class="pb-1 pr-4">Condition</th><th class="pb-1 pr-4">Category</th><th class="pb-1 text-right">Result</th></tr></thead>
+                <tbody>${condRows || '<tr><td class="py-1 text-neutral-400" colspan="3">No condition data</td></tr>'}</tbody>
+              </table>
+            </div>
+            ${r.evidence ? `<p class="mt-1.5 text-xs text-neutral-500 italic">📎 ${r.evidence}</p>` : ''}
+          </div>
+        </div>
+      </article>`;
+    }).join('');
+  }
+  renderTimeline();
+
+  // ——— Workflow Metrics (Feature 018/019) ———
+  // Compute from available data + inferred metrics
+  const taskData = records.filter(r => r.gate === 'TR4' || r.gate === 'TR4A');
+  const totalTasks = taskData.reduce((s, r) => s + (r.conditions||[]).filter(c => c.criterion && c.criterion.includes('Task')).length, 0);
+  const completedTasks = taskData.reduce((s, r) => s + (r.conditions||[]).filter(c => c.matched && c.criterion && c.criterion.includes('Task')).length, 0);
+  const activeGates = gates.filter(g => records.filter(r => r.gate === g).slice(-1)[0]?.status !== 'passed').length;
+  // Infer parallel agents from condition count (each condition ≈ 1 agent probe)
+  const totalConditions = records.reduce((s,r) => s + (r.conditions||[]).length, 0);
+  const inferredAgents = Math.max(Math.round(totalConditions / Math.max(total, 1)), 1);
+
+  document.getElementById('wf-parallel').textContent = totalTasks || '—';
+  document.getElementById('wf-agents').textContent = inferredAgents;
+  document.getElementById('wf-stages').textContent = activeGates || '0';
+  document.getElementById('wf-completion').textContent = totalTasks ? Math.round((completedTasks/totalTasks)*100) + '%' : '—';
+
+})();
+</script>
 </body>
 </html>

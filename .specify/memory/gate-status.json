@@ -1,232 +1,250 @@
-﻿{
-    "ipd_mode":  true,
-    "last_updated":  "2026-06-08T08:22:43+08:00",
-    "gates":  {
-                  "TR0":  {
-                              "status":  "passed",
-                              "evidence":  "Constitution ratified with Gate Criteria Reference section",
-                              "date":  "2026-06-06"
-                          },
-                  "TR1":  {
-                              "status":  "passed",
-                              "evidence":  "Spec created with TR Gate Assessment: VIPD Versioning \u0026 Docs Preparation",
-                              "date":  "2026-06-08T08:20:51+08:00",
-                              "history":  [
-                                              {
-                                                  "date":  "2026-06-07T20:44:11+08:00",
-                                                  "from":  "passed",
-                                                  "evidence":  "test",
-                                                  "to":  "passed"
-                                              },
-                                              {
-                                                  "date":  "2026-06-07T20:59:09+08:00",
-                                                  "from":  "passed",
-                                                  "to":  "passed",
-                                                  "evidence":  "Spec created with TR Gate Assessment"
-                                              },
-                                              {
-                                                  "date":  "2026-06-07T21:49:47+08:00",
-                                                  "from":  "passed",
-                                                  "to":  "passed",
-                                                  "evidence":  "Spec created with TR Gate Assessment"
-                                              },
-                                              {
-                                                  "to":  "passed",
-                                                  "date":  "2026-06-07T22:14:29+08:00",
-                                                  "evidence":  "Spec created for vipd-init skill with TR Gate Assessment section",
-                                                  "from":  "passed"
-                                              },
-                                              {
-                                                  "from":  "passed",
-                                                  "evidence":  "Spec created with TR Gate Assessment",
-                                                  "to":  "passed",
-                                                  "date":  "2026-06-07T22:35:11+08:00"
-                                              },
-                                              {
-                                                  "to":  "passed",
-                                                  "evidence":  "Low risk, 0 open risks resolved after 3 clarifications",
-                                                  "from":  "passed",
-                                                  "date":  "2026-06-07T22:41:26+08:00"
-                                              },
-                                              {
-                                                  "date":  "2026-06-08T06:58:00+08:00",
-                                                  "from":  "passed",
-                                                  "to":  "passed",
-                                                  "evidence":  "Spec created with TR Gate Assessment"
-                                              },
-                                              {
-                                                  "date":  "2026-06-08T07:11:09+08:00",
-                                                  "from":  "passed",
-                                                  "to":  "passed",
-                                                  "evidence":  "Medium risk, 4 open risks resolved via clarification"
-                                              },
-                                              {
-                                                  "date":  "2026-06-08T08:20:51+08:00",
-                                                  "from":  "passed",
-                                                  "to":  "passed",
-                                                  "evidence":  "Spec created with TR Gate Assessment: VIPD Versioning \u0026 Docs Preparation"
-                                              }
-                                          ]
-                          },
-                  "TR2_TR3":  {
-                                  "status":  "passed",
-                                  "evidence":  "Plan created with Gate Readiness + ADL (4 decisions: version.yml format, bash CLI wrapper, full feature catalog README, initial 1.0.0)",
-                                  "date":  "2026-06-08T08:22:43+08:00",
-                                  "history":  [
-                                                  {
-                                                      "date":  "2026-06-07T21:03:07+08:00",
-                                                      "from":  "passed",
-                                                      "to":  "passed",
-                                                      "evidence":  "Plan created with Gate Readiness + ADL"
-                                                  },
-                                                  {
-                                                      "date":  "2026-06-07T21:23:41+08:00",
-                                                      "from":  "passed",
-                                                      "to":  "passed",
-                                                      "evidence":  "Plan created with Gate Readiness + ADL"
-                                                  },
-                                                  {
-                                                      "date":  "2026-06-07T21:55:55+08:00",
-                                                      "from":  "passed",
-                                                      "to":  "passed",
-                                                      "evidence":  "Plan created with Gate Readiness + ADL"
-                                                  },
-                                                  {
-                                                      "from":  "passed",
-                                                      "evidence":  "Plan created with Technical Context, Constitution Check, CBB Assessment, ADL; quickstart.md generated",
-                                                      "date":  "2026-06-07T22:17:46+08:00",
-                                                      "to":  "passed"
-                                                  },
-                                                  {
-                                                      "date":  "2026-06-07T22:43:42+08:00",
-                                                      "to":  "passed",
-                                                      "from":  "passed",
-                                                      "evidence":  "Plan creation started with user approval (gate pre-check failed due to missing plan 鈥?expected)"
-                                                  },
-                                                  {
-                                                      "date":  "2026-06-08T07:15:37+08:00",
-                                                      "from":  "passed",
-                                                      "to":  "passed",
-                                                      "evidence":  "Plan created with Gate Readiness + ADL (5 decisions recorded)"
-                                                  },
-                                                  {
-                                                      "date":  "2026-06-08T07:50:29+08:00",
-                                                      "from":  "passed",
-                                                      "to":  "passed",
-                                                      "evidence":  "Plan created with Gate Readiness + ADL (4 decisions: flat YAML resources, config priority chain, directory-scan validation, new .vipd/config.yml)"
-                                                  },
-                                                  {
-                                                      "date":  "2026-06-08T08:22:43+08:00",
-                                                      "from":  "passed",
-                                                      "to":  "passed",
-                                                      "evidence":  "Plan created with Gate Readiness + ADL (4 decisions: version.yml format, bash CLI wrapper, full feature catalog README, initial 1.0.0)"
-                                                  }
-                                              ]
-                              },
-                  "TR4":  {
-                              "status":  "passed",
-                              "evidence":  "Tasks generated with Gate Completion Verification: 28 tasks across 7 phases, 4 user stories",
-                              "date":  "2026-06-08T08:06:25+08:00",
-                              "history":  [
-                                              {
-                                                  "date":  "2026-06-07T21:09:39+08:00",
-                                                  "from":  "passed",
-                                                  "to":  "passed",
-                                                  "evidence":  "Tasks generated with Gate Completion Verification"
-                                              },
-                                              {
-                                                  "date":  "2026-06-07T21:59:18+08:00",
-                                                  "from":  "passed",
-                                                  "to":  "passed",
-                                                  "evidence":  "Tasks generated with Gate Completion Verification"
-                                              },
-                                              {
-                                                  "date":  "2026-06-07T22:19:27+08:00",
-                                                  "evidence":  "Tasks generated for vipd-init skill: 26 tasks across 6 phases, 3 user stories, with Gate Completion Verification",
-                                                  "from":  "passed",
-                                                  "to":  "passed"
-                                              },
-                                              {
-                                                  "to":  "passed",
-                                                  "date":  "2026-06-07T22:48:28+08:00",
-                                                  "from":  "passed",
-                                                  "evidence":  "Task generation started with user approval (gate pre-check failed due to missing tasks 鈥?expected)"
-                                              },
-                                              {
-                                                  "date":  "2026-06-08T07:18:00+08:00",
-                                                  "from":  "passed",
-                                                  "to":  "passed",
-                                                  "evidence":  "Tasks generated with Gate Completion Verification: 27 tasks across 7 phases, 4 user stories"
-                                              },
-                                              {
-                                                  "date":  "2026-06-08T08:06:25+08:00",
-                                                  "from":  "passed",
-                                                  "to":  "passed",
-                                                  "evidence":  "Tasks generated with Gate Completion Verification: 28 tasks across 7 phases, 4 user stories"
-                                              }
-                                          ]
-                          },
-                  "TR4A":  {
-                               "status":  "passed",
-                               "evidence":  "Quality summary: 28/28 tasks completed across 7 phases — lang/en.yml, lang/zh.yml, .vipd/resolve_language.sh (priority chain), .vipd/load_strings.sh (t() lookup with English fallback), SKILL.md extended with --lang + language-aware output + selection prompt, config write/read, CLI override, terminal encoding check, E2E validation passed. New capabilities: vipd init --lang zh runs entirely in Chinese, language persists to .vipd/config.yml, --lang flag overrides per-command.",
-                               "date":  "2026-06-08T08:14:36+08:00",
-                               "history":  [
-                                               {
-                                                   "date":  "2026-06-07T20:44:38+08:00",
-                                                   "to":  "passed",
-                                                   "evidence":  "Quality summary: 71 tasks implemented across 12 phases 閳?TR6 launch gate, depth validation, Should-Meet advisory, ordering enforcement, per-feature gate-status.json, Python _gate_utils.py, GatewayStep IPD-awareness, agent skill renaming, CBB catalog, Trio review template, WSJF rubric, LPDT concrete criteria, LPDT+PO conflict mitigation, Go/Kill/Hold/Recycle framework, constitution v1.3.0, README IPD docs",
-                                                   "from":  "passed"
-                                               },
-                                               {
-                                                   "date":  "2026-06-07T21:35:41+08:00",
-                                                   "from":  "passed",
-                                                   "to":  "passed",
-                                                   "evidence":  "Quality summary: 16/16 tasks implemented across 6 phases 鈥?hello.sh extended with --lang en/zh/ja, UTF-8 CJK greetings validated, backward compatibility confirmed, edge cases covered (--lang without value, invalid code fallback, combined flags)"
-                                               },
-                                               {
-                                                   "evidence":  "Quality summary: 25/26 tasks completed 鈥?SKILL.md created with all sections (frontmatter, Pre-Execution, Execution Steps 1-5, Edge Cases, Troubleshooting, Related Commands). Remaining T026 is manual E2E verification.",
-                                                   "from":  "passed",
-                                                   "to":  "passed",
-                                                   "date":  "2026-06-07T22:21:59+08:00"
-                                               },
-                                               {
-                                                   "to":  "passed",
-                                                   "evidence":  "All core tasks complete: 10 Chinese translation files created under docs/zh/, 5 README.zh.md links updated, all code blocks/headings/toggles verified",
-                                                   "date":  "2026-06-07T23:01:27+08:00",
-                                                   "from":  "passed"
-                                               },
-                                               {
-                                                   "date":  "2026-06-08T07:24:38+08:00",
-                                                   "from":  "passed",
-                                                   "to":  "passed",
-                                                   "evidence":  "Quality summary: 27/27 tasks completed across 7 phases — T001-T002 Setup, T003-T006 Foundational (tr-criteria.yml, _gate_helpers.ps1), T007-T011 US1 phase-scoped gate check, T012-T015 US2 config validation, T016-T020 US3 conditional-pass/deferred items, T021-T024 US4 cycle detection, T025-T027 Polish/audit/docs. New features: -Context Plan/Task, --check-cycles, -ValidateConfig, conditional-pass verdict, deferred-items.json, Write-AuditLog audit trail"
-                                               },
-                                               {
-                                                   "date":  "2026-06-08T08:14:36+08:00",
-                                                   "from":  "passed",
-                                                   "to":  "passed",
-                                                   "evidence":  "Quality summary: 28/28 tasks completed across 7 phases — lang/en.yml, lang/zh.yml, .vipd/resolve_language.sh (priority chain), .vipd/load_strings.sh (t() lookup with English fallback), SKILL.md extended with --lang + language-aware output + selection prompt, config write/read, CLI override, terminal encoding check, E2E validation passed. New capabilities: vipd init --lang zh runs entirely in Chinese, language persists to .vipd/config.yml, --lang flag overrides per-command."
-                                               }
-                                           ]
-                           },
-                  "TR5":  {
-                              "status":  "passed",
-                              "evidence":  "TR5 validation complete 鈥?validation report generated",
-                              "date":  "2026-06-07T21:16:16+08:00",
-                              "history":  [
-                                              {
-                                                  "evidence":  "TR5 validation complete: 25/25 FRs implemented (FR-001 through FR-025), 8/8 SCs met, 5/5 constitution principles aligned, 0 critical issues, 71/71 tasks completed across gate scripts, Python CLI, agent skills, templates, and documentation",
-                                                  "from":  "passed",
-                                                  "date":  "2026-06-07T20:44:48+08:00",
-                                                  "to":  "passed"
-                                              },
-                                              {
-                                                  "date":  "2026-06-07T21:16:16+08:00",
-                                                  "from":  "passed",
-                                                  "to":  "passed",
-                                                  "evidence":  "TR5 validation complete 鈥?validation report generated"
-                                              }
-                                          ]
-                          }
-              }
+{
+  "ipd_mode": true,
+  "last_updated": "2026-06-09T09:07:37+08:00",
+  "gates": {
+    "TR0": {
+      "status": "passed",
+      "evidence": "Constitution ratified with Gate Criteria Reference section",
+      "date": "2026-06-06"
+    },
+    "TR1": {
+      "status": "passed",
+      "evidence": "medium risk, 5 open risks resolved; all 5 clarifications integrated into spec",
+      "date": "2026-06-09T08:27:51+08:00",
+      "history": [
+        {
+          "date": "2026-06-07T20:44:11+08:00",
+          "from": "passed",
+          "evidence": "test",
+          "to": "passed"
+        },
+        {
+          "date": "2026-06-07T20:59:09+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Spec created with TR Gate Assessment"
+        },
+        {
+          "date": "2026-06-07T21:49:47+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Spec created with TR Gate Assessment"
+        },
+        {
+          "to": "passed",
+          "date": "2026-06-07T22:14:29+08:00",
+          "evidence": "Spec created for vipd-init skill with TR Gate Assessment section",
+          "from": "passed"
+        },
+        {
+          "from": "passed",
+          "evidence": "Spec created with TR Gate Assessment",
+          "to": "passed",
+          "date": "2026-06-07T22:35:11+08:00"
+        },
+        {
+          "to": "passed",
+          "evidence": "Low risk, 0 open risks resolved after 3 clarifications",
+          "from": "passed",
+          "date": "2026-06-07T22:41:26+08:00"
+        },
+        {
+          "date": "2026-06-08T06:58:00+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Spec created with TR Gate Assessment"
+        },
+        {
+          "date": "2026-06-08T07:11:09+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Medium risk, 4 open risks resolved via clarification"
+        },
+        {
+          "date": "2026-06-08T08:20:51+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Spec created with TR Gate Assessment: VIPD Versioning & Docs Preparation"
+        },
+        {
+          "evidence": "Spec created with TR Gate Assessment",
+          "from": "passed",
+          "date": "2026-06-09T08:19:46+08:00",
+          "to": "passed"
+        },
+        {
+          "from": "passed",
+          "evidence": "medium risk, 5 open risks resolved; all 5 clarifications integrated into spec",
+          "date": "2026-06-09T08:27:51+08:00",
+          "to": "passed"
+        }
+      ]
+    },
+    "TR2_TR3": {
+      "status": "passed",
+      "evidence": "Plan created with Gate Readiness + ADL; research.md, data-model.md, contracts/, quickstart.md generated; Constitution Check PASS",
+      "date": "2026-06-09T09:07:37+08:00",
+      "history": [
+        {
+          "date": "2026-06-07T21:03:07+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Plan created with Gate Readiness + ADL"
+        },
+        {
+          "date": "2026-06-07T21:23:41+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Plan created with Gate Readiness + ADL"
+        },
+        {
+          "date": "2026-06-07T21:55:55+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Plan created with Gate Readiness + ADL"
+        },
+        {
+          "from": "passed",
+          "evidence": "Plan created with Technical Context, Constitution Check, CBB Assessment, ADL; quickstart.md generated",
+          "date": "2026-06-07T22:17:46+08:00",
+          "to": "passed"
+        },
+        {
+          "date": "2026-06-07T22:43:42+08:00",
+          "to": "passed",
+          "from": "passed",
+          "evidence": "Plan creation started with user approval (gate pre-check failed due to missing plan 鈥?expected)"
+        },
+        {
+          "date": "2026-06-08T07:15:37+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Plan created with Gate Readiness + ADL (5 decisions recorded)"
+        },
+        {
+          "date": "2026-06-08T07:50:29+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Plan created with Gate Readiness + ADL (4 decisions: flat YAML resources, config priority chain, directory-scan validation, new .vipd/config.yml)"
+        },
+        {
+          "date": "2026-06-08T08:22:43+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Plan created with Gate Readiness + ADL (4 decisions: version.yml format, bash CLI wrapper, full feature catalog README, initial 1.0.0)"
+        },
+        {
+          "to": "passed",
+          "evidence": "Plan created with Gate Readiness + ADL; research.md, data-model.md, contracts/, quickstart.md generated; Constitution Check PASS",
+          "from": "passed",
+          "date": "2026-06-09T09:07:37+08:00"
+        }
+      ]
+    },
+    "TR4": {
+      "status": "passed",
+      "evidence": "Tasks generated with Gate Completion Verification: 28 tasks across 7 phases, 4 user stories",
+      "date": "2026-06-08T08:06:25+08:00",
+      "history": [
+        {
+          "date": "2026-06-07T21:09:39+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Tasks generated with Gate Completion Verification"
+        },
+        {
+          "date": "2026-06-07T21:59:18+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Tasks generated with Gate Completion Verification"
+        },
+        {
+          "date": "2026-06-07T22:19:27+08:00",
+          "evidence": "Tasks generated for vipd-init skill: 26 tasks across 6 phases, 3 user stories, with Gate Completion Verification",
+          "from": "passed",
+          "to": "passed"
+        },
+        {
+          "to": "passed",
+          "date": "2026-06-07T22:48:28+08:00",
+          "from": "passed",
+          "evidence": "Task generation started with user approval (gate pre-check failed due to missing tasks 鈥?expected)"
+        },
+        {
+          "date": "2026-06-08T07:18:00+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Tasks generated with Gate Completion Verification: 27 tasks across 7 phases, 4 user stories"
+        },
+        {
+          "date": "2026-06-08T08:06:25+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Tasks generated with Gate Completion Verification: 28 tasks across 7 phases, 4 user stories"
+        }
+      ]
+    },
+    "TR4A": {
+      "status": "passed",
+      "evidence": "Quality summary: 28/28 tasks completed across 7 phases — lang/en.yml, lang/zh.yml, .vipd/resolve_language.sh (priority chain), .vipd/load_strings.sh (t() lookup with English fallback), SKILL.md extended with --lang + language-aware output + selection prompt, config write/read, CLI override, terminal encoding check, E2E validation passed. New capabilities: vipd init --lang zh runs entirely in Chinese, language persists to .vipd/config.yml, --lang flag overrides per-command.",
+      "date": "2026-06-08T08:14:36+08:00",
+      "history": [
+        {
+          "date": "2026-06-07T20:44:38+08:00",
+          "to": "passed",
+          "evidence": "Quality summary: 71 tasks implemented across 12 phases 閳?TR6 launch gate, depth validation, Should-Meet advisory, ordering enforcement, per-feature gate-status.json, Python _gate_utils.py, GatewayStep IPD-awareness, agent skill renaming, CBB catalog, Trio review template, WSJF rubric, LPDT concrete criteria, LPDT+PO conflict mitigation, Go/Kill/Hold/Recycle framework, constitution v1.3.0, README IPD docs",
+          "from": "passed"
+        },
+        {
+          "date": "2026-06-07T21:35:41+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Quality summary: 16/16 tasks implemented across 6 phases 鈥?hello.sh extended with --lang en/zh/ja, UTF-8 CJK greetings validated, backward compatibility confirmed, edge cases covered (--lang without value, invalid code fallback, combined flags)"
+        },
+        {
+          "evidence": "Quality summary: 25/26 tasks completed 鈥?SKILL.md created with all sections (frontmatter, Pre-Execution, Execution Steps 1-5, Edge Cases, Troubleshooting, Related Commands). Remaining T026 is manual E2E verification.",
+          "from": "passed",
+          "to": "passed",
+          "date": "2026-06-07T22:21:59+08:00"
+        },
+        {
+          "to": "passed",
+          "evidence": "All core tasks complete: 10 Chinese translation files created under docs/zh/, 5 README.zh.md links updated, all code blocks/headings/toggles verified",
+          "date": "2026-06-07T23:01:27+08:00",
+          "from": "passed"
+        },
+        {
+          "date": "2026-06-08T07:24:38+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Quality summary: 27/27 tasks completed across 7 phases — T001-T002 Setup, T003-T006 Foundational (tr-criteria.yml, _gate_helpers.ps1), T007-T011 US1 phase-scoped gate check, T012-T015 US2 config validation, T016-T020 US3 conditional-pass/deferred items, T021-T024 US4 cycle detection, T025-T027 Polish/audit/docs. New features: -Context Plan/Task, --check-cycles, -ValidateConfig, conditional-pass verdict, deferred-items.json, Write-AuditLog audit trail"
+        },
+        {
+          "date": "2026-06-08T08:14:36+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Quality summary: 28/28 tasks completed across 7 phases — lang/en.yml, lang/zh.yml, .vipd/resolve_language.sh (priority chain), .vipd/load_strings.sh (t() lookup with English fallback), SKILL.md extended with --lang + language-aware output + selection prompt, config write/read, CLI override, terminal encoding check, E2E validation passed. New capabilities: vipd init --lang zh runs entirely in Chinese, language persists to .vipd/config.yml, --lang flag overrides per-command."
+        }
+      ]
+    },
+    "TR5": {
+      "status": "passed",
+      "evidence": "TR5 validation complete 鈥?validation report generated",
+      "date": "2026-06-07T21:16:16+08:00",
+      "history": [
+        {
+          "evidence": "TR5 validation complete: 25/25 FRs implemented (FR-001 through FR-025), 8/8 SCs met, 5/5 constitution principles aligned, 0 critical issues, 71/71 tasks completed across gate scripts, Python CLI, agent skills, templates, and documentation",
+          "from": "passed",
+          "date": "2026-06-07T20:44:48+08:00",
+          "to": "passed"
+        },
+        {
+          "date": "2026-06-07T21:16:16+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "TR5 validation complete 鈥?validation report generated"
+        }
+      ]
+    }
+  }
 }

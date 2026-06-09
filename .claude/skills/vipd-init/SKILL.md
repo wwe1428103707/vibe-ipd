@@ -1,7 +1,7 @@
 ---
 name: "vipd-init"
 description: "Initialize a new vibe-ipd project by scaffolding with the upstream speckit CLI (specify init)."
-argument-hint: "<PROJECT_NAME> [--integration claude|copilot] [--script ps|sh] [--lang en|zh|ja]"
+argument-hint: "<PROJECT_NAME> [--integration claude|claude-code|copilot] [--script ps|sh] [--lang en|zh|ja]"
 compatibility: "Requires uvx (recommended) or pipx for upstream CLI delegation"
 metadata:
   author: "vibe-ipd"
@@ -28,6 +28,7 @@ Parse the input to extract:
 **Examples**:
 - `/vipd-init my-app --integration claude` → scaffold `my-app/` with Claude integration
 - `/vipd-init . --integration claude` → scaffold in current directory with Claude integration
+- `/vipd-init my-app --integration claude-code` → scaffold with Claude Code Workflow mode (auto-generates Workflow scripts in vipd-tasks, parallel execution in vipd-implement)
 - `/vipd-init my-app` → scaffold `my-app/` without integration-specific files
 - `/vipd-init my-app --lang zh` → scaffold with Chinese language output
 - `/vipd-init my-app --integration copilot --lang ja` → scaffold with Copilot + Japanese
@@ -142,9 +143,28 @@ Run the constructed command.
   echo "❌  $(t error.scaffolding_failed details="$ERROR_DETAILS")"
   ```
 
-### Step 5: Post-Init Branding (Optional)
+### Step 5: Post-Init Mode Setting (Claude Code only)
 
-After scaffolding succeeds, check what was created:
+If `--integration claude-code` was provided:
+1. After scaffolding succeeds, navigate into the project directory (if PROJECT_NAME is not `.`)
+2. Create or update `.vipd/config.yml` to add `mode: claude-code`:
+   ```bash
+   # Add mode to .vipd/config.yml
+   if [ -f ".vipd/config.yml" ]; then
+     if grep -q "^mode:" .vipd/config.yml; then
+       sed -i 's/^mode:.*/mode: claude-code/' .vipd/config.yml
+     else
+       echo "mode: claude-code" >> .vipd/config.yml
+     fi
+   else
+     echo -e "language: en\nmode: claude-code" > .vipd/config.yml
+   fi
+   ```
+3. Log confirmation: `"[vipd-init] Claude Code workflow mode enabled"`
+
+### Step 6: Post-Init Branding (Optional)
+
+After scaffolding succeeds (and mode setting if applicable), check what was created:
 
 1. **Inventory newly created skills**: List `.claude/skills/` in the target project.
 2. **Detect `speckit-*` skills**: If any `speckit-*` prefixed skills are found:

@@ -132,6 +132,64 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Parallel execution examples per story
    - Implementation strategy section (MVP first, incremental delivery)
 
+5. **Claude Code mode only — auto-generate Workflow script**:
+
+   1. **Detect mode**: Read `.vipd/config.yml` and check for `mode: claude-code`:
+      ```bash
+      MODE="standard"
+      if [ -f ".vipd/config.yml" ]; then
+        FOUND_MODE=$(grep -E '^mode:' .vipd/config.yml | sed 's/^mode:[[:space:]]*//')
+        [ -n "$FOUND_MODE" ] && MODE="$FOUND_MODE"
+      fi
+      if [ "$MODE" != "claude-code" ]; then
+        echo "[vipd-tasks] Standard mode — skipping Workflow script generation"
+        # Continue to normal post-execution hooks
+      else
+        echo "[vipd-tasks] Claude Code mode — generating Workflow script"
+      ```
+
+   2. **If claude-code mode**: Parse the generated tasks.md to extract the Workflow mapping:
+      - Count tasks in each phase (Setup, Foundational, each User Story, Polish)
+      - Extract User Story labels and their task lists (marked by `[US1]`, `[US2]`, etc.)
+      - Identify `[P]` markers for parallel task routing
+      - Build a mapping: phase → story → tasks → parallel flags
+
+   3. **Generate `.claude/workflows/execute-tasks.wf.js`**:
+      - Read the template from `.claude/templates/workflow-template.js`
+      - Replace `{{FEATURE_NAME}}` with the feature name from plan.md
+      - Replace `{{SETUP_COUNT}}` with the number of Setup tasks
+      - Replace `{{FOUNDATION_COUNT}}` with the number of Foundational tasks
+      - Generate `{{STORY_PHASES}}`: For each User Story, emit a `phase()` call followed by `parallel()` blocks containing `agent()` calls for each `[P]` task and combined `agent()` calls for non-`[P]` tasks
+      - Ensure the structure follows:
+        ```javascript
+        // Setup phase — parallel barrier
+        phase('Setup')
+        const setupTasks = await parallel([...agent() calls...])
+
+        // Foundational phase — parallel barrier  
+        phase('Foundational')
+        const foundationTasks = await parallel([...agent() calls...])
+
+        // Gate: Wait for all foundational before stories
+        // User Story phases — parallel per story
+        phase('User Stories')
+        const storyResults = await parallel([
+          // Each story is one agent() call (can itself parallelize internally)
+          ...stories.map(s => () => agent(s.prompt))
+        ])
+
+        // Polish phase
+        phase('Polish')
+        const polishTasks = await parallel([...agent() calls...])
+        ```
+      - Write the generated content to `.claude/workflows/execute-tasks.wf.js`
+
+   4. **Validate generated script**:
+      - Confirm file exists at `.claude/workflows/execute-tasks.wf.js`
+      - Confirm it starts with `export const meta`
+      - Confirm it contains `agent()` calls
+      - Log success: `"[vipd-tasks] Workflow script generated: .claude/workflows/execute-tasks.wf.js"`
+
 ## Mandatory Post-Execution Hooks
 
 **You MUST complete this section before reporting completion to the user.**

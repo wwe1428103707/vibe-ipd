@@ -182,27 +182,67 @@ You **MUST** consider the user input before proceeding (if not empty).
    - **Terraform**: `.terraform/`, `*.tfstate*`, `*.tfvars`, `.terraform.lock.hcl`
    - **Kubernetes/k8s**: `*.secret.yaml`, `secrets/`, `.kube/`, `kubeconfig*`, `*.key`, `*.crt`
 
-5. Parse tasks.md structure and extract:
+5. **Claude Code mode — Workflow execution path**:
+
+   **Step 5a — Detect mode**: Read `.vipd/config.yml` and check for `mode: claude-code`:
+   ```bash
+   MODE="standard"
+   if [ -f ".vipd/config.yml" ]; then
+     FOUND_MODE=$(grep -E '^mode:' .vipd/config.yml | sed 's/^mode:[[:space:]]*//')
+     [ -n "$FOUND_MODE" ] && MODE="$FOUND_MODE"
+   fi
+   ```
+
+   **Step 5b — Runtime probe (claude-code mode only)**: If `mode: claude-code`:
+   1. Check if `.claude/workflows/execute-tasks.wf.js` exists
+   2. If missing: log `"[vipd-implement] Workflow script not found — falling back to sequential mode"` and proceed to traditional execution (skip to step 6)
+   3. If found: attempt to execute the Workflow script via the Workflow tool:
+      - Use the `Workflow` tool to run `.claude/workflows/execute-tasks.wf.js`
+      - Pass `args` containing the `tasks.md` path and `FEATURE_DIR`
+   
+   **Step 5c — Workflow execution**: When Workflow tool is available:
+   - The Workflow script handles all phases (Setup → Foundational → User Stories → Polish)
+   - Each phase's agents execute in parallel according to the script's `parallel()` blocks
+   - Agent status is visible via `/workflows` command
+   - Monitor progress and wait for Workflow execution to complete
+
+   **Step 5d — Handle Workflow results**:
+   - On successful completion: Collect execution summary (phases completed, agents succeeded, total time)
+   - On partial failure: Some agents may have failed; document which tasks failed and mark their checkboxes as `[ ]` in tasks.md
+   - On complete failure: Log error details and fall back to traditional execution (step 6)
+   - In all cases: Mark completed tasks as `[X]` in tasks.md
+
+   **Step 5e — Graceful degradation**: If any of the following conditions are met, fall back to traditional sequential execution (step 6):
+   - `.vipd/config.yml` does not exist or `mode` is not `claude-code`
+   - `.claude/workflows/execute-tasks.wf.js` does not exist
+   - Workflow tool is not available in the current environment
+   - Workflow execution fails entirely
+   - Log degradation: `"[vipd-implement] Falling back to sequential mode: <reason>"`
+   - **Note**: Degradation is irreversible for this execution session. The next session will re-attempt Workflow mode.
+
+6. **Traditional execution path** (fallback / non-claude-code mode):
+
+   Parse tasks.md structure and extract:
    - **Task phases**: Setup, Tests, Core, Integration, Polish
    - **Task dependencies**: Sequential vs parallel execution rules
    - **Task details**: ID, description, file paths, parallel markers [P]
    - **Execution flow**: Order and dependency requirements
 
-6. Execute implementation following the task plan:
+7. Execute implementation following the task plan:
    - **Phase-by-phase execution**: Complete each phase before moving to the next
    - **Respect dependencies**: Run sequential tasks in order, parallel tasks [P] can run together  
    - **Follow TDD approach**: Execute test tasks before their corresponding implementation tasks
    - **File-based coordination**: Tasks affecting the same files must run sequentially
    - **Validation checkpoints**: Verify each phase completion before proceeding
 
-7. Implementation execution rules:
+8. Implementation execution rules:
    - **Setup first**: Initialize project structure, dependencies, configuration
    - **Tests before code**: If you need to write tests for contracts, entities, and integration scenarios
    - **Core development**: Implement models, services, CLI commands, endpoints
    - **Integration work**: Database connections, middleware, logging, external services
    - **Polish and validation**: Unit tests, performance optimization, documentation
 
-8. Progress tracking and error handling:
+9. Progress tracking and error handling:
    - Report progress after each completed task
    - Halt execution if any non-parallel task fails
    - For parallel tasks [P], continue with successful tasks, report failed ones
@@ -210,7 +250,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Suggest next steps if implementation cannot proceed
    - **IMPORTANT** For completed tasks, make sure to mark the task off as [X] in the tasks file.
 
-9. Completion validation:
+10. Completion validation:
    - Verify all required tasks are completed
    - Check that implemented features match the original specification
    - Validate that tests pass and coverage meets requirements

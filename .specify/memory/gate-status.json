@@ -1,6 +1,6 @@
 {
   "ipd_mode": true,
-  "last_updated": "2026-06-09T10:13:39+08:00",
+  "last_updated": "2026-06-09T10:59:36+08:00",
   "gates": {
     "TR0": {
       "status": "passed",
@@ -9,8 +9,8 @@
     },
     "TR1": {
       "status": "passed",
-      "evidence": "Test: JSONL recording verification",
-      "date": "2026-06-09T10:13:39+08:00",
+      "evidence": "Low risk, 0 open risks resolved after 2 clarifications (mobile scope removed, CTA section removed)",
+      "date": "2026-06-09T10:43:37+08:00",
       "history": [
         {
           "date": "2026-06-07T20:44:11+08:00",
@@ -95,13 +95,25 @@
           "date": "2026-06-09T10:13:39+08:00",
           "to": "passed",
           "from": "passed"
+        },
+        {
+          "to": "passed",
+          "from": "passed",
+          "evidence": "Spec created with TR Gate Assessment (Feature 021 — report editorial redesign)",
+          "date": "2026-06-09T10:37:40+08:00"
+        },
+        {
+          "date": "2026-06-09T10:43:37+08:00",
+          "from": "passed",
+          "to": "passed",
+          "evidence": "Low risk, 0 open risks resolved after 2 clarifications (mobile scope removed, CTA section removed)"
         }
       ]
     },
     "TR2_TR3": {
       "status": "passed",
-      "evidence": "Plan created with Gate Readiness + ADL; research.md, data-model.md, contracts/, quickstart.md generated; Constitution Check PASS",
-      "date": "2026-06-09T09:51:20+08:00",
+      "evidence": "Plan created with Gate Readiness + ADL (Feature 021 — editorial report redesign. Research/data-model/contracts/quickstart generated.)",
+      "date": "2026-06-09T10:47:53+08:00",
       "history": [
         {
           "date": "2026-06-07T21:03:07+08:00",
@@ -162,13 +174,19 @@
           "date": "2026-06-09T09:51:20+08:00",
           "from": "passed",
           "evidence": "Plan created with Gate Readiness + ADL; research.md, data-model.md, contracts/, quickstart.md generated; Constitution Check PASS"
+        },
+        {
+          "evidence": "Plan created with Gate Readiness + ADL (Feature 021 — editorial report redesign. Research/data-model/contracts/quickstart generated.)",
+          "from": "passed",
+          "date": "2026-06-09T10:47:53+08:00",
+          "to": "passed"
         }
       ]
     },
     "TR4": {
       "status": "passed",
-      "evidence": "Tasks generated: 18 tasks across 6 phases, 3 user stories with independent test criteria",
-      "date": "2026-06-09T09:54:16+08:00",
+      "evidence": "Tasks generated with Gate Completion Verification (30 tasks across 7 phases, Feature 021 — editorial report redesign)",
+      "date": "2026-06-09T10:51:33+08:00",
       "history": [
         {
           "date": "2026-06-07T21:09:39+08:00",
@@ -217,13 +235,19 @@
           "to": "passed",
           "evidence": "Tasks generated: 18 tasks across 6 phases, 3 user stories with independent test criteria",
           "date": "2026-06-09T09:54:16+08:00"
+        },
+        {
+          "date": "2026-06-09T10:51:33+08:00",
+          "to": "passed",
+          "evidence": "Tasks generated with Gate Completion Verification (30 tasks across 7 phases, Feature 021 — editorial report redesign)",
+          "from": "passed"
         }
       ]
     },
     "TR4A": {
       "status": "passed",
-      "evidence": "27 tasks completed across 8 phases: 3 skill files modified, 3 utility scripts created, 2 template files created, 1 new skill created. Claude Code mode: init→tasks→implement full pipeline operational with Workflow parallel execution and graceful degradation.",
-      "date": "2026-06-09T09:30:46+08:00",
+      "evidence": "Template redesigned with TailwindCSS editorial style. 30 tasks completed across 7 phases. Workflow metrics added. Desktop-only layout. CTA removed. All tasks verified.",
+      "date": "2026-06-09T10:59:36+08:00",
       "history": [
         {
           "date": "2026-06-07T20:44:38+08:00",
@@ -266,6 +290,12 @@
           "date": "2026-06-09T09:30:46+08:00",
           "to": "passed",
           "from": "passed"
+        },
+        {
+          "evidence": "Template redesigned with TailwindCSS editorial style. 30 tasks completed across 7 phases. Workflow metrics added. Desktop-only layout. CTA removed. All tasks verified.",
+          "from": "passed",
+          "date": "2026-06-09T10:59:36+08:00",
+          "to": "passed"
         }
       ]
     },

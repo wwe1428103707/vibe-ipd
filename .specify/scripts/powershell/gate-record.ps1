@@ -179,6 +179,35 @@ $prevStatusForAudit = if ($gs.gates.$Gate) { $gs.gates.$Gate.status } else { $nu
 Write-GateEntry @entryParams
 
 # ============================================================
+# JSONL detailed gate recording (Feature 019)
+# ============================================================
+$jsonlDir = Join-Path $repoRoot '.specify/memory'
+$jsonlFile = Join-Path $jsonlDir 'gate-history.jsonl'
+$jsonlRecord = @{
+    timestamp = $isoDate
+    gate = $Gate
+    feature = $featureName
+    status = $Status
+    conditions = @()
+    attempt = 1
+    max_attempts = 3
+    auto_fix_attempted = ($Status -eq 'failed' -or $Status -eq 'degraded')
+    auto_fix = $null
+    evidence = $Evidence
+}
+# Attempt to read conditions from gate-check output (if available via pipeline)
+$checkOutput = $env:GATE_CHECK_JSON
+if ($checkOutput) {
+    try { $jsonlRecord.conditions = ($checkOutput | ConvertFrom-Json).current_gate.must_meet_details } catch {}
+}
+# Append JSONL line
+try {
+    $jsonlRecord | ConvertTo-Json -Compress -Depth 3 | Add-Content -LiteralPath $jsonlFile -Encoding UTF8
+} catch {
+    Write-Warning "Failed to write gate-history.jsonl: $_"
+}
+
+# ============================================================
 # Audit log entry for all gate status changes (T025)
 # ============================================================
 # Determine feature name from gateFile path

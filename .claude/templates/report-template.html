@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIPD 门控报告</title>
+<style>
+:root {
+  --pass: #22c55e; --fail: #ef4444; --degraded: #f59e0b;
+  --bg: #f8fafc; --card: #fff; --border: #e2e8f0; --text: #1e293b;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); padding: 2rem; }
+h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+.summary { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; flex: 1; min-width: 120px; }
+.card h3 { font-size: .8rem; color: #64748b; text-transform: uppercase; }
+.card .count { font-size: 1.8rem; font-weight: 700; }
+.dashboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap: .75rem; margin-bottom: 2rem; }
+.gate-badge { padding: .75rem; border-radius: 8px; text-align: center; font-weight: 600; font-size: .9rem; cursor: pointer; border: 2px solid transparent; transition: .15s; }
+.gate-badge:hover { opacity: .85; }
+.gate-pass { background: #dcfce7; border-color: var(--pass); color: #166534; }
+.gate-fail { background: #fee2e2; border-color: var(--fail); color: #991b1b; }
+.gate-degraded { background: #fef3c7; border-color: var(--degraded); color: #92400e; }
+.gate-pending { background: #f1f5f9; border-color: #cbd5e1; color: #475569; }
+.timeline { background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+.record { border-bottom: 1px solid var(--border); padding: .75rem 1rem; }
+.record:last-child { border-bottom: none; }
+.record summary { cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: .5rem; }
+.record summary .status-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+.record .meta { font-size: .8rem; color: #64748b; margin-top: .25rem; }
+.record .detail { margin-top: .5rem; padding: .75rem; background: #f8fafc; border-radius: 6px; font-size: .85rem; }
+.record .detail table { width: 100%; border-collapse: collapse; }
+.record .detail th, .record .detail td { text-align: left; padding: .25rem .5rem; border-bottom: 1px solid #e2e8f0; }
+.empty { text-align: center; padding: 3rem; color: #94a3b8; }
+</style>
+</head>
+<body>
+<h1>📋 VIPD 门控报告</h1>
+<div class="summary" id="summary"></div>
+<h2>门控总览</h2>
+<div class="dashboard" id="dashboard"></div>
+<h2>门控时间线</h2>
+<div class="timeline" id="timeline"></div>
+<script>
+(async function(){
+  const DATA_URL = document.currentScript.getAttribute('data-url') || '../../../.specify/memory/gate-history.jsonl';
+  let records = [];
+  try {
+    const resp = await fetch(DATA_URL);
+    const text = await resp.text();
+    records = text.trim().split('\n').filter(Boolean).map(l => JSON.parse(l));
+  } catch(e) { document.getElementById('timeline').innerHTML = '<div class="empty">暂无门控记录</div>'; return; }
+
+  // Summary
+  const total = records.length;
+  const passed = records.filter(r => r.status === 'passed').length;
+  const failed = records.filter(r => r.status === 'failed').length;
+  const degraded = records.filter(r => r.status === 'degraded').length;
+  document.getElementById('summary').innerHTML =
+    `<div class="card"><h3>总检查次数</h3><div class="count">${total}</div></div>
+     <div class="card"><h3>✅ 通过</h3><div class="count">${passed}</div></div>
+     <div class="card"><h3>❌ 失败</h3><div class="count">${failed}</div></div>
+     <div class="card"><h3>⚠️ 降级</h3><div class="count">${degraded}</div></div>`;
+
+  // Dashboard by gate
+  const gates = [...new Set(records.map(r => r.gate))].sort();
+  document.getElementById('dashboard').innerHTML = gates.map(g => {
+    const r = records.filter(x => x.gate === g);
+    const last = r[r.length-1];
+    const cls = last.status === 'passed' ? 'gate-pass' : last.status === 'degraded' ? 'gate-degraded' : 'gate-fail';
+    return `<div class="gate-badge ${cls}">${g}<br><small>${last.status} (${r.length}x)</small></div>`;
+  }).join('');
+
+  // Timeline
+  document.getElementById('timeline').innerHTML = records.slice().reverse().map((r, i) => {
+    const dotCls = r.status === 'passed' ? '#22c55e' : r.status === 'degraded' ? '#f59e0b' : '#ef4444';
+    return `<details class="record">
+      <summary><span class="status-dot" style="background:${dotCls}"></span> [${r.gate}] ${r.status} — ${r.feature || 'unknown'}</summary>
+      <div class="meta">${r.timestamp} | 尝试 #${r.attempt} | 自动修复: ${r.auto_fix_attempted ? '是' : '否'}</div>
+      <div class="detail">
+        <table><tr><th>条件</th><th>结果</th><th>分类</th></tr>
+        ${(r.conditions||[]).map(c => `<tr><td>${c.criterion}</td><td>${c.matched ? '✅' : '❌'}</td><td>${c.category||'—'}</td></tr>`).join('')}
+        ${r.errors && r.errors.length ? `<tr><td colspan="3">错误: ${r.errors.join('; ')}</td></tr>` : ''}
+        ${r.evidence ? `<tr><td colspan="3">📎 ${r.evidence}</td></tr>` : ''}
+        ${r.auto_fix_attempted && r.auto_fix ? `<tr><td colspan="3">🔧 修复: ${r.auto_fix.action_taken} (${r.auto_fix.success ? '✅成功' : '❌失败'})</td></tr>` : ''}
+      </table></div>
+    </details>`;
+  }).join('');
+})();
+</script>
+</body>
+</html>

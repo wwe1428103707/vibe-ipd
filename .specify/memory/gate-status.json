@@ -1,6 +1,6 @@
 {
   "ipd_mode": true,
-  "last_updated": "2026-06-09T09:54:16+08:00",
+  "last_updated": "2026-06-09T10:13:39+08:00",
   "gates": {
     "TR0": {
       "status": "passed",
@@ -9,8 +9,8 @@
     },
     "TR1": {
       "status": "passed",
-      "evidence": "low risk, 4 open risks resolved via clarification: command name, JSONL format, auto-fix strategy, security category",
-      "date": "2026-06-09T09:47:39+08:00",
+      "evidence": "Test: JSONL recording verification",
+      "date": "2026-06-09T10:13:39+08:00",
       "history": [
         {
           "date": "2026-06-07T20:44:11+08:00",
@@ -89,6 +89,12 @@
           "date": "2026-06-09T09:47:39+08:00",
           "to": "passed",
           "evidence": "low risk, 4 open risks resolved via clarification: command name, JSONL format, auto-fix strategy, security category"
+        },
+        {
+          "evidence": "Test: JSONL recording verification",
+          "date": "2026-06-09T10:13:39+08:00",
+          "to": "passed",
+          "from": "passed"
         }
       ]
     },

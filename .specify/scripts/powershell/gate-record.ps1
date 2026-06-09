@@ -183,8 +183,12 @@ Write-GateEntry @entryParams
 # ============================================================
 $jsonlDir = Join-Path $repoRoot '.specify/memory'
 $jsonlFile = Join-Path $jsonlDir 'gate-history.jsonl'
+$jsonlTimestamp = (Get-Date -Format 'yyyy-MM-ddTHH:mm:ssK')
+if (-not $featureName -or $featureName -eq 'unknown') {
+    if ($featureDir) { $featureName = Split-Path $featureDir -Leaf }
+}
 $jsonlRecord = @{
-    timestamp = $isoDate
+    timestamp = $jsonlTimestamp
     gate = $Gate
     feature = $featureName
     status = $Status

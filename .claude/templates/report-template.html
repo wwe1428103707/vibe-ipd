@@ -42,52 +42,34 @@ h1 { font-size: 1.5rem; margin-bottom: 1rem; }
 <div class="dashboard" id="dashboard"></div>
 <h2>门控时间线</h2>
 <div class="timeline" id="timeline"></div>
+<script id="gate-data" type="application/json"></script>
 <script>
-(async function(){
-  const DATA_URL = document.currentScript.getAttribute('data-url') || '../../../.specify/memory/gate-history.jsonl';
-  let records = [];
-  try {
-    const resp = await fetch(DATA_URL);
-    const text = await resp.text();
-    records = text.trim().split('\n').filter(Boolean).map(l => JSON.parse(l));
-  } catch(e) { document.getElementById('timeline').innerHTML = '<div class="empty">暂无门控记录</div>'; return; }
+// Static gate report data — filled by generate-report.ps1
+const GATE_DATA = null;
 
-  // Summary
+function renderReport(records) {
+  if (!records || records.length === 0) { document.getElementById('timeline').innerHTML = '<div class="empty">暂无门控记录</div>'; return; }
   const total = records.length;
   const passed = records.filter(r => r.status === 'passed').length;
   const failed = records.filter(r => r.status === 'failed').length;
   const degraded = records.filter(r => r.status === 'degraded').length;
   document.getElementById('summary').innerHTML =
-    `<div class="card"><h3>总检查次数</h3><div class="count">${total}</div></div>
-     <div class="card"><h3>✅ 通过</h3><div class="count">${passed}</div></div>
-     <div class="card"><h3>❌ 失败</h3><div class="count">${failed}</div></div>
-     <div class="card"><h3>⚠️ 降级</h3><div class="count">${degraded}</div></div>`;
-
-  // Dashboard by gate
+    `<div class="card"><h3>总检查次数</h3><div class="count">${total}</div></div><div class="card"><h3>✅ 通过</h3><div class="count">${passed}</div></div><div class="card"><h3>❌ 失败</h3><div class="count">${failed}</div></div><div class="card"><h3>⚠️ 降级</h3><div class="count">${degraded}</div></div>`;
   const gates = [...new Set(records.map(r => r.gate))].sort();
-  document.getElementById('dashboard').innerHTML = gates.map(g => {
-    const r = records.filter(x => x.gate === g);
-    const last = r[r.length-1];
-    const cls = last.status === 'passed' ? 'gate-pass' : last.status === 'degraded' ? 'gate-degraded' : 'gate-fail';
-    return `<div class="gate-badge ${cls}">${g}<br><small>${last.status} (${r.length}x)</small></div>`;
-  }).join('');
+  document.getElementById('dashboard').innerHTML = gates.map(g => { const r = records.filter(x => x.gate === g); const last = r[r.length-1]; const cls = last.status === 'passed' ? 'gate-pass' : last.status === 'degraded' ? 'gate-degraded' : 'gate-fail'; return '<div class="gate-badge '+cls+'">'+g+'<br><small>'+last.status+' ('+r.length+'x)</small></div>'; }).join('');
+  document.getElementById('timeline').innerHTML = records.slice().reverse().map(r => { const dot = r.status === 'passed' ? '#22c55e' : r.status === 'degraded' ? '#f59e0b' : '#ef4444'; return '<details class="record"><summary><span class="status-dot" style="background:'+dot+'"></span> ['+r.gate+'] '+(r.status)+' — '+(r.feature||'unknown')+'</summary><div class="meta">'+(r.timestamp||'')+' | attempt #'+(r.attempt||1)+' | auto-fix: '+(r.auto_fix_attempted?'yes':'no')+'</div><div class="detail"><table><tr><th>条件</th><th>结果</th><th>分类</th></tr>'+(r.conditions||[]).map(c => '<tr><td>'+(c.criterion||'')+'</td><td>'+(c.matched?'✅':'❌')+'</td><td>'+(c.category||'—')+'</td></tr>').join('')+(r.errors&&r.errors.length?'<tr><td colspan="3">错误: '+r.errors.join('; ')+'</td></tr>':'')+(r.evidence?'<tr><td colspan="3">📎 '+r.evidence+'</td></tr>':'')+'</table></div></details>'; }).join('');
+}
 
-  // Timeline
-  document.getElementById('timeline').innerHTML = records.slice().reverse().map((r, i) => {
-    const dotCls = r.status === 'passed' ? '#22c55e' : r.status === 'degraded' ? '#f59e0b' : '#ef4444';
-    return `<details class="record">
-      <summary><span class="status-dot" style="background:${dotCls}"></span> [${r.gate}] ${r.status} — ${r.feature || 'unknown'}</summary>
-      <div class="meta">${r.timestamp} | 尝试 #${r.attempt} | 自动修复: ${r.auto_fix_attempted ? '是' : '否'}</div>
-      <div class="detail">
-        <table><tr><th>条件</th><th>结果</th><th>分类</th></tr>
-        ${(r.conditions||[]).map(c => `<tr><td>${c.criterion}</td><td>${c.matched ? '✅' : '❌'}</td><td>${c.category||'—'}</td></tr>`).join('')}
-        ${r.errors && r.errors.length ? `<tr><td colspan="3">错误: ${r.errors.join('; ')}</td></tr>` : ''}
-        ${r.evidence ? `<tr><td colspan="3">📎 ${r.evidence}</td></tr>` : ''}
-        ${r.auto_fix_attempted && r.auto_fix ? `<tr><td colspan="3">🔧 修复: ${r.auto_fix.action_taken} (${r.auto_fix.success ? '✅成功' : '❌失败'})</td></tr>` : ''}
-      </table></div>
-    </details>`;
-  }).join('');
-})();
-</script>
+// Try static data first, then fall back to fetch
+if (GATE_DATA) {
+  renderReport(GATE_DATA);
+} else {
+  const dataScript = document.getElementById('gate-data');
+  if (dataScript && dataScript.textContent.trim()) {
+    try { renderReport(JSON.parse(dataScript.textContent)); } catch(e) { renderReport(null); }
+  } else {
+    document.getElementById('timeline').innerHTML = '<div class="empty">暂无门控记录</div>';
+  }
+}
 </body>
 </html>

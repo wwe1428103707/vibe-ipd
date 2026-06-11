@@ -1,6 +1,6 @@
 [project]
 name = "vibe-ipd"
-version = "1.0.8"
+version = "1.0.10"
 description = "vibe-ipd — Integrated Product Development Toolkit (forked from GitHub Spec Kit). Spec-Driven Development for AI-Native teams with IPD governance."
 readme = "README.md"
 requires-python = ">=3.11"
